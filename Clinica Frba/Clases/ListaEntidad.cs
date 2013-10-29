@@ -26,12 +26,16 @@ namespace Clinica_Frba {
             return list;
         }
 
+        public void ClearList() {
+            items.Clear();
+        }
 
         public DataTable SelectAll() {
 
             return DB.ExecuteReader("SELECT * FROM " + DB.schema + tabla);
 
         }
+
 
 
         //--Enumerator

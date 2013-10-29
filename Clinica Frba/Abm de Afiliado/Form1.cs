@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Clinica_Frba.NewFolder12
+namespace Clinica_Frba.AbmAfiliados
 {
-    public partial class Form1 : Form
+    public partial class AbmAfiliados : Form
     {
-        public Form1()
+        public AbmAfiliados()
         {
             InitializeComponent();
         }

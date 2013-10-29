@@ -35,13 +35,40 @@ namespace Clinica_Frba
             rol = login.rol;
             funcs.FillByRol(rol.id);
 
-            
+            foreach (Funcionalidad func in funcs.items) {
+                if (flp1.Controls.ContainsKey(func.ToString()))
+                    flp1.Controls[func.nombre].Visible = true;
+                else
+                    flp2.Controls[func.nombre].Visible = true;
+
+            }
 
 
         }
 
-        private void bRoles_Click(object sender, EventArgs e) {
-            AbmRoles.AbmRoles form = new Clinica_Frba.AbmRoles.AbmRoles();
+        private void Abm_Roles_Click(object sender, EventArgs e) {
+            AbmRoles.AbmRoles form = new AbmRoles.AbmRoles();
+            form.ShowDialog();
+        }
+
+        private void Abm_Afiliado_Click(object sender, EventArgs e) {
+            AbmAfiliados.AbmAfiliados form = new AbmAfiliados.AbmAfiliados();
+            form.ShowDialog();
+        }
+
+        private void Abm_Profesional_Click(object sender, EventArgs e) {
+            AbmProfesional.AbmProfesional form = new AbmProfesional.AbmProfesional();
+            form.ShowDialog();
+        }
+
+        private void Abm_Planes_Medicos_Click(object sender, EventArgs e) {
+            AbmPlanes.AbmPlanes form = new AbmPlanes.AbmPlanes();
+            form.ShowDialog();
+        }
+
+        private void Abm_Especialidades_Medicas_Click(object sender, EventArgs e) {
+            AbmEspecialidadesMedicas.AbmEspecialidadesMedicas form = new AbmEspecialidadesMedicas.AbmEspecialidadesMedicas();
+            form.ShowDialog();
         }
     }
 }

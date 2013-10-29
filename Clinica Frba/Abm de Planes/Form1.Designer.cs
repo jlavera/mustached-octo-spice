@@ -1,6 +1,6 @@
-﻿namespace Clinica_Frba.NewFolder15
+﻿namespace Clinica_Frba.AbmPlanes
 {
-    partial class Form1
+    partial class AbmPlanes
     {
         /// <summary>
         /// Required designer variable.

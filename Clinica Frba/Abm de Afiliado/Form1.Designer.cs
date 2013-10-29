@@ -1,6 +1,6 @@
-﻿namespace Clinica_Frba.NewFolder12
+﻿namespace Clinica_Frba.AbmAfiliados
 {
-    partial class Form1
+    partial class AbmAfiliados
     {
         /// <summary>
         /// Required designer variable.

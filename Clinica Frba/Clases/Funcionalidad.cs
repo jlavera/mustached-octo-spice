@@ -15,5 +15,9 @@ namespace Clinica_Frba.Clases {
             nombre = dr["nombre"].ToString();
 
         }
+
+        public override string ToString() {
+            return nombre;
+        }
     }
 }

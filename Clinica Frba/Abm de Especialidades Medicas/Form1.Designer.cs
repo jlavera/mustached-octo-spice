@@ -1,6 +1,6 @@
-﻿namespace Clinica_Frba.NewFolder14
+﻿namespace Clinica_Frba.AbmEspecialidadesMedicas
 {
-    partial class Form1
+    partial class AbmEspecialidadesMedicas
     {
         /// <summary>
         /// Required designer variable.

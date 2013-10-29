@@ -36,10 +36,11 @@ namespace Clinica_Frba {
 
                     return;
                 }
-
-                MessageBox.Show("Success");
-
+                
+                roles.ClearList();
                 roles.FillRolesByUser(userTemp.id);
+
+                lbRoles.Items.Clear();
                 lbRoles.Items.AddRange(roles.ToList());
 
                 lbRoles.Enabled = true;

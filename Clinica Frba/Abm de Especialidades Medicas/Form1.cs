@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Clinica_Frba.NewFolder14
+namespace Clinica_Frba.AbmEspecialidadesMedicas
 {
-    public partial class Form1 : Form
+    public partial class AbmEspecialidadesMedicas : Form
     {
-        public Form1()
+        public AbmEspecialidadesMedicas()
         {
             InitializeComponent();
         }

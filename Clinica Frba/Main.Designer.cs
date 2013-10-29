@@ -28,114 +28,260 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.bAfiliados = new System.Windows.Forms.Button();
-            this.bEspeMed = new System.Windows.Forms.Button();
-            this.bPlanes = new System.Windows.Forms.Button();
-            this.bProfe = new System.Windows.Forms.Button();
-            this.bRoles = new System.Windows.Forms.Button();
+            this.Abm_Afiliado = new System.Windows.Forms.Button();
+            this.Abm_Especialidades_Medicas = new System.Windows.Forms.Button();
+            this.Abm_Planes_Medicos = new System.Windows.Forms.Button();
+            this.Abm_Profesional = new System.Windows.Forms.Button();
+            this.Abm_Rol = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.flp1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.Abm_Usuario = new System.Windows.Forms.Button();
+            this.flp2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.Agendas = new System.Windows.Forms.Button();
+            this.Bonos = new System.Windows.Forms.Button();
+            this.Turnos = new System.Windows.Forms.Button();
+            this.Registro_de_Llegada = new System.Windows.Forms.Button();
+            this.Registro_de_Resultado = new System.Windows.Forms.Button();
+            this.Cancelar_atencion = new System.Windows.Forms.Button();
+            this.Receta = new System.Windows.Forms.Button();
+            this.Estadisticas = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.flp1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.flp2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // bAfiliados
+            // Abm_Afiliado
             // 
-            this.bAfiliados.Location = new System.Drawing.Point(3, 3);
-            this.bAfiliados.Name = "bAfiliados";
-            this.bAfiliados.Size = new System.Drawing.Size(207, 41);
-            this.bAfiliados.TabIndex = 0;
-            this.bAfiliados.Text = "Afiliados";
-            this.bAfiliados.UseVisualStyleBackColor = true;
-            this.bAfiliados.Visible = false;
+            this.Abm_Afiliado.Location = new System.Drawing.Point(3, 3);
+            this.Abm_Afiliado.Name = "Abm_Afiliado";
+            this.Abm_Afiliado.Size = new System.Drawing.Size(207, 41);
+            this.Abm_Afiliado.TabIndex = 0;
+            this.Abm_Afiliado.Text = "Afiliados";
+            this.Abm_Afiliado.UseVisualStyleBackColor = true;
+            this.Abm_Afiliado.Visible = false;
+            this.Abm_Afiliado.Click += new System.EventHandler(this.Abm_Afiliado_Click);
             // 
-            // bEspeMed
+            // Abm_Especialidades_Medicas
             // 
-            this.bEspeMed.Location = new System.Drawing.Point(3, 136);
-            this.bEspeMed.Name = "bEspeMed";
-            this.bEspeMed.Size = new System.Drawing.Size(207, 37);
-            this.bEspeMed.TabIndex = 1;
-            this.bEspeMed.Text = "Especialidades Médicas";
-            this.bEspeMed.UseVisualStyleBackColor = true;
-            this.bEspeMed.Visible = false;
+            this.Abm_Especialidades_Medicas.Location = new System.Drawing.Point(3, 136);
+            this.Abm_Especialidades_Medicas.Name = "Abm_Especialidades_Medicas";
+            this.Abm_Especialidades_Medicas.Size = new System.Drawing.Size(207, 37);
+            this.Abm_Especialidades_Medicas.TabIndex = 1;
+            this.Abm_Especialidades_Medicas.Text = "Especialidades Médicas";
+            this.Abm_Especialidades_Medicas.UseVisualStyleBackColor = true;
+            this.Abm_Especialidades_Medicas.Visible = false;
+            this.Abm_Especialidades_Medicas.Click += new System.EventHandler(this.Abm_Especialidades_Medicas_Click);
             // 
-            // bPlanes
+            // Abm_Planes_Medicos
             // 
-            this.bPlanes.Location = new System.Drawing.Point(3, 50);
-            this.bPlanes.Name = "bPlanes";
-            this.bPlanes.Size = new System.Drawing.Size(207, 37);
-            this.bPlanes.TabIndex = 2;
-            this.bPlanes.Text = "Planes";
-            this.bPlanes.UseVisualStyleBackColor = true;
-            this.bPlanes.Visible = false;
+            this.Abm_Planes_Medicos.Location = new System.Drawing.Point(3, 50);
+            this.Abm_Planes_Medicos.Name = "Abm_Planes_Medicos";
+            this.Abm_Planes_Medicos.Size = new System.Drawing.Size(207, 37);
+            this.Abm_Planes_Medicos.TabIndex = 2;
+            this.Abm_Planes_Medicos.Text = "Planes";
+            this.Abm_Planes_Medicos.UseVisualStyleBackColor = true;
+            this.Abm_Planes_Medicos.Visible = false;
+            this.Abm_Planes_Medicos.Click += new System.EventHandler(this.Abm_Planes_Medicos_Click);
             // 
-            // bProfe
+            // Abm_Profesional
             // 
-            this.bProfe.Location = new System.Drawing.Point(3, 93);
-            this.bProfe.Name = "bProfe";
-            this.bProfe.Size = new System.Drawing.Size(207, 37);
-            this.bProfe.TabIndex = 3;
-            this.bProfe.Text = "Profesionales";
-            this.bProfe.UseVisualStyleBackColor = true;
-            this.bProfe.Visible = false;
+            this.Abm_Profesional.Location = new System.Drawing.Point(3, 93);
+            this.Abm_Profesional.Name = "Abm_Profesional";
+            this.Abm_Profesional.Size = new System.Drawing.Size(207, 37);
+            this.Abm_Profesional.TabIndex = 3;
+            this.Abm_Profesional.Text = "Profesionales";
+            this.Abm_Profesional.UseVisualStyleBackColor = true;
+            this.Abm_Profesional.Visible = false;
+            this.Abm_Profesional.Click += new System.EventHandler(this.Abm_Profesional_Click);
             // 
-            // bRoles
+            // Abm_Rol
             // 
-            this.bRoles.Location = new System.Drawing.Point(3, 179);
-            this.bRoles.Name = "bRoles";
-            this.bRoles.Size = new System.Drawing.Size(207, 37);
-            this.bRoles.TabIndex = 4;
-            this.bRoles.Text = "Roles";
-            this.bRoles.UseVisualStyleBackColor = true;
-            this.bRoles.Visible = false;
-            this.bRoles.Click += new System.EventHandler(this.bRoles_Click);
+            this.Abm_Rol.Location = new System.Drawing.Point(3, 179);
+            this.Abm_Rol.Name = "Abm_Rol";
+            this.Abm_Rol.Size = new System.Drawing.Size(207, 37);
+            this.Abm_Rol.TabIndex = 4;
+            this.Abm_Rol.Text = "Roles";
+            this.Abm_Rol.UseVisualStyleBackColor = true;
+            this.Abm_Rol.Visible = false;
+            this.Abm_Rol.Click += new System.EventHandler(this.Abm_Roles_Click);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.flp1);
-            this.groupBox1.Location = new System.Drawing.Point(277, 12);
+            this.groupBox1.Location = new System.Drawing.Point(599, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(286, 462);
+            this.groupBox1.Size = new System.Drawing.Size(290, 296);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ABMs";
             // 
             // flp1
             // 
-            this.flp1.Controls.Add(this.bAfiliados);
-            this.flp1.Controls.Add(this.bPlanes);
-            this.flp1.Controls.Add(this.bProfe);
-            this.flp1.Controls.Add(this.bEspeMed);
-            this.flp1.Controls.Add(this.bRoles);
-            this.flp1.Location = new System.Drawing.Point(17, 17);
+            this.flp1.Controls.Add(this.Abm_Afiliado);
+            this.flp1.Controls.Add(this.Abm_Planes_Medicos);
+            this.flp1.Controls.Add(this.Abm_Profesional);
+            this.flp1.Controls.Add(this.Abm_Especialidades_Medicas);
+            this.flp1.Controls.Add(this.Abm_Rol);
+            this.flp1.Controls.Add(this.Abm_Usuario);
+            this.flp1.Location = new System.Drawing.Point(56, 17);
             this.flp1.Name = "flp1";
-            this.flp1.Size = new System.Drawing.Size(253, 430);
+            this.flp1.Size = new System.Drawing.Size(214, 266);
             this.flp1.TabIndex = 6;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.flp2);
+            this.groupBox2.Location = new System.Drawing.Point(12, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(565, 296);
+            this.groupBox2.TabIndex = 6;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Funcionalidades";
+            // 
+            // Abm_Usuario
+            // 
+            this.Abm_Usuario.Location = new System.Drawing.Point(3, 222);
+            this.Abm_Usuario.Name = "Abm_Usuario";
+            this.Abm_Usuario.Size = new System.Drawing.Size(207, 35);
+            this.Abm_Usuario.TabIndex = 5;
+            this.Abm_Usuario.Text = "Usuarios";
+            this.Abm_Usuario.UseVisualStyleBackColor = true;
+            // 
+            // flp2
+            // 
+            this.flp2.Controls.Add(this.Agendas);
+            this.flp2.Controls.Add(this.Bonos);
+            this.flp2.Controls.Add(this.Turnos);
+            this.flp2.Controls.Add(this.Registro_de_Llegada);
+            this.flp2.Controls.Add(this.Registro_de_Resultado);
+            this.flp2.Controls.Add(this.Cancelar_atencion);
+            this.flp2.Controls.Add(this.Receta);
+            this.flp2.Controls.Add(this.Estadisticas);
+            this.flp2.Location = new System.Drawing.Point(95, 19);
+            this.flp2.Name = "flp2";
+            this.flp2.Size = new System.Drawing.Size(464, 271);
+            this.flp2.TabIndex = 0;
+            // 
+            // Agendas
+            // 
+            this.Agendas.Location = new System.Drawing.Point(3, 3);
+            this.Agendas.Name = "Agendas";
+            this.Agendas.Size = new System.Drawing.Size(75, 23);
+            this.Agendas.TabIndex = 0;
+            this.Agendas.Text = "Agendas";
+            this.Agendas.UseVisualStyleBackColor = true;
+            this.Agendas.Visible = false;
+            // 
+            // Bonos
+            // 
+            this.Bonos.Location = new System.Drawing.Point(84, 3);
+            this.Bonos.Name = "Bonos";
+            this.Bonos.Size = new System.Drawing.Size(75, 23);
+            this.Bonos.TabIndex = 1;
+            this.Bonos.Text = "Bonos";
+            this.Bonos.UseVisualStyleBackColor = true;
+            this.Bonos.Visible = false;
+            // 
+            // Turnos
+            // 
+            this.Turnos.Location = new System.Drawing.Point(165, 3);
+            this.Turnos.Name = "Turnos";
+            this.Turnos.Size = new System.Drawing.Size(75, 23);
+            this.Turnos.TabIndex = 2;
+            this.Turnos.Text = "Turnos";
+            this.Turnos.UseVisualStyleBackColor = true;
+            this.Turnos.Visible = false;
+            // 
+            // Registro_de_Llegada
+            // 
+            this.Registro_de_Llegada.Location = new System.Drawing.Point(246, 3);
+            this.Registro_de_Llegada.Name = "Registro_de_Llegada";
+            this.Registro_de_Llegada.Size = new System.Drawing.Size(75, 23);
+            this.Registro_de_Llegada.TabIndex = 3;
+            this.Registro_de_Llegada.Text = "Registro de llegada";
+            this.Registro_de_Llegada.UseVisualStyleBackColor = true;
+            this.Registro_de_Llegada.Visible = false;
+            // 
+            // Registro_de_Resultado
+            // 
+            this.Registro_de_Resultado.Location = new System.Drawing.Point(327, 3);
+            this.Registro_de_Resultado.Name = "Registro_de_Resultado";
+            this.Registro_de_Resultado.Size = new System.Drawing.Size(75, 23);
+            this.Registro_de_Resultado.TabIndex = 4;
+            this.Registro_de_Resultado.Text = "Registro de Resultado";
+            this.Registro_de_Resultado.UseVisualStyleBackColor = true;
+            this.Registro_de_Resultado.Visible = false;
+            // 
+            // Cancelar_atencion
+            // 
+            this.Cancelar_atencion.Location = new System.Drawing.Point(3, 32);
+            this.Cancelar_atencion.Name = "Cancelar_atencion";
+            this.Cancelar_atencion.Size = new System.Drawing.Size(75, 23);
+            this.Cancelar_atencion.TabIndex = 5;
+            this.Cancelar_atencion.Text = "Cancelar atención";
+            this.Cancelar_atencion.UseVisualStyleBackColor = true;
+            this.Cancelar_atencion.Visible = false;
+            // 
+            // Receta
+            // 
+            this.Receta.Location = new System.Drawing.Point(84, 32);
+            this.Receta.Name = "Receta";
+            this.Receta.Size = new System.Drawing.Size(75, 23);
+            this.Receta.TabIndex = 6;
+            this.Receta.Text = "Receta";
+            this.Receta.UseVisualStyleBackColor = true;
+            this.Receta.Visible = false;
+            // 
+            // Estadisticas
+            // 
+            this.Estadisticas.Location = new System.Drawing.Point(165, 32);
+            this.Estadisticas.Name = "Estadisticas";
+            this.Estadisticas.Size = new System.Drawing.Size(75, 23);
+            this.Estadisticas.TabIndex = 7;
+            this.Estadisticas.Text = "Estadísticas";
+            this.Estadisticas.UseVisualStyleBackColor = true;
+            this.Estadisticas.Visible = false;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 501);
+            this.ClientSize = new System.Drawing.Size(892, 317);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "Main";
             this.Text = "Main";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.flp1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.flp2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button bAfiliados;
-        private System.Windows.Forms.Button bEspeMed;
-        private System.Windows.Forms.Button bPlanes;
-        private System.Windows.Forms.Button bProfe;
-        private System.Windows.Forms.Button bRoles;
+        private System.Windows.Forms.Button Abm_Afiliado;
+        private System.Windows.Forms.Button Abm_Especialidades_Medicas;
+        private System.Windows.Forms.Button Abm_Planes_Medicos;
+        private System.Windows.Forms.Button Abm_Profesional;
+        private System.Windows.Forms.Button Abm_Rol;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.FlowLayoutPanel flp1;
+        private System.Windows.Forms.Button Abm_Usuario;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.FlowLayoutPanel flp2;
+        private System.Windows.Forms.Button Agendas;
+        private System.Windows.Forms.Button Bonos;
+        private System.Windows.Forms.Button Turnos;
+        private System.Windows.Forms.Button Registro_de_Llegada;
+        private System.Windows.Forms.Button Registro_de_Resultado;
+        private System.Windows.Forms.Button Cancelar_atencion;
+        private System.Windows.Forms.Button Receta;
+        private System.Windows.Forms.Button Estadisticas;
 
 
     }
