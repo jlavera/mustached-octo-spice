@@ -34,6 +34,7 @@
             // 
             // bEntrar
             // 
+            this.bEntrar.Enabled = false;
             this.bEntrar.Location = new System.Drawing.Point(107, 274);
             this.bEntrar.Name = "bEntrar";
             this.bEntrar.Size = new System.Drawing.Size(142, 44);
@@ -66,7 +67,7 @@
             this.tbUsuario.Name = "tbUsuario";
             this.tbUsuario.Size = new System.Drawing.Size(121, 20);
             this.tbUsuario.TabIndex = 0;
-            this.tbUsuario.Text = "lave";
+            this.tbUsuario.Text = "admin";
             // 
             // tbPassword
             // 
@@ -75,10 +76,11 @@
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(142, 20);
             this.tbPassword.TabIndex = 1;
-            this.tbPassword.Text = "1234";
+            this.tbPassword.Text = "w23e";
             // 
             // lbRoles
             // 
+            this.lbRoles.Enabled = false;
             this.lbRoles.FormattingEnabled = true;
             this.lbRoles.Location = new System.Drawing.Point(107, 125);
             this.lbRoles.Name = "lbRoles";

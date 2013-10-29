@@ -22,12 +22,13 @@ namespace Clinica_Frba {
         }
 
         private void bValidar_Click(object sender, EventArgs e) {
+            
             //--Validar que haya valor en los campos
             if ((tbUsuario.Text != "") && (tbPassword.Text != "")) {
 
                 //--Traer usuarios con ese user y pass
                 Usuarios users = new Usuarios();
-                userTemp = users.VerifyUser(tbUsuario.Text, tbPassword.Text);
+                userTemp = users.VerifyUser(tbUsuario.Text, getHashSha256(tbPassword.Text));
 
                 //--Si hay más de 0
                 if (userTemp == null) {
@@ -38,10 +39,17 @@ namespace Clinica_Frba {
 
                 MessageBox.Show("Success");
 
-                roles.FillRolesByUser(user.id);
+                roles.FillRolesByUser(userTemp.id);
                 lbRoles.Items.AddRange(roles.ToList());
 
+                lbRoles.Enabled = true;
+                bEntrar.Enabled = true;
+
+            } else {
+                MessageBox.Show("Faltan datos");
             }
+
+
         }
 
         private void bEntrar_Click(object sender, EventArgs e) {

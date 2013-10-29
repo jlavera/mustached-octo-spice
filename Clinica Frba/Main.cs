@@ -10,13 +10,14 @@ using Clinica_Frba.Clases;
 
 namespace Clinica_Frba
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
 
         Usuario user;
         Rol rol;
+        Funcionalidades funcs = new Funcionalidades();
 
-        public Form1()
+        public Main()
         {
             InitializeComponent();
         }
@@ -32,8 +33,9 @@ namespace Clinica_Frba
 
             user = login.user;
             rol = login.rol;
+            funcs.FillByRol(rol.id);
 
-
+            
 
 
         }
