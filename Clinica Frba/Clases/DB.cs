@@ -73,7 +73,6 @@ namespace Clinica_Frba.Clases {
             return temp;
         }
 
-
         /// <summary>
         /// Ejecuta comando y devuelve la cantidad de filas afectadas
         /// </summary>
