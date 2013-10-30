@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Linq;
 using System.Text;
@@ -14,21 +14,26 @@ namespace Clinica_Frba.Clases {
             : base("usuario") {
         }
 
-        public int CantRows() {
-            return DB.ExecuteCardinal("SELECT COUNT(*) FROM " + DB.schema + tabla);
-        }
-
         public void FillWithAll() {
             Fill(SelectAll());
         }
 
         private void Fill(DataTable dt) {
-
             foreach (DataRow dr in dt.Rows) {
                 items.Add(new Usuario(dr));
             }
-
         }
+
+        public Usuario this[int index] {
+            get {
+                return (Usuario)items[index];
+            }
+
+            set {
+                items[index] = (object)value;
+            }
+        }
+
         #endregion
         //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
 

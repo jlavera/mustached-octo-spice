@@ -1,0 +1,4 @@
+p_fileName;p_singular;p_plural;p_tabla
+Usuarios.cs;Usuario;Usuarios;usuario
+Roles.cs;Rol;Roles;rol
+Funcionalidades.cs;Funcionalidad;Funcionalidades;funcionalidad

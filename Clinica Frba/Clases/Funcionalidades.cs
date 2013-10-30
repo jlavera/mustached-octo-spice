@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,12 +19,21 @@ namespace Clinica_Frba.Clases {
         }
 
         private void Fill(DataTable dt) {
-
             foreach (DataRow dr in dt.Rows) {
                 items.Add(new Funcionalidad(dr));
             }
-
         }
+
+        public Funcionalidad this[int index] {
+            get {
+                return (Funcionalidad)items[index];
+            }
+
+            set {
+                items[index] = (object)value;
+            }
+        }
+
         #endregion
         //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
 

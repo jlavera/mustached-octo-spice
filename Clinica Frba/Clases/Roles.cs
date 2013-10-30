@@ -34,20 +34,20 @@ namespace Clinica_Frba.Clases {
                 items[index] = (object)value;
             }
         }
+
+        #endregion
+        //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
+        
         public Rol this[string id]{
             get{
-                foreach(Rol rol in items){
-                    if (rol.id == Convert.ToInt32(id)){
-                        return rol;
+                foreach(Rol item in items){
+                    if (item.id == Convert.ToInt32(id)){
+                        return item;
                     }
                 }
                 return null;
             }
         }
-
-        #endregion
-        //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
-
 
         public void FillWithFilter(string p_nombre, ListBox.SelectedObjectCollection p_objects) {
 

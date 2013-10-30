@@ -5,7 +5,7 @@ using System.Text;
 using System.Data;
 
 namespace Clinica_Frba.Clases {
-    class Funcionalidad: Entidad {
+    public class Funcionalidad: Entidad {
 
         public int id;
         public string nombre;

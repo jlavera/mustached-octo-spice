@@ -1,0 +1,26 @@
+        #region homogeneo
+        public ###plural###()
+            : base("###tabla###") {
+        }
+
+        public void FillWithAll() {
+            Fill(SelectAll());
+        }
+
+        private void Fill(DataTable dt) {
+            foreach (DataRow dr in dt.Rows) {
+                items.Add(new ###singular###(dr));
+            }
+        }
+
+        public ###singular### this[int index] {
+            get {
+                return (###singular###)items[index];
+            }
+
+            set {
+                items[index] = (object)value;
+            }
+        }
+
+        #endregion
