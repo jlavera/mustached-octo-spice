@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,7 +15,7 @@ namespace Clinica_Frba.Abm_de_Rol {
         public string nombre;
         public Funcionalidades allFuncs = new Funcionalidades();
 
-        private bool nueva;
+        public bool nueva;
         private string[] selectedFuncs;
         private Roles roles = new Roles();
 
@@ -60,14 +60,28 @@ namespace Clinica_Frba.Abm_de_Rol {
 
         private void bGuardar_Click(object sender, EventArgs e) {
 
-            if (nueva) {
+            string subQuery = "";
+            foreach (Funcionalidad funcionalidad in lbFuncionalidades.SelectedItems)
+            {
+                subQuery += "(" + funcionalidad.id + ", " + tbId.Text + "), ";
+            }
+            //Comoconcatena con ", " le saco los ultimos dos caracteres al string
+            if(lbFuncionalidades.SelectedItems.Count > 1)
+                subQuery.Substring(0, subQuery.Length - 2);
 
-                //--INSERT
-
+             if (nueva) {
+                 if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "rol(nombre) VALUES ('" + tbNombre.Text + "');") < 0)
+                    MessageBox.Show("Error en inserscion de rol");
             } else {
-
-                //--UPDATE
-
+                //Es mas facil borrar todos los rol_x_funcionalidad que revisar cuales cambiaron
+                if (DB.ExecuteNonQuery("DELETE " + DB.schema + "rol_x_funcionalidad WHERE rol=" + tbId.Text + "; " +
+                                        "UPDATE " + DB.schema + "rol SET nombre='" + tbNombre.Text + "' WHERE id=" + tbId.Text) < 0)
+                    MessageBox.Show("Error en modificacion de rol");
+            }
+            if (lbFuncionalidades.SelectedItems.Count > 1){
+                subQuery.Substring(0, subQuery.Length - 2);
+                if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "rol_x_funcionalidad(funcionalidad, rol) VALUES " + subQuery) < 0)
+                    MessageBox.Show("Error en inserscion de rol_x_funcionalidad");
             }
         }
     }
