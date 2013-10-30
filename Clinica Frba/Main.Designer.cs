@@ -138,6 +138,7 @@
             this.Abm_Usuario.TabIndex = 5;
             this.Abm_Usuario.Text = "Usuarios";
             this.Abm_Usuario.UseVisualStyleBackColor = true;
+            this.Abm_Usuario.Visible = false;
             // 
             // groupBox2
             // 

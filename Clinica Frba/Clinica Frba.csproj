@@ -102,12 +102,6 @@
     <Compile Include="Abm de Profesional\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm de Especialidades Medicas\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm de Especialidades Medicas\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Abm de Planes\Form1.cs">
       <SubType>Form</SubType>
     </Compile>

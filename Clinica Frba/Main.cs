@@ -56,13 +56,11 @@ namespace Clinica_Frba {
         }
 
         private void Abm_Planes_Medicos_Click(object sender, EventArgs e) {
-            AbmPlanes.AbmPlanes form = new AbmPlanes.AbmPlanes();
-            form.ShowDialog();
+            MessageBox.Show("Como la funcionalidad fue simplificada no es necesario realizar la implementación de este caso de uso pero si su modelado.");
         }
 
         private void Abm_Especialidades_Medicas_Click(object sender, EventArgs e) {
-            AbmEspecialidadesMedicas.AbmEspecialidadesMedicas form = new AbmEspecialidadesMedicas.AbmEspecialidadesMedicas();
-            form.ShowDialog();
+            MessageBox.Show("Para reducir el tiempo de desarrollo de los alumnos, no será necesario que realicen la implementación de dicho ABM.");
         }
     }
 }

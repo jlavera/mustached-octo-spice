@@ -66,8 +66,8 @@ namespace Clinica_Frba.Abm_de_Rol {
                 subQuery += "(" + funcionalidad.id + ", " + tbId.Text + "), ";
             }
             //Comoconcatena con ", " le saco los ultimos dos caracteres al string
-            if(lbFuncionalidades.SelectedItems.Count > 1)
-                subQuery.Substring(0, subQuery.Length - 2);
+            if(lbFuncionalidades.SelectedItems.Count > 0)
+                subQuery = subQuery.Substring(0, subQuery.Length - 2);
 
              if (nueva) {
                  if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "rol(nombre) VALUES ('" + tbNombre.Text + "');") < 0)
@@ -78,11 +78,12 @@ namespace Clinica_Frba.Abm_de_Rol {
                                         "UPDATE " + DB.schema + "rol SET nombre='" + tbNombre.Text + "' WHERE id=" + tbId.Text) < 0)
                     MessageBox.Show("Error en modificacion de rol");
             }
-            if (lbFuncionalidades.SelectedItems.Count > 1){
-                subQuery.Substring(0, subQuery.Length - 2);
+            if (lbFuncionalidades.SelectedItems.Count > 0){
                 if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "rol_x_funcionalidad(funcionalidad, rol) VALUES " + subQuery) < 0)
                     MessageBox.Show("Error en inserscion de rol_x_funcionalidad");
             }
+            this.Close();
+            DialogResult = DialogResult.OK;
         }
     }
 }
