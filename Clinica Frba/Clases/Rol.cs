@@ -19,6 +19,13 @@ namespace Clinica_Frba.Clases {
             habilitado = Convert.ToBoolean(dr["habilitado"]);
         }
 
+        public Rol(int p_id, string p_nombre, string p_funcionalidades) {
+            id = p_id;
+            nombre = p_nombre;
+            funcionalidades = p_funcionalidades;
+            habilitado = true;
+        }
+
         public override string ToString() {
             return nombre;
         }
@@ -26,7 +33,7 @@ namespace Clinica_Frba.Clases {
         public override bool Equals(object rol) {
             return (rol != System.DBNull.Value && ((Rol)rol).id == id && ((Rol)rol).nombre == nombre && ((Rol)rol).funcionalidades == funcionalidades);
         }
-
+        
         public override int GetHashCode() {
             return base.GetHashCode();
         }

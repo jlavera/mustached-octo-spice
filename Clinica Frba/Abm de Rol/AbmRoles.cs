@@ -20,16 +20,7 @@ namespace Clinica_Frba.AbmRoles {
 
         private void Form1_Load(object sender, EventArgs e) {
 
-            funcs.FillWithAll();
-            lbFuncionalidades.Items.AddRange(funcs.ToList());
-
-
-            roles = new Roles();
-            roles.FillWithAll();
-
-            foreach (Rol rol in roles.items)
-                dgvRoles.Rows.Add(rol.id, rol.nombre, rol.funcionalidades, rol.habilitado);
-            
+            FillDgvYLb();
             
         }
 
@@ -49,7 +40,10 @@ namespace Clinica_Frba.AbmRoles {
             if (dgvRoles.Columns[e.ColumnIndex].HeaderText == "Seleccionar") {
                 Abm_de_Rol.EditRol formEdit = new Clinica_Frba.Abm_de_Rol.EditRol(roles[e.RowIndex]);
                 formEdit.ShowDialog();
-                //MessageBox.Show(dgvRoles.Rows[e.RowIndex].Cells["Nombre"].Value.ToString());
+
+                if (formEdit.DialogResult == DialogResult.OK) {
+                    FillDgvYLb();
+                }
             }
 
         }
@@ -64,11 +58,24 @@ namespace Clinica_Frba.AbmRoles {
             Abm_de_Rol.EditRol editForm = new Abm_de_Rol.EditRol();
             editForm.ShowDialog();
 
-
-
+            
 
         }
 
+
+        private void FillDgvYLb() {
+            
+            funcs.FillWithAll();
+            lbFuncionalidades.Items.AddRange(funcs.ToList());
+
+
+            roles = new Roles();
+            roles.FillWithAll();
+
+            foreach (Rol rol in roles.items)
+                dgvRoles.Rows.Add(rol.id, rol.nombre, rol.funcionalidades, rol.habilitado);            
+
+        }
 
     }
 }
