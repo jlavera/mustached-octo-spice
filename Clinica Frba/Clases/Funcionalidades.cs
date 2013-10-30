@@ -26,7 +26,7 @@ namespace Clinica_Frba.Clases {
 
         }
         #endregion
-        //----------------------------------------------------
+        //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
 
         public void FillByRol(int p_rolId) {
             Fill(DB.ExecuteReader("SELECT f.id, f.nombre FROM moustache_spice.rol_x_funcionalidad rxf JOIN moustache_spice.funcionalidad f On f.id = rxf.funcionalidad WHERE rxf.rol = " + p_rolId));

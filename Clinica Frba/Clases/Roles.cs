@@ -46,7 +46,7 @@ namespace Clinica_Frba.Clases {
         }
 
         #endregion
-        //----------------------------------------------------
+        //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
 
 
         public void FillWithFilter(string p_nombre, ListBox.SelectedObjectCollection p_objects) {

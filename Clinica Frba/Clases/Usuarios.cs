@@ -30,7 +30,7 @@ namespace Clinica_Frba.Clases {
 
         }
         #endregion
-        //----------------------------------------------------
+        //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
 
         public Usuario VerifyUser(string p_user, string p_pass) {
             try {
