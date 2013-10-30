@@ -28,16 +28,21 @@ namespace Clinica_Frba.Clases {
         /// <returns></returns>
         static public DataTable ExecuteReader(string command) {
 
-            sqlCon.Open();
-
             DataTable dt = new DataTable();
+            try {
 
-            SqlDataAdapter da = new SqlDataAdapter(command, sqlCon);
-            da.Fill(dt);
-            da.Dispose();
+                sqlCon.Open();
 
-            sqlCon.Close();
+                SqlDataAdapter da = new SqlDataAdapter(command, sqlCon);
+                da.Fill(dt);
+                da.Dispose();
 
+            } catch (Exception ex) {
+                return null;
+            } finally {
+
+                sqlCon.Close();
+            }
             return dt;
         }
 
@@ -56,11 +61,14 @@ namespace Clinica_Frba.Clases {
                 reader = (new SqlCommand(command, sqlCon)).ExecuteReader();
                 reader.Read();
 
-                temp = reader.GetInt32(0);
+                //--Es convert porque hay veces que trae Decimal y el getInt no entiende nada :)
+                temp = Convert.ToInt32(reader[0]); 
 
-                sqlCon.Close();
             } catch (Exception ex) {
                 return -1;
+            } finally {
+
+                sqlCon.Close();
             }
             return temp;
         }

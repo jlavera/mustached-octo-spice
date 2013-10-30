@@ -35,8 +35,8 @@
             this.Abm_Rol = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.flp1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.Abm_Usuario = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.flp2 = new System.Windows.Forms.FlowLayoutPanel();
             this.Agendas = new System.Windows.Forms.Button();
             this.Bonos = new System.Windows.Forms.Button();
@@ -68,7 +68,7 @@
             this.Abm_Especialidades_Medicas.Location = new System.Drawing.Point(3, 136);
             this.Abm_Especialidades_Medicas.Name = "Abm_Especialidades_Medicas";
             this.Abm_Especialidades_Medicas.Size = new System.Drawing.Size(207, 37);
-            this.Abm_Especialidades_Medicas.TabIndex = 1;
+            this.Abm_Especialidades_Medicas.TabIndex = 3;
             this.Abm_Especialidades_Medicas.Text = "Especialidades Médicas";
             this.Abm_Especialidades_Medicas.UseVisualStyleBackColor = true;
             this.Abm_Especialidades_Medicas.Visible = false;
@@ -79,7 +79,7 @@
             this.Abm_Planes_Medicos.Location = new System.Drawing.Point(3, 50);
             this.Abm_Planes_Medicos.Name = "Abm_Planes_Medicos";
             this.Abm_Planes_Medicos.Size = new System.Drawing.Size(207, 37);
-            this.Abm_Planes_Medicos.TabIndex = 2;
+            this.Abm_Planes_Medicos.TabIndex = 1;
             this.Abm_Planes_Medicos.Text = "Planes";
             this.Abm_Planes_Medicos.UseVisualStyleBackColor = true;
             this.Abm_Planes_Medicos.Visible = false;
@@ -90,7 +90,7 @@
             this.Abm_Profesional.Location = new System.Drawing.Point(3, 93);
             this.Abm_Profesional.Name = "Abm_Profesional";
             this.Abm_Profesional.Size = new System.Drawing.Size(207, 37);
-            this.Abm_Profesional.TabIndex = 3;
+            this.Abm_Profesional.TabIndex = 2;
             this.Abm_Profesional.Text = "Profesionales";
             this.Abm_Profesional.UseVisualStyleBackColor = true;
             this.Abm_Profesional.Visible = false;
@@ -130,6 +130,15 @@
             this.flp1.Size = new System.Drawing.Size(214, 266);
             this.flp1.TabIndex = 6;
             // 
+            // Abm_Usuario
+            // 
+            this.Abm_Usuario.Location = new System.Drawing.Point(3, 222);
+            this.Abm_Usuario.Name = "Abm_Usuario";
+            this.Abm_Usuario.Size = new System.Drawing.Size(207, 35);
+            this.Abm_Usuario.TabIndex = 5;
+            this.Abm_Usuario.Text = "Usuarios";
+            this.Abm_Usuario.UseVisualStyleBackColor = true;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.flp2);
@@ -139,15 +148,6 @@
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Funcionalidades";
-            // 
-            // Abm_Usuario
-            // 
-            this.Abm_Usuario.Location = new System.Drawing.Point(3, 222);
-            this.Abm_Usuario.Name = "Abm_Usuario";
-            this.Abm_Usuario.Size = new System.Drawing.Size(207, 35);
-            this.Abm_Usuario.TabIndex = 5;
-            this.Abm_Usuario.Text = "Usuarios";
-            this.Abm_Usuario.UseVisualStyleBackColor = true;
             // 
             // flp2
             // 

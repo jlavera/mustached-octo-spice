@@ -43,7 +43,6 @@ namespace Clinica_Frba
 
             }
 
-
         }
 
         private void Abm_Roles_Click(object sender, EventArgs e) {

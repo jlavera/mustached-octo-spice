@@ -6,16 +6,12 @@ using System.Collections;
 using System.Data;
 
 namespace Clinica_Frba.Clases {
-    class Funcionalidades: ListaEntidad {
+    public class Funcionalidades: ListaEntidad {
 
         //--------------HOMOGENEO A TODAS LAS ENTIDADES------
         #region homogeneo
         public Funcionalidades()
             : base("funcionalidad") {
-        }
-
-        public int CantRows() {
-            return DB.ExecuteCardinal("SELECT COUNT(*) FROM " + DB.schema + tabla);
         }
 
         public void FillWithAll() {

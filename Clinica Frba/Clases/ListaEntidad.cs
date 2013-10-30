@@ -30,13 +30,23 @@ namespace Clinica_Frba {
             items.Clear();
         }
 
-        public DataTable SelectAll() {
+        virtual public DataTable SelectAll() {
 
             return DB.ExecuteReader("SELECT * FROM " + DB.schema + tabla);
 
         }
 
+        public int CantRows() {
+            return DB.ExecuteCardinal("SELECT COUNT(*) FROM " + DB.schema + tabla);
+        }
 
+        public int GetNextIdentity() {
+            try {
+                return DB.ExecuteCardinal("SELECT IDENT_CURRENT('" + DB.schema + tabla + "') +  IDENT_INCR('" + DB.schema + tabla + "')");
+            } catch (Exception ex) {
+                return -1;
+            }
+        }
 
         //--Enumerator
         #region enum

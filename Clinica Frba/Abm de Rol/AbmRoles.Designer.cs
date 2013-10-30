@@ -29,32 +29,38 @@
         private void InitializeComponent()
         {
             this.dgvRoles = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
             this.lbFuncionalidades = new System.Windows.Forms.ListBox();
             this.tbRol = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.bBuscar = new System.Windows.Forms.Button();
+            this.bAgregar = new System.Windows.Forms.Button();
+            this.bEliminar = new System.Windows.Forms.Button();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Funcionalidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Habilitado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoles)).BeginInit();
             this.gbFiltros.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvRoles
             // 
+            this.dgvRoles.AllowUserToAddRows = false;
             this.dgvRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRoles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.Nombre,
+            this.Funcionalidades,
+            this.Habilitado,
             this.Column1});
             this.dgvRoles.Location = new System.Drawing.Point(12, 254);
             this.dgvRoles.Name = "dgvRoles";
             this.dgvRoles.Size = new System.Drawing.Size(840, 324);
             this.dgvRoles.TabIndex = 0;
             this.dgvRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRoles_CellContentClick);
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Seleccionar";
-            this.Column1.Name = "Column1";
             // 
             // gbFiltros
             // 
@@ -71,6 +77,7 @@
             // 
             // lbFuncionalidades
             // 
+            this.lbFuncionalidades.DisplayMember = "id";
             this.lbFuncionalidades.FormattingEnabled = true;
             this.lbFuncionalidades.Location = new System.Drawing.Point(588, 19);
             this.lbFuncionalidades.Name = "lbFuncionalidades";
@@ -106,7 +113,7 @@
             // 
             // bBuscar
             // 
-            this.bBuscar.Location = new System.Drawing.Point(702, 200);
+            this.bBuscar.Location = new System.Drawing.Point(708, 206);
             this.bBuscar.Name = "bBuscar";
             this.bBuscar.Size = new System.Drawing.Size(75, 23);
             this.bBuscar.TabIndex = 2;
@@ -114,11 +121,66 @@
             this.bBuscar.UseVisualStyleBackColor = true;
             this.bBuscar.Click += new System.EventHandler(this.bBuscar_Click);
             // 
+            // bAgregar
+            // 
+            this.bAgregar.Location = new System.Drawing.Point(12, 206);
+            this.bAgregar.Name = "bAgregar";
+            this.bAgregar.Size = new System.Drawing.Size(134, 29);
+            this.bAgregar.TabIndex = 3;
+            this.bAgregar.Text = "Agregar";
+            this.bAgregar.UseVisualStyleBackColor = true;
+            this.bAgregar.Click += new System.EventHandler(this.bAgregar_Click);
+            // 
+            // bEliminar
+            // 
+            this.bEliminar.Location = new System.Drawing.Point(191, 206);
+            this.bEliminar.Name = "bEliminar";
+            this.bEliminar.Size = new System.Drawing.Size(134, 29);
+            this.bEliminar.TabIndex = 4;
+            this.bEliminar.Text = "Eliminar seleccionados";
+            this.bEliminar.UseVisualStyleBackColor = true;
+            this.bEliminar.Click += new System.EventHandler(this.bEliminar_Click);
+            // 
+            // Id
+            // 
+            this.Id.Frozen = true;
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            this.Nombre.Frozen = true;
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            // 
+            // Funcionalidades
+            // 
+            this.Funcionalidades.Frozen = true;
+            this.Funcionalidades.HeaderText = "Funcionalidades";
+            this.Funcionalidades.Name = "Funcionalidades";
+            this.Funcionalidades.ReadOnly = true;
+            // 
+            // Habilitado
+            // 
+            this.Habilitado.Frozen = true;
+            this.Habilitado.HeaderText = "Habilitado";
+            this.Habilitado.Name = "Habilitado";
+            this.Habilitado.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Seleccionar";
+            this.Column1.Name = "Column1";
+            // 
             // AbmRoles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(868, 590);
+            this.Controls.Add(this.bEliminar);
+            this.Controls.Add(this.bAgregar);
             this.Controls.Add(this.bBuscar);
             this.Controls.Add(this.gbFiltros);
             this.Controls.Add(this.dgvRoles);
@@ -141,6 +203,12 @@
         private System.Windows.Forms.TextBox tbRol;
         private System.Windows.Forms.Button bBuscar;
         private System.Windows.Forms.ListBox lbFuncionalidades;
+        private System.Windows.Forms.Button bAgregar;
+        private System.Windows.Forms.Button bEliminar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Funcionalidades;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Habilitado;
         private System.Windows.Forms.DataGridViewButtonColumn Column1;
     }
 }
