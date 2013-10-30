@@ -8,17 +8,14 @@ using System.Text;
 using System.Windows.Forms;
 using Clinica_Frba.Clases;
 
-namespace Clinica_Frba
-{
-    public partial class Main : Form
-    {
+namespace Clinica_Frba {
+    public partial class Main : Form {
 
         Usuario user;
         Rol rol;
         Funcionalidades funcs = new Funcionalidades();
 
-        public Main()
-        {
+        public Main() {
             InitializeComponent();
         }
 
@@ -40,9 +37,7 @@ namespace Clinica_Frba
                     flp1.Controls[func.nombre].Visible = true;
                 else
                     flp2.Controls[func.nombre].Visible = true;
-
             }
-
         }
 
         private void Abm_Roles_Click(object sender, EventArgs e) {

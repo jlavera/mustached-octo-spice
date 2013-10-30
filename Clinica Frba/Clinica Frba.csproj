@@ -63,6 +63,7 @@
     </Compile>
     <Compile Include="Clases\Funcionalidad.cs" />
     <Compile Include="Clases\Funcionalidades.cs" />
+    <Compile Include="Clases\FuncionesBoludas.cs" />
     <Compile Include="Clases\Rol.cs" />
     <Compile Include="Clases\Roles.cs" />
     <Compile Include="Clases\Transformer.cs">
@@ -188,13 +189,14 @@
       <DependentUpon>LogIn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="App.Config" />
     <None Include="Properties\Settings.settings">
@@ -208,6 +210,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Cosas\fecha.txt" />
     <Content Include="ToDo.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -23,5 +23,9 @@ namespace Clinica_Frba.Clases {
         public override bool Equals(object func) {
             return ((func != System.DBNull.Value) &&((Funcionalidad)func).id == id) && (((Funcionalidad)func).nombre == nombre);
         }
+
+        public override int GetHashCode() {
+            return base.GetHashCode();
+        }
     }
 }

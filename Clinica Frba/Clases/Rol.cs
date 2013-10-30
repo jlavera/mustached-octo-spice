@@ -27,5 +27,9 @@ namespace Clinica_Frba.Clases {
             return (rol != System.DBNull.Value && ((Rol)rol).id == id && ((Rol)rol).nombre == nombre && ((Rol)rol).funcionalidades == funcionalidades);
         }
 
+        public override int GetHashCode() {
+            return base.GetHashCode();
+        }
+
     }
 }

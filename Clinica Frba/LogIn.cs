@@ -75,5 +75,12 @@ namespace Clinica_Frba {
 
             return hashString;
         }
+
+        private void LogIn_Load(object sender, EventArgs e) {
+            MessageBox.Show(DateTime.Now.ToString());
+            FuncionesBoludas.SetDateTime(DateTime.Now);
+            MessageBox.Show(FuncionesBoludas.GetDateTime().ToString());
+        }
+
     }
 }
