@@ -73,5 +73,27 @@ namespace Clinica_Frba.Clases {
             return temp;
         }
 
+
+        /// <summary>
+        /// Ejecuta comando y devuelve la cantidad de filas afectadas
+        /// </summary>
+        /// <param name="command">Comando</param>
+        /// <returns></returns>
+        static public int ExecuteNonQuery(string command) {
+            int temp;
+
+            try {
+                sqlCon.Open();
+
+                temp = (new SqlCommand(command, sqlCon)).ExecuteNonQuery();
+
+            } catch (Exception ex) {
+                return -1;
+            } finally {
+                sqlCon.Close();
+            }
+            return temp;
+        }
+
     }
 }
