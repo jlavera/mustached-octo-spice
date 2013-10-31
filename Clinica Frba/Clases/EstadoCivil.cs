@@ -17,5 +17,9 @@ namespace Clinica_Frba.Clases {
 
         }
 
+        public override string ToString() {
+            return nombre;
+        }
+
     }
 }

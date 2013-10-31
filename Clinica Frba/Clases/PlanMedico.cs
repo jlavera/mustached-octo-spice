@@ -21,5 +21,8 @@ namespace Clinica_Frba.Clases {
             precioBonoFarmacia = Convert.ToInt32(dr["pla_precioBonoFarmacia"]);
         }
 
+        public override string ToString() {
+            return nombre ;
+        }
     }
 }
