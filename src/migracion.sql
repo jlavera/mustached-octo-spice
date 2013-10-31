@@ -43,6 +43,14 @@ BEGIN
 	RETURN 1
 END
 GO
+
+CREATE FUNCTION moustache_spice.bonoFarmaciaHabilitado(@impresion DATE, @vencimiento DATE) RETURNS int AS
+BEGIN
+	IF (@impresion  < @vencimiento  AND
+						   DATEDIFF(DAY, @impresion , @vencimiento ) <= 60)
+		RETURN 0
+	RETURN 1
+GO
 -- -----------------------------------------------------
 -- creacion tabla usuario
 -- -----------------------------------------------------
@@ -280,8 +288,7 @@ CREATE TABLE moustache_spice.bonoFarmacia (
   bfa_fechaVencimiento DATE NOT NULL,
   bfa_afiliado INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.afiliado(afi_id),
   PRIMARY KEY (bfa_id),
-  CHECK (bfa_fechaImpresion < bfa_fechaVencimiento AND
-						   DATEDIFF(DAY,bfa_fechaImpresion, bfa_fechaVencimiento) <= 60 )
+  CHECK ( moustache_spice.bonoFarmaciaHabilitado( bfa_fechaImpresion, bfa_fechaVencimiento) = 0 )
 );
 
 -- -----------------------------------------------------
@@ -312,6 +319,7 @@ CREATE VIEW moustache_spice.vAfiliado AS
 		FROM moustache_spice.afiliado
 			LEFT JOIN moustache_spice.usuario ON usu_id = afi_usuario
 			LEFT JOIN moustache_spice.planMedico ON afi_planMedico = pla_id
+			LEFT JOIN moustache_spice.estadoCivil ON afi_estadoCivil = est_id
 GO
 
 
@@ -455,7 +463,7 @@ INSERT INTO moustache_spice.bonoFarmacia(bfa_id, bfa_fechaImpresion, bfa_fechaVe
 	(SELECT DISTINCT Bono_Farmacia_Numero, Bono_Farmacia_Fecha_Impresion, Bono_Farmacia_Fecha_Vencimiento, afi_id
 	FROM gd_esquema.Maestra
 	LEFT JOIN moustache_spice.vAfiliado ON usu_numeroDocumento = Paciente_Dni
-	WHERE Bono_Farmacia_Numero IS NOT NULL)
+	WHERE Bono_Farmacia_Numero IS NOT NULL AND moustache_spice.bonoFarmaciaHabilitado(Bono_Farmacia_Fecha_Impresion, Bono_Farmacia_Fecha_Vencimiento) = 0)
 SET IDENTITY_INSERT moustache_spice.bonoFarmacia OFF
 
 -- -----------------------------------------------------
@@ -492,9 +500,8 @@ INSERT INTO moustache_spice.medicamento_x_bonoFarmacia(mxb_bonoFarmacia, mxb_med
 		LEFT JOIN moustache_spice.medicamento ON med_nombre = Bono_Farmacia_Medicamento
 	WHERE Bono_Farmacia_Numero IS NOT NULL
 	AND Bono_Farmacia_Medicamento IS NOT NULL)
-
-
-SELECT sem_habilitado, COUNT(*) FROM moustache_spice.semanal GROUP BY sem_habilitado
+	
+	
 -- -----------------------------------------------------
 -- ##TODO##
 -- >> Grupos familiares (asumismos por apellido, o dejamos vacio?) necesito migrar los planes medicos
