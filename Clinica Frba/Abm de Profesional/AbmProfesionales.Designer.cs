@@ -1,6 +1,6 @@
-﻿namespace Clinica_Frba.AbmAfiliados
+﻿namespace Clinica_Frba.AbmProfesionales
 {
-    partial class AbmAfiliados
+    partial class AbmProfesionales
     {
         /// <summary>
         /// Required designer variable.
@@ -32,8 +32,6 @@
             this.bAgregar = new System.Windows.Forms.Button();
             this.bBuscar = new System.Windows.Forms.Button();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
-            this.lbPlanMedico = new System.Windows.Forms.ListBox();
-            this.lbEstadoCivil = new System.Windows.Forms.ListBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.tbFamiliaresACargo = new System.Windows.Forms.TextBox();
@@ -76,6 +74,8 @@
             this.familiaresACargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.planMedico = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.lbEstadoCivil = new System.Windows.Forms.ListBox();
+            this.lbPlanMedico = new System.Windows.Forms.ListBox();
             this.gbFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAfiliados)).BeginInit();
             this.SuspendLayout();
@@ -150,25 +150,6 @@
             this.gbFiltros.TabIndex = 6;
             this.gbFiltros.TabStop = false;
             this.gbFiltros.Text = "Filtros";
-            // 
-            // lbPlanMedico
-            // 
-            this.lbPlanMedico.FormattingEnabled = true;
-            this.lbPlanMedico.Location = new System.Drawing.Point(849, 40);
-            this.lbPlanMedico.Name = "lbPlanMedico";
-            this.lbPlanMedico.Size = new System.Drawing.Size(120, 108);
-            this.lbPlanMedico.TabIndex = 32;
-            // 
-            // lbEstadoCivil
-            // 
-            this.lbEstadoCivil.DisplayMember = "id";
-            this.lbEstadoCivil.FormattingEnabled = true;
-            this.lbEstadoCivil.Location = new System.Drawing.Point(686, 40);
-            this.lbEstadoCivil.Name = "lbEstadoCivil";
-            this.lbEstadoCivil.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbEstadoCivil.Size = new System.Drawing.Size(113, 108);
-            this.lbEstadoCivil.TabIndex = 31;
-            this.lbEstadoCivil.ValueMember = "id";
             // 
             // label14
             // 
@@ -509,6 +490,25 @@
             this.seleccionar.HeaderText = "Seleccionar";
             this.seleccionar.Name = "seleccionar";
             // 
+            // lbEstadoCivil
+            // 
+            this.lbEstadoCivil.DisplayMember = "id";
+            this.lbEstadoCivil.FormattingEnabled = true;
+            this.lbEstadoCivil.Location = new System.Drawing.Point(686, 40);
+            this.lbEstadoCivil.Name = "lbEstadoCivil";
+            this.lbEstadoCivil.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lbEstadoCivil.Size = new System.Drawing.Size(113, 108);
+            this.lbEstadoCivil.TabIndex = 31;
+            this.lbEstadoCivil.ValueMember = "id";
+            // 
+            // lbPlanMedico
+            // 
+            this.lbPlanMedico.FormattingEnabled = true;
+            this.lbPlanMedico.Location = new System.Drawing.Point(849, 40);
+            this.lbPlanMedico.Name = "lbPlanMedico";
+            this.lbPlanMedico.Size = new System.Drawing.Size(120, 108);
+            this.lbPlanMedico.TabIndex = 32;
+            // 
             // AbmAfiliados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -519,9 +519,9 @@
             this.Controls.Add(this.bBuscar);
             this.Controls.Add(this.gbFiltros);
             this.Controls.Add(this.dgvAfiliados);
-            this.Name = "AbmAfiliados";
+            this.Name = "AbmProfesionales";
             this.Text = "Abm de afiliados";
-            this.Load += new System.EventHandler(this.AbmAfiliados_Load);
+            this.Load += new System.EventHandler(this.AbmProfesionales_Load);
             this.gbFiltros.ResumeLayout(false);
             this.gbFiltros.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAfiliados)).EndInit();
