@@ -3,4 +3,4 @@ Usuarios.cs;Usuario;Usuarios;usuario
 Roles.cs;Rol;Roles;rol
 Funcionalidades.cs;Funcionalidad;Funcionalidades;funcionalidad
 Afiliados.cs;Afiliado;Afiliados;afiliado
-PlanesMedicos.cs;PlanMedico;PlanesMedicos;planMedico
+EstadosCiviles.cs;EstadoCivil;EstadosCiviles;estadoCivil

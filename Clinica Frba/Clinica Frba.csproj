@@ -63,6 +63,8 @@
     <Compile Include="Clases\Afiliado.cs" />
     <Compile Include="Clases\Afiliados.cs" />
     <Compile Include="Clases\DB.cs" />
+    <Compile Include="Clases\EstadoCivil.cs" />
+    <Compile Include="Clases\EstadosCiviles.cs" />
     <Compile Include="Clases\FormHelper.cs">
       <SubType>Form</SubType>
     </Compile>

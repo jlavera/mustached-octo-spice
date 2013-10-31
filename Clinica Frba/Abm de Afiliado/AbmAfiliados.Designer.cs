@@ -75,6 +75,7 @@
             this.estadoCivil = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.familiaresACargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.planMedico = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.gbFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoles)).BeginInit();
             this.SuspendLayout();
@@ -401,7 +402,8 @@
             this.nombreUsuario,
             this.estadoCivil,
             this.familiaresACargo,
-            this.planMedico});
+            this.planMedico,
+            this.seleccionar});
             this.dgvRoles.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvRoles.Location = new System.Drawing.Point(0, 233);
             this.dgvRoles.Name = "dgvRoles";
@@ -492,6 +494,11 @@
             this.planMedico.Name = "planMedico";
             this.planMedico.ReadOnly = true;
             // 
+            // seleccionar
+            // 
+            this.seleccionar.HeaderText = "Seleccionar";
+            this.seleccionar.Name = "seleccionar";
+            // 
             // AbmAfiliados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -561,5 +568,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn estadoCivil;
         private System.Windows.Forms.DataGridViewTextBoxColumn familiaresACargo;
         private System.Windows.Forms.DataGridViewTextBoxColumn planMedico;
+        private System.Windows.Forms.DataGridViewButtonColumn seleccionar;
     }
 }
