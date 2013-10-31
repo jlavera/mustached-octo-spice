@@ -41,7 +41,7 @@ namespace Clinica_Frba.Clases {
             return DB.ExecuteReader("SELECT * FROM "+ DB.schema + "vAfiliado");
         }
 
-        public void FillWithFilter(string p_nombre, ListBox.SelectedObjectCollection p_objects, bool p_showAll) {
+        public void FillWithFilter(string p_nombre, string p_apellido, string p_direccion, string p_tipoDocumento, long p_numDocumento, long p_telefono, string p_mail, string p_nombreUsuario, string p_sexo, ListBox.SelectedObjectCollection p_grupoFamiliar, ListBox.SelectedObjectCollection p_estadoCivil, ListBox.SelectedObjectCollection p_planMedico, int p_orden, int p_familiares) {
 
             string query = "SELECT * FROM " + DB.schema + "vAfiliado WHERE " + ((p_showAll) ? "1=1" : "rol_habilitado=1");
 
@@ -56,7 +56,6 @@ namespace Clinica_Frba.Clases {
 
             if (p_nombre != "")
                 query += " AND rol_nombre LIKE '%" + p_nombre + "%'";
-
 
             Fill(DB.ExecuteReader(query));
         }

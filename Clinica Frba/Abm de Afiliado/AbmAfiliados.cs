@@ -30,7 +30,7 @@ namespace Clinica_Frba.AbmAfiliados {
             lbGrupoFamiliar.Items.AddRange(grupos.ToList());
 
             planes.FillWithAll();
-            cmbPlanMedico.Items.AddRange(planes.ToList());
+            lbPlanMedico.Items.AddRange(planes.ToList());
 
         }
 
@@ -56,6 +56,10 @@ namespace Clinica_Frba.AbmAfiliados {
 
         private void bBuscar_Click(object sender, EventArgs e) {
             dgvAfiliados.Rows.Clear();
+
+            afiliados.ClearList();
+            afiliados.FillWithFilter(tbNombre.Text, tbApellido.Text, tbDireccion.Text, cmbTipoDNI.SelectedText, Convert.ToInt64(tbNumeroDni.Text), Convert.ToInt64(tbTelefono.Text), tbMail.Text, tbNombreUsuario.Text, cmbSexo.SelectedText, lbGrupoFamiliar.SelectedItems, lbEstadoCivil.SelectedItems, lbPlanMedico.SelectedItems, Convert.ToInt32(tbOrden.Text), Convert.ToInt32(tbFamiliaresACargo.Text));
+
 
         }
     }

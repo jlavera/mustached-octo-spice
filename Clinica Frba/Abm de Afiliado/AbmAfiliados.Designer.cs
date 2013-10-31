@@ -32,7 +32,6 @@
             this.bAgregar = new System.Windows.Forms.Button();
             this.bBuscar = new System.Windows.Forms.Button();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
-            this.cmbPlanMedico = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.tbFamiliaresACargo = new System.Windows.Forms.TextBox();
@@ -44,7 +43,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.tbMail = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.tbTelefono = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tbNumeroDni = new System.Windows.Forms.TextBox();
             this.cmbTipoDNI = new System.Windows.Forms.ComboBox();
@@ -76,13 +75,15 @@
             this.planMedico = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.lbEstadoCivil = new System.Windows.Forms.ListBox();
+            this.lbPlanMedico = new System.Windows.Forms.ListBox();
             this.gbFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAfiliados)).BeginInit();
             this.SuspendLayout();
             // 
             // bEliminar
             // 
-            this.bEliminar.Location = new System.Drawing.Point(189, 198);
+            this.bEliminar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.bEliminar.Location = new System.Drawing.Point(189, 186);
             this.bEliminar.Name = "bEliminar";
             this.bEliminar.Size = new System.Drawing.Size(134, 29);
             this.bEliminar.TabIndex = 9;
@@ -91,7 +92,8 @@
             // 
             // bAgregar
             // 
-            this.bAgregar.Location = new System.Drawing.Point(12, 198);
+            this.bAgregar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.bAgregar.Location = new System.Drawing.Point(12, 186);
             this.bAgregar.Name = "bAgregar";
             this.bAgregar.Size = new System.Drawing.Size(134, 29);
             this.bAgregar.TabIndex = 8;
@@ -100,8 +102,8 @@
             // 
             // bBuscar
             // 
-            this.bBuscar.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.bBuscar.Location = new System.Drawing.Point(1111, 199);
+            this.bBuscar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.bBuscar.Location = new System.Drawing.Point(1111, 186);
             this.bBuscar.Name = "bBuscar";
             this.bBuscar.Size = new System.Drawing.Size(91, 29);
             this.bBuscar.TabIndex = 7;
@@ -111,10 +113,11 @@
             // 
             // gbFiltros
             // 
-            this.gbFiltros.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.gbFiltros.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbFiltros.Controls.Add(this.lbPlanMedico);
             this.gbFiltros.Controls.Add(this.lbEstadoCivil);
-            this.gbFiltros.Controls.Add(this.cmbPlanMedico);
             this.gbFiltros.Controls.Add(this.label14);
             this.gbFiltros.Controls.Add(this.label13);
             this.gbFiltros.Controls.Add(this.tbFamiliaresACargo);
@@ -126,7 +129,7 @@
             this.gbFiltros.Controls.Add(this.label9);
             this.gbFiltros.Controls.Add(this.tbMail);
             this.gbFiltros.Controls.Add(this.label8);
-            this.gbFiltros.Controls.Add(this.textBox6);
+            this.gbFiltros.Controls.Add(this.tbTelefono);
             this.gbFiltros.Controls.Add(this.label7);
             this.gbFiltros.Controls.Add(this.tbNumeroDni);
             this.gbFiltros.Controls.Add(this.cmbTipoDNI);
@@ -143,18 +146,10 @@
             this.gbFiltros.Controls.Add(this.lbGrupoFamiliar);
             this.gbFiltros.Location = new System.Drawing.Point(12, 12);
             this.gbFiltros.Name = "gbFiltros";
-            this.gbFiltros.Size = new System.Drawing.Size(1190, 180);
+            this.gbFiltros.Size = new System.Drawing.Size(1190, 168);
             this.gbFiltros.TabIndex = 6;
             this.gbFiltros.TabStop = false;
             this.gbFiltros.Text = "Filtros";
-            // 
-            // cmbPlanMedico
-            // 
-            this.cmbPlanMedico.FormattingEnabled = true;
-            this.cmbPlanMedico.Location = new System.Drawing.Point(853, 40);
-            this.cmbPlanMedico.Name = "cmbPlanMedico";
-            this.cmbPlanMedico.Size = new System.Drawing.Size(138, 21);
-            this.cmbPlanMedico.TabIndex = 30;
             // 
             // label14
             // 
@@ -168,7 +163,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(835, 107);
+            this.label13.Location = new System.Drawing.Point(1015, 63);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(95, 13);
             this.label13.TabIndex = 28;
@@ -176,7 +171,7 @@
             // 
             // tbFamiliaresACargo
             // 
-            this.tbFamiliaresACargo.Location = new System.Drawing.Point(851, 127);
+            this.tbFamiliaresACargo.Location = new System.Drawing.Point(1031, 83);
             this.tbFamiliaresACargo.Name = "tbFamiliaresACargo";
             this.tbFamiliaresACargo.Size = new System.Drawing.Size(140, 20);
             this.tbFamiliaresACargo.TabIndex = 27;
@@ -251,12 +246,12 @@
             this.label8.TabIndex = 18;
             this.label8.Text = "Teléfono:";
             // 
-            // textBox6
+            // tbTelefono
             // 
-            this.textBox6.Location = new System.Drawing.Point(190, 126);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(140, 20);
-            this.textBox6.TabIndex = 17;
+            this.tbTelefono.Location = new System.Drawing.Point(190, 126);
+            this.tbTelefono.Name = "tbTelefono";
+            this.tbTelefono.Size = new System.Drawing.Size(140, 20);
+            this.tbTelefono.TabIndex = 17;
             // 
             // label7
             // 
@@ -347,7 +342,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(835, 64);
+            this.label2.Location = new System.Drawing.Point(1015, 20);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 13);
             this.label2.TabIndex = 6;
@@ -364,7 +359,7 @@
             // 
             // tbOrden
             // 
-            this.tbOrden.Location = new System.Drawing.Point(851, 84);
+            this.tbOrden.Location = new System.Drawing.Point(1031, 40);
             this.tbOrden.Name = "tbOrden";
             this.tbOrden.Size = new System.Drawing.Size(140, 20);
             this.tbOrden.TabIndex = 4;
@@ -376,7 +371,7 @@
             this.lbGrupoFamiliar.Location = new System.Drawing.Point(531, 40);
             this.lbGrupoFamiliar.Name = "lbGrupoFamiliar";
             this.lbGrupoFamiliar.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbGrupoFamiliar.Size = new System.Drawing.Size(113, 121);
+            this.lbGrupoFamiliar.Size = new System.Drawing.Size(113, 108);
             this.lbGrupoFamiliar.TabIndex = 3;
             this.lbGrupoFamiliar.ValueMember = "id";
             // 
@@ -401,9 +396,9 @@
             this.planMedico,
             this.seleccionar});
             this.dgvAfiliados.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvAfiliados.Location = new System.Drawing.Point(0, 233);
+            this.dgvAfiliados.Location = new System.Drawing.Point(0, 221);
             this.dgvAfiliados.Name = "dgvAfiliados";
-            this.dgvAfiliados.Size = new System.Drawing.Size(1212, 356);
+            this.dgvAfiliados.Size = new System.Drawing.Size(1212, 431);
             this.dgvAfiliados.TabIndex = 5;
             // 
             // Id
@@ -502,15 +497,23 @@
             this.lbEstadoCivil.Location = new System.Drawing.Point(686, 40);
             this.lbEstadoCivil.Name = "lbEstadoCivil";
             this.lbEstadoCivil.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbEstadoCivil.Size = new System.Drawing.Size(113, 121);
+            this.lbEstadoCivil.Size = new System.Drawing.Size(113, 108);
             this.lbEstadoCivil.TabIndex = 31;
             this.lbEstadoCivil.ValueMember = "id";
+            // 
+            // lbPlanMedico
+            // 
+            this.lbPlanMedico.FormattingEnabled = true;
+            this.lbPlanMedico.Location = new System.Drawing.Point(849, 40);
+            this.lbPlanMedico.Name = "lbPlanMedico";
+            this.lbPlanMedico.Size = new System.Drawing.Size(120, 108);
+            this.lbPlanMedico.TabIndex = 32;
             // 
             // AbmAfiliados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1212, 589);
+            this.ClientSize = new System.Drawing.Size(1212, 652);
             this.Controls.Add(this.bEliminar);
             this.Controls.Add(this.bAgregar);
             this.Controls.Add(this.bBuscar);
@@ -540,7 +543,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tbMail;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox tbTelefono;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbNumeroDni;
         private System.Windows.Forms.ComboBox cmbTipoDNI;
@@ -555,7 +558,6 @@
         private System.Windows.Forms.TextBox tbNombreUsuario;
         private System.Windows.Forms.ComboBox cmbSexo;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox cmbPlanMedico;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox tbFamiliaresACargo;
@@ -576,5 +578,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn planMedico;
         private System.Windows.Forms.DataGridViewButtonColumn seleccionar;
         private System.Windows.Forms.ListBox lbEstadoCivil;
+        private System.Windows.Forms.ListBox lbPlanMedico;
     }
 }
