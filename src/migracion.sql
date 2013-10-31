@@ -11,8 +11,20 @@ BEGIN
 	set @resultado= ''
 	select @resultado = @resultado + fun_nombre + ', '
 	FROM moustache_spice.funcionalidad
-	JOIN moustache_spice.rol_x_funcionalidad ON rxf_funcionalidad = fun_id
+		JOIN moustache_spice.rol_x_funcionalidad ON rxf_funcionalidad = fun_id
 	WHERE rxf_rol = @rolID
+	RETURN @resultado
+END
+GO
+
+CREATE FUNCTION moustache_spice.concatenarEspecialidades(@proID int) RETURNS varchar(500) AS
+BEGIN
+  declare @resultado varchar(500)
+	set @resultado= ''
+	select @resultado = @resultado + esp_descripcion + ', '
+	FROM moustache_spice.especialidad
+		LEFT JOIN moustache_spice.profesional_x_especialidad ON pxe_especialidad = esp_id
+	WHERE pxe_profesional = @proID AND pxe_habilitado=1
 	RETURN @resultado
 END
 GO
@@ -46,10 +58,10 @@ GO
 
 CREATE FUNCTION moustache_spice.bonoFarmaciaHabilitado(@impresion DATE, @vencimiento DATE) RETURNS int AS
 BEGIN
-	IF (@impresion  < @vencimiento  AND
-						   DATEDIFF(DAY, @impresion , @vencimiento ) <= 60)
+	IF (@impresion < @vencimiento AND DATEDIFF(DAY, @impresion , @vencimiento ) <= 60)
 		RETURN 0
 	RETURN 1
+END
 GO
 -- -----------------------------------------------------
 -- creacion tabla usuario
@@ -172,7 +184,6 @@ CREATE TABLE moustache_spice.agenda (
   PRIMARY KEY(age_id),
   CHECK ( (age_desde < age_hasta) AND (DATEDIFF(day, age_desde, age_hasta) <= 120) )
 );
-
 -- -----------------------------------------------------
 -- creacion tabla semanal
 -- -----------------------------------------------------
@@ -309,11 +320,11 @@ CREATE TABLE moustache_spice.medicamento_x_bonoFarmacia (
 -- -----------------------------------------------------
 GO
 CREATE VIEW moustache_spice.vProfesional AS
-		SELECT *
+		SELECT *, moustache_spice.concatenarEspecialidades(pro_id) AS especialidades
 		FROM moustache_spice.profesional
 			JOIN moustache_spice.usuario ON usu_id = pro_usuario
-
 GO
+
 CREATE VIEW moustache_spice.vAfiliado AS
 		SELECT *
 		FROM moustache_spice.afiliado
