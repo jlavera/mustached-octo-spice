@@ -26,7 +26,7 @@ namespace Clinica_Frba.Clases {
         /// </summary>
         /// <param name="command">Comando</param>
         /// <returns></returns>
-        static public DataTable ExecuteReader(string command)   {
+        static public DataTable ExecuteReader(string command) {
 
             DataTable dt = new DataTable();
             try {

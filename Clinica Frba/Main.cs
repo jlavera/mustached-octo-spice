@@ -51,7 +51,7 @@ namespace Clinica_Frba {
         }
 
         private void Abm_Profesional_Click(object sender, EventArgs e) {
-            AbmProfesional.AbmProfesional form = new AbmProfesional.AbmProfesional();
+            AbmProfesional.AbmProfesionales form = new AbmProfesional.AbmProfesionales();
             form.ShowDialog();
         }
 
@@ -61,6 +61,17 @@ namespace Clinica_Frba {
 
         private void Abm_Especialidades_Medicas_Click(object sender, EventArgs e) {
             MessageBox.Show("Para reducir el tiempo de desarrollo de los alumnos, no será necesario que realicen la implementación de dicho ABM.");
+        }
+
+        private void Agendas_Click(object sender, EventArgs e)
+        {
+            RegistrarAgendas.RegistrarAgendas form = new RegistrarAgendas.RegistrarAgendas();
+            form.ShowDialog();
+        }
+
+        private void Abm_Usuario_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Para reducir el tiempo de confección del TP y así beneficiar al alumno se determinó que no será necesario que se implemente/codifique el ABM de usuarios.");
         }
     }
 }

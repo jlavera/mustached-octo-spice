@@ -53,8 +53,12 @@ IF OBJECT_ID('moustache_spice.cantidadMedicamentos') IS NOT NULL
 	DROP FUNCTION moustache_spice.cantidadMedicamentos
 IF OBJECT_ID('moustache_spice.concatenarFuncionalidad') IS NOT NULL
 	DROP FUNCTION moustache_spice.concatenarFuncionalidad
+IF OBJECT_ID('moustache_spice.concatenarEspecialidades') IS NOT NULL
+	DROP FUNCTION moustache_spice.concatenarEspecialidades
 IF OBJECT_ID('moustache_spice.semanalHabilitado') IS NOT NULL
 	DROP FUNCTION moustache_spice.semanalHabilitado
+IF OBJECT_ID('moustache_spice.bonoFarmaciaHabilitado') IS NOT NULL
+	DROP FUNCTION moustache_spice.bonoFarmaciaHabilitado	
 
 IF OBJECT_ID('moustache_spice.vProfesional', 'V') IS NOT NULL
 	DROP VIEW moustache_spice.vProfesional

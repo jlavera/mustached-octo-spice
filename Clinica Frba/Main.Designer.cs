@@ -139,6 +139,7 @@
             this.Abm_Usuario.Text = "Usuarios";
             this.Abm_Usuario.UseVisualStyleBackColor = true;
             this.Abm_Usuario.Visible = false;
+            this.Abm_Usuario.Click += new System.EventHandler(this.Abm_Usuario_Click);
             // 
             // groupBox2
             // 
@@ -174,6 +175,7 @@
             this.Agendas.Text = "Agendas";
             this.Agendas.UseVisualStyleBackColor = true;
             this.Agendas.Visible = false;
+            this.Agendas.Click += new System.EventHandler(this.Agendas_Click);
             // 
             // Bonos
             // 
