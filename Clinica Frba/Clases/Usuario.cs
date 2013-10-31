@@ -8,8 +8,6 @@ using Clinica_Frba.Clases;
 namespace Clinica_Frba.Clases {
     public class Usuario {
 
-        public DataRow ldr;
-
         public int id{ get; set; }
         public string nombreUsuario { get; set; }
         public string contrasegna { get; set; }
@@ -26,7 +24,7 @@ namespace Clinica_Frba.Clases {
         public bool habilitado { get; set; }
 
         public Usuario(DataRow dr) {
-            ldr = dr;
+
             id = (int)dr["id"];
             nombreUsuario = (string)dr["nombreUsuario"];
             contrasegna = (dr["contrasegna"] == System.DBNull.Value)?"":(string)dr["contrasegna"];

@@ -48,12 +48,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abm de Afiliado\EditAfiliado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm de Afiliado\EditAfiliado.Designer.cs">
+      <DependentUpon>EditAfiliado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm de Rol\EditRol.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Abm de Rol\EditRol.Designer.cs">
       <DependentUpon>EditRol.cs</DependentUpon>
     </Compile>
+    <Compile Include="Clases\Afiliado.cs" />
+    <Compile Include="Clases\Afiliados.cs" />
     <Compile Include="Clases\DB.cs" />
     <Compile Include="Clases\FormHelper.cs">
       <SubType>Form</SubType>
@@ -64,6 +72,8 @@
     <Compile Include="Clases\Funcionalidad.cs" />
     <Compile Include="Clases\Funcionalidades.cs" />
     <Compile Include="Clases\FuncionesBoludas.cs" />
+    <Compile Include="Clases\PlanesMedicos.cs" />
+    <Compile Include="Clases\PlanMedico.cs" />
     <Compile Include="Clases\Rol.cs" />
     <Compile Include="Clases\Roles.cs" />
     <Compile Include="Clases\Transformer.cs">
@@ -90,11 +100,11 @@
     <Compile Include="Registro de Usuario\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm de Afiliado\Form1.cs">
+    <Compile Include="Abm de Afiliado\AbmAfiliados.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm de Afiliado\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm de Afiliado\AbmAfiliados.Designer.cs">
+      <DependentUpon>AbmAfiliados.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm de Profesional\Form1.cs">
       <SubType>Form</SubType>
@@ -170,6 +180,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Abm de Afiliado\AbmAfiliados.resx">
+      <DependentUpon>AbmAfiliados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm de Afiliado\EditAfiliado.resx">
+      <DependentUpon>EditAfiliado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm de Profesional\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

@@ -11,11 +11,13 @@ using Clinica_Frba.Clases;
 namespace Clinica_Frba.Abm_de_Rol {
     public partial class EditRol : Form {
 
+        public DialogResult dr = DialogResult.Cancel;
+
         public int id;
         public string nombre;
         public Funcionalidades allFuncs = new Funcionalidades();
 
-        private bool nueva;
+        public bool nueva;
         private string[] selectedFuncs;
         private Roles roles = new Roles();
 
@@ -61,7 +63,7 @@ namespace Clinica_Frba.Abm_de_Rol {
         private void bGuardar_Click(object sender, EventArgs e) {
 
             if (nueva) {
-
+                
                 //--INSERT
 
             } else {
@@ -69,6 +71,8 @@ namespace Clinica_Frba.Abm_de_Rol {
                 //--UPDATE
 
             }
+
+            dr = DialogResult.OK;
         }
     }
 }

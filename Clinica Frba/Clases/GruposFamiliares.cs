@@ -1,16 +1,16 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
-using Clinica_Frba.Clases;
+using Clinica_Frba;
 
 namespace Clinica_Frba.Clases {
-    class PlanesMedicos: ListaEntidad {
+    class GruposFamiliares : ListaEntidad {
         //--------------HOMOGENEO A TODAS LAS ENTIDADES------
         #region homogeneo
-        public PlanesMedicos()
-            : base("planMedico") {
+        public GruposFamiliares()
+            : base("grupoFamiliar") {
         }
 
         public void FillWithAll() {
@@ -19,13 +19,13 @@ namespace Clinica_Frba.Clases {
 
         private void Fill(DataTable dt) {
             foreach (DataRow dr in dt.Rows) {
-                items.Add(new PlanMedico(dr));
+                items.Add(new GrupoFamiliar(dr));
             }
         }
 
-        public PlanMedico this[int index] {
+        public GrupoFamiliar this[int index] {
             get {
-                return (PlanMedico)items[index];
+                return (GrupoFamiliar)items[index];
             }
 
             set {

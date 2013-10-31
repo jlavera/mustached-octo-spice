@@ -6,11 +6,11 @@ using System.Data;
 using Clinica_Frba.Clases;
 
 namespace Clinica_Frba.Clases {
-    class PlanesMedicos: ListaEntidad {
+    class Afiliados : ListaEntidad {
         //--------------HOMOGENEO A TODAS LAS ENTIDADES------
         #region homogeneo
-        public PlanesMedicos()
-            : base("planMedico") {
+        public Afiliados()
+            : base("afiliado") {
         }
 
         public void FillWithAll() {
@@ -19,13 +19,13 @@ namespace Clinica_Frba.Clases {
 
         private void Fill(DataTable dt) {
             foreach (DataRow dr in dt.Rows) {
-                items.Add(new PlanMedico(dr));
+                items.Add(new Afiliado(dr));
             }
         }
 
-        public PlanMedico this[int index] {
+        public Afiliado this[int index] {
             get {
-                return (PlanMedico)items[index];
+                return (Afiliado)items[index];
             }
 
             set {

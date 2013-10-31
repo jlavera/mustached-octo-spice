@@ -7,12 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Clinica_Frba.AbmAfiliados
-{
-    public partial class AbmAfiliados : Form
-    {
-        public AbmAfiliados()
-        {
+namespace Clinica_Frba.Abm_de_Afiliado {
+    public partial class EditAfiliado : Form {
+        public EditAfiliado() {
             InitializeComponent();
         }
     }
