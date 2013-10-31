@@ -37,6 +37,7 @@
             this.bBuscar = new System.Windows.Forms.Button();
             this.bAgregar = new System.Windows.Forms.Button();
             this.bEliminar = new System.Windows.Forms.Button();
+            this.cbHabilitado = new System.Windows.Forms.CheckBox();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Funcionalidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,14 +57,16 @@
             this.Funcionalidades,
             this.Habilitado,
             this.Column1});
-            this.dgvRoles.Location = new System.Drawing.Point(12, 254);
+            this.dgvRoles.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvRoles.Location = new System.Drawing.Point(0, 259);
             this.dgvRoles.Name = "dgvRoles";
-            this.dgvRoles.Size = new System.Drawing.Size(840, 324);
+            this.dgvRoles.Size = new System.Drawing.Size(868, 331);
             this.dgvRoles.TabIndex = 0;
             this.dgvRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRoles_CellContentClick);
             // 
             // gbFiltros
             // 
+            this.gbFiltros.Controls.Add(this.cbHabilitado);
             this.gbFiltros.Controls.Add(this.lbFuncionalidades);
             this.gbFiltros.Controls.Add(this.tbRol);
             this.gbFiltros.Controls.Add(this.label2);
@@ -141,6 +144,16 @@
             this.bEliminar.UseVisualStyleBackColor = true;
             this.bEliminar.Click += new System.EventHandler(this.bEliminar_Click);
             // 
+            // cbHabilitado
+            // 
+            this.cbHabilitado.AutoSize = true;
+            this.cbHabilitado.Location = new System.Drawing.Point(36, 71);
+            this.cbHabilitado.Name = "cbHabilitado";
+            this.cbHabilitado.Size = new System.Drawing.Size(105, 17);
+            this.cbHabilitado.TabIndex = 4;
+            this.cbHabilitado.Text = "Mostrar borrados";
+            this.cbHabilitado.UseVisualStyleBackColor = true;
+            // 
             // Id
             // 
             this.Id.Frozen = true;
@@ -161,6 +174,7 @@
             this.Funcionalidades.HeaderText = "Funcionalidades";
             this.Funcionalidades.Name = "Funcionalidades";
             this.Funcionalidades.ReadOnly = true;
+            this.Funcionalidades.Width = 200;
             // 
             // Habilitado
             // 
@@ -205,6 +219,7 @@
         private System.Windows.Forms.ListBox lbFuncionalidades;
         private System.Windows.Forms.Button bAgregar;
         private System.Windows.Forms.Button bEliminar;
+        private System.Windows.Forms.CheckBox cbHabilitado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Funcionalidades;

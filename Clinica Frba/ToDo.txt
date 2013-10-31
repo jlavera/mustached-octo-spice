@@ -1,1 +1,1 @@
-﻿-- Agregar en los select si está habilitado
+﻿-- (Partial) Agregar en los select si está habilitado

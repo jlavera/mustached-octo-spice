@@ -11,8 +11,8 @@ namespace Clinica_Frba.Clases {
         public string nombre;
 
         public Funcionalidad(DataRow dr) {
-            id = Convert.ToInt32(dr["id"]);
-            nombre = dr["nombre"].ToString();
+            id = Convert.ToInt32(dr["fun_id"]);
+            nombre = dr["fun_nombre"].ToString();
 
         }
 

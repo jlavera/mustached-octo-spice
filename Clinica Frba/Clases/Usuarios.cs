@@ -39,7 +39,7 @@ namespace Clinica_Frba.Clases {
 
         public Usuario VerifyUser(string p_user, string p_pass) {
             try {
-                return new Usuario(DB.ExecuteReader("SELECT * FROM " + DB.schema + "usuario WHERE nombreUsuario = \'" + p_user + "\' AND " + "contrasegna = \'" + p_pass + "\'").Rows[0]);
+                return new Usuario(DB.ExecuteReader("SELECT * FROM " + DB.schema + "usuario WHERE usu_nombreUsuario = \'" + p_user + "\' AND usu_contrasegna = \'" + p_pass + "\'").Rows[0]);
             } catch (Exception ex) {
                 return null;
             }

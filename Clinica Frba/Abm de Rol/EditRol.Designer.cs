@@ -31,11 +31,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.bGuardar = new System.Windows.Forms.Button();
+            this.cbHabilitado = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbHabilitado);
             this.groupBox1.Controls.Add(this.lbFuncionalidades);
             this.groupBox1.Controls.Add(this.tbNombre);
             this.groupBox1.Controls.Add(this.tbId);
@@ -111,6 +113,16 @@
             this.bGuardar.UseVisualStyleBackColor = true;
             this.bGuardar.Click += new System.EventHandler(this.bGuardar_Click);
             // 
+            // cbHabilitado
+            // 
+            this.cbHabilitado.AutoSize = true;
+            this.cbHabilitado.Location = new System.Drawing.Point(22, 157);
+            this.cbHabilitado.Name = "cbHabilitado";
+            this.cbHabilitado.Size = new System.Drawing.Size(73, 17);
+            this.cbHabilitado.TabIndex = 7;
+            this.cbHabilitado.Text = "Habilitado";
+            this.cbHabilitado.UseVisualStyleBackColor = true;
+            // 
             // EditRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -136,5 +148,6 @@
         private System.Windows.Forms.ListBox lbFuncionalidades;
         private System.Windows.Forms.TextBox tbNombre;
         private System.Windows.Forms.TextBox tbId;
+        private System.Windows.Forms.CheckBox cbHabilitado;
     }
 }

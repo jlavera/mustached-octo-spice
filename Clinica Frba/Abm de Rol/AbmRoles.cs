@@ -19,9 +19,9 @@ namespace Clinica_Frba.AbmRoles {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-
+            funcs.FillWithAll();
+            lbFuncionalidades.Items.AddRange(funcs.ToList());
             FillDgvYLb();
-            
         }
 
         private void bBuscar_Click(object sender, EventArgs e) {
@@ -29,7 +29,7 @@ namespace Clinica_Frba.AbmRoles {
             dgvRoles.Rows.Clear();
 
             roles.ClearList();
-            roles.FillWithFilter(tbRol.Text, lbFuncionalidades.SelectedItems);
+            roles.FillWithFilter(tbRol.Text, lbFuncionalidades.SelectedItems, cbHabilitado.Checked);
 
             foreach (Rol rol in roles.items)
                 dgvRoles.Rows.Add(rol.id, rol.nombre, rol.funcionalidades, rol.habilitado);
@@ -49,28 +49,26 @@ namespace Clinica_Frba.AbmRoles {
         }
 
         private void bEliminar_Click(object sender, EventArgs e) {
-
             roles.DeleteSelected(dgvRoles, dgvRoles.SelectedRows);
-
+            FillDgvYLb();
         }
 
         private void bAgregar_Click(object sender, EventArgs e) {
             Abm_de_Rol.EditRol editForm = new Abm_de_Rol.EditRol();
             editForm.ShowDialog();
 
-            
+            if (editForm.DialogResult == DialogResult.OK)
+            {
+                FillDgvYLb();
+            }
 
         }
 
 
         private void FillDgvYLb() {
-            
-            funcs.FillWithAll();
-            lbFuncionalidades.Items.AddRange(funcs.ToList());
-
-
+            dgvRoles.Rows.Clear();
             roles = new Roles();
-            roles.FillWithAll();
+            roles.FillWithFilter(tbRol.Text, lbFuncionalidades.SelectedItems, cbHabilitado.Checked);
 
             foreach (Rol rol in roles.items)
                 dgvRoles.Rows.Add(rol.id, rol.nombre, rol.funcionalidades, rol.habilitado);            

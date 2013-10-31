@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -44,6 +44,7 @@ namespace Clinica_Frba.Abm_de_Rol {
 
             if (nueva) {
                 tbId.Text = roles.GetNextIdentity().ToString();
+                cbHabilitado.Visible = false;
 
             } else {
                 tbId.Text = id.ToString();
@@ -62,17 +63,31 @@ namespace Clinica_Frba.Abm_de_Rol {
 
         private void bGuardar_Click(object sender, EventArgs e) {
 
-            if (nueva) {
-                
-                //--INSERT
+            string subQuery = "";
+            foreach (Funcionalidad funcionalidad in lbFuncionalidades.SelectedItems)
+            {
+                subQuery += "(" + funcionalidad.id + ", " + tbId.Text + "), ";
+            }
+            //Comoconcatena con ", " le saco los ultimos dos caracteres al string
+            if(lbFuncionalidades.SelectedItems.Count > 0)
+                subQuery = subQuery.Substring(0, subQuery.Length - 2);
 
+             if (nueva) {
+                 if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "rol(rol_nombre) VALUES ('" + tbNombre.Text + "');") < 0)
+                    MessageBox.Show("Error en inserscion de rol");
             } else {
-
-                //--UPDATE
-
+                //Es mas facil borrar todos los rol_x_funcionalidad que revisar cuales cambiaron
+                if (DB.ExecuteNonQuery("DELETE " + DB.schema + "rol_x_funcionalidad WHERE rxf_rol=" + tbId.Text + "; " +
+                                        "UPDATE " + DB.schema + "rol SET rol_nombre='" + tbNombre.Text + "', rol_habilitado=" + Convert.ToInt32(cbHabilitado.Checked) + " WHERE rol_id=" + tbId.Text) < 0)
+                    MessageBox.Show("Error en modificacion de rol");
+            }
+            if (lbFuncionalidades.SelectedItems.Count > 0){
+                if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "rol_x_funcionalidad(rxf_funcionalidad, rxf_rol) VALUES " + subQuery) < 0)
+                    MessageBox.Show("Error en inserscion de rol_x_funcionalidad");
             }
 
-            dr = DialogResult.OK;
+            this.Close();
+            DialogResult = DialogResult.OK;
         }
     }
 }

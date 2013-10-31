@@ -49,48 +49,54 @@ namespace Clinica_Frba.Clases {
             }
         }
 
-        public void FillWithFilter(string p_nombre, ListBox.SelectedObjectCollection p_objects) {
+        public void FillWithFilter(string p_nombre, ListBox.SelectedObjectCollection p_objects, bool p_showAll) {
 
-            string query = "SELECT  DISTINCT r.*, " + DB.schema + "concatenarFuncionalidad(id) AS funcionalidades FROM " + DB.schema + tabla +
-                    " r LEFT JOIN " + DB.schema + "rol_x_funcionalidad AS rxf ON r.id = rxf.rol WHERE ";
+            string query = "SELECT DISTINCT r.*, " + DB.schema + "concatenarFuncionalidad(rol_id) AS funcionalidades FROM " + DB.schema + tabla +
+                " r LEFT JOIN " + DB.schema + "rol_x_funcionalidad ON rol_id = rxf_rol WHERE " + ((p_showAll) ? "1=1" : "rol_habilitado=1");
 
 
-            foreach (Funcionalidad func in p_objects) {
-                query += " rxf.funcionalidad = " + func.id + " OR ";
+            if (p_objects.Count > 0)
+            {
+                query += " AND (";
+                foreach (Funcionalidad func in p_objects)
+                {
+                    query += " rxf_funcionalidad = " + func.id + " OR";
+                }
+                query = query.Substring(0, query.Length - 3);
+                query += ")";
             }
 
             if (p_nombre != "")
-                query += " r.nombre LIKE '%" + p_nombre + "%'";
-            else
-                query += " (1 != 1)";
+                query += " AND rol_nombre LIKE '%" + p_nombre + "%'";
+
 
             Fill(DB.ExecuteReader(query));
         }
 
         override public DataTable SelectAll() {
 
-            return DB.ExecuteReader("SELECT *, " + DB.schema + "concatenarFuncionalidad(id) AS funcionalidades FROM " + DB.schema + tabla);
+            return DB.ExecuteReader("SELECT *, " + DB.schema + "concatenarFuncionalidad(id) AS funcionalidades FROM " + DB.schema + tabla + " WHERE rol_habilitado=1");
         }
 
         public void FillRolesByUser(int p_userId) {
 
             //--Trae funcionalidades vacio para mantener polimorfismo
-            Fill(DB.ExecuteReader("SELECT *, ' ' AS funcionalidades FROM " + DB.schema + "rol_x_usuario rxu JOIN " + DB.schema + "rol ON rxu.rol = rol.id WHERE usuario = \'" + p_userId + "\'"));
+            Fill(DB.ExecuteReader("SELECT *, ' ' AS funcionalidades FROM " + DB.schema + "rol_x_usuario JOIN " + DB.schema + "rol ON rxu_rol = rol_id WHERE rxu_usuario = " + p_userId));
         }
 
         public void DeleteSelected(DataGridView dgv, DataGridViewSelectedRowCollection p_objects) {
 
             //--Eliminar de la DB
-            string query = "DELETE FROM " + DB.schema + tabla + " r WHERE ";
+            string query = "UPDATE " + DB.schema + tabla + " SET rol_habilitado=0 WHERE";
 
             foreach (DataGridViewRow rol in p_objects) {
-                query += " r.id= " + rol.Cells["id"].Value + " OR ";
+                query += " rol_id=" + rol.Cells["id"].Value + " OR";
             }
+            //Para sacar el ultimo or
+            query = query.Substring(0, query.Length - 3);
 
-            query += " (1 != 1)";
-
-            //if (DB.ExecuteCardinal(query) == -1)
-                //return;
+            if (DB.ExecuteNonQuery(query) == -1)
+                MessageBox.Show("Error en la delecion");
 
             //--Eliminar del ArrayList
             foreach (DataGridViewRow rol in p_objects) {
