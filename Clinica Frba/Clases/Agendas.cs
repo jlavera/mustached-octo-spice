@@ -52,37 +52,43 @@ namespace Clinica_Frba.Clases {
         {
 
             //--Eliminar de la DB
-            string query = "UPDATE " + DB.schema + tabla + " SET rol_habilitado=0 WHERE";
-
-            foreach (DataGridViewRow rol in p_objects)
+            if (p_objects.Count > 0)
             {
-                query += " rol_id=" + rol.Cells["id"].Value + " OR";
-            }
-            //Para sacar el ultimo or
-            query = query.Substring(0, query.Length - 3);
+                string query = "DELETE " + DB.schema + tabla + " WHERE";
 
-            if (DB.ExecuteNonQuery(query) == -1)
-                MessageBox.Show("Error en la delecion");
+                foreach (DataGridViewRow agenda in p_objects)
+                {
+                    query += " age_id=" + agenda.Cells["id"].Value + " OR";
+                }
+                //Para sacar el ultimo or
+                query = query.Substring(0, query.Length - 3);
 
-            //--Eliminar del ArrayList
-            foreach (DataGridViewRow rol in p_objects)
-            {
-                items.Remove(this[rol.Cells["id"].Value.ToString()]);
-            }
+                if (DB.ExecuteNonQuery(query) == -1)
+                    MessageBox.Show("Error en la delecion");
 
-            //--Eliminar del dgv
-            foreach (DataGridViewRow agenda in p_objects)
-            {
-                dgv.Rows.Remove(agenda);
+                //--Eliminar del ArrayList
+                foreach (DataGridViewRow agenda in p_objects)
+                {
+                    items.Remove(this[agenda.Cells["id"].Value.ToString()]);
+                }
+
+                //--Eliminar del dgv
+                foreach (DataGridViewRow agenda in p_objects)
+                {
+                    dgv.Rows.Remove(agenda);
+                }
             }
         }
 
         public void FillWithFilter(int _profesional, DateTime _desde, DateTime _hasta) {
-
-            string query = "SELECT * FROM";
-
-
+            string query = "SELECT A.*, usu_apellido + ', ' + usu_nombre AS profesional FROM " + DB.schema + tabla + " A LEFT JOIN " + DB.schema + "vProfesional ON pro_id = age_profesional WHERE";
+            if (_profesional != -1)
+                query += " age_profesional = " + _profesional + " AND ";
+            if (_desde != _hasta)
+                query += " age_desde > '" + _desde.Date.ToString("yyyy-MM-dd") + "' AND age_hasta < '" + _hasta.Date.ToString("yyy-MM-dd") + "'     ";
+            query = query.Substring(0, query.Length - 5);
             Fill(DB.ExecuteReader(query));
+            
         }
 
         override public DataTable SelectAll(){
