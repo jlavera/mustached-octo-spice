@@ -65,6 +65,8 @@
     <Compile Include="Clases\Agenda.cs" />
     <Compile Include="Clases\Agendas.cs" />
     <Compile Include="Clases\DB.cs" />
+    <Compile Include="Clases\EstadoCivil.cs" />
+    <Compile Include="Clases\EstadosCiviles.cs" />
     <Compile Include="Clases\FormHelper.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +76,8 @@
     <Compile Include="Clases\Funcionalidad.cs" />
     <Compile Include="Clases\Funcionalidades.cs" />
     <Compile Include="Clases\FuncionesBoludas.cs" />
+    <Compile Include="Clases\GrupoFamiliar.cs" />
+    <Compile Include="Clases\GruposFamiliares.cs" />
     <Compile Include="Clases\PlanesMedicos.cs" />
     <Compile Include="Clases\PlanMedico.cs" />
     <Compile Include="Clases\Rol.cs" />
