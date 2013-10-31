@@ -1,4 +1,4 @@
-﻿namespace Clinica_Frba.Abm_de_Afiliado {
+﻿namespace Clinica_Frba.AbmAfiliados {
     partial class EditAfiliado {
         /// <summary>
         /// Required designer variable.
@@ -29,9 +29,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(821, 390);
+            this.ClientSize = new System.Drawing.Size(944, 657);
             this.Name = "EditAfiliado";
             this.Text = "EditAfiliado";
+            this.Load += new System.EventHandler(this.EditAfiliado_Load);
             this.ResumeLayout(false);
 
         }

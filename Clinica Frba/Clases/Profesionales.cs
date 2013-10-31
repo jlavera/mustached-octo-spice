@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +6,11 @@ using System.Data;
 using Clinica_Frba.Clases;
 
 namespace Clinica_Frba.Clases {
-    class GruposFamiliares:ListaEntidad {
-        
+    class Profesionales:ListaEntidad {
         //--------------HOMOGENEO A TODAS LAS ENTIDADES------
         #region homogeneo
-        public GruposFamiliares()
-            : base("afiliado") {
+        public Profesionales()
+            : base("profesional") {
         }
 
         public void FillWithAll() {
@@ -20,13 +19,13 @@ namespace Clinica_Frba.Clases {
 
         private void Fill(DataTable dt) {
             foreach (DataRow dr in dt.Rows) {
-                items.Add(new GrupoFamiliar(dr));
+                items.Add(new Profesional(dr));
             }
         }
 
-        public GrupoFamiliar this[int index] {
+        public Profesional this[int index] {
             get {
-                return (GrupoFamiliar)items[index];
+                return (Profesional)items[index];
             }
 
             set {
@@ -37,9 +36,8 @@ namespace Clinica_Frba.Clases {
         #endregion
         //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
 
-
         public override DataTable SelectAll() {
-            return DB.ExecuteReader("SELECT DISTINCT afi_grupoFamiliar, afi_id, usu_apellido + ', ' + usu_nombre AS afi_titular FROM " + DB.schema +"vAfiliado WHERE afi_orden = 1");
+            return DB.ExecuteReader("SELECT * FROM " + DB.schema + "vProfesional");
         }
 
     }

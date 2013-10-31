@@ -8,18 +8,18 @@ using System.Text;
 using System.Windows.Forms;
 using Clinica_Frba.Clases;
 
-namespace Clinica_Frba.AbmAfiliados {
-    public partial class AbmAfiliados : Form {
+namespace Clinica_Frba.AbmProfesionales {
+    public partial class AbmProfesionales: Form {
         Afiliados afiliados = new Afiliados();
         EstadosCiviles estadosCiviles = new EstadosCiviles();
         GruposFamiliares grupos = new GruposFamiliares();
         PlanesMedicos planes = new PlanesMedicos();
 
-        public AbmAfiliados() {
+        public AbmProfesionales() {
             InitializeComponent();
         }
 
-        private void AbmAfiliados_Load(object sender, EventArgs e) {            
+        private void AbmProfesionales_Load(object sender, EventArgs e) {            
 
             FillDgv();
 
