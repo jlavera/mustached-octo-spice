@@ -19,20 +19,19 @@ namespace Clinica_Frba.Clases {
 
         public Usuario usuario;
         public PlanMedico planMedico;
-        public GrupoFamiliar grupoFamiliar;
 
         public Afiliado(DataRow dr) {
-            id = Convert.ToInt32(dr["id"]);
-            grupoFamiliar = (dr["grupoFamiliar"] == System.DBNull.Value)? -1 :Convert.ToInt32(dr["grupoFamiliar"]);
-            orden = (dr["orden"] == System.DBNull.Value) ? -1 : Convert.ToInt32(dr["orden"]);
-            usuarioId = Convert.ToInt32(dr["usuario"]);
-            estadoCivil = (dr["estadoCivil"] == System.DBNull.Value) ? -1 : Convert.ToInt32(dr["estadoCivil"]);
-            familiaresACargo = (dr["familiaresACargo"] == System.DBNull.Value) ? -1 : Convert.ToInt32(dr["familiaresACargo"]);
-            planMedicoId = Convert.ToInt32(dr["planMedico"]);
-            habilitado = Convert.ToBoolean(dr["habilitado"]);
+            id = Convert.ToInt32(dr["afi_id"]);
+            grupoFamiliar = (dr["afi_grupoFamiliar"] == System.DBNull.Value) ? -1 : Convert.ToInt32(dr["afi_grupoFamiliar"]);
+            orden = (dr["afi_orden"] == System.DBNull.Value) ? -1 : Convert.ToInt32(dr["afi_orden"]);
+            usuarioId = Convert.ToInt32(dr["afi_usuario"]);
+            estadoCivil = (dr["afi_estadoCivil"] == System.DBNull.Value) ? -1 : Convert.ToInt32(dr["afi_estadoCivil"]);
+            familiaresACargo = (dr["afi_familiaresACargo"] == System.DBNull.Value) ? -1 : Convert.ToInt32(dr["afi_familiaresACargo"]);
+            planMedicoId = (dr["afi_planMedico"] == System.DBNull.Value) ? -1 : Convert.ToInt32(dr["afi_planMedico"]);
+            habilitado = Convert.ToBoolean(dr["afi_habilitado"]);
 
-            usuario = new Usuario(usuarioId);
-            planMedico = new PlanMedico(planMedicoId);
+            usuario = new Usuario(dr);
+            planMedico = new PlanMedico(dr);
         }
 
     }

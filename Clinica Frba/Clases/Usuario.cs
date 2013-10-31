@@ -27,17 +27,17 @@ namespace Clinica_Frba.Clases {
 
             id = (int)dr["usu_id"];
             nombreUsuario = (string)dr["usu_nombreUsuario"];
-            contrasegna = (string)dr["usu_contrasegna"];
+            contrasegna = (dr["usu_contrasegna"] == System.DBNull.Value)? "" : (string)dr["usu_contrasegna"];
             intentosFallidos = (int)dr["usu_intentosFallidos"];
             nombre = (string)dr["usu_nombre"];
             apellido = (string)dr["usu_apellido"];
-            tipoDocumento = Convert.ToString(dr["usu_tipoDocumento"]);
+            tipoDocumento = (dr["usu_tipoDocumento"] == System.DBNull.Value)? "":Convert.ToString(dr["usu_tipoDocumento"]);
             numeroDocumento = (decimal)dr["usu_numeroDocumento"];
             direccion = (string)dr["usu_direccion"];
             telefono = (decimal)dr["usu_telefono"];
             mail = (string)dr["usu_mail"];
             fechaNacimiento = (DateTime)dr["usu_fechaNacimiento"];
-            sexo = dr["usu_sexo"].ToString();
+            sexo = (dr["usu_sexo"] == System.DBNull.Value)? "":dr["usu_sexo"].ToString();
             habilitado = (bool)Convert.ToBoolean(dr["usu_habilitado"]);
 
         }

@@ -35,5 +35,10 @@ namespace Clinica_Frba.Clases {
 
         #endregion
         //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
+
+
+        public override DataTable SelectAll() {
+            return DB.ExecuteReader("SELECT * FROM "+ DB.schema + "vAfiliado");
+        }
     }
 }

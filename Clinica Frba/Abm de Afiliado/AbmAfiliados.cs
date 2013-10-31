@@ -20,19 +20,21 @@ namespace Clinica_Frba.AbmAfiliados {
 
         private void AbmAfiliados_Load(object sender, EventArgs e) {
 
+            
 
+            FillDgv();
         }
 
         private void cmbTipoDNI_SelectedIndexChanged(object sender, EventArgs e) {
 
         }
 
-        private void FillDgvYLb() {
+        private void FillDgv() {
 
             afiliados.FillWithAll();
 
             foreach (Afiliado afiliado in afiliados.items) {
-                dgvRoles.Rows.Add(afiliado.usuario.id, afiliado.usuario.nombre, afiliado.usuario.apellido, afiliado.usuario, tipoDocumento, afiliado.usuario.numeroDocumento, afiliado.usuario.direccion, afiliado.usuario.telefono, afiliado.usuario.mail, afiliado.usuario.fechaNacimiento, afiliado.usuario.sexo, afiliado.usuario.nombreUsuario, afiliado.grupoFamiliar, afiliado.orden, afiliado.estadoCivil, afiliado.familiaresACargo, afiliado.planMedico.nombre);
+                dgvRoles.Rows.Add(afiliado.grupoFamiliar.ToString() + afiliado.orden.ToString(), afiliado.usuario.nombre, afiliado.usuario.apellido, afiliado.usuario.tipoDocumento, afiliado.usuario.numeroDocumento, afiliado.usuario.direccion, afiliado.usuario.telefono, afiliado.usuario.mail, afiliado.usuario.fechaNacimiento, afiliado.usuario.sexo, afiliado.usuario.nombreUsuario, afiliado.grupoFamiliar, afiliado.orden, afiliado.estadoCivil, afiliado.familiaresACargo, afiliado.planMedico.nombre);
             }
 
         }
