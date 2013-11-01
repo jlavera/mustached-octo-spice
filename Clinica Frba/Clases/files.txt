@@ -6,3 +6,4 @@ Afiliados.cs;Afiliado;Afiliados;afiliado
 EstadosCiviles.cs;EstadoCivil;EstadosCiviles;estadoCivil
 GruposFamiliares.cs;GrupoFamiliar;GruposFamiliares;afiliado
 Profesionales.cs;Profesional;Profesionales;profesional
+Agendas.cs;Agenda;Agendas;agenda

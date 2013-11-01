@@ -43,7 +43,7 @@ namespace Clinica_Frba.AbmProfesionales {
             afiliados.FillWithAll();
 
             foreach (Afiliado afiliado in afiliados.items) {
-                dgvAfiliados.Rows.Add(afiliado.grupoFamiliar.ToString("D5") + "-" + afiliado.orden.ToString("D2"),
+                dgvAfiliados.Rows.Add(afiliado.grupoFamiliar.grupo.ToString("D5") + "-" + afiliado.orden.ToString("D2"),
                     afiliado.usuario.nombre, afiliado.usuario.apellido,
                     (afiliado.usuario.tipoDocumento == "") ? "Faltar cargar" : afiliado.usuario.tipoDocumento, afiliado.usuario.numeroDocumento,
                     afiliado.usuario.direccion, afiliado.usuario.telefono, afiliado.usuario.mail, afiliado.usuario.fechaNacimiento,

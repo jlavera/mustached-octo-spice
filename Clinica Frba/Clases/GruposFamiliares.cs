@@ -39,7 +39,7 @@ namespace Clinica_Frba.Clases {
 
 
         public override DataTable SelectAll() {
-            return DB.ExecuteReader("SELECT DISTINCT afi_grupoFamiliar, afi_id, usu_apellido + ', ' + usu_nombre AS afi_titular FROM " + DB.schema +"vAfiliado WHERE afi_orden = 1");
+            return DB.ExecuteReader("SELECT DISTINCT afi_grupoFamiliar, afi_id, usu_apellido, usu_nombre FROM " + DB.schema +"vAfiliado WHERE afi_orden = 1");
         }
 
     }

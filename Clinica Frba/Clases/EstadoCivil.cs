@@ -21,5 +21,12 @@ namespace Clinica_Frba.Clases {
             return nombre;
         }
 
+        public override bool Equals(object obj) {
+            return (obj != DBNull.Value && ((EstadoCivil)obj).id == id && ((EstadoCivil)obj).nombre == nombre);
+        }
+
+        public override int GetHashCode() {
+            return base.GetHashCode();
+        }
     }
 }

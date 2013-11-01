@@ -99,6 +99,7 @@
             this.bAgregar.TabIndex = 8;
             this.bAgregar.Text = "Agregar";
             this.bAgregar.UseVisualStyleBackColor = true;
+            this.bAgregar.Click += new System.EventHandler(this.bAgregar_Click);
             // 
             // bBuscar
             // 
@@ -299,7 +300,6 @@
             this.cmbTipoDNI.Name = "cmbTipoDNI";
             this.cmbTipoDNI.Size = new System.Drawing.Size(61, 21);
             this.cmbTipoDNI.TabIndex = 14;
-            this.cmbTipoDNI.SelectedIndexChanged += new System.EventHandler(this.cmbTipoDNI_SelectedIndexChanged);
             // 
             // label6
             // 
@@ -419,6 +419,7 @@
             this.dgvAfiliados.Name = "dgvAfiliados";
             this.dgvAfiliados.Size = new System.Drawing.Size(1212, 431);
             this.dgvAfiliados.TabIndex = 5;
+            this.dgvAfiliados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAfiliados_CellContentClick);
             // 
             // Id
             // 

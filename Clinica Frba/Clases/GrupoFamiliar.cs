@@ -15,7 +15,7 @@ namespace Clinica_Frba.Clases {
 
             grupo = (dr["afi_grupoFamiliar"] == System.DBNull.Value)? -1: Convert.ToInt32(dr["afi_grupoFamiliar"]);
             titularId = (dr["afi_id"] == System.DBNull.Value) ? -1 : Convert.ToInt32(dr["afi_id"]);
-            titular = (dr["afi_titular"] == System.DBNull.Value) ? "" : dr["afi_titular"].ToString();
+            titular = dr["usu_apellido"].ToString() + ", " + dr["usu_nombre"].ToString();
 
         }
 

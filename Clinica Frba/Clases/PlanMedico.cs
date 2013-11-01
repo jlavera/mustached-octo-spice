@@ -22,7 +22,15 @@ namespace Clinica_Frba.Clases {
         }
 
         public override string ToString() {
-            return nombre ;
+            return nombre;
+        }
+
+        public override bool Equals(object obj) {
+            return ( obj != DBNull.Value && ((PlanMedico)obj).id == id && ((PlanMedico)obj).nombre == nombre && ((PlanMedico)obj).codigo == codigo && ((PlanMedico)obj).precioBonoConsulta == precioBonoConsulta && ((PlanMedico)obj).precioBonoFarmacia == precioBonoFarmacia);
+        }
+
+        public override int GetHashCode() {
+            return base.GetHashCode();
         }
     }
 }

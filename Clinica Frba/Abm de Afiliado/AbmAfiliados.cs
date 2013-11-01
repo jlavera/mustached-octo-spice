@@ -34,16 +34,12 @@ namespace Clinica_Frba.AbmAfiliados {
 
         }
 
-        private void cmbTipoDNI_SelectedIndexChanged(object sender, EventArgs e) {
-
-        }
-
         private void FillDgv() {
 
             afiliados.FillWithAll();
 
             foreach (Afiliado afiliado in afiliados.items) {
-                dgvAfiliados.Rows.Add(afiliado.grupoFamiliar.ToString("D5") + "-" + afiliado.orden.ToString("D2"),
+                dgvAfiliados.Rows.Add(afiliado.grupoFamiliar.grupo.ToString("D5") + "-" + afiliado.orden.ToString("D2"),
                     afiliado.usuario.nombre, afiliado.usuario.apellido,
                     (afiliado.usuario.tipoDocumento == "") ? "Faltar cargar" : afiliado.usuario.tipoDocumento, afiliado.usuario.numeroDocumento,
                     afiliado.usuario.direccion, afiliado.usuario.telefono, afiliado.usuario.mail, afiliado.usuario.fechaNacimiento,
@@ -64,6 +60,23 @@ namespace Clinica_Frba.AbmAfiliados {
                 Convert.ToInt32(tbOrden.Text), Convert.ToInt32(tbFamiliaresACargo.Text));
 
 
+        }
+
+        private void bAgregar_Click(object sender, EventArgs e) {
+            EditAfiliado editForm = new EditAfiliado();
+            editForm.ShowDialog();
+        }
+
+        private void dgvAfiliados_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+
+            if (dgvAfiliados.Columns[e.ColumnIndex].HeaderText == "Seleccionar") {
+                EditAfiliado formEdit = new EditAfiliado(afiliados[e.RowIndex]);
+                formEdit.ShowDialog();
+
+                if (formEdit.DialogResult == DialogResult.OK) {
+                    FillDgv();
+                }
+            }
         }
     }
 }

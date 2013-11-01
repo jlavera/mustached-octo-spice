@@ -51,7 +51,7 @@ namespace Clinica_Frba {
         }
 
         private void Abm_Profesional_Click(object sender, EventArgs e) {
-            AbmProfesionales.AbmProfesional form = new AbmProfesionales.AbmProfesional();
+            AbmProfesionales.AbmProfesionales form = new AbmProfesionales.AbmProfesionales();
             form.ShowDialog();
         }
 
