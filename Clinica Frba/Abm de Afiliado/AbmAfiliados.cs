@@ -19,7 +19,7 @@ namespace Clinica_Frba.AbmAfiliados {
             InitializeComponent();
         }
 
-        private void AbmAfiliados_Load(object sender, EventArgs e) {            
+        private void AbmAfiliados_Load(object sender, EventArgs e) {
 
             //--Llenar dgv con todos los afiliados
             FillDgv();
@@ -38,25 +38,8 @@ namespace Clinica_Frba.AbmAfiliados {
 
         //--Click en el botón buscar
         private void bBuscar_Click(object sender, EventArgs e) {
-            
-            //--Limpia lista entidad y la trae aplicando los filtros
-            afiliados.ClearList();
-            afiliados.FillWithFilter(tbNombre.Text, tbApellido.Text, tbDireccion.Text, cmbTipoDNI.SelectedText,
-                Convert.ToInt64(tbNumeroDni.Text), Convert.ToInt64(tbTelefono.Text), tbMail.Text, tbNombreUsuario.Text
-                , cmbSexo.SelectedText, lbGrupoFamiliar.SelectedItems, lbEstadoCivil.SelectedItems, lbPlanMedico.SelectedItems,
-                Convert.ToInt32(tbOrden.Text), Convert.ToInt32(tbFamiliaresACargo.Text));
 
-            //--Llena dgv
-            dgvAfiliados.Rows.Clear();
-            foreach (Afiliado afiliado in afiliados.items) {
-                dgvAfiliados.Rows.Add(afiliado.grupoFamiliar.grupo.ToString("D5") + "-" + afiliado.orden.ToString("D2"),
-                    afiliado.usuario.nombre, afiliado.usuario.apellido,
-                    (afiliado.usuario.tipoDocumento == "") ? "Faltar cargar" : afiliado.usuario.tipoDocumento, afiliado.usuario.numeroDocumento,
-                    afiliado.usuario.direccion, afiliado.usuario.telefono, afiliado.usuario.mail, afiliado.usuario.fechaNacimiento,
-                    (afiliado.usuario.sexo == "") ? "Faltar cargar" : afiliado.usuario.sexo, afiliado.usuario.nombreUsuario,
-                    (afiliado.estadoCivil.nombre == "") ? "Falta cargar" : afiliado.estadoCivil.ToString(),
-                    (afiliado.familiaresACargo == -1) ? "Falta cargar" : afiliado.familiaresACargo.ToString(), afiliado.planMedico.nombre);
-            }
+            FillDgv();
         }
 
         //--Click en el botón de agregar
@@ -70,7 +53,6 @@ namespace Clinica_Frba.AbmAfiliados {
             if (editForm.DialogResult == DialogResult.OK) {
                 FillDgv();
             }
-
         }
 
         private void dgvAfiliados_CellContentClick(object sender, DataGridViewCellEventArgs e) {
@@ -90,8 +72,26 @@ namespace Clinica_Frba.AbmAfiliados {
         //--Llenar dgv con todos los afiliados
         private void FillDgv() {
 
-            afiliados.FillWithAll();
+            //--Limpia lista entidad y la trae aplicando los filtros
+            afiliados.ClearList();
+            afiliados.FillWithFilter(tbNombre.Text,
+                tbApellido.Text,
+                tbDireccion.Text,
+                cmbTipoDNI.SelectedText,
+                Convert.ToInt64((tbNumeroDni.Text == "")? "-1" : tbNumeroDni.Text),
+                Convert.ToInt64((tbTelefono.Text == "") ? "-1" : tbTelefono.Text),
+                tbMail.Text,
+                tbNombreUsuario.Text,
+                cmbSexo.SelectedText.ToString(),
+                lbGrupoFamiliar.SelectedItems, 
+                lbEstadoCivil.SelectedItems,
+                lbPlanMedico.SelectedItems,
+                Convert.ToInt32((tbOrden.Text == "") ? "-1" : tbOrden.Text),
+                Convert.ToInt32((tbFamiliaresACargo.Text == "") ? "-1" : tbFamiliaresACargo.Text));
 
+            afiliados.FillWithAll();
+            //--Llena dgv
+            dgvAfiliados.Rows.Clear();
             foreach (Afiliado afiliado in afiliados.items) {
                 dgvAfiliados.Rows.Add(afiliado.grupoFamiliar.grupo.ToString("D5") + "-" + afiliado.orden.ToString("D2"),
                     afiliado.usuario.nombre, afiliado.usuario.apellido,

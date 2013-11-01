@@ -35,7 +35,8 @@ namespace Clinica_Frba.AbmRoles {
             roles.ClearList();
 
             //--Trae los roles aplicando el filtro y los llena en el dgv
-            roles.FillWithFilter(tbRol.Text, lbFuncionalidades.SelectedItems, cbHabilitado.Checked);
+            //roles.FillWithFilter(tbRol.Text, lbFuncionalidades.SelectedItems, cbHabilitado.Checked);
+            FillDgv();
 
             foreach (Rol rol in roles.items)
                 dgvRoles.Rows.Add(rol.id, rol.nombre, rol.funcionalidades, rol.habilitado);
@@ -74,7 +75,6 @@ namespace Clinica_Frba.AbmRoles {
             if (editForm.DialogResult == DialogResult.OK) {
                 FillDgv();
             }
-
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Clinica_Frba.AbmRoles {
 
             //--Traer todos los roles
             roles = new Roles();
-            roles.FillWithAll();
+            roles.FillWithFilter(tbRol.Text, lbFuncionalidades.SelectedItems, cbHabilitado.Checked);
 
             //--Limpiar dgv y volverlo a llenar
             dgvRoles.Rows.Clear();

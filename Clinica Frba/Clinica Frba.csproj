@@ -54,6 +54,12 @@
     <Compile Include="Abm de Afiliado\EditAfiliado.Designer.cs">
       <DependentUpon>EditAfiliado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm de Afiliado\EditIntegrante.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm de Afiliado\EditIntegrante.Designer.cs">
+      <DependentUpon>EditIntegrante.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm de Profesional\AbmProfesionales.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm de Afiliado\EditAfiliado.resx">
       <DependentUpon>EditAfiliado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm de Afiliado\EditIntegrante.resx">
+      <DependentUpon>EditIntegrante.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm de Profesional\AbmProfesionales.resx">
       <DependentUpon>AbmProfesionales.cs</DependentUpon>

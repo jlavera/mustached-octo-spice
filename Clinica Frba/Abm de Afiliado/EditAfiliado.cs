@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -15,6 +15,7 @@ namespace Clinica_Frba.AbmAfiliados{
         PlanesMedicos planes = new PlanesMedicos();
 
         private bool nueva;
+        private bool tieneConyuge;
 
         public string nombre;
         public string apellido;
@@ -29,8 +30,11 @@ namespace Clinica_Frba.AbmAfiliados{
         public PlanMedico planMedico;
         public GrupoFamiliar grupoFamiliar;
         public int orden = 0; //--0 significa NO titular
-        public Afiliado[] integrantes;
+        ArrayList integrantes = new ArrayList();
 
+        /// <summary>
+        /// Formulario para crear afiliado nuevo
+        /// </summary>
         public EditAfiliado() {
             InitializeComponent();
 
@@ -39,6 +43,10 @@ namespace Clinica_Frba.AbmAfiliados{
             nueva = true;
         }
 
+        /// <summary>
+        /// Formulario para editar un afiliado
+        /// </summary>
+        /// <param name="p_afil">Afiliado a editar</param>
         public EditAfiliado(Afiliado p_afil){
 
             InitializeComponent();
@@ -60,17 +68,21 @@ namespace Clinica_Frba.AbmAfiliados{
             nueva = false;
         }
 
+        /// <summary>
+        /// Formulario para crear afiliado (integrante de un grupo)
+        /// </summary>
+        /// <param name="p_grupoFamiliar">Grupo familiar al que pertenece</param>
+        /// <param name="p_orden">Orden que va a tener</param>
         public EditAfiliado(int p_grupoFamiliar, int p_orden) {
 
             InitializeComponent();
-
-            orden = 1;
 
             nueva = true;
         }
 
         private void EditAfiliado_Load(object sender, EventArgs e) {
 
+            //--Llenar y cargar en comboBox's
             estadosCiviles.FillWithAll();
             cmbEstadoCivil.Items.AddRange(estadosCiviles.ToList());
 
@@ -80,6 +92,7 @@ namespace Clinica_Frba.AbmAfiliados{
             planes.FillWithAll();
             cmbPlanMedico.Items.AddRange(planes.ToList());
 
+            //--Si no es nueva, poner los datos a modificar en los textBox
             if (!nueva) {
 
                 tbNombre.Text = nombre;
@@ -98,12 +111,36 @@ namespace Clinica_Frba.AbmAfiliados{
 
                 cmbEstadoCivil.SelectedItem = estadoCivil;
                 cmbPlanMedico.SelectedItem = planMedico;
-
                 cmbGrupoFamiliar.SelectedItem = grupoFamiliar;
 
+                tbOrden.Text = orden.ToString();
+
+                //--Traer los integrantes del grupo y si alguno es conyuge, marcar la flag
+                foreach (DataRow dr in DB.ExecuteReader(
+                    "SELECT * FROM moustache_spice.vAfiliado va WHERE va.afi_grupoFamiliar = 0 ORDER BY va.afi_grupoFamiliar ASC").Rows) {
+                    integrantes.Add(new Afiliado(dr));
+                    if (Convert.ToInt32(dr["orden"]) == 2)
+                        tieneConyuge = true;
+                }
+            }
+        }
+
+        private void bAgregarACargo_Click(object sender, EventArgs e) {
+            //--Abrir ventana para agregar afiliado
+            EditIntegrante editForm = new EditIntegrante(tieneConyuge);
+            editForm.ShowDialog();
+
+            //--Si el que agregó es conyuge, marcar que tiene conyuge
+            if (editForm.esConyuge)
+                tieneConyuge = true;
+
+            //--Si el diálogo tiene resultado OK, volver a llenar dgv
+            if (editForm.DialogResult == DialogResult.OK) {
+                lbIntegrantes.Items.Clear();
+                foreach (Afiliado afil in integrantes)
+                    lbIntegrantes.Items.Add(afil.orden.ToString("D2") + afil.usuario.apellido + ", " + afil.usuario.nombre);
             }
 
-            tbOrden.Text = orden.ToString();
 
         }
 
@@ -125,13 +162,11 @@ namespace Clinica_Frba.AbmAfiliados{
 
             }
             
+
+            //--TODO cuando guarda todo tiene que asignar los ordenes, y asignar al conyuge el 2
+
             //--Si está todo piola
             DialogResult = DialogResult.OK;
-        }
-
-        private void bAgregarACargo_Click(object sender, EventArgs e) {
-
-
         }
     }
 }

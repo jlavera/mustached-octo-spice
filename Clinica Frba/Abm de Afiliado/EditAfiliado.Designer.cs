@@ -24,7 +24,17 @@
         /// </summary>
         private void InitializeComponent() {
             this.gbDatos = new System.Windows.Forms.GroupBox();
-            this.bGuardar = new System.Windows.Forms.Button();
+            this.bAgregarACargo = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lbIntegrantes = new System.Windows.Forms.ListBox();
+            this.gbGrupo = new System.Windows.Forms.GroupBox();
+            this.rbExistente = new System.Windows.Forms.RadioButton();
+            this.tbOrden = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.rbNuevo = new System.Windows.Forms.RadioButton();
+            this.cmbGrupoFamiliar = new System.Windows.Forms.ComboBox();
+            this.cmbEstadoCivil = new System.Windows.Forms.ComboBox();
+            this.cmbPlanMedico = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.cmbSexo = new System.Windows.Forms.ComboBox();
@@ -45,17 +55,7 @@
             this.tbApellido = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tbNombre = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tbOrden = new System.Windows.Forms.TextBox();
-            this.cmbGrupoFamiliar = new System.Windows.Forms.ComboBox();
-            this.cmbPlanMedico = new System.Windows.Forms.ComboBox();
-            this.cmbEstadoCivil = new System.Windows.Forms.ComboBox();
-            this.rbNuevo = new System.Windows.Forms.RadioButton();
-            this.rbExistente = new System.Windows.Forms.RadioButton();
-            this.gbGrupo = new System.Windows.Forms.GroupBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.bAgregarACargo = new System.Windows.Forms.Button();
+            this.bGuardar = new System.Windows.Forms.Button();
             this.gbDatos.SuspendLayout();
             this.gbGrupo.SuspendLayout();
             this.SuspendLayout();
@@ -64,7 +64,7 @@
             // 
             this.gbDatos.Controls.Add(this.bAgregarACargo);
             this.gbDatos.Controls.Add(this.label1);
-            this.gbDatos.Controls.Add(this.listBox1);
+            this.gbDatos.Controls.Add(this.lbIntegrantes);
             this.gbDatos.Controls.Add(this.gbGrupo);
             this.gbDatos.Controls.Add(this.cmbEstadoCivil);
             this.gbDatos.Controls.Add(this.cmbPlanMedico);
@@ -96,15 +96,110 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos:";
             // 
-            // bGuardar
+            // bAgregarACargo
             // 
-            this.bGuardar.Location = new System.Drawing.Point(33, 297);
-            this.bGuardar.Name = "bGuardar";
-            this.bGuardar.Size = new System.Drawing.Size(153, 37);
-            this.bGuardar.TabIndex = 0;
-            this.bGuardar.Text = "Guardar";
-            this.bGuardar.UseVisualStyleBackColor = true;
-            this.bGuardar.Click += new System.EventHandler(this.bGuardar_Click);
+            this.bAgregarACargo.Location = new System.Drawing.Point(473, 319);
+            this.bAgregarACargo.Name = "bAgregarACargo";
+            this.bAgregarACargo.Size = new System.Drawing.Size(223, 21);
+            this.bAgregarACargo.TabIndex = 70;
+            this.bAgregarACargo.Text = "Agregar integrante";
+            this.bAgregarACargo.UseVisualStyleBackColor = true;
+            this.bAgregarACargo.Click += new System.EventHandler(this.bAgregarACargo_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(448, 176);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(110, 13);
+            this.label1.TabIndex = 68;
+            this.label1.Text = "Integrantes del grupo:";
+            // 
+            // lbIntegrantes
+            // 
+            this.lbIntegrantes.FormattingEnabled = true;
+            this.lbIntegrantes.Location = new System.Drawing.Point(473, 192);
+            this.lbIntegrantes.Name = "lbIntegrantes";
+            this.lbIntegrantes.Size = new System.Drawing.Size(223, 121);
+            this.lbIntegrantes.TabIndex = 67;
+            // 
+            // gbGrupo
+            // 
+            this.gbGrupo.Controls.Add(this.rbExistente);
+            this.gbGrupo.Controls.Add(this.tbOrden);
+            this.gbGrupo.Controls.Add(this.label2);
+            this.gbGrupo.Controls.Add(this.rbNuevo);
+            this.gbGrupo.Controls.Add(this.cmbGrupoFamiliar);
+            this.gbGrupo.Location = new System.Drawing.Point(214, 176);
+            this.gbGrupo.Name = "gbGrupo";
+            this.gbGrupo.Size = new System.Drawing.Size(217, 164);
+            this.gbGrupo.TabIndex = 66;
+            this.gbGrupo.TabStop = false;
+            this.gbGrupo.Text = "Grupo familiar:";
+            // 
+            // rbExistente
+            // 
+            this.rbExistente.AutoSize = true;
+            this.rbExistente.Checked = true;
+            this.rbExistente.Location = new System.Drawing.Point(24, 30);
+            this.rbExistente.Name = "rbExistente";
+            this.rbExistente.Size = new System.Drawing.Size(71, 17);
+            this.rbExistente.TabIndex = 64;
+            this.rbExistente.TabStop = true;
+            this.rbExistente.Text = "Existente:";
+            this.rbExistente.UseVisualStyleBackColor = true;
+            this.rbExistente.CheckedChanged += new System.EventHandler(this.rbExistente_CheckedChanged);
+            // 
+            // tbOrden
+            // 
+            this.tbOrden.Enabled = false;
+            this.tbOrden.Location = new System.Drawing.Point(47, 130);
+            this.tbOrden.Name = "tbOrden";
+            this.tbOrden.Size = new System.Drawing.Size(140, 20);
+            this.tbOrden.TabIndex = 34;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(21, 114);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(39, 13);
+            this.label2.TabIndex = 36;
+            this.label2.Text = "Orden:";
+            // 
+            // rbNuevo
+            // 
+            this.rbNuevo.AutoSize = true;
+            this.rbNuevo.Location = new System.Drawing.Point(24, 80);
+            this.rbNuevo.Name = "rbNuevo";
+            this.rbNuevo.Size = new System.Drawing.Size(60, 17);
+            this.rbNuevo.TabIndex = 63;
+            this.rbNuevo.Text = "Nuevo:";
+            this.rbNuevo.UseVisualStyleBackColor = true;
+            // 
+            // cmbGrupoFamiliar
+            // 
+            this.cmbGrupoFamiliar.FormattingEnabled = true;
+            this.cmbGrupoFamiliar.Location = new System.Drawing.Point(47, 53);
+            this.cmbGrupoFamiliar.Name = "cmbGrupoFamiliar";
+            this.cmbGrupoFamiliar.Size = new System.Drawing.Size(140, 21);
+            this.cmbGrupoFamiliar.TabIndex = 59;
+            // 
+            // cmbEstadoCivil
+            // 
+            this.cmbEstadoCivil.FormattingEnabled = true;
+            this.cmbEstadoCivil.Location = new System.Drawing.Point(46, 192);
+            this.cmbEstadoCivil.Name = "cmbEstadoCivil";
+            this.cmbEstadoCivil.Size = new System.Drawing.Size(140, 21);
+            this.cmbEstadoCivil.TabIndex = 61;
+            // 
+            // cmbPlanMedico
+            // 
+            this.cmbPlanMedico.FormattingEnabled = true;
+            this.cmbPlanMedico.Location = new System.Drawing.Point(48, 248);
+            this.cmbPlanMedico.Name = "cmbPlanMedico";
+            this.cmbPlanMedico.Size = new System.Drawing.Size(140, 21);
+            this.cmbPlanMedico.TabIndex = 60;
             // 
             // label14
             // 
@@ -277,110 +372,15 @@
             this.tbNombre.Size = new System.Drawing.Size(140, 20);
             this.tbNombre.TabIndex = 37;
             // 
-            // label2
+            // bGuardar
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 114);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 13);
-            this.label2.TabIndex = 36;
-            this.label2.Text = "Orden:";
-            // 
-            // tbOrden
-            // 
-            this.tbOrden.Enabled = false;
-            this.tbOrden.Location = new System.Drawing.Point(47, 130);
-            this.tbOrden.Name = "tbOrden";
-            this.tbOrden.Size = new System.Drawing.Size(140, 20);
-            this.tbOrden.TabIndex = 34;
-            // 
-            // cmbGrupoFamiliar
-            // 
-            this.cmbGrupoFamiliar.FormattingEnabled = true;
-            this.cmbGrupoFamiliar.Location = new System.Drawing.Point(47, 53);
-            this.cmbGrupoFamiliar.Name = "cmbGrupoFamiliar";
-            this.cmbGrupoFamiliar.Size = new System.Drawing.Size(140, 21);
-            this.cmbGrupoFamiliar.TabIndex = 59;
-            // 
-            // cmbPlanMedico
-            // 
-            this.cmbPlanMedico.FormattingEnabled = true;
-            this.cmbPlanMedico.Location = new System.Drawing.Point(48, 248);
-            this.cmbPlanMedico.Name = "cmbPlanMedico";
-            this.cmbPlanMedico.Size = new System.Drawing.Size(140, 21);
-            this.cmbPlanMedico.TabIndex = 60;
-            // 
-            // cmbEstadoCivil
-            // 
-            this.cmbEstadoCivil.FormattingEnabled = true;
-            this.cmbEstadoCivil.Location = new System.Drawing.Point(46, 192);
-            this.cmbEstadoCivil.Name = "cmbEstadoCivil";
-            this.cmbEstadoCivil.Size = new System.Drawing.Size(140, 21);
-            this.cmbEstadoCivil.TabIndex = 61;
-            // 
-            // rbNuevo
-            // 
-            this.rbNuevo.AutoSize = true;
-            this.rbNuevo.Location = new System.Drawing.Point(24, 80);
-            this.rbNuevo.Name = "rbNuevo";
-            this.rbNuevo.Size = new System.Drawing.Size(60, 17);
-            this.rbNuevo.TabIndex = 63;
-            this.rbNuevo.Text = "Nuevo:";
-            this.rbNuevo.UseVisualStyleBackColor = true;
-            // 
-            // rbExistente
-            // 
-            this.rbExistente.AutoSize = true;
-            this.rbExistente.Checked = true;
-            this.rbExistente.Location = new System.Drawing.Point(24, 30);
-            this.rbExistente.Name = "rbExistente";
-            this.rbExistente.Size = new System.Drawing.Size(71, 17);
-            this.rbExistente.TabIndex = 64;
-            this.rbExistente.TabStop = true;
-            this.rbExistente.Text = "Existente:";
-            this.rbExistente.UseVisualStyleBackColor = true;
-            this.rbExistente.CheckedChanged += new System.EventHandler(this.rbExistente_CheckedChanged);
-            // 
-            // gbGrupo
-            // 
-            this.gbGrupo.Controls.Add(this.rbExistente);
-            this.gbGrupo.Controls.Add(this.tbOrden);
-            this.gbGrupo.Controls.Add(this.label2);
-            this.gbGrupo.Controls.Add(this.rbNuevo);
-            this.gbGrupo.Controls.Add(this.cmbGrupoFamiliar);
-            this.gbGrupo.Location = new System.Drawing.Point(214, 176);
-            this.gbGrupo.Name = "gbGrupo";
-            this.gbGrupo.Size = new System.Drawing.Size(217, 164);
-            this.gbGrupo.TabIndex = 66;
-            this.gbGrupo.TabStop = false;
-            this.gbGrupo.Text = "Grupo familiar:";
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(473, 192);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(223, 121);
-            this.listBox1.TabIndex = 67;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(448, 176);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 13);
-            this.label1.TabIndex = 68;
-            this.label1.Text = "Integrantes del grupo:";
-            // 
-            // bAgregarACargo
-            // 
-            this.bAgregarACargo.Location = new System.Drawing.Point(473, 319);
-            this.bAgregarACargo.Name = "bAgregarACargo";
-            this.bAgregarACargo.Size = new System.Drawing.Size(223, 21);
-            this.bAgregarACargo.TabIndex = 70;
-            this.bAgregarACargo.Text = "Agregar integrante";
-            this.bAgregarACargo.UseVisualStyleBackColor = true;
-            this.bAgregarACargo.Click += new System.EventHandler(this.bAgregarACargo_Click);
+            this.bGuardar.Location = new System.Drawing.Point(33, 297);
+            this.bGuardar.Name = "bGuardar";
+            this.bGuardar.Size = new System.Drawing.Size(153, 37);
+            this.bGuardar.TabIndex = 0;
+            this.bGuardar.Text = "Guardar";
+            this.bGuardar.UseVisualStyleBackColor = true;
+            this.bGuardar.Click += new System.EventHandler(this.bGuardar_Click);
             // 
             // EditAfiliado
             // 
@@ -433,6 +433,6 @@
         private System.Windows.Forms.GroupBox gbGrupo;
         private System.Windows.Forms.Button bAgregarACargo;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lbIntegrantes;
     }
 }

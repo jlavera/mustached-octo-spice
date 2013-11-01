@@ -35,11 +35,11 @@ namespace Clinica_Frba.Clases {
 
         #endregion
         //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
-        
-        public Rol this[string id]{
-            get{
-                foreach(Rol item in items){
-                    if (item.id == Convert.ToInt32(id)){
+
+        public Rol this[string id] {
+            get {
+                foreach (Rol item in items) {
+                    if (item.id == Convert.ToInt32(id)) {
                         return item;
                     }
                 }
@@ -59,11 +59,9 @@ namespace Clinica_Frba.Clases {
                 " r LEFT JOIN " + DB.schema + "rol_x_funcionalidad ON rol_id = rxf_rol WHERE " + ((p_showAll) ? "1=1" : "rol_habilitado=1");
 
 
-            if (p_objects.Count > 0)
-            {
+            if (p_objects.Count > 0) {
                 query += " AND (";
-                foreach (Funcionalidad func in p_objects)
-                {
+                foreach (Funcionalidad func in p_objects) {
                     query += " rxf_funcionalidad = " + func.id + " OR";
                 }
                 query = query.Substring(0, query.Length - 3);
