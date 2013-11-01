@@ -130,18 +130,53 @@ namespace Clinica_Frba.AbmAfiliados{
             EditIntegrante editForm = new EditIntegrante(tieneConyuge);
             editForm.ShowDialog();
 
-            //--Si el que agregó es conyuge, marcar que tiene conyuge
-            if (editForm.esConyuge)
-                tieneConyuge = true;
-
-            //--Si el diálogo tiene resultado OK, volver a llenar dgv
+            //--Si el diálogo tiene resultado OK, guardar el afiliado
             if (editForm.DialogResult == DialogResult.OK) {
+                DataTable dt = new DataTable();
+                dt.Columns.Add("afi_id");
+                dt.Columns.Add("afi_orden");
+                dt.Columns.Add("afi_usuario");
+                dt.Columns.Add("afi_estadoCivil");
+                dt.Columns.Add("afi_familiaresACargo");
+                dt.Columns.Add("afi_planMedico");
+                dt.Columns.Add("afi_habilitado");
+
+                dt.Columns.Add("usu_id");
+                dt.Columns.Add("usu_nombreUsuario");
+                dt.Columns.Add("usu_contrasegna");
+                dt.Columns.Add("usu_intentosFallidos");
+                dt.Columns.Add("usu_nombre");
+                dt.Columns.Add("usu_apellido");
+                dt.Columns.Add("usu_tipoDocumento");
+                dt.Columns.Add("usu_numeroDocumento");
+                dt.Columns.Add("usu_direccion");
+                dt.Columns.Add("usu_telefono");
+                dt.Columns.Add("usu_mail");
+                dt.Columns.Add("usu_fechaNacimiento");
+                dt.Columns.Add("usu_sexo");
+                dt.Columns.Add("usu_habilitado");
+
+                dt.Columns.Add("pla_id");
+                dt.Columns.Add("pla_nombres");
+                dt.Columns.Add("pla_codigo");
+                dt.Columns.Add("pla_precioBonoConsulta");
+                dt.Columns.Add("pla_precioBonoFarmacia");
+
+                dt.Columns.Add("est_id");
+                dt.Columns.Add("est_estado");
+
+                DataRow dr = dt.NewRow();
+
+                //TODO rellenar datarow con los datos creados, crear el afiliado, agregar a array de afiliados
+
+                //--Si el que agregó es conyuge, marcar que tiene conyuge
+                if (editForm.esConyuge)
+                    tieneConyuge = true;
+
                 lbIntegrantes.Items.Clear();
                 foreach (Afiliado afil in integrantes)
                     lbIntegrantes.Items.Add(afil.orden.ToString("D2") + afil.usuario.apellido + ", " + afil.usuario.nombre);
             }
-
-
         }
 
         private void rbExistente_CheckedChanged(object sender, EventArgs e) {
