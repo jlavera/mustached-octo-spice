@@ -50,7 +50,6 @@ namespace Clinica_Frba.AbmRoles {
 
         private void bEliminar_Click(object sender, EventArgs e) {
             roles.DeleteSelected(dgvRoles, dgvRoles.SelectedRows);
-            FillDgvYLb();
         }
 
         private void bAgregar_Click(object sender, EventArgs e) {

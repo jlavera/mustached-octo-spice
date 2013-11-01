@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.dgvAgenda = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.profesional = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.desde = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hasta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -39,11 +44,6 @@
             this.bEliminar = new System.Windows.Forms.Button();
             this.bAgregar = new System.Windows.Forms.Button();
             this.bBuscar = new System.Windows.Forms.Button();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.profesional = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.desde = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hasta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAgenda)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +63,37 @@
             this.dgvAgenda.Name = "dgvAgenda";
             this.dgvAgenda.Size = new System.Drawing.Size(643, 150);
             this.dgvAgenda.TabIndex = 0;
+            this.dgvAgenda.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAgenda_CellContentClick);
+            // 
+            // id
+            // 
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            // 
+            // profesional
+            // 
+            this.profesional.HeaderText = "Profesional";
+            this.profesional.Name = "profesional";
+            this.profesional.ReadOnly = true;
+            // 
+            // desde
+            // 
+            this.desde.HeaderText = "Desde";
+            this.desde.Name = "desde";
+            this.desde.ReadOnly = true;
+            // 
+            // hasta
+            // 
+            this.hasta.HeaderText = "Hasta";
+            this.hasta.Name = "hasta";
+            this.hasta.ReadOnly = true;
+            // 
+            // seleccionar
+            // 
+            this.seleccionar.HeaderText = "Seleccionar";
+            this.seleccionar.Name = "seleccionar";
+            this.seleccionar.ReadOnly = true;
             // 
             // groupBox1
             // 
@@ -152,6 +183,7 @@
             this.bAgregar.TabIndex = 6;
             this.bAgregar.Text = "Agregar";
             this.bAgregar.UseVisualStyleBackColor = true;
+            this.bAgregar.Click += new System.EventHandler(this.bAgregar_Click);
             // 
             // bBuscar
             // 
@@ -161,36 +193,7 @@
             this.bBuscar.TabIndex = 5;
             this.bBuscar.Text = "Buscar";
             this.bBuscar.UseVisualStyleBackColor = true;
-            // 
-            // id
-            // 
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            // 
-            // profesional
-            // 
-            this.profesional.HeaderText = "Profesional";
-            this.profesional.Name = "profesional";
-            this.profesional.ReadOnly = true;
-            // 
-            // desde
-            // 
-            this.desde.HeaderText = "Desde";
-            this.desde.Name = "desde";
-            this.desde.ReadOnly = true;
-            // 
-            // hasta
-            // 
-            this.hasta.HeaderText = "Hasta";
-            this.hasta.Name = "hasta";
-            this.hasta.ReadOnly = true;
-            // 
-            // seleccionar
-            // 
-            this.seleccionar.HeaderText = "Seleccionar";
-            this.seleccionar.Name = "seleccionar";
-            this.seleccionar.ReadOnly = true;
+            this.bBuscar.Click += new System.EventHandler(this.bBuscar_Click);
             // 
             // RegistrarAgendas
             // 
