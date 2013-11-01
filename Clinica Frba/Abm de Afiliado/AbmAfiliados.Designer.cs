@@ -157,6 +157,7 @@
             this.lbPlanMedico.FormattingEnabled = true;
             this.lbPlanMedico.Location = new System.Drawing.Point(849, 40);
             this.lbPlanMedico.Name = "lbPlanMedico";
+            this.lbPlanMedico.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbPlanMedico.Size = new System.Drawing.Size(120, 108);
             this.lbPlanMedico.TabIndex = 32;
             // 

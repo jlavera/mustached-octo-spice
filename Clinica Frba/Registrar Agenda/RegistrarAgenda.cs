@@ -37,7 +37,7 @@ namespace Clinica_Frba.RegistrarAgendas {
         }
 
         private void bEliminar_Click(object sender, EventArgs e) {
-            //agendas.DeleteSelected(dgvRoles, dgvRoles.SelectedRows);
+            agendas.DeleteSelected(dgvAgenda, dgvAgenda.SelectedRows);
             FillDgv();
         }
 

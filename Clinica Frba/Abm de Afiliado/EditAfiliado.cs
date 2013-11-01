@@ -127,7 +127,7 @@ namespace Clinica_Frba.AbmAfiliados{
 
         private void bAgregarACargo_Click(object sender, EventArgs e) {
             //--Abrir ventana para agregar afiliado
-            EditIntegrante editForm = new EditIntegrante(tieneConyuge);
+            /*EditIntegrante editForm = new EditIntegrante(tieneConyuge);
             editForm.ShowDialog();
 
             //--Si el diálogo tiene resultado OK, guardar el afiliado
@@ -176,7 +176,8 @@ namespace Clinica_Frba.AbmAfiliados{
                 lbIntegrantes.Items.Clear();
                 foreach (Afiliado afil in integrantes)
                     lbIntegrantes.Items.Add(afil.orden.ToString("D2") + afil.usuario.apellido + ", " + afil.usuario.nombre);
-            }
+            }*/
+
         }
 
         private void rbExistente_CheckedChanged(object sender, EventArgs e) {
