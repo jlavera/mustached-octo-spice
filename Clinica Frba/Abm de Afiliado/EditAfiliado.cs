@@ -100,10 +100,10 @@ namespace Clinica_Frba.AbmAfiliados{
                 cmbPlanMedico.SelectedItem = planMedico;
 
                 cmbGrupoFamiliar.SelectedItem = grupoFamiliar;
-                tbOrden.Text = orden.ToString();
 
-                
             }
+
+            tbOrden.Text = orden.ToString();
 
         }
 

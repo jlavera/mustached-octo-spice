@@ -7,8 +7,6 @@ using System.Windows.Forms;
 
 namespace Clinica_Frba.Clases {
     public class Roles : ListaEntidad {
-
-
         //--------------HOMOGENEO A TODAS LAS ENTIDADES------
         #region homogeneo
         public Roles()
@@ -49,6 +47,12 @@ namespace Clinica_Frba.Clases {
             }
         }
 
+        /// <summary>
+        /// Llena la lista aplicando los filtros
+        /// </summary>
+        /// <param name="p_nombre">Nombre</param>
+        /// <param name="p_objects">Funcionalidades</param>
+        /// <param name="p_showAll">Habilitados</param>
         public void FillWithFilter(string p_nombre, ListBox.SelectedObjectCollection p_objects, bool p_showAll) {
 
             string query = "SELECT DISTINCT r.*, " + DB.schema + "concatenarFuncionalidad(rol_id) AS funcionalidades FROM " + DB.schema + tabla +
@@ -75,15 +79,24 @@ namespace Clinica_Frba.Clases {
 
         override public DataTable SelectAll() {
 
-            return DB.ExecuteReader("SELECT *, " + DB.schema + "concatenarFuncionalidad(id) AS funcionalidades FROM " + DB.schema + tabla + " WHERE rol_habilitado=1");
+            return DB.ExecuteReader("SELECT *, " + DB.schema + "concatenarFuncionalidad(rol_id) AS funcionalidades FROM " + DB.schema + tabla + " WHERE rol_habilitado=1");
         }
 
+        /// <summary>
+        /// Llena la entidad con los roles que tiene un usuario
+        /// </summary>
+        /// <param name="p_userId"></param>
         public void FillRolesByUser(int p_userId) {
 
             //--Trae funcionalidades vacio para mantener polimorfismo
             Fill(DB.ExecuteReader("SELECT *, ' ' AS funcionalidades FROM " + DB.schema + "rol_x_usuario JOIN " + DB.schema + "rol ON rxu_rol = rol_id WHERE rxu_usuario = " + p_userId));
         }
 
+        /// <summary>
+        /// Elimina de la db, de la lista entidad y del dgv los roles seleccionados
+        /// </summary>
+        /// <param name="dgv"></param>
+        /// <param name="p_objects"></param>
         public void DeleteSelected(DataGridView dgv, DataGridViewSelectedRowCollection p_objects) {
 
             //--Eliminar de la DB

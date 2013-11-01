@@ -17,6 +17,11 @@ namespace Clinica_Frba {
             tabla = p_tabla;
         }
         
+
+        /// <summary>
+        /// Devuelve la lista como lsita de objetos (para agregar en listBox o comboBox)
+        /// </summary>
+        /// <returns></returns>
         public Object[] ToList(){
             Object[] list = new Object[items.Count];
 
@@ -26,6 +31,9 @@ namespace Clinica_Frba {
             return list;
         }
 
+        /// <summary>
+        /// Elimina todos los elementos de la lista
+        /// </summary>
         public void ClearList() {
             items.Clear();
         }
@@ -40,6 +48,10 @@ namespace Clinica_Frba {
             return DB.ExecuteCardinal("SELECT COUNT(*) FROM " + DB.schema + tabla);
         }
 
+        /// <summary>
+        /// Devuelve el próximo id de la tabla
+        /// </summary>
+        /// <returns></returns>
         public int GetNextIdentity() {
             try {
                 return DB.ExecuteCardinal("SELECT IDENT_CURRENT('" + DB.schema + tabla + "') +  IDENT_INCR('" + DB.schema + tabla + "')");

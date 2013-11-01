@@ -21,8 +21,10 @@ namespace Clinica_Frba.AbmAfiliados {
 
         private void AbmAfiliados_Load(object sender, EventArgs e) {            
 
+            //--Llenar dgv con todos los afiliados
             FillDgv();
 
+            //--Traer y llenar los listBox
             estadosCiviles.FillWithAll();
             lbEstadoCivil.Items.AddRange(estadosCiviles.ToList());
 
@@ -34,6 +36,58 @@ namespace Clinica_Frba.AbmAfiliados {
 
         }
 
+        //--Click en el botón buscar
+        private void bBuscar_Click(object sender, EventArgs e) {
+            
+            //--Limpia lista entidad y la trae aplicando los filtros
+            afiliados.ClearList();
+            afiliados.FillWithFilter(tbNombre.Text, tbApellido.Text, tbDireccion.Text, cmbTipoDNI.SelectedText,
+                Convert.ToInt64(tbNumeroDni.Text), Convert.ToInt64(tbTelefono.Text), tbMail.Text, tbNombreUsuario.Text
+                , cmbSexo.SelectedText, lbGrupoFamiliar.SelectedItems, lbEstadoCivil.SelectedItems, lbPlanMedico.SelectedItems,
+                Convert.ToInt32(tbOrden.Text), Convert.ToInt32(tbFamiliaresACargo.Text));
+
+            //--Llena dgv
+            dgvAfiliados.Rows.Clear();
+            foreach (Afiliado afiliado in afiliados.items) {
+                dgvAfiliados.Rows.Add(afiliado.grupoFamiliar.grupo.ToString("D5") + "-" + afiliado.orden.ToString("D2"),
+                    afiliado.usuario.nombre, afiliado.usuario.apellido,
+                    (afiliado.usuario.tipoDocumento == "") ? "Faltar cargar" : afiliado.usuario.tipoDocumento, afiliado.usuario.numeroDocumento,
+                    afiliado.usuario.direccion, afiliado.usuario.telefono, afiliado.usuario.mail, afiliado.usuario.fechaNacimiento,
+                    (afiliado.usuario.sexo == "") ? "Faltar cargar" : afiliado.usuario.sexo, afiliado.usuario.nombreUsuario,
+                    (afiliado.estadoCivil.nombre == "") ? "Falta cargar" : afiliado.estadoCivil.ToString(),
+                    (afiliado.familiaresACargo == -1) ? "Falta cargar" : afiliado.familiaresACargo.ToString(), afiliado.planMedico.nombre);
+            }
+        }
+
+        //--Click en el botón de agregar
+        private void bAgregar_Click(object sender, EventArgs e) {
+
+            //--Abrir ventana para agregar afiliado
+            EditAfiliado editForm = new EditAfiliado();
+            editForm.ShowDialog();
+
+            //--Si el diálogo tiene resultado OK, volver a llenar dgv
+            if (editForm.DialogResult == DialogResult.OK) {
+                FillDgv();
+            }
+
+        }
+
+        private void dgvAfiliados_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+
+            //--Abrir ventana para editar afiliado
+            if (dgvAfiliados.Columns[e.ColumnIndex].HeaderText == "Seleccionar") {
+                EditAfiliado formEdit = new EditAfiliado(afiliados[e.RowIndex]);
+                formEdit.ShowDialog();
+
+                //--Si el diálogo tiene resultado OK, volver a llenar dgv
+                if (formEdit.DialogResult == DialogResult.OK) {
+                    FillDgv();
+                }
+            }
+        }
+
+        //--Llenar dgv con todos los afiliados
         private void FillDgv() {
 
             afiliados.FillWithAll();
@@ -44,38 +98,8 @@ namespace Clinica_Frba.AbmAfiliados {
                     (afiliado.usuario.tipoDocumento == "") ? "Faltar cargar" : afiliado.usuario.tipoDocumento, afiliado.usuario.numeroDocumento,
                     afiliado.usuario.direccion, afiliado.usuario.telefono, afiliado.usuario.mail, afiliado.usuario.fechaNacimiento,
                     (afiliado.usuario.sexo == "") ? "Faltar cargar" : afiliado.usuario.sexo, afiliado.usuario.nombreUsuario,
-                    (afiliado.estadoCivil.nombre == "")? "Falta cargar": afiliado.estadoCivil.ToString(),
-                    (afiliado.familiaresACargo == -1)? "Falta cargar": afiliado.familiaresACargo.ToString(), afiliado.planMedico.nombre);
-            }
-
-        }
-
-        private void bBuscar_Click(object sender, EventArgs e) {
-            dgvAfiliados.Rows.Clear();
-
-            afiliados.ClearList();
-            afiliados.FillWithFilter(tbNombre.Text, tbApellido.Text, tbDireccion.Text, cmbTipoDNI.SelectedText,
-                Convert.ToInt64(tbNumeroDni.Text), Convert.ToInt64(tbTelefono.Text), tbMail.Text, tbNombreUsuario.Text
-                , cmbSexo.SelectedText, lbGrupoFamiliar.SelectedItems, lbEstadoCivil.SelectedItems, lbPlanMedico.SelectedItems,
-                Convert.ToInt32(tbOrden.Text), Convert.ToInt32(tbFamiliaresACargo.Text));
-
-
-        }
-
-        private void bAgregar_Click(object sender, EventArgs e) {
-            EditAfiliado editForm = new EditAfiliado();
-            editForm.ShowDialog();
-        }
-
-        private void dgvAfiliados_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-
-            if (dgvAfiliados.Columns[e.ColumnIndex].HeaderText == "Seleccionar") {
-                EditAfiliado formEdit = new EditAfiliado(afiliados[e.RowIndex]);
-                formEdit.ShowDialog();
-
-                if (formEdit.DialogResult == DialogResult.OK) {
-                    FillDgv();
-                }
+                    (afiliado.estadoCivil.nombre == "") ? "Falta cargar" : afiliado.estadoCivil.ToString(),
+                    (afiliado.familiaresACargo == -1) ? "Falta cargar" : afiliado.familiaresACargo.ToString(), afiliado.planMedico.nombre);
             }
         }
     }

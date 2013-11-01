@@ -37,6 +37,12 @@ namespace Clinica_Frba.Clases {
         #endregion
         //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
 
+        /// <summary>
+        /// Devuelve un usuario que cumpla con el usuario y la contraseña
+        /// </summary>
+        /// <param name="p_user">Usuario</param>
+        /// <param name="p_pass">Contraseña</param>
+        /// <returns></returns>
         public Usuario VerifyUser(string p_user, string p_pass) {
             try {
                 return new Usuario(DB.ExecuteReader("SELECT * FROM " + DB.schema + "usuario WHERE usu_nombreUsuario = \'" + p_user + "\' AND usu_contrasegna = \'" + p_pass + "\'").Rows[0]);

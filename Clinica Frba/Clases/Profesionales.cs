@@ -36,6 +36,11 @@ namespace Clinica_Frba.Clases {
         #endregion
         //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
 
+
+        /// <summary>
+        /// Devuelve los profesionales junto con sus entidades FK desde la vista
+        /// </summary>
+        /// <returns></returns>
         public override DataTable SelectAll() {
             return DB.ExecuteReader("SELECT * FROM " + DB.schema + "vProfesional");
         }

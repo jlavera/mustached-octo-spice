@@ -37,7 +37,10 @@ namespace Clinica_Frba.Clases {
         #endregion
         //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
 
-
+        /// <summary>
+        /// Obtiene los distintos grupos familiares, junto con el id, apellido y nombre del titular desde los afiliados
+        /// </summary>
+        /// <returns></returns>
         public override DataTable SelectAll() {
             return DB.ExecuteReader("SELECT DISTINCT afi_grupoFamiliar, afi_id, usu_apellido, usu_nombre FROM " + DB.schema +"vAfiliado WHERE afi_orden = 1");
         }

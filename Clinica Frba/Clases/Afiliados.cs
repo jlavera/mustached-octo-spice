@@ -37,10 +37,31 @@ namespace Clinica_Frba.Clases {
         #endregion
         //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
 
+        /// <summary>
+        /// Trae todos los afiliados desde la vista (junto con las entidades de sus FK)
+        /// </summary>
+        /// <returns></returns>
         public override DataTable SelectAll() {
             return DB.ExecuteReader("SELECT * FROM "+ DB.schema + "vAfiliado");
         }
 
+        /// <summary>
+        /// Trae filtrando según sus atributos
+        /// </summary>
+        /// <param name="p_nombre"></param>
+        /// <param name="p_apellido"></param>
+        /// <param name="p_direccion"></param>
+        /// <param name="p_tipoDocumento"></param>
+        /// <param name="p_numDocumento"></param>
+        /// <param name="p_telefono"></param>
+        /// <param name="p_mail"></param>
+        /// <param name="p_nombreUsuario"></param>
+        /// <param name="p_sexo"></param>
+        /// <param name="p_grupoFamiliar"></param>
+        /// <param name="p_estadoCivil"></param>
+        /// <param name="p_planMedico"></param>
+        /// <param name="p_orden"></param>
+        /// <param name="p_familiares"></param>
         public void FillWithFilter(string p_nombre, string p_apellido, string p_direccion, string p_tipoDocumento,
             long p_numDocumento, long p_telefono, string p_mail, string p_nombreUsuario, string p_sexo,
             ListBox.SelectedObjectCollection p_grupoFamiliar, ListBox.SelectedObjectCollection p_estadoCivil,

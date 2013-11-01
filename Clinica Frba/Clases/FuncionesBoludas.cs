@@ -7,6 +7,11 @@ using System.IO;
 namespace Clinica_Frba.Clases {
     static class FuncionesBoludas {
 
+
+        /// <summary>
+        /// Devuelve la fecha del archivo en "Cosas/fecha.txt"
+        /// </summary>
+        /// <returns></returns>
         static public DateTime GetDateTime() {
             string path = "";
 
@@ -23,6 +28,11 @@ namespace Clinica_Frba.Clases {
             return aux;
         }
 
+
+        /// <summary>
+        /// Graba la fecha en el archivo "Cosas/fecha.txt"
+        /// </summary>
+        /// <param name="dt"></param>
         static public void SetDateTime(DateTime dt) {
             string path = "";
 
