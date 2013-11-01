@@ -38,7 +38,6 @@ namespace Clinica_Frba.AbmAfiliados {
 
         //--Click en el botón buscar
         private void bBuscar_Click(object sender, EventArgs e) {
-
             FillDgv();
         }
 
@@ -74,10 +73,12 @@ namespace Clinica_Frba.AbmAfiliados {
 
             //--Limpia lista entidad y la trae aplicando los filtros
             afiliados.ClearList();
+            dgvAfiliados.Rows.Clear();
+
             afiliados.FillWithFilter(tbNombre.Text,
                 tbApellido.Text,
                 tbDireccion.Text,
-                cmbTipoDNI.SelectedText,
+                cmbTipoDNI.Text,
                 Convert.ToInt64((tbNumeroDni.Text == "")? "-1" : tbNumeroDni.Text),
                 Convert.ToInt64((tbTelefono.Text == "") ? "-1" : tbTelefono.Text),
                 tbMail.Text,
@@ -88,10 +89,7 @@ namespace Clinica_Frba.AbmAfiliados {
                 lbPlanMedico.SelectedItems,
                 Convert.ToInt32((tbOrden.Text == "") ? "-1" : tbOrden.Text),
                 Convert.ToInt32((tbFamiliaresACargo.Text == "") ? "-1" : tbFamiliaresACargo.Text));
-
-            afiliados.FillWithAll();
             //--Llena dgv
-            dgvAfiliados.Rows.Clear();
             foreach (Afiliado afiliado in afiliados.items) {
                 dgvAfiliados.Rows.Add(afiliado.grupoFamiliar.grupo.ToString("D5") + "-" + afiliado.orden.ToString("D2"),
                     afiliado.usuario.nombre, afiliado.usuario.apellido,

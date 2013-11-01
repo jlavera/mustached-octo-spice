@@ -32,10 +32,21 @@ namespace Clinica_Frba.Registrar_Agenda
 
         private void EditAgenda_Load(object sender, EventArgs e)
         {
-            CheckBox agregador = new CheckBox();
-            agregador.Size = new Size(36, 12);
-            agregador.Text = "16:30";
-            //flpSemanal.Controls.Add(agregador);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string query = "DELETE "+DB.schema+"semanal WHERE sem_profesional =" + cbProfesional.SelectedItem+"; ";
+            if (nueva){
+                query = "INSERT INTO "+DB.schema+"agenda(age_desde, age_hasta, age_profesional) VALUES("+dtpDesde.Value.ToString("yyyy-MM-dd")+", "+dtpHasta.Value.ToString("yyyy-MM-dd")+", "+ cbProfesional.SelectedItem +");";
+                
+                    //INSERT INTO " + DB.schema + "semanal(sem_agenda, sem_dia, sem_hora)
+            }else{
+            }
+
+            DB.ExecuteNonQuery(query);
+            this.Close();
+            DialogResult = DialogResult.OK;
         }
     }
 }

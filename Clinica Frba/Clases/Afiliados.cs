@@ -48,20 +48,6 @@ namespace Clinica_Frba.Clases {
         /// <summary>
         /// Trae filtrando según sus atributos
         /// </summary>
-        /// <param name="p_nombre"></param>
-        /// <param name="p_apellido"></param>
-        /// <param name="p_direccion"></param>
-        /// <param name="p_tipoDocumento"></param>
-        /// <param name="p_numDocumento"></param>
-        /// <param name="p_telefono"></param>
-        /// <param name="p_mail"></param>
-        /// <param name="p_nombreUsuario"></param>
-        /// <param name="p_sexo"></param>
-        /// <param name="p_grupoFamiliar"></param>
-        /// <param name="p_estadoCivil"></param>
-        /// <param name="p_planMedico"></param>
-        /// <param name="p_orden"></param>
-        /// <param name="p_familiares"></param>
         public void FillWithFilter(string p_nombre,
             string p_apellido,
             string p_direccion,
@@ -77,21 +63,55 @@ namespace Clinica_Frba.Clases {
             int p_orden,
             int p_familiares) {
 
-            /*string query = "SELECT * FROM " + DB.schema + "vAfiliado WHERE " + ((p_showAll) ? "1=1" : "rol_habilitado=1");
-
-            if (p_objects.Count > 0) {
-                query += " AND (";
-                foreach (Funcionalidad func in p_objects) {
-                    query += " rxf_funcionalidad = " + func.id + " OR";
-                }
-                query = query.Substring(0, query.Length - 3);
-                query += ")";
+            string query = "SELECT * FROM " + DB.schema + "vAfiliado WHERE";
+            if(p_apellido!="")
+                query+=" usu_apellido LIKE '%"+p_apellido+"%' AND ";
+            if (p_direccion != "")
+                query += " usu_direccion LIKE '%" + p_direccion + "%' AND ";
+            if (p_estadoCivil.Count > 0){
+                query += " (";
+                foreach (EstadoCivil ec in p_estadoCivil)
+                    query += "est_id =" + ec.id + " OR ";
+                query.Substring(0, query.Length - 4);
+                query += ") AND ";
             }
-
+            if (p_familiares != -1)
+                query += " afi_familiaresACargo =" + p_familiares+ " AND ";
+            if (p_grupoFamiliar.Count > 0){
+                query += " (";
+                foreach (GrupoFamiliar gf in p_grupoFamiliar)
+                    query += "afi_grupoFamiliar =" + gf.grupo + " OR ";
+                query.Substring(0, query.Length - 4);
+                query += ") AND ";
+            }
+            if (p_mail != "")
+                query += " usu_mail LIKE '%" + p_mail + "%' AND ";
             if (p_nombre != "")
-                query += " AND rol_nombre LIKE '%" + p_nombre + "%'";
+                query += " usu_nombre LIKE '%" + p_nombre+ "%' AND ";
+            if (p_nombreUsuario != "")
+                query += " usu_nombreUsuario LIKE '%" + p_nombreUsuario + "%' AND ";
+            if (p_numDocumento != -1)
+                query += " usu_numeroDocumento=" + p_numDocumento+ " AND ";
+            if (p_orden != -1)
+                query += " afi_orden =" + p_orden+ " AND ";
+            if (p_planMedico.Count > 0){
+                query += " (";
+                foreach (PlanMedico pm in p_planMedico)
+                    query += "pla_id =" + pm.id + " OR ";
+                query.Substring(0, query.Length - 4);
+                query += ") AND ";
+            }
+            if (p_sexo != "")
+                query += " usu_sexo =" + p_sexo + " AND ";
+            if (p_telefono != -1)
+                query += " usu_telefono =" + p_telefono+ " AND ";
+            if (p_tipoDocumento != "")
+                query += " usu_tipoDocumento='" + p_tipoDocumento+ "' AND ";
 
-            Fill(DB.ExecuteReader(query));*/
+
+            //sacar la ultima basura
+            query = query.Substring(0, query.Length - 5);
+            Fill(DB.ExecuteReader(query));
         }
 
     }
