@@ -8,19 +8,15 @@ using System.Text;
 using System.Windows.Forms;
 using Clinica_Frba.Clases;
 
-namespace Clinica_Frba.RegistrarAgendas
-{
-    public partial class RegistrarAgendas : Form
-    {
+namespace Clinica_Frba.RegistrarAgendas {
+    public partial class RegistrarAgendas : Form {
         Agendas agendas = new Agendas();
 
-        public RegistrarAgendas()
-        {
+        public RegistrarAgendas() {
             InitializeComponent();
         }
 
-        private void RegistrarAgendas_Load(object sender, EventArgs e)
-        {
+        private void RegistrarAgendas_Load(object sender, EventArgs e) {
             dtpDesde.Value = DateTime.Today;
             dtpHasta.Value = DateTime.Today;
 
@@ -30,8 +26,7 @@ namespace Clinica_Frba.RegistrarAgendas
                 dgvAgenda.Rows.Add(agenda.id, agenda.profesional, agenda.desde, agenda.hasta);
         }
 
-        private void FillDgv()
-        {
+        private void FillDgv() {
             agendas.ClearList();
             dgvAgenda.Rows.Clear();
             agendas.FillWithFilter(cbProfesional.SelectedIndex, dtpDesde.Value, dtpHasta.Value);
@@ -41,49 +36,38 @@ namespace Clinica_Frba.RegistrarAgendas
 
         }
 
-        private void bEliminar_Click(object sender, EventArgs e)
-        {
-<<<<<<< HEAD
+        private void bEliminar_Click(object sender, EventArgs e) {
             //agendas.DeleteSelected(dgvRoles, dgvRoles.SelectedRows);
             FillDgv();
-=======
-            agendas.DeleteSelected(dgvAgenda, dgvAgenda.SelectedRows);
         }
 
-        private void dgvAgenda_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dgvAgenda.Columns[e.ColumnIndex].HeaderText == "Seleccionar")
-            {
+        private void dgvAgenda_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+            if (dgvAgenda.Columns[e.ColumnIndex].HeaderText == "Seleccionar") {
                 Registrar_Agenda.EditAgenda formEdit = new Registrar_Agenda.EditAgenda(agendas[e.RowIndex]);
                 formEdit.ShowDialog();
 
-                if (formEdit.DialogResult == DialogResult.OK)
-                {
+                if (formEdit.DialogResult == DialogResult.OK) {
                     FillDgv();
                 }
             }
 
         }
 
-        private void bAgregar_Click(object sender, EventArgs e)
-        {
+        private void bAgregar_Click(object sender, EventArgs e) {
             Registrar_Agenda.EditAgenda editForm = new Registrar_Agenda.EditAgenda();
             editForm.ShowDialog();
 
-            if (editForm.DialogResult == DialogResult.OK)
-            {
+            if (editForm.DialogResult == DialogResult.OK) {
                 FillDgv();
             }
 
         }
 
-        private void bBuscar_Click(object sender, EventArgs e)
-        {
+        private void bBuscar_Click(object sender, EventArgs e) {
             if (dtpDesde.Value.Ticks >= dtpHasta.Value.Ticks)
                 MessageBox.Show("Las fechas no estan en orden");
             else
                 FillDgv();
->>>>>>> de88e39879181be845794c647ec502b70130574f
         }
     }
 }

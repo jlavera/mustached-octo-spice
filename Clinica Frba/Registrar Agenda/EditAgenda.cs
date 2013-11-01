@@ -35,7 +35,7 @@ namespace Clinica_Frba.Registrar_Agenda
             CheckBox agregador = new CheckBox();
             agregador.Size = new Size(36, 12);
             agregador.Text = "16:30";
-            flpSemanal.Controls.Add(agregador);
+            //flpSemanal.Controls.Add(agregador);
         }
     }
 }
