@@ -36,9 +36,5 @@ namespace Clinica_Frba.Clases {
             grupoFamiliar = new GrupoFamiliar(dr);
         }
 
-        public Afiliado() {
-
-        }
-
     }
 }

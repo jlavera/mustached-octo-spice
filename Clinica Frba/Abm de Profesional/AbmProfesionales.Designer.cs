@@ -32,12 +32,10 @@
             this.bAgregar = new System.Windows.Forms.Button();
             this.bBuscar = new System.Windows.Forms.Button();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
-            this.lbPlanMedico = new System.Windows.Forms.ListBox();
-            this.lbEstadoCivil = new System.Windows.Forms.ListBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.tbFamiliaresACargo = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.tbMatricula = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.nLimit = new System.Windows.Forms.NumericUpDown();
             this.cmbSexo = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -56,12 +54,10 @@
             this.tbApellido = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tbNombre = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.tbOrden = new System.Windows.Forms.TextBox();
-            this.lbGrupoFamiliar = new System.Windows.Forms.ListBox();
-            this.dgvAfiliados = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lbEspecialidades = new System.Windows.Forms.ListBox();
+            this.dgvProfesionales = new System.Windows.Forms.DataGridView();
+            this.matrícula = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tipoDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,15 +68,11 @@
             this.fechaNacimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sexo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombreUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.estadoCivil = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.familiaresACargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.planMedico = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.especialidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.label15 = new System.Windows.Forms.Label();
-            this.nLimit = new System.Windows.Forms.NumericUpDown();
             this.gbFiltros.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAfiliados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nLimit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProfesionales)).BeginInit();
             this.SuspendLayout();
             // 
             // bEliminar
@@ -92,6 +84,7 @@
             this.bEliminar.TabIndex = 9;
             this.bEliminar.Text = "Eliminar seleccionados";
             this.bEliminar.UseVisualStyleBackColor = true;
+            this.bEliminar.Click += new System.EventHandler(this.bEliminar_Click);
             // 
             // bAgregar
             // 
@@ -102,6 +95,7 @@
             this.bAgregar.TabIndex = 8;
             this.bAgregar.Text = "Agregar";
             this.bAgregar.UseVisualStyleBackColor = true;
+            this.bAgregar.Click += new System.EventHandler(this.bAgregar_Click);
             // 
             // bBuscar
             // 
@@ -119,14 +113,10 @@
             this.gbFiltros.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbFiltros.Controls.Add(this.label15);
-            this.gbFiltros.Controls.Add(this.lbPlanMedico);
-            this.gbFiltros.Controls.Add(this.nLimit);
-            this.gbFiltros.Controls.Add(this.lbEstadoCivil);
-            this.gbFiltros.Controls.Add(this.label14);
-            this.gbFiltros.Controls.Add(this.label13);
-            this.gbFiltros.Controls.Add(this.tbFamiliaresACargo);
             this.gbFiltros.Controls.Add(this.label12);
+            this.gbFiltros.Controls.Add(this.tbMatricula);
+            this.gbFiltros.Controls.Add(this.label15);
+            this.gbFiltros.Controls.Add(this.nLimit);
             this.gbFiltros.Controls.Add(this.cmbSexo);
             this.gbFiltros.Controls.Add(this.label11);
             this.gbFiltros.Controls.Add(this.label10);
@@ -145,10 +135,8 @@
             this.gbFiltros.Controls.Add(this.tbApellido);
             this.gbFiltros.Controls.Add(this.label3);
             this.gbFiltros.Controls.Add(this.tbNombre);
-            this.gbFiltros.Controls.Add(this.label2);
             this.gbFiltros.Controls.Add(this.label1);
-            this.gbFiltros.Controls.Add(this.tbOrden);
-            this.gbFiltros.Controls.Add(this.lbGrupoFamiliar);
+            this.gbFiltros.Controls.Add(this.lbEspecialidades);
             this.gbFiltros.Location = new System.Drawing.Point(12, 12);
             this.gbFiltros.Name = "gbFiltros";
             this.gbFiltros.Size = new System.Drawing.Size(1190, 168);
@@ -156,58 +144,52 @@
             this.gbFiltros.TabStop = false;
             this.gbFiltros.Text = "Filtros";
             // 
-            // lbPlanMedico
-            // 
-            this.lbPlanMedico.FormattingEnabled = true;
-            this.lbPlanMedico.Location = new System.Drawing.Point(849, 40);
-            this.lbPlanMedico.Name = "lbPlanMedico";
-            this.lbPlanMedico.Size = new System.Drawing.Size(120, 108);
-            this.lbPlanMedico.TabIndex = 32;
-            // 
-            // lbEstadoCivil
-            // 
-            this.lbEstadoCivil.DisplayMember = "id";
-            this.lbEstadoCivil.FormattingEnabled = true;
-            this.lbEstadoCivil.Location = new System.Drawing.Point(686, 40);
-            this.lbEstadoCivil.Name = "lbEstadoCivil";
-            this.lbEstadoCivil.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbEstadoCivil.Size = new System.Drawing.Size(113, 108);
-            this.lbEstadoCivil.TabIndex = 31;
-            this.lbEstadoCivil.ValueMember = "id";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(835, 20);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(68, 13);
-            this.label14.TabIndex = 29;
-            this.label14.Text = "Plan médico:";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(1015, 63);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(95, 13);
-            this.label13.TabIndex = 28;
-            this.label13.Text = "Familiares a cargo:";
-            // 
-            // tbFamiliaresACargo
-            // 
-            this.tbFamiliaresACargo.Location = new System.Drawing.Point(1031, 83);
-            this.tbFamiliaresACargo.Name = "tbFamiliaresACargo";
-            this.tbFamiliaresACargo.Size = new System.Drawing.Size(140, 20);
-            this.tbFamiliaresACargo.TabIndex = 27;
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(671, 20);
+            this.label12.Location = new System.Drawing.Point(21, 20);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(64, 13);
-            this.label12.TabIndex = 25;
-            this.label12.Text = "Estado civil:";
+            this.label12.Size = new System.Drawing.Size(55, 13);
+            this.label12.TabIndex = 42;
+            this.label12.Text = "Matrícula:";
+            // 
+            // tbMatricula
+            // 
+            this.tbMatricula.Location = new System.Drawing.Point(37, 40);
+            this.tbMatricula.Name = "tbMatricula";
+            this.tbMatricula.Size = new System.Drawing.Size(140, 20);
+            this.tbMatricula.TabIndex = 41;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(966, 106);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(98, 13);
+            this.label15.TabIndex = 40;
+            this.label15.Text = "Cantidad a mostrar:";
+            // 
+            // nLimit
+            // 
+            this.nLimit.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.nLimit.Location = new System.Drawing.Point(982, 122);
+            this.nLimit.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nLimit.Name = "nLimit";
+            this.nLimit.Size = new System.Drawing.Size(140, 20);
+            this.nLimit.TabIndex = 39;
+            this.nLimit.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             // 
             // cmbSexo
             // 
@@ -215,7 +197,7 @@
             this.cmbSexo.Items.AddRange(new object[] {
             "Masculino",
             "Femenino"});
-            this.cmbSexo.Location = new System.Drawing.Point(362, 126);
+            this.cmbSexo.Location = new System.Drawing.Point(984, 40);
             this.cmbSexo.Name = "cmbSexo";
             this.cmbSexo.Size = new System.Drawing.Size(138, 21);
             this.cmbSexo.TabIndex = 24;
@@ -223,7 +205,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(344, 106);
+            this.label11.Location = new System.Drawing.Point(966, 20);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(34, 13);
             this.label11.TabIndex = 23;
@@ -232,7 +214,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(344, 63);
+            this.label10.Location = new System.Drawing.Point(249, 63);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(99, 13);
             this.label10.TabIndex = 22;
@@ -240,7 +222,7 @@
             // 
             // tbNombreUsuario
             // 
-            this.tbNombreUsuario.Location = new System.Drawing.Point(360, 83);
+            this.tbNombreUsuario.Location = new System.Drawing.Point(265, 83);
             this.tbNombreUsuario.Name = "tbNombreUsuario";
             this.tbNombreUsuario.Size = new System.Drawing.Size(140, 20);
             this.tbNombreUsuario.TabIndex = 21;
@@ -248,7 +230,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(344, 20);
+            this.label9.Location = new System.Drawing.Point(249, 20);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(29, 13);
             this.label9.TabIndex = 20;
@@ -256,7 +238,7 @@
             // 
             // tbMail
             // 
-            this.tbMail.Location = new System.Drawing.Point(360, 40);
+            this.tbMail.Location = new System.Drawing.Point(265, 40);
             this.tbMail.Name = "tbMail";
             this.tbMail.Size = new System.Drawing.Size(140, 20);
             this.tbMail.TabIndex = 19;
@@ -264,7 +246,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(174, 106);
+            this.label8.Location = new System.Drawing.Point(487, 106);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(52, 13);
             this.label8.TabIndex = 18;
@@ -272,7 +254,7 @@
             // 
             // tbTelefono
             // 
-            this.tbTelefono.Location = new System.Drawing.Point(190, 126);
+            this.tbTelefono.Location = new System.Drawing.Point(503, 126);
             this.tbTelefono.Name = "tbTelefono";
             this.tbTelefono.Size = new System.Drawing.Size(140, 20);
             this.tbTelefono.TabIndex = 17;
@@ -280,7 +262,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(174, 63);
+            this.label7.Location = new System.Drawing.Point(487, 63);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(118, 13);
             this.label7.TabIndex = 16;
@@ -288,7 +270,7 @@
             // 
             // tbNumeroDni
             // 
-            this.tbNumeroDni.Location = new System.Drawing.Point(190, 83);
+            this.tbNumeroDni.Location = new System.Drawing.Point(503, 83);
             this.tbNumeroDni.Name = "tbNumeroDni";
             this.tbNumeroDni.Size = new System.Drawing.Size(140, 20);
             this.tbNumeroDni.TabIndex = 15;
@@ -300,16 +282,15 @@
             "DNI",
             "LE",
             "LC"});
-            this.cmbTipoDNI.Location = new System.Drawing.Point(192, 40);
+            this.cmbTipoDNI.Location = new System.Drawing.Point(505, 40);
             this.cmbTipoDNI.Name = "cmbTipoDNI";
             this.cmbTipoDNI.Size = new System.Drawing.Size(61, 21);
             this.cmbTipoDNI.TabIndex = 14;
-            this.cmbTipoDNI.SelectedIndexChanged += new System.EventHandler(this.cmbTipoDNI_SelectedIndexChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(174, 20);
+            this.label6.Location = new System.Drawing.Point(487, 20);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(102, 13);
             this.label6.TabIndex = 13;
@@ -318,7 +299,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 106);
+            this.label5.Location = new System.Drawing.Point(249, 106);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 13);
             this.label5.TabIndex = 12;
@@ -326,7 +307,7 @@
             // 
             // tbDireccion
             // 
-            this.tbDireccion.Location = new System.Drawing.Point(22, 126);
+            this.tbDireccion.Location = new System.Drawing.Point(265, 126);
             this.tbDireccion.Name = "tbDireccion";
             this.tbDireccion.Size = new System.Drawing.Size(140, 20);
             this.tbDireccion.TabIndex = 11;
@@ -334,7 +315,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 63);
+            this.label4.Location = new System.Drawing.Point(21, 106);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 10;
@@ -342,7 +323,7 @@
             // 
             // tbApellido
             // 
-            this.tbApellido.Location = new System.Drawing.Point(22, 83);
+            this.tbApellido.Location = new System.Drawing.Point(37, 126);
             this.tbApellido.Name = "tbApellido";
             this.tbApellido.Size = new System.Drawing.Size(140, 20);
             this.tbApellido.TabIndex = 9;
@@ -350,7 +331,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 20);
+            this.label3.Location = new System.Drawing.Point(21, 63);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 13);
             this.label3.TabIndex = 8;
@@ -358,53 +339,37 @@
             // 
             // tbNombre
             // 
-            this.tbNombre.Location = new System.Drawing.Point(22, 40);
+            this.tbNombre.Location = new System.Drawing.Point(37, 83);
             this.tbNombre.Name = "tbNombre";
             this.tbNombre.Size = new System.Drawing.Size(140, 20);
             this.tbNombre.TabIndex = 7;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1015, 20);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Orden:";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(518, 20);
+            this.label1.Location = new System.Drawing.Point(718, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 13);
+            this.label1.Size = new System.Drawing.Size(81, 13);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Grupo familiar:";
+            this.label1.Text = "Especialidades:";
             // 
-            // tbOrden
+            // lbEspecialidades
             // 
-            this.tbOrden.Location = new System.Drawing.Point(1031, 40);
-            this.tbOrden.Name = "tbOrden";
-            this.tbOrden.Size = new System.Drawing.Size(140, 20);
-            this.tbOrden.TabIndex = 4;
+            this.lbEspecialidades.DisplayMember = "id";
+            this.lbEspecialidades.FormattingEnabled = true;
+            this.lbEspecialidades.Location = new System.Drawing.Point(742, 40);
+            this.lbEspecialidades.Name = "lbEspecialidades";
+            this.lbEspecialidades.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lbEspecialidades.Size = new System.Drawing.Size(140, 108);
+            this.lbEspecialidades.TabIndex = 3;
+            this.lbEspecialidades.ValueMember = "id";
             // 
-            // lbGrupoFamiliar
+            // dgvProfesionales
             // 
-            this.lbGrupoFamiliar.DisplayMember = "id";
-            this.lbGrupoFamiliar.FormattingEnabled = true;
-            this.lbGrupoFamiliar.Location = new System.Drawing.Point(531, 40);
-            this.lbGrupoFamiliar.Name = "lbGrupoFamiliar";
-            this.lbGrupoFamiliar.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbGrupoFamiliar.Size = new System.Drawing.Size(113, 108);
-            this.lbGrupoFamiliar.TabIndex = 3;
-            this.lbGrupoFamiliar.ValueMember = "id";
-            // 
-            // dgvAfiliados
-            // 
-            this.dgvAfiliados.AllowUserToAddRows = false;
-            this.dgvAfiliados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAfiliados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Id,
+            this.dgvProfesionales.AllowUserToAddRows = false;
+            this.dgvProfesionales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProfesionales.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.matrícula,
             this.Nombre,
             this.Apellido,
             this.tipoDocumento,
@@ -415,21 +380,20 @@
             this.fechaNacimiento,
             this.sexo,
             this.nombreUsuario,
-            this.estadoCivil,
-            this.familiaresACargo,
-            this.planMedico,
+            this.especialidades,
             this.seleccionar});
-            this.dgvAfiliados.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvAfiliados.Location = new System.Drawing.Point(0, 221);
-            this.dgvAfiliados.Name = "dgvAfiliados";
-            this.dgvAfiliados.Size = new System.Drawing.Size(1212, 431);
-            this.dgvAfiliados.TabIndex = 5;
+            this.dgvProfesionales.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvProfesionales.Location = new System.Drawing.Point(0, 221);
+            this.dgvProfesionales.Name = "dgvProfesionales";
+            this.dgvProfesionales.Size = new System.Drawing.Size(1212, 431);
+            this.dgvProfesionales.TabIndex = 5;
+            this.dgvProfesionales.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAfiliados_CellContentClick);
             // 
-            // Id
+            // matrícula
             // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
+            this.matrícula.HeaderText = "Matrícula";
+            this.matrícula.Name = "matrícula";
+            this.matrícula.ReadOnly = true;
             // 
             // Nombre
             // 
@@ -491,59 +455,16 @@
             this.nombreUsuario.Name = "nombreUsuario";
             this.nombreUsuario.ReadOnly = true;
             // 
-            // estadoCivil
+            // especialidades
             // 
-            this.estadoCivil.HeaderText = "Estado civil";
-            this.estadoCivil.Name = "estadoCivil";
-            this.estadoCivil.ReadOnly = true;
-            // 
-            // familiaresACargo
-            // 
-            this.familiaresACargo.HeaderText = "Familiares a cargo";
-            this.familiaresACargo.Name = "familiaresACargo";
-            this.familiaresACargo.ReadOnly = true;
-            // 
-            // planMedico
-            // 
-            this.planMedico.HeaderText = "Plan Medico";
-            this.planMedico.Name = "planMedico";
-            this.planMedico.ReadOnly = true;
+            this.especialidades.HeaderText = "Especialidades";
+            this.especialidades.Name = "especialidades";
+            this.especialidades.ReadOnly = true;
             // 
             // seleccionar
             // 
             this.seleccionar.HeaderText = "Seleccionar";
             this.seleccionar.Name = "seleccionar";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(1015, 111);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(98, 13);
-            this.label15.TabIndex = 40;
-            this.label15.Text = "Cantidad a mostrar:";
-            // 
-            // nLimit
-            // 
-            this.nLimit.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.nLimit.Location = new System.Drawing.Point(1031, 127);
-            this.nLimit.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nLimit.Name = "nLimit";
-            this.nLimit.Size = new System.Drawing.Size(120, 20);
-            this.nLimit.TabIndex = 39;
-            this.nLimit.Value = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
             // 
             // AbmProfesionales
             // 
@@ -554,14 +475,14 @@
             this.Controls.Add(this.bAgregar);
             this.Controls.Add(this.bBuscar);
             this.Controls.Add(this.gbFiltros);
-            this.Controls.Add(this.dgvAfiliados);
+            this.Controls.Add(this.dgvProfesionales);
             this.Name = "AbmProfesionales";
             this.Text = "Abm de afiliados";
             this.Load += new System.EventHandler(this.AbmProfesionales_Load);
             this.gbFiltros.ResumeLayout(false);
             this.gbFiltros.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAfiliados)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nLimit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProfesionales)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -572,11 +493,9 @@
         private System.Windows.Forms.Button bAgregar;
         private System.Windows.Forms.Button bBuscar;
         private System.Windows.Forms.GroupBox gbFiltros;
-        private System.Windows.Forms.ListBox lbGrupoFamiliar;
-        private System.Windows.Forms.DataGridView dgvAfiliados;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ListBox lbEspecialidades;
+        private System.Windows.Forms.DataGridView dgvProfesionales;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tbOrden;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tbMail;
         private System.Windows.Forms.Label label8;
@@ -595,11 +514,11 @@
         private System.Windows.Forms.TextBox tbNombreUsuario;
         private System.Windows.Forms.ComboBox cmbSexo;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox tbFamiliaresACargo;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.NumericUpDown nLimit;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.TextBox tbMatricula;
+        private System.Windows.Forms.DataGridViewTextBoxColumn matrícula;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;
         private System.Windows.Forms.DataGridViewTextBoxColumn tipoDocumento;
@@ -610,13 +529,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaNacimiento;
         private System.Windows.Forms.DataGridViewTextBoxColumn sexo;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombreUsuario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn estadoCivil;
-        private System.Windows.Forms.DataGridViewTextBoxColumn familiaresACargo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn planMedico;
+        private System.Windows.Forms.DataGridViewTextBoxColumn especialidades;
         private System.Windows.Forms.DataGridViewButtonColumn seleccionar;
-        private System.Windows.Forms.ListBox lbEstadoCivil;
-        private System.Windows.Forms.ListBox lbPlanMedico;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.NumericUpDown nLimit;
     }
 }

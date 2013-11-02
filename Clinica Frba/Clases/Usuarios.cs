@@ -38,10 +38,10 @@ namespace Clinica_Frba.Clases {
         //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
 
         /// <summary>
-        /// Devuelve un usuario que cumpla con el usuario y la contraseña
+        /// Devuelve un usuario que cumpla con el usuario y la contraseï¿½a
         /// </summary>
         /// <param name="p_user">Usuario</param>
-        /// <param name="p_pass">Contraseña</param>
+        /// <param name="p_pass">Contraseï¿½a</param>
         /// <returns></returns>
         public Usuario VerifyUser(string p_user, string p_pass) {
             try {

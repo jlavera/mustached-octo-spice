@@ -89,6 +89,8 @@
     <Compile Include="Clases\Agenda.cs" />
     <Compile Include="Clases\Agendas.cs" />
     <Compile Include="Clases\DB.cs" />
+    <Compile Include="Clases\Especialidad.cs" />
+    <Compile Include="Clases\Especialidades.cs" />
     <Compile Include="Clases\EstadoCivil.cs" />
     <Compile Include="Clases\EstadosCiviles.cs" />
     <Compile Include="Clases\FormHelper.cs">

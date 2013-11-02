@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using System.Windows.Forms;
 using Clinica_Frba.Clases;
 
 namespace Clinica_Frba.Clases {
@@ -43,6 +44,54 @@ namespace Clinica_Frba.Clases {
         /// <returns></returns>
         public override DataTable SelectAll() {
             return DB.ExecuteReader("SELECT * FROM " + DB.schema + "vProfesional");
+        }
+
+
+        public void FillWithFilter(string p_matricula,
+            string p_nombre,
+            string p_apellido,
+            string p_direccion,
+            string p_tipoDocumento,
+            long p_numDocumento,
+            long p_telefono,
+            string p_mail,
+            string p_nombreUsuario,
+            string p_sexo,
+            ListBox.SelectedObjectCollection p_especialidades,
+            int p_limit) {
+
+            string query = "SELECT TOP " + p_limit + " * FROM " + DB.schema + "vProfesional WHERE";
+            if (p_apellido != "")
+                query += " usu_apellido LIKE '%" + p_apellido + "%' AND ";
+            if (p_direccion != "")
+                query += " usu_direccion LIKE '%" + p_direccion + "%' AND ";
+            if (p_especialidades.Count > 0) {
+                query += " (";
+                foreach (Especialidad esp in p_especialidades)
+                    query += "especialidades LIKe '%" + esp.nombre + "%' OR ";
+                query += "1!=1) AND ";
+            }
+            if (p_mail != "")
+                query += " usu_mail LIKE '%" + p_mail + "%' AND ";
+            if (p_nombre != "")
+                query += " usu_nombre LIKE '%" + p_nombre + "%' AND ";
+            if (p_nombreUsuario != "")
+                query += " usu_nombreUsuario LIKE '%" + p_nombreUsuario + "%' AND ";
+            if (p_numDocumento != -1)
+                query += " usu_numeroDocumento=" + p_numDocumento + " AND ";
+
+            if (p_sexo != null)
+                query += " usu_sexo='" + ((p_sexo == "Masculino") ? "M" : "F") + "' AND ";
+            if (p_telefono != -1)
+                query += " usu_telefono =" + p_telefono + " AND ";
+            if (p_tipoDocumento != "")
+                query += " usu_tipoDocumento='" + p_tipoDocumento + "' AND ";
+
+
+            //sacar la ultima basura
+            query = query.Substring(0, query.Length - 5);
+            Fill(DB.ExecuteReader(query));
+
         }
 
     }

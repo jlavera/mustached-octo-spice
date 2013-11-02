@@ -10,59 +10,106 @@ using Clinica_Frba.Clases;
 
 namespace Clinica_Frba.AbmProfesionales {
     public partial class AbmProfesionales: Form {
-        Afiliados afiliados = new Afiliados();
-        EstadosCiviles estadosCiviles = new EstadosCiviles();
-        GruposFamiliares grupos = new GruposFamiliares();
-        PlanesMedicos planes = new PlanesMedicos();
+        Profesionales profs = new Profesionales();
+        Especialidades esps = new Especialidades();
 
         public AbmProfesionales() {
             InitializeComponent();
         }
 
-        private void AbmProfesionales_Load(object sender, EventArgs e) {            
+        private void AbmProfesionales_Load(object sender, EventArgs e) {
 
+            //--Llenar dgv con todos los afiliados
             FillDgv();
 
-            estadosCiviles.FillWithAll();
-            lbEstadoCivil.Items.AddRange(estadosCiviles.ToList());
-
-            grupos.FillWithAll();
-            lbGrupoFamiliar.Items.AddRange(grupos.ToList());
-
-            planes.FillWithAll();
-            lbPlanMedico.Items.AddRange(planes.ToList());
+            //--Traer y llenar los listBox
+            esps.FillWithAll();
+            lbEspecialidades.Items.AddRange(esps.ToList());
 
         }
 
-        private void cmbTipoDNI_SelectedIndexChanged(object sender, EventArgs e) {
-
+        //--Click en el botón buscar
+        private void bBuscar_Click(object sender, EventArgs e) {
+            FillDgv();
         }
 
         private void FillDgv() {
 
-            afiliados.FillWithAll();
+            //--Limpia lista entidad y la trae aplicando los filtros
+            profs.ClearList();
+            dgvProfesionales.Rows.Clear();
 
-            foreach (Afiliado afiliado in afiliados.items) {
-                dgvAfiliados.Rows.Add(afiliado.grupoFamiliar.grupo.ToString("D5") + "-" + afiliado.orden.ToString("D2"),
-                    afiliado.usuario.nombre, afiliado.usuario.apellido,
-                    (afiliado.usuario.tipoDocumento == "") ? "Faltar cargar" : afiliado.usuario.tipoDocumento, afiliado.usuario.numeroDocumento,
-                    afiliado.usuario.direccion, afiliado.usuario.telefono, afiliado.usuario.mail, afiliado.usuario.fechaNacimiento,
-                    (afiliado.usuario.sexo == "") ? "Faltar cargar" : afiliado.usuario.sexo, afiliado.usuario.nombreUsuario,
-                    (afiliado.estadoCivil.nombre == "")? "Falta cargar": afiliado.estadoCivil.ToString(),
-                    (afiliado.familiaresACargo == -1)? "Falta cargar": afiliado.familiaresACargo.ToString(), afiliado.planMedico.nombre);
+            profs.FillWithFilter(tbMatricula.Text,
+                tbNombre.Text,
+                tbApellido.Text,
+                tbDireccion.Text,
+                cmbTipoDNI.Text,
+                Convert.ToInt64((tbNumeroDni.Text == "") ? "-1" : tbNumeroDni.Text),
+                Convert.ToInt64((tbTelefono.Text == "") ? "-1" : tbTelefono.Text),
+                tbMail.Text,
+                tbNombreUsuario.Text,
+                cmbSexo.SelectedText,
+                lbEspecialidades.SelectedItems,
+                Convert.ToInt32(nLimit.Value));
+
+            //--Llena dgv
+            foreach (Profesional prof in profs.items) {
+                dgvProfesionales.Rows.Add(prof.matricula,
+                    prof.usuario.nombre, prof.usuario.apellido,
+                    (prof.usuario.tipoDocumento == "") ? "Faltar cargar" : prof.usuario.tipoDocumento, prof.usuario.numeroDocumento,
+                    prof.usuario.direccion, prof.usuario.telefono, prof.usuario.mail, prof.usuario.fechaNacimiento,
+                    (prof.usuario.sexo == "") ? "Faltar cargar" : prof.usuario.sexo, prof.usuario.nombreUsuario,
+                    prof.especialidades);
             }
 
         }
+        
+        //--Click en el botón de agregar
+        private void bAgregar_Click(object sender, EventArgs e) {
 
-        private void bBuscar_Click(object sender, EventArgs e) {
-            dgvAfiliados.Rows.Clear();
+            //--Abrir ventana para agregar afiliado
+            EditProfesional editForm = new EditProfesional();
+            editForm.ShowDialog();
 
-            afiliados.ClearList();
-            afiliados.FillWithFilter(tbNombre.Text, tbApellido.Text, tbDireccion.Text, cmbTipoDNI.SelectedText,
-                Convert.ToInt64(tbNumeroDni.Text), Convert.ToInt64(tbTelefono.Text), tbMail.Text, tbNombreUsuario.Text
-                , cmbSexo.SelectedText, lbGrupoFamiliar.SelectedItems, lbEstadoCivil.SelectedItems, lbPlanMedico.SelectedItems,
-                Convert.ToInt32(tbOrden.Text), Convert.ToInt32(tbFamiliaresACargo.Text), Convert.ToInt32(nLimit.Value));
+            //--Si el diálogo tiene resultado OK, volver a llenar dgv
+            if (editForm.DialogResult == DialogResult.OK) {
+                FillDgv();
+            }
+        }
 
+
+        private void dgvAfiliados_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+
+            //--Abrir ventana para editar afiliado
+            if (dgvProfesionales.Columns[e.ColumnIndex].HeaderText == "Seleccionar") {
+                EditProfesional formEdit = new EditProfesional(profs[e.RowIndex]);
+                formEdit.ShowDialog();
+
+                //--Si el diálogo tiene resultado OK, volver a llenar dgv
+                if (formEdit.DialogResult == DialogResult.OK) {
+                    FillDgv();
+                }
+            }
+        }
+
+        private void bEliminar_Click(object sender, EventArgs e) {
+
+            //--Elimina los roles seleccionados
+            //profs.DeleteSelected(dgvProfesionales);
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            //Limpiar las cosa para buscar
+            foreach (Control ctrl in gbFiltros.Controls) {
+                if (ctrl is TextBox)
+                    ((TextBox)ctrl).Text = "";
+                if (ctrl is ComboBox)
+                    ((ComboBox)ctrl).SelectedIndex = -1;
+                if (ctrl is MaskedTextBox)
+                    ((MaskedTextBox)ctrl).Text = "";
+                if (ctrl is ListBox)
+                    ((ListBox)ctrl).ClearSelected();
+            }
         }
     }
 }

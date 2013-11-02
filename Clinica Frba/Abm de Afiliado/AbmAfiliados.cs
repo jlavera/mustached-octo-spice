@@ -83,7 +83,7 @@ namespace Clinica_Frba.AbmAfiliados {
                 Convert.ToInt64((tbTelefono.Text == "") ? "-1" : tbTelefono.Text),
                 tbMail.Text,
                 tbNombreUsuario.Text,
-                cmbSexo.SelectedItem,
+                cmbSexo.SelectedText,
                 lbGrupoFamiliar.SelectedItems, 
                 lbEstadoCivil.SelectedItems,
                 lbPlanMedico.SelectedItems,

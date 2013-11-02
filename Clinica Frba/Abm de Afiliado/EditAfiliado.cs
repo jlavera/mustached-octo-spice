@@ -179,7 +179,7 @@ namespace Clinica_Frba.AbmAfiliados{
                 if (nueva)
                 {
                     query = "INSERT INTO moustache_spice.usuario(usu_nombre, usu_apellido, usu_direccion, usu_tipoDocumento, usu_numeroDocumento, usu_telefono, usu_mail, usu_sexo, usu_nombreUsuario, usu_fechaNacimiento ) VALUES " +
-                            "('" + tbNombre.Text + "', '" + tbApellido.Text + "', '" + tbDireccion.Text + "', '" + cmbTipoDNI.Text + "', " + tbNumeroDni.Text + ", " + tbTelefono.Text + ", '" + tbMail.Text + "', '" + ((cmbSexo.SelectedItem == "Masculino") ? "M" : "F") + "', '" + tbNombreUsuario.Text + "', '" + dtpFechaNacimiento.Value.ToString("yyyy-MM-dd") + "'); ";
+                            "('" + tbNombre.Text + "', '" + tbApellido.Text + "', '" + tbDireccion.Text + "', '" + cmbTipoDNI.Text + "', " + tbNumeroDni.Text + ", " + tbTelefono.Text + ", '" + tbMail.Text + "', '" + ((cmbSexo.SelectedText == "Masculino") ? "M" : "F") + "', '" + tbNombreUsuario.Text + "', '" + dtpFechaNacimiento.Value.ToString("yyyy-MM-dd") + "'); ";
                     query += "INSERT INTO moustache_spice.afiliado(afi_estadoCivil, afi_familiaresACargo, afi_usuario, afi_orden, afi_planMedico) VALUES (" +
                             ((EstadoCivil)cmbEstadoCivil.SelectedItem).id + ", " + lbIntegrantes.Items.Count + ", SCOPE_Identity(), 1, " + ((PlanMedico)cmbPlanMedico.SelectedItem).id + "); ";
 
@@ -193,7 +193,7 @@ namespace Clinica_Frba.AbmAfiliados{
                             ", usu_telefono=" + tbTelefono.Text +
                             ", usu_mail='" + tbMail.Text + "' " +
                             ", usu_tipoDocumento='" + cmbTipoDNI.Text + "' " +
-                            ", usu_sexo='" + ((cmbSexo.SelectedItem == "Masculino") ? "M" : "F") + "' " +
+                            ", usu_sexo='" + ((cmbSexo.SelectedText == "Masculino") ? "M" : "F") + "' " +
                             "WHERE usu_id=" + usuarioID + "; ";
                     query += "UPDATE moustache_spice.afiliado SET afi_estadoCivil=" + ((EstadoCivil)cmbEstadoCivil.SelectedItem).id +
                              ", afi_familiaresACargo=" + ((orden == 1) ? lbIntegrantes.Items.Count : 0) +

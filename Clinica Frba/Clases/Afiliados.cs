@@ -58,7 +58,7 @@ namespace Clinica_Frba.Clases {
         }
 
         /// <summary>
-        /// Trae filtrando según sus atributos
+        /// Trae filtrando segï¿½n sus atributos
         /// </summary>
         public void FillWithFilter(string p_nombre,
             string p_apellido,
@@ -68,7 +68,7 @@ namespace Clinica_Frba.Clases {
             long p_telefono,
             string p_mail,
             string p_nombreUsuario,
-            object p_sexo,
+            string p_sexo,
             ListBox.SelectedObjectCollection p_grupoFamiliar,
             ListBox.SelectedObjectCollection p_estadoCivil,
             ListBox.SelectedObjectCollection p_planMedico,

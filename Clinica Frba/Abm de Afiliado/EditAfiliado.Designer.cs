@@ -26,7 +26,6 @@
             this.gbDatos = new System.Windows.Forms.GroupBox();
             this.tbNumeroDni = new System.Windows.Forms.MaskedTextBox();
             this.tbTelefono = new System.Windows.Forms.MaskedTextBox();
-            this.bCambiarGrupo = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.dtpFechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,6 +52,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbNombre = new System.Windows.Forms.TextBox();
             this.bGuardar = new System.Windows.Forms.Button();
+            this.bCambiarGrupo = new System.Windows.Forms.Button();
             this.gbDatos.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -109,16 +109,6 @@
             this.tbTelefono.Name = "tbTelefono";
             this.tbTelefono.Size = new System.Drawing.Size(138, 20);
             this.tbTelefono.TabIndex = 74;
-            // 
-            // bCambiarGrupo
-            // 
-            this.bCambiarGrupo.Location = new System.Drawing.Point(225, 245);
-            this.bCambiarGrupo.Name = "bCambiarGrupo";
-            this.bCambiarGrupo.Size = new System.Drawing.Size(140, 41);
-            this.bCambiarGrupo.TabIndex = 73;
-            this.bCambiarGrupo.Text = "Cambiar grupo familiar";
-            this.bCambiarGrupo.UseVisualStyleBackColor = true;
-            this.bCambiarGrupo.Click += new System.EventHandler(this.bCambiarGrupo_Click);
             // 
             // label2
             // 
@@ -179,7 +169,7 @@
             // 
             this.cmbPlanMedico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPlanMedico.FormattingEnabled = true;
-            this.cmbPlanMedico.Location = new System.Drawing.Point(48, 215);
+            this.cmbPlanMedico.Location = new System.Drawing.Point(46, 215);
             this.cmbPlanMedico.Name = "cmbPlanMedico";
             this.cmbPlanMedico.Size = new System.Drawing.Size(140, 21);
             this.cmbPlanMedico.TabIndex = 5;
@@ -345,13 +335,23 @@
             // 
             // bGuardar
             // 
-            this.bGuardar.Location = new System.Drawing.Point(48, 245);
+            this.bGuardar.Location = new System.Drawing.Point(46, 245);
             this.bGuardar.Name = "bGuardar";
-            this.bGuardar.Size = new System.Drawing.Size(153, 41);
+            this.bGuardar.Size = new System.Drawing.Size(140, 41);
             this.bGuardar.TabIndex = 12;
             this.bGuardar.Text = "Guardar";
             this.bGuardar.UseVisualStyleBackColor = true;
             this.bGuardar.Click += new System.EventHandler(this.bGuardar_Click);
+            // 
+            // bCambiarGrupo
+            // 
+            this.bCambiarGrupo.Location = new System.Drawing.Point(225, 245);
+            this.bCambiarGrupo.Name = "bCambiarGrupo";
+            this.bCambiarGrupo.Size = new System.Drawing.Size(140, 41);
+            this.bCambiarGrupo.TabIndex = 73;
+            this.bCambiarGrupo.Text = "Cambiar grupo familiar";
+            this.bCambiarGrupo.UseVisualStyleBackColor = true;
+            this.bCambiarGrupo.Click += new System.EventHandler(this.bCambiarGrupo_Click);
             // 
             // EditAfiliado
             // 

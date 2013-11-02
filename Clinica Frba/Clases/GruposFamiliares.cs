@@ -48,7 +48,7 @@ namespace Clinica_Frba.Clases {
         }
 
         /// <summary>
-        /// Llena la entidad con grupos según el nombre o apellido
+        /// Llena la entidad con grupos segï¿½n el nombre o apellido
         /// </summary>
         /// <param name="p_text"></param>
         public void FillByName(string p_text) {
