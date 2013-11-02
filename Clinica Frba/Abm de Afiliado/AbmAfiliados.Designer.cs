@@ -98,7 +98,7 @@
             this.bAgregar.Name = "bAgregar";
             this.bAgregar.Size = new System.Drawing.Size(134, 29);
             this.bAgregar.TabIndex = 8;
-            this.bAgregar.Text = "Agregar";
+            this.bAgregar.Text = "Agregar titular";
             this.bAgregar.UseVisualStyleBackColor = true;
             this.bAgregar.Click += new System.EventHandler(this.bAgregar_Click);
             // 

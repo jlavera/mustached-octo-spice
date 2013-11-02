@@ -76,7 +76,7 @@ namespace Clinica_Frba.AbmAfiliados{
             tbNombreUsuario.Enabled = false;
             tbNumeroDni.Enabled = false;
             cmbTipoDNI.Enabled = false;
-            cmbSexo.Enabled = false;         
+            cmbSexo.Enabled = false;
 
             nueva = false;
         }
@@ -92,6 +92,11 @@ namespace Clinica_Frba.AbmAfiliados{
 
             //--Si no es nueva, poner los datos a modificar en los textBox
             if (!nueva) {
+
+                if (orden > 1)
+                    bAgregarACargo.Enabled = false;
+                else
+                    bCambiarGrupo.Enabled = false;
 
                 tbNombre.Text = nombre;
                 tbApellido.Text = apellido;
@@ -114,7 +119,7 @@ namespace Clinica_Frba.AbmAfiliados{
 
                 //--Traer los integrantes del grupo
                 foreach (DataRow dr in DB.ExecuteReader(
-                    "SELECT * FROM moustache_spice.vAfiliado va WHERE va.afi_grupoFamiliar = " + grupoFamiliar.grupo + " AND va.afi_orden > 1 ORDER BY va.afi_grupoFamiliar ASC").Rows) {
+                    "SELECT * FROM moustache_spice.vAfiliado va WHERE va.afi_grupoFamiliar = " + grupoFamiliar.grupo + " ORDER BY va.afi_grupoFamiliar ASC").Rows) {
 
                     //--Crea el integrante que trajo y lo agrega al listbox
                     Integrante integrante = new Integrante(dr);
@@ -124,7 +129,8 @@ namespace Clinica_Frba.AbmAfiliados{
                     if (Convert.ToInt32(dr["afi_orden"]) == 2)
                         tieneConyuge = true;
                 }
-            }
+            } else
+                bCambiarGrupo.Enabled = false;
         }
 
         private void bAgregarACargo_Click(object sender, EventArgs e) {
@@ -179,6 +185,33 @@ namespace Clinica_Frba.AbmAfiliados{
 
             //--Si está todo piola
             DialogResult = DialogResult.OK;
+        }
+
+        private void bCambiarGrupo_Click(object sender, EventArgs e) {
+            CambiarGrupo formCamb = new CambiarGrupo(grupoFamiliar, afiliadoID);
+            formCamb.ShowDialog();
+            /* TODO: NO SE QUE HICE LOL **************************************/
+
+            if (formCamb.DialogResult == DialogResult.OK) {
+                if (!formCamb.nueva) {
+                    //--Traer los integrantes del grupo
+                    foreach (DataRow dr in DB.ExecuteReader(
+                        "SELECT * FROM moustache_spice.vAfiliado va WHERE va.afi_grupoFamiliar = " + grupoFamiliar.grupo + " ORDER BY va.afi_grupoFamiliar ASC").Rows) {
+
+                        //--Crea el integrante que trajo y lo agrega al listbox
+                        Integrante integrante = new Integrante(dr);
+                        lbIntegrantes.Items.Add(integrante);
+
+                        //--Si algún integrante es conyuge, marca la flag
+                        if (Convert.ToInt32(dr["afi_orden"]) == 2)
+                            tieneConyuge = true;
+
+                        //--Bloquear agregar integrantes
+                        bAgregarACargo.Enabled = false;
+                    }
+                } else
+                    bAgregarACargo.Enabled = true;
+            }
         }
     }
 }

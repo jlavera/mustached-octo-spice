@@ -95,7 +95,7 @@
             // cbConyuge
             // 
             this.cbConyuge.AutoSize = true;
-            this.cbConyuge.Location = new System.Drawing.Point(33, 246);
+            this.cbConyuge.Location = new System.Drawing.Point(33, 254);
             this.cbConyuge.Name = "cbConyuge";
             this.cbConyuge.Size = new System.Drawing.Size(68, 17);
             this.cbConyuge.TabIndex = 62;
