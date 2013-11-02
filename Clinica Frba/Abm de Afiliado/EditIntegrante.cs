@@ -12,15 +12,22 @@ namespace Clinica_Frba.AbmAfiliados {
     public partial class EditIntegrante : Form {
 
         private bool tieneConyuge;
+        EstadosCiviles estadosCiviles = new EstadosCiviles();
+
         public Integrante integrante;
 
-        public EditIntegrante(bool p_tiene) {
+        public EditIntegrante(bool p_tiene, string p_telefono, string p_direccion, string p_apellido) {
             InitializeComponent();
 
             tieneConyuge = p_tiene;
+            tbTelefono.Text = p_telefono;
+            tbDireccion.Text = p_direccion;
+            tbApellido.Text = p_apellido;
         }
 
         private void EditIntegrante_Load(object sender, EventArgs e) {
+            estadosCiviles.FillWithAll();
+            cmbEstadoCivil.Items.AddRange(estadosCiviles.ToList());
 
             //--Si ya tiene conyuge, no puede agregar conyuge
             if (tieneConyuge)
@@ -28,11 +35,22 @@ namespace Clinica_Frba.AbmAfiliados {
         }
 
         private void bGuardar_Click(object sender, EventArgs e) {
-            integrante = new Integrante(tbNombre.Text, tbApellido.Text, tbDireccion.Text, tbMail.Text, cmbTipoDNI.SelectedText,
-                Convert.ToInt64(tbNumeroDni.Text), Convert.ToInt64(tbTelefono), (EstadoCivil)cmbEstadoCivil.SelectedItem,
-                (cmbSexo.SelectedText == "Masculino") ? "M" : "F", tbNombreUsuario.Text, cbConyuge.Checked, dtpFechaNacimiento.Value);
+            string invalidez = "";
+            foreach (Control ctrl in gbDatos.Controls)
+            {
+                if ((ctrl is TextBox && ((TextBox)ctrl).Text == "") || (ctrl is MaskedTextBox && ((MaskedTextBox)ctrl).Text == "") || (ctrl is ComboBox && ((ComboBox)ctrl).SelectedIndex == -1))
+                    invalidez += ctrl.Name + ", ";
+            }
+            if (invalidez != "")
+                MessageBox.Show("Faltan los siguientes campos: " + invalidez);
+            else
+            {
 
-            this.Close();
+                integrante = new Integrante(tbNombre.Text, tbApellido.Text, tbDireccion.Text, tbMail.Text, cmbTipoDNI.Text,
+                    Convert.ToInt64(tbNumeroDni.Text), Convert.ToInt64(tbTelefono.Text), (EstadoCivil)cmbEstadoCivil.SelectedItem,
+                    (cmbSexo.SelectedItem == "Masculino") ? "M" : "F", tbNombreUsuario.Text, cbConyuge.Checked, dtpFechaNacimiento.Value);
+                DialogResult = DialogResult.OK;
+            }
         }
 
 

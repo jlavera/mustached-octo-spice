@@ -24,6 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.dtpFechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.cbConyuge = new System.Windows.Forms.CheckBox();
             this.cmbEstadoCivil = new System.Windows.Forms.ComboBox();
@@ -35,9 +36,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.tbMail = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.tbTelefono = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.tbNumeroDni = new System.Windows.Forms.TextBox();
             this.cmbTipoDNI = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -47,12 +46,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbNombre = new System.Windows.Forms.TextBox();
             this.bGuardar = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.tbNumeroDni = new System.Windows.Forms.MaskedTextBox();
+            this.tbTelefono = new System.Windows.Forms.MaskedTextBox();
             this.gbDatos.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.tbNumeroDni);
+            this.gbDatos.Controls.Add(this.tbTelefono);
             this.gbDatos.Controls.Add(this.label1);
             this.gbDatos.Controls.Add(this.dtpFechaNacimiento);
             this.gbDatos.Controls.Add(this.cbConyuge);
@@ -65,9 +67,7 @@
             this.gbDatos.Controls.Add(this.label9);
             this.gbDatos.Controls.Add(this.tbMail);
             this.gbDatos.Controls.Add(this.label8);
-            this.gbDatos.Controls.Add(this.tbTelefono);
             this.gbDatos.Controls.Add(this.label7);
-            this.gbDatos.Controls.Add(this.tbNumeroDni);
             this.gbDatos.Controls.Add(this.cmbTipoDNI);
             this.gbDatos.Controls.Add(this.label6);
             this.gbDatos.Controls.Add(this.label5);
@@ -84,12 +84,21 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos:";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(30, 283);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(109, 13);
+            this.label1.TabIndex = 73;
+            this.label1.Text = "Fecha de nacimiento:";
+            // 
             // dtpFechaNacimiento
             // 
             this.dtpFechaNacimiento.Location = new System.Drawing.Point(48, 303);
             this.dtpFechaNacimiento.Name = "dtpFechaNacimiento";
             this.dtpFechaNacimiento.Size = new System.Drawing.Size(200, 20);
-            this.dtpFechaNacimiento.TabIndex = 72;
+            this.dtpFechaNacimiento.TabIndex = 11;
             this.dtpFechaNacimiento.Value = new System.DateTime(2013, 11, 1, 0, 0, 0, 0);
             // 
             // cbConyuge
@@ -98,17 +107,18 @@
             this.cbConyuge.Location = new System.Drawing.Point(33, 246);
             this.cbConyuge.Name = "cbConyuge";
             this.cbConyuge.Size = new System.Drawing.Size(68, 17);
-            this.cbConyuge.TabIndex = 62;
+            this.cbConyuge.TabIndex = 10;
             this.cbConyuge.Text = "Conyuge";
             this.cbConyuge.UseVisualStyleBackColor = true;
             // 
             // cmbEstadoCivil
             // 
+            this.cmbEstadoCivil.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEstadoCivil.FormattingEnabled = true;
             this.cmbEstadoCivil.Location = new System.Drawing.Point(46, 172);
             this.cmbEstadoCivil.Name = "cmbEstadoCivil";
             this.cmbEstadoCivil.Size = new System.Drawing.Size(140, 21);
-            this.cmbEstadoCivil.TabIndex = 61;
+            this.cmbEstadoCivil.TabIndex = 3;
             // 
             // label12
             // 
@@ -121,6 +131,7 @@
             // 
             // cmbSexo
             // 
+            this.cmbSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSexo.FormattingEnabled = true;
             this.cmbSexo.Items.AddRange(new object[] {
             "Masculino",
@@ -128,7 +139,7 @@
             this.cmbSexo.Location = new System.Drawing.Point(48, 219);
             this.cmbSexo.Name = "cmbSexo";
             this.cmbSexo.Size = new System.Drawing.Size(138, 21);
-            this.cmbSexo.TabIndex = 54;
+            this.cmbSexo.TabIndex = 4;
             // 
             // label11
             // 
@@ -153,7 +164,7 @@
             this.tbNombreUsuario.Location = new System.Drawing.Point(248, 219);
             this.tbNombreUsuario.Name = "tbNombreUsuario";
             this.tbNombreUsuario.Size = new System.Drawing.Size(140, 20);
-            this.tbNombreUsuario.TabIndex = 51;
+            this.tbNombreUsuario.TabIndex = 9;
             // 
             // label9
             // 
@@ -169,7 +180,7 @@
             this.tbMail.Location = new System.Drawing.Point(248, 176);
             this.tbMail.Name = "tbMail";
             this.tbMail.Size = new System.Drawing.Size(140, 20);
-            this.tbMail.TabIndex = 49;
+            this.tbMail.TabIndex = 8;
             // 
             // label8
             // 
@@ -180,13 +191,6 @@
             this.label8.TabIndex = 48;
             this.label8.Text = "Teléfono:";
             // 
-            // tbTelefono
-            // 
-            this.tbTelefono.Location = new System.Drawing.Point(248, 133);
-            this.tbTelefono.Name = "tbTelefono";
-            this.tbTelefono.Size = new System.Drawing.Size(140, 20);
-            this.tbTelefono.TabIndex = 47;
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -196,15 +200,9 @@
             this.label7.TabIndex = 46;
             this.label7.Text = "Número de documento:";
             // 
-            // tbNumeroDni
-            // 
-            this.tbNumeroDni.Location = new System.Drawing.Point(248, 90);
-            this.tbNumeroDni.Name = "tbNumeroDni";
-            this.tbNumeroDni.Size = new System.Drawing.Size(140, 20);
-            this.tbNumeroDni.TabIndex = 45;
-            // 
             // cmbTipoDNI
             // 
+            this.cmbTipoDNI.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoDNI.FormattingEnabled = true;
             this.cmbTipoDNI.Items.AddRange(new object[] {
             "DNI",
@@ -213,7 +211,7 @@
             this.cmbTipoDNI.Location = new System.Drawing.Point(250, 47);
             this.cmbTipoDNI.Name = "cmbTipoDNI";
             this.cmbTipoDNI.Size = new System.Drawing.Size(61, 21);
-            this.cmbTipoDNI.TabIndex = 44;
+            this.cmbTipoDNI.TabIndex = 5;
             // 
             // label6
             // 
@@ -238,7 +236,7 @@
             this.tbDireccion.Location = new System.Drawing.Point(46, 133);
             this.tbDireccion.Name = "tbDireccion";
             this.tbDireccion.Size = new System.Drawing.Size(140, 20);
-            this.tbDireccion.TabIndex = 41;
+            this.tbDireccion.TabIndex = 2;
             // 
             // label4
             // 
@@ -254,7 +252,7 @@
             this.tbApellido.Location = new System.Drawing.Point(46, 90);
             this.tbApellido.Name = "tbApellido";
             this.tbApellido.Size = new System.Drawing.Size(140, 20);
-            this.tbApellido.TabIndex = 39;
+            this.tbApellido.TabIndex = 1;
             // 
             // label3
             // 
@@ -270,7 +268,7 @@
             this.tbNombre.Location = new System.Drawing.Point(46, 47);
             this.tbNombre.Name = "tbNombre";
             this.tbNombre.Size = new System.Drawing.Size(140, 20);
-            this.tbNombre.TabIndex = 37;
+            this.tbNombre.TabIndex = 0;
             // 
             // bGuardar
             // 
@@ -282,14 +280,21 @@
             this.bGuardar.UseVisualStyleBackColor = true;
             this.bGuardar.Click += new System.EventHandler(this.bGuardar_Click);
             // 
-            // label1
+            // tbNumeroDni
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(30, 283);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 13);
-            this.label1.TabIndex = 73;
-            this.label1.Text = "Fecha de nacimiento:";
+            this.tbNumeroDni.Location = new System.Drawing.Point(248, 90);
+            this.tbNumeroDni.Mask = "000000000000000000";
+            this.tbNumeroDni.Name = "tbNumeroDni";
+            this.tbNumeroDni.Size = new System.Drawing.Size(140, 20);
+            this.tbNumeroDni.TabIndex = 6;
+            // 
+            // tbTelefono
+            // 
+            this.tbTelefono.Location = new System.Drawing.Point(248, 129);
+            this.tbTelefono.Mask = "000000000000000000";
+            this.tbTelefono.Name = "tbTelefono";
+            this.tbTelefono.Size = new System.Drawing.Size(140, 20);
+            this.tbTelefono.TabIndex = 7;
             // 
             // EditIntegrante
             // 
@@ -318,9 +323,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tbMail;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox tbTelefono;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox tbNumeroDni;
         private System.Windows.Forms.ComboBox cmbTipoDNI;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
@@ -333,5 +336,7 @@
         private System.Windows.Forms.CheckBox cbConyuge;
         private System.Windows.Forms.DateTimePicker dtpFechaNacimiento;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.MaskedTextBox tbNumeroDni;
+        private System.Windows.Forms.MaskedTextBox tbTelefono;
     }
 }

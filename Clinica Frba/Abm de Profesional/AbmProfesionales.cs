@@ -61,8 +61,7 @@ namespace Clinica_Frba.AbmProfesionales {
             afiliados.FillWithFilter(tbNombre.Text, tbApellido.Text, tbDireccion.Text, cmbTipoDNI.SelectedText,
                 Convert.ToInt64(tbNumeroDni.Text), Convert.ToInt64(tbTelefono.Text), tbMail.Text, tbNombreUsuario.Text
                 , cmbSexo.SelectedText, lbGrupoFamiliar.SelectedItems, lbEstadoCivil.SelectedItems, lbPlanMedico.SelectedItems,
-                Convert.ToInt32(tbOrden.Text), Convert.ToInt32(tbFamiliaresACargo.Text));
-
+                Convert.ToInt32(tbOrden.Text), Convert.ToInt32(tbFamiliaresACargo.Text), Convert.ToInt32(nLimit.Value));
 
         }
     }

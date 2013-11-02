@@ -83,12 +83,13 @@ namespace Clinica_Frba.AbmAfiliados {
                 Convert.ToInt64((tbTelefono.Text == "") ? "-1" : tbTelefono.Text),
                 tbMail.Text,
                 tbNombreUsuario.Text,
-                cmbSexo.SelectedText.ToString(),
+                cmbSexo.SelectedItem,
                 lbGrupoFamiliar.SelectedItems, 
                 lbEstadoCivil.SelectedItems,
                 lbPlanMedico.SelectedItems,
                 Convert.ToInt32((tbOrden.Text == "") ? "-1" : tbOrden.Text),
-                Convert.ToInt32((tbFamiliaresACargo.Text == "") ? "-1" : tbFamiliaresACargo.Text));
+                Convert.ToInt32((tbFamiliaresACargo.Text == "") ? "-1" : tbFamiliaresACargo.Text),
+                Convert.ToInt32(nLimit.Value));
             //--Llena dgv
             foreach (Afiliado afiliado in afiliados.items) {
                 dgvAfiliados.Rows.Add(afiliado.grupoFamiliar.grupo.ToString("D5") + "-" + afiliado.orden.ToString("D2"),
@@ -105,6 +106,21 @@ namespace Clinica_Frba.AbmAfiliados {
 
             //--Elimina los roles seleccionados
             afiliados.DeleteSelected(dgvAfiliados);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Limpiar las cosa para buscar
+            foreach (Control ctrl in gbFiltros.Controls) {
+                if (ctrl is TextBox)
+                    ((TextBox)ctrl).Text = "";
+                if (ctrl is ComboBox)
+                    ((ComboBox)ctrl).SelectedIndex = -1;
+                if (ctrl is MaskedTextBox)
+                    ((MaskedTextBox)ctrl).Text = "";
+                if (ctrl is ListBox)
+                    ((ListBox)ctrl).ClearSelected();
+            }
         }
     }
 }
