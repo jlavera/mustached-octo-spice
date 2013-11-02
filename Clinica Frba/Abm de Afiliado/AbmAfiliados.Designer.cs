@@ -89,6 +89,7 @@
             this.bEliminar.TabIndex = 9;
             this.bEliminar.Text = "Eliminar seleccionados";
             this.bEliminar.UseVisualStyleBackColor = true;
+            this.bEliminar.Click += new System.EventHandler(this.bEliminar_Click);
             // 
             // bAgregar
             // 

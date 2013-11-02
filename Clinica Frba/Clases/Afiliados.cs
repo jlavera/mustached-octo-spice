@@ -37,6 +37,17 @@ namespace Clinica_Frba.Clases {
         #endregion
         //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
 
+        public Afiliado this[string id] {
+            get {
+                foreach (Afiliado item in items) {
+                    if (item.id == Convert.ToInt32(id)) {
+                        return item;
+                    }
+                }
+                return null;
+            }
+        }
+
         /// <summary>
         /// Trae todos los afiliados desde la vista (junto con las entidades de sus FK)
         /// </summary>
@@ -109,6 +120,36 @@ namespace Clinica_Frba.Clases {
             //sacar la ultima basura
             query = query.Substring(0, query.Length - 5);
             Fill(DB.ExecuteReader(query));
+        }
+
+        /// <summary>
+        /// Elimina de la db, de la lista entidad y del dgv los roles seleccionados
+        /// </summary>
+        /// <param name="dgv"></param>
+        public void DeleteSelected(DataGridView dgv) {
+            DataGridViewSelectedRowCollection p_objects = dgv.SelectedRows;
+
+            //--Eliminar de la DB
+            string query = "UPDATE " + DB.schema + tabla + " SET afi_habilitado=0 WHERE";
+
+            foreach (DataGridViewRow afiliado in p_objects) {
+                query += " afi_id=" + afiliado.Cells["id"].Value + " OR";
+            }
+            //Para sacar el ultimo or
+            query = query.Substring(0, query.Length - 3);
+
+            if (DB.ExecuteNonQuery(query) == -1)
+                MessageBox.Show("Error en la delecion");
+
+            //--Eliminar del ArrayList
+            foreach (DataGridViewRow afiliado in p_objects) {
+                items.Remove(this[afiliado.Cells["id"].Value.ToString()]);
+            }
+
+            //--Eliminar del dgv
+            foreach (DataGridViewRow rol in p_objects) {
+                dgv.Rows.Remove(rol);
+            }
         }
 
     }

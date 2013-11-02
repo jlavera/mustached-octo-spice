@@ -100,5 +100,11 @@ namespace Clinica_Frba.AbmAfiliados {
                     (afiliado.familiaresACargo == -1) ? "Falta cargar" : afiliado.familiaresACargo.ToString(), afiliado.planMedico.nombre);
             }
         }
+
+        private void bEliminar_Click(object sender, EventArgs e) {
+
+            //--Elimina los roles seleccionados
+            afiliados.DeleteSelected(dgvAfiliados);
+        }
     }
 }

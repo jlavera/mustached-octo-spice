@@ -95,7 +95,8 @@ namespace Clinica_Frba.Clases {
         /// </summary>
         /// <param name="dgv"></param>
         /// <param name="p_objects"></param>
-        public void DeleteSelected(DataGridView dgv, DataGridViewSelectedRowCollection p_objects) {
+        public void DeleteSelected(DataGridView dgv) {
+            DataGridViewSelectedRowCollection p_objects = dgv.SelectedRows;
 
             //--Eliminar de la DB
             string query = "UPDATE " + DB.schema + tabla + " SET rol_habilitado=0 WHERE";
@@ -118,7 +119,6 @@ namespace Clinica_Frba.Clases {
             foreach (DataGridViewRow rol in p_objects) {
                 dgv.Rows.Remove(rol);
             }
-
         }
     }
 }
