@@ -24,8 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.gbDatos = new System.Windows.Forms.GroupBox();
-            this.bAgregarACargo = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.bAgregarACargo = new System.Windows.Forms.Button();
             this.lbIntegrantes = new System.Windows.Forms.ListBox();
             this.cmbEstadoCivil = new System.Windows.Forms.ComboBox();
             this.cmbPlanMedico = new System.Windows.Forms.ComboBox();
@@ -50,11 +50,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbNombre = new System.Windows.Forms.TextBox();
             this.bGuardar = new System.Windows.Forms.Button();
+            this.dtpFechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.gbDatos.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.dtpFechaNacimiento);
             this.gbDatos.Controls.Add(this.label1);
             this.gbDatos.Controls.Add(this.bAgregarACargo);
             this.gbDatos.Controls.Add(this.lbIntegrantes);
@@ -88,6 +90,15 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del titular:";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(209, 156);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(110, 13);
+            this.label1.TabIndex = 68;
+            this.label1.Text = "Integrantes del grupo:";
+            // 
             // bAgregarACargo
             // 
             this.bAgregarACargo.Location = new System.Drawing.Point(227, 245);
@@ -97,15 +108,6 @@
             this.bAgregarACargo.Text = "Agregar integrante";
             this.bAgregarACargo.UseVisualStyleBackColor = true;
             this.bAgregarACargo.Click += new System.EventHandler(this.bAgregarACargo_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(209, 156);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 13);
-            this.label1.TabIndex = 68;
-            this.label1.Text = "Integrantes del grupo:";
             // 
             // lbIntegrantes
             // 
@@ -312,6 +314,14 @@
             this.bGuardar.UseVisualStyleBackColor = true;
             this.bGuardar.Click += new System.EventHandler(this.bGuardar_Click);
             // 
+            // dtpFechaNacimiento
+            // 
+            this.dtpFechaNacimiento.Location = new System.Drawing.Point(212, 0);
+            this.dtpFechaNacimiento.Name = "dtpFechaNacimiento";
+            this.dtpFechaNacimiento.Size = new System.Drawing.Size(200, 20);
+            this.dtpFechaNacimiento.TabIndex = 71;
+            this.dtpFechaNacimiento.Value = new System.DateTime(2013, 11, 1, 0, 0, 0, 0);
+            // 
             // EditAfiliado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -356,5 +366,6 @@
         private System.Windows.Forms.Button bAgregarACargo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox lbIntegrantes;
+        private System.Windows.Forms.DateTimePicker dtpFechaNacimiento;
     }
 }

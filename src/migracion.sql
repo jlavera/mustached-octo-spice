@@ -258,6 +258,7 @@ CREATE TABLE moustache_spice.turno (
   tur_id INT NOT NULL Identity,
   tur_afiliado INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.afiliado(afi_id),
   tur_profesional INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.profesional(pro_id),
+  tur_especialidad INT FOREIGN KEY REFERENCES moustache_spice.especialidad(esp_id),
   tur_fechaYHoraTurno DATETIME NOT NULL,
   tur_fechaYHoraLlegada DATETIME NULL,
   tur_fechaYHoraAtencion DATETIME NULL,
@@ -267,6 +268,11 @@ CREATE TABLE moustache_spice.turno (
   tur_habilitado TINYINT NOT NULL DEFAULT 1,-- Sería cuando se cancela un turno
   PRIMARY KEY (tur_id)
 );
+
+CREATE TABLE moustache_spice.turnoAudit(
+	tuA_turno INT NOT NULL FOREIGN KEY REFERENCES moustache_spice.turno(tur_id),
+	tuA_razon VARCHAR(255),
+); 
 
 -- -----------------------------------------------------
 -- creacion tabla bonoConsulta
@@ -406,8 +412,8 @@ INSERT INTO moustache_spice.planMedico(pla_codigo, pla_nombre, pla_precioBonoCon
 -- -----------------------------------------------------
 -- migracion tabla afiliado 
 -- -----------------------------------------------------
-INSERT INTO moustache_spice.afiliado(afi_usuario, afi_grupoFamiliar, afi_planMedico, afi_orden)
-	(SELECT DISTINCT usu_id, usu_id, pla_id, 1 FROM gd_esquema.Maestra
+INSERT INTO moustache_spice.afiliado(afi_usuario, afi_planMedico, afi_orden)
+	(SELECT DISTINCT usu_id, pla_id, 1 FROM gd_esquema.Maestra
 	LEFT JOIN moustache_spice.usuario ON usu_numeroDocumento = Paciente_Dni
 	LEFT JOIN moustache_spice.planMedico ON pla_codigo = Plan_Med_Codigo
 	WHERE Paciente_Dni IS NOT NULL);

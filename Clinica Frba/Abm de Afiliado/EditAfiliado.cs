@@ -16,6 +16,8 @@ namespace Clinica_Frba.AbmAfiliados{
 
         private bool nueva;
         private bool tieneConyuge;
+        private int usuarioID;
+        private int afiliadoID;
 
         public string nombre;
         public string apellido;
@@ -49,6 +51,8 @@ namespace Clinica_Frba.AbmAfiliados{
         public EditAfiliado(Afiliado p_afil){
 
             InitializeComponent();
+            usuarioID = p_afil.usuario.id;
+            afiliadoID = p_afil.id;
 
             nombre = p_afil.usuario.nombre;
             apellido = p_afil.usuario.apellido;
@@ -63,6 +67,14 @@ namespace Clinica_Frba.AbmAfiliados{
             planMedico = p_afil.planMedico;
             grupoFamiliar = p_afil.grupoFamiliar;
             orden = p_afil.orden;
+
+            tbNombre.Enabled = false;
+            tbApellido.Enabled = false;
+            dtpFechaNacimiento.Enabled = false;
+            tbNombreUsuario.Enabled = false;
+            tbNumeroDni.Enabled = false;
+            cmbTipoDNI.Enabled = false;
+            cmbSexo.Enabled = false;         
 
             nueva = false;
         }
@@ -140,16 +152,25 @@ namespace Clinica_Frba.AbmAfiliados{
 
         private void bGuardar_Click(object sender, EventArgs e) {
 
+            string query;
             //--Grabar o editar al titular
             if (nueva) {
-
-                //--INSERT
-
+                query = "INSERT INTO moustache_spice.usuario(usu_nombre, usu_apellido, usu_direccion, usu_tipoDocumento, usu_numeroDocumento, usu_telefono, usu_mail, usu_sexo, usu_nombreUsuario, usu_fechaNacimiento ) VALUES " +
+                        "('" + tbNombre.Text + "', '" + tbApellido.Text + "', '" + tbDireccion.Text + "', '" + cmbTipoDNI.SelectedText + "', " + tbNumeroDni.Text + ", " + tbTelefono.Text + ", '" + tbMail.Text + "', '" + cmbSexo.SelectedText + "', '" + tbNombreUsuario.Text + "', '" + dtpFechaNacimiento.Value.ToString("yyyy-MM-dd") + "'); ";
+                query += "INSERT INTO moustache_spice.afiliado(afi_estadoCivil, afi_familiaresACargo, afi_usuario, afi_grupoFamiliar, afi_orden) VALUES ("+
+                        ((EstadoCivil)cmbEstadoCivil.SelectedItem).id + ", " + lbIntegrantes.Items.Count + ", SCOPE_Identity(), 1)";
             } else {
 
-                //--UPDATE
+                query = "UPDATE moustache_spice.usuario SET usu_direccion='" + tbDireccion +
+                        ", usu_telefono=" + tbTelefono.Text +
+                        ", usu_mail=" + tbMail.Text +
+                        "' WHERE usu_id=" + usuarioID + "; ";
+                query += "UPDATE moustache_spice.afiliado SET afi_estadoCivil=" + ((EstadoCivil)cmbEstadoCivil.SelectedItem).id +
+                        ", afi_familiaresACargo=" + lbIntegrantes.Items.Count +
+                        "' WHERE afi_id=" + afiliadoID + "; ";
 
             }
+            DB.ExecuteNonQuery(query);
 
             //--Agregar a la DB a los integrantes que estén para grabar
             foreach (Integrante inte in lbIntegrantes.Items) {
@@ -159,7 +180,6 @@ namespace Clinica_Frba.AbmAfiliados{
                         //--********----------------****Acá le asignás el 2 en orden
                     } else {
                         //--********----------------****Acá tenés el próximo orden, bofi
-                        //grupoFamiliar.proximoOrden;
                     }
                 }
             }

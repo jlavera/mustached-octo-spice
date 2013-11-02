@@ -72,8 +72,7 @@ namespace Clinica_Frba.Clases {
                 query += " (";
                 foreach (EstadoCivil ec in p_estadoCivil)
                     query += "est_id =" + ec.id + " OR ";
-                query.Substring(0, query.Length - 4);
-                query += ") AND ";
+                query += "1!=1) AND ";
             }
             if (p_familiares != -1)
                 query += " afi_familiaresACargo =" + p_familiares+ " AND ";
@@ -81,8 +80,7 @@ namespace Clinica_Frba.Clases {
                 query += " (";
                 foreach (GrupoFamiliar gf in p_grupoFamiliar)
                     query += "afi_grupoFamiliar =" + gf.grupo + " OR ";
-                query.Substring(0, query.Length - 4);
-                query += ") AND ";
+                query += "1!=1) AND ";
             }
             if (p_mail != "")
                 query += " usu_mail LIKE '%" + p_mail + "%' AND ";
@@ -98,8 +96,7 @@ namespace Clinica_Frba.Clases {
                 query += " (";
                 foreach (PlanMedico pm in p_planMedico)
                     query += "pla_id =" + pm.id + " OR ";
-                query.Substring(0, query.Length - 4);
-                query += ") AND ";
+                query += "1!=1) AND ";
             }
             if (p_sexo != "")
                 query += " usu_sexo =" + p_sexo + " AND ";
