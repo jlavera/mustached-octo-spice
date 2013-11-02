@@ -232,16 +232,24 @@ CREATE TABLE moustache_spice.grupoFamiliarAudit (
 -- -----------------------------------------------------
 CREATE TABLE moustache_spice.afiliado (
   afi_id INT NOT NULL Identity,
-  afi_grupoFamiliar INT NULL, -- *FALTA*
+  afi_grupoFamiliar2 INT NULL FOREIGN KEY REFERENCES  moustache_spice.afiliado(afi_id), -- *Le pongo 2 porque en la vista de vAfiliado que es la que se usa, tiene el isnull de afi_id*
   afi_orden INT NULL, -- *FALTA*
   afi_usuario INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.usuario(usu_id),
   afi_estadoCivil INT FOREIGN KEY REFERENCES  moustache_spice.estadoCivil(est_id), -- *FALTA*
-  afi_planMedico INT FOREIGN KEY REFERENCES  moustache_spice.planMedico(pla_id),
+  afi_planMedico INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.planMedico(pla_id),
   afi_familiaresACargo INT NULL,
   afi_habilitado TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (afi_id),
   --UNIQUE (afi_grupoFamiliar, afi_orden)
 );
+GO
+CREATE TRIGGER moustache_spice.cambiarPlanMedico ON moustache_spice.afiliado AFTER UPDATE AS
+BEGIN
+	UPDATE moustache_spice.afiliado
+		SET afi_planMedico=(select TOP 1 afi_planMedico from inserted)
+	WHERE afi_grupoFamiliar2 IN (SELECT afi_id FROM inserted)
+END
+GO
 
 -- -----------------------------------------------------
 -- creacion tabla afiliadoAudit
@@ -332,11 +340,12 @@ CREATE VIEW moustache_spice.vProfesional AS
 GO
 
 CREATE VIEW moustache_spice.vAfiliado AS
-		SELECT *
+		SELECT *, ISNULL(afi_grupoFamiliar2, afi_id) AS afi_grupoFamiliar
 		FROM moustache_spice.afiliado
 			LEFT JOIN moustache_spice.usuario ON usu_id = afi_usuario
 			LEFT JOIN moustache_spice.planMedico ON afi_planMedico = pla_id
 			LEFT JOIN moustache_spice.estadoCivil ON afi_estadoCivil = est_id
+		WHERE afi_habilitado=1 AND usu_habilitado=1
 GO
 
 
@@ -544,4 +553,7 @@ INSERT INTO moustache_spice.medicamento_x_bonoFarmacia(mxb_bonoFarmacia, mxb_med
 --			  AND Bono_Farmacia_Medicamento IS NOT NULL
 --			GROUP BY Bono_Farmacia_Numero
 --			HAVING COUNT(Bono_Farmacia_Medicamento) > 1
+
+-- >> Trigger para hacer que cuando cambie un plan medico de un padre, cambien todos los hijos
+-- Esta implementado para updates de a uno, no para masivo
 -- -----------------------------------------------------

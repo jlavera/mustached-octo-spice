@@ -32,6 +32,8 @@
             this.bAgregar = new System.Windows.Forms.Button();
             this.bBuscar = new System.Windows.Forms.Button();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
+            this.lbPlanMedico = new System.Windows.Forms.ListBox();
+            this.lbEstadoCivil = new System.Windows.Forms.ListBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.tbFamiliaresACargo = new System.Windows.Forms.TextBox();
@@ -74,10 +76,11 @@
             this.familiaresACargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.planMedico = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.lbEstadoCivil = new System.Windows.Forms.ListBox();
-            this.lbPlanMedico = new System.Windows.Forms.ListBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.nLimit = new System.Windows.Forms.NumericUpDown();
             this.gbFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAfiliados)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nLimit)).BeginInit();
             this.SuspendLayout();
             // 
             // bEliminar
@@ -116,7 +119,9 @@
             this.gbFiltros.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbFiltros.Controls.Add(this.label15);
             this.gbFiltros.Controls.Add(this.lbPlanMedico);
+            this.gbFiltros.Controls.Add(this.nLimit);
             this.gbFiltros.Controls.Add(this.lbEstadoCivil);
             this.gbFiltros.Controls.Add(this.label14);
             this.gbFiltros.Controls.Add(this.label13);
@@ -150,6 +155,25 @@
             this.gbFiltros.TabIndex = 6;
             this.gbFiltros.TabStop = false;
             this.gbFiltros.Text = "Filtros";
+            // 
+            // lbPlanMedico
+            // 
+            this.lbPlanMedico.FormattingEnabled = true;
+            this.lbPlanMedico.Location = new System.Drawing.Point(849, 40);
+            this.lbPlanMedico.Name = "lbPlanMedico";
+            this.lbPlanMedico.Size = new System.Drawing.Size(120, 108);
+            this.lbPlanMedico.TabIndex = 32;
+            // 
+            // lbEstadoCivil
+            // 
+            this.lbEstadoCivil.DisplayMember = "id";
+            this.lbEstadoCivil.FormattingEnabled = true;
+            this.lbEstadoCivil.Location = new System.Drawing.Point(686, 40);
+            this.lbEstadoCivil.Name = "lbEstadoCivil";
+            this.lbEstadoCivil.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lbEstadoCivil.Size = new System.Drawing.Size(113, 108);
+            this.lbEstadoCivil.TabIndex = 31;
+            this.lbEstadoCivil.ValueMember = "id";
             // 
             // label14
             // 
@@ -490,26 +514,38 @@
             this.seleccionar.HeaderText = "Seleccionar";
             this.seleccionar.Name = "seleccionar";
             // 
-            // lbEstadoCivil
+            // label15
             // 
-            this.lbEstadoCivil.DisplayMember = "id";
-            this.lbEstadoCivil.FormattingEnabled = true;
-            this.lbEstadoCivil.Location = new System.Drawing.Point(686, 40);
-            this.lbEstadoCivil.Name = "lbEstadoCivil";
-            this.lbEstadoCivil.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbEstadoCivil.Size = new System.Drawing.Size(113, 108);
-            this.lbEstadoCivil.TabIndex = 31;
-            this.lbEstadoCivil.ValueMember = "id";
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(1015, 111);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(98, 13);
+            this.label15.TabIndex = 40;
+            this.label15.Text = "Cantidad a mostrar:";
             // 
-            // lbPlanMedico
+            // nLimit
             // 
-            this.lbPlanMedico.FormattingEnabled = true;
-            this.lbPlanMedico.Location = new System.Drawing.Point(849, 40);
-            this.lbPlanMedico.Name = "lbPlanMedico";
-            this.lbPlanMedico.Size = new System.Drawing.Size(120, 108);
-            this.lbPlanMedico.TabIndex = 32;
+            this.nLimit.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.nLimit.Location = new System.Drawing.Point(1031, 127);
+            this.nLimit.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nLimit.Name = "nLimit";
+            this.nLimit.Size = new System.Drawing.Size(120, 20);
+            this.nLimit.TabIndex = 39;
+            this.nLimit.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             // 
-            // AbmAfiliados
+            // AbmProfesionales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -525,6 +561,7 @@
             this.gbFiltros.ResumeLayout(false);
             this.gbFiltros.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAfiliados)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nLimit)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -579,5 +616,7 @@
         private System.Windows.Forms.DataGridViewButtonColumn seleccionar;
         private System.Windows.Forms.ListBox lbEstadoCivil;
         private System.Windows.Forms.ListBox lbPlanMedico;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.NumericUpDown nLimit;
     }
 }

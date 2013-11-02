@@ -63,9 +63,12 @@ namespace Clinica_Frba.AbmAfiliados {
 
             //--Si es nueva, updatear el grupo id con el afiliado id, sino
             if (rbNueva.Checked)
-                DB.ExecuteNonQuery("UPDATE " + DB.schema + "afiliado SET afi_grupoFamiliar = " + afiliadoId + ", afi_orden = 1 WHERE afi_id = " + afiliadoId);
+                DB.ExecuteNonQuery("UPDATE " + DB.schema + "afiliado SET afi_grupoFamiliar2 = NULL, afi_orden = 1 WHERE afi_id = " + afiliadoId);
             else
+            {
                 nuevo = (GrupoFamiliar)cmbGrupos.SelectedItem;
+                DB.ExecuteNonQuery("UPDATE " + DB.schema + "afiliado SET afi_grupoFamiliar2 = " + ((GrupoFamiliar)cmbGrupos.SelectedItem).grupo + ", afi_orden = " + ((GrupoFamiliar)cmbGrupos.SelectedItem).proximoOrden + " WHERE afi_id = " + afiliadoId);
+            }
 
             DialogResult = DialogResult.OK;
             nueva = rbNueva.Checked;
