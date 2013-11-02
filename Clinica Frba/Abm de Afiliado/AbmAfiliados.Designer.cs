@@ -101,8 +101,8 @@
             this.bAgregar.Location = new System.Drawing.Point(12, 186);
             this.bAgregar.Name = "bAgregar";
             this.bAgregar.Size = new System.Drawing.Size(134, 29);
-            this.bAgregar.TabIndex = 17;
-            this.bAgregar.Text = "Agregar";
+            this.bAgregar.TabIndex = 8;
+            this.bAgregar.Text = "Agregar titular";
             this.bAgregar.UseVisualStyleBackColor = true;
             this.bAgregar.Click += new System.EventHandler(this.bAgregar_Click);
             // 

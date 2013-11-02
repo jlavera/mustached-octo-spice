@@ -59,6 +59,7 @@
             // 
             this.gbDatos.Controls.Add(this.tbNumeroDni);
             this.gbDatos.Controls.Add(this.tbTelefono);
+            this.gbDatos.Controls.Add(this.bCambiarGrupo);
             this.gbDatos.Controls.Add(this.label2);
             this.gbDatos.Controls.Add(this.dtpFechaNacimiento);
             this.gbDatos.Controls.Add(this.label1);
@@ -87,7 +88,7 @@
             this.gbDatos.Controls.Add(this.bGuardar);
             this.gbDatos.Location = new System.Drawing.Point(12, 12);
             this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(562, 300);
+            this.gbDatos.Size = new System.Drawing.Size(633, 300);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del titular:";
@@ -112,7 +113,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(209, 196);
+            this.label1.Location = new System.Drawing.Point(450, 157);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(110, 13);
             this.label1.TabIndex = 68;
@@ -120,18 +121,19 @@
             // 
             // bAgregarACargo
             // 
-            this.bAgregarACargo.Location = new System.Drawing.Point(227, 265);
+            this.bAgregarACargo.Location = new System.Drawing.Point(468, 265);
             this.bAgregarACargo.Name = "bAgregarACargo";
-            this.bAgregarACargo.Size = new System.Drawing.Size(322, 21);
-            this.bAgregarACargo.TabIndex = 11;
+            this.bAgregarACargo.Size = new System.Drawing.Size(138, 21);
+            this.bAgregarACargo.TabIndex = 70;
             this.bAgregarACargo.Text = "Agregar integrante";
             this.bAgregarACargo.UseVisualStyleBackColor = true;
             this.bAgregarACargo.Click += new System.EventHandler(this.bAgregarACargo_Click);
             // 
             // lbIntegrantes
             // 
+            this.lbIntegrantes.Enabled = false;
             this.lbIntegrantes.FormattingEnabled = true;
-            this.lbIntegrantes.Location = new System.Drawing.Point(227, 216);
+            this.lbIntegrantes.Location = new System.Drawing.Point(468, 173);
             this.lbIntegrantes.Name = "lbIntegrantes";
             this.lbIntegrantes.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.lbIntegrantes.Size = new System.Drawing.Size(320, 43);
@@ -180,7 +182,7 @@
             this.cmbSexo.Items.AddRange(new object[] {
             "Masculino",
             "Femenino"});
-            this.cmbSexo.Location = new System.Drawing.Point(409, 133);
+            this.cmbSexo.Location = new System.Drawing.Point(468, 133);
             this.cmbSexo.Name = "cmbSexo";
             this.cmbSexo.Size = new System.Drawing.Size(138, 21);
             this.cmbSexo.TabIndex = 10;
@@ -188,7 +190,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(391, 113);
+            this.label11.Location = new System.Drawing.Point(450, 113);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(34, 13);
             this.label11.TabIndex = 53;
@@ -197,7 +199,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(391, 70);
+            this.label10.Location = new System.Drawing.Point(450, 70);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(99, 13);
             this.label10.TabIndex = 52;
@@ -205,7 +207,7 @@
             // 
             // tbNombreUsuario
             // 
-            this.tbNombreUsuario.Location = new System.Drawing.Point(407, 90);
+            this.tbNombreUsuario.Location = new System.Drawing.Point(468, 90);
             this.tbNombreUsuario.Name = "tbNombreUsuario";
             this.tbNombreUsuario.Size = new System.Drawing.Size(140, 20);
             this.tbNombreUsuario.TabIndex = 9;
@@ -213,7 +215,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(391, 27);
+            this.label9.Location = new System.Drawing.Point(450, 27);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(29, 13);
             this.label9.TabIndex = 50;
@@ -221,10 +223,10 @@
             // 
             // tbMail
             // 
-            this.tbMail.Location = new System.Drawing.Point(407, 47);
+            this.tbMail.Location = new System.Drawing.Point(468, 47);
             this.tbMail.Name = "tbMail";
-            this.tbMail.Size = new System.Drawing.Size(140, 20);
-            this.tbMail.TabIndex = 8;
+            this.tbMail.Size = new System.Drawing.Size(138, 20);
+            this.tbMail.TabIndex = 49;
             // 
             // label8
             // 
@@ -316,7 +318,7 @@
             // 
             // bGuardar
             // 
-            this.bGuardar.Location = new System.Drawing.Point(33, 245);
+            this.bGuardar.Location = new System.Drawing.Point(48, 245);
             this.bGuardar.Name = "bGuardar";
             this.bGuardar.Size = new System.Drawing.Size(153, 41);
             this.bGuardar.TabIndex = 12;
@@ -340,11 +342,21 @@
             this.tbTelefono.Size = new System.Drawing.Size(138, 20);
             this.tbTelefono.TabIndex = 74;
             // 
+            // bCambiarGrupo
+            // 
+            this.bCambiarGrupo.Location = new System.Drawing.Point(225, 245);
+            this.bCambiarGrupo.Name = "bCambiarGrupo";
+            this.bCambiarGrupo.Size = new System.Drawing.Size(140, 41);
+            this.bCambiarGrupo.TabIndex = 73;
+            this.bCambiarGrupo.Text = "Cambiar grupo familiar";
+            this.bCambiarGrupo.UseVisualStyleBackColor = true;
+            this.bCambiarGrupo.Click += new System.EventHandler(this.bCambiarGrupo_Click);
+            // 
             // EditAfiliado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(588, 320);
+            this.ClientSize = new System.Drawing.Size(658, 320);
             this.Controls.Add(this.gbDatos);
             this.Name = "EditAfiliado";
             this.Text = "Edición de afiliado";
@@ -386,5 +398,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.MaskedTextBox tbNumeroDni;
         private System.Windows.Forms.MaskedTextBox tbTelefono;
+        private System.Windows.Forms.Button bCambiarGrupo;
     }
 }
