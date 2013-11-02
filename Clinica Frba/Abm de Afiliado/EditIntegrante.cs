@@ -6,12 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Clinica_Frba.Clases;
 
 namespace Clinica_Frba.AbmAfiliados {
     public partial class EditIntegrante : Form {
 
         private bool tieneConyuge;
-        public bool esConyuge;
+        public Integrante integrante;
 
         public EditIntegrante(bool p_tiene) {
             InitializeComponent();
@@ -27,9 +28,11 @@ namespace Clinica_Frba.AbmAfiliados {
         }
 
         private void bGuardar_Click(object sender, EventArgs e) {
-            if (cbConyuge.Checked)
-                esConyuge = true;
+            integrante = new Integrante(tbNombre.Text, tbApellido.Text, tbDireccion.Text, tbMail.Text, cmbTipoDNI.SelectedText,
+                Convert.ToInt64(tbNumeroDni.Text), Convert.ToInt64(tbTelefono), (EstadoCivil)cmbEstadoCivil.SelectedItem,
+                (cmbSexo.SelectedText == "Masculino") ? "M" : "F", tbNombreUsuario.Text, cbConyuge.Checked);
 
+            this.Close();
         }
 
 

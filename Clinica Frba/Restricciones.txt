@@ -1,0 +1,1 @@
+﻿-- Para agregar a alguien a un grupo familiar, hay que abrir la ventana de edición del titular y agregarlo como integrante

@@ -10,12 +10,14 @@ namespace Clinica_Frba.Clases {
         public int grupo;
         public int titularId;
         public string titular;
+        public int proximoOrden;
 
         public GrupoFamiliar(DataRow dr) {
 
             grupo = (dr["afi_grupoFamiliar"] == System.DBNull.Value)? -1: Convert.ToInt32(dr["afi_grupoFamiliar"]);
             titularId = (dr["afi_id"] == System.DBNull.Value) ? -1 : Convert.ToInt32(dr["afi_id"]);
             titular = dr["usu_apellido"].ToString() + ", " + dr["usu_nombre"].ToString();
+            proximoOrden = Convert.ToInt32(dr["grp_proximoOrden"]);
 
         }
 

@@ -30,7 +30,6 @@ namespace Clinica_Frba.AbmAfiliados{
         public PlanMedico planMedico;
         public GrupoFamiliar grupoFamiliar;
         public int orden = 0; //--0 significa NO titular
-        ArrayList integrantes = new ArrayList();
 
         /// <summary>
         /// Formulario para crear afiliado nuevo
@@ -86,9 +85,6 @@ namespace Clinica_Frba.AbmAfiliados{
             estadosCiviles.FillWithAll();
             cmbEstadoCivil.Items.AddRange(estadosCiviles.ToList());
 
-            grupos.FillWithAll();
-            cmbGrupoFamiliar.Items.AddRange(grupos.ToList());
-
             planes.FillWithAll();
             cmbPlanMedico.Items.AddRange(planes.ToList());
 
@@ -111,83 +107,40 @@ namespace Clinica_Frba.AbmAfiliados{
 
                 cmbEstadoCivil.SelectedItem = estadoCivil;
                 cmbPlanMedico.SelectedItem = planMedico;
-                cmbGrupoFamiliar.SelectedItem = grupoFamiliar;
-
-                tbOrden.Text = orden.ToString();
 
                 //--Traer los integrantes del grupo y si alguno es conyuge, marcar la flag
                 foreach (DataRow dr in DB.ExecuteReader(
-                    "SELECT * FROM moustache_spice.vAfiliado va WHERE va.afi_grupoFamiliar = 0 ORDER BY va.afi_grupoFamiliar ASC").Rows) {
-                    integrantes.Add(new Afiliado(dr));
-                    if (Convert.ToInt32(dr["orden"]) == 2)
+                    "SELECT * FROM moustache_spice.vAfiliado va WHERE va.afi_grupoFamiliar = " + grupoFamiliar.grupo + " AND va.afi_orden > 1 ORDER BY va.afi_grupoFamiliar ASC").Rows) {
+
+                    //--Crea el integrante que trajo y lo agrega al listbox
+                    Integrante integrante = new Integrante(dr);
+                    lbIntegrantes.Items.Add(integrante);
+
+                    if (Convert.ToInt32(dr["afi_orden"]) == 2)
                         tieneConyuge = true;
                 }
             }
         }
 
         private void bAgregarACargo_Click(object sender, EventArgs e) {
-            //--Abrir ventana para agregar afiliado
-            /*EditIntegrante editForm = new EditIntegrante(tieneConyuge);
+            //--Abrir ventana para agregar integrante
+            EditIntegrante editForm = new EditIntegrante(tieneConyuge);
             editForm.ShowDialog();
 
-            //--Si el diálogo tiene resultado OK, guardar el afiliado
+            //--Si el diálogo tiene resultado OK, guardar el integrante en el listBox
             if (editForm.DialogResult == DialogResult.OK) {
-                DataTable dt = new DataTable();
-                dt.Columns.Add("afi_id");
-                dt.Columns.Add("afi_orden");
-                dt.Columns.Add("afi_usuario");
-                dt.Columns.Add("afi_estadoCivil");
-                dt.Columns.Add("afi_familiaresACargo");
-                dt.Columns.Add("afi_planMedico");
-                dt.Columns.Add("afi_habilitado");
-
-                dt.Columns.Add("usu_id");
-                dt.Columns.Add("usu_nombreUsuario");
-                dt.Columns.Add("usu_contrasegna");
-                dt.Columns.Add("usu_intentosFallidos");
-                dt.Columns.Add("usu_nombre");
-                dt.Columns.Add("usu_apellido");
-                dt.Columns.Add("usu_tipoDocumento");
-                dt.Columns.Add("usu_numeroDocumento");
-                dt.Columns.Add("usu_direccion");
-                dt.Columns.Add("usu_telefono");
-                dt.Columns.Add("usu_mail");
-                dt.Columns.Add("usu_fechaNacimiento");
-                dt.Columns.Add("usu_sexo");
-                dt.Columns.Add("usu_habilitado");
-
-                dt.Columns.Add("pla_id");
-                dt.Columns.Add("pla_nombres");
-                dt.Columns.Add("pla_codigo");
-                dt.Columns.Add("pla_precioBonoConsulta");
-                dt.Columns.Add("pla_precioBonoFarmacia");
-
-                dt.Columns.Add("est_id");
-                dt.Columns.Add("est_estado");
-
-                DataRow dr = dt.NewRow();
-
-                //TODO rellenar datarow con los datos creados, crear el afiliado, agregar a array de afiliados
+                lbIntegrantes.Items.Add(editForm.integrante);
 
                 //--Si el que agregó es conyuge, marcar que tiene conyuge
-                if (editForm.esConyuge)
+                if (editForm.integrante.esConyuge)
                     tieneConyuge = true;
 
-                lbIntegrantes.Items.Clear();
-                foreach (Afiliado afil in integrantes)
-                    lbIntegrantes.Items.Add(afil.orden.ToString("D2") + afil.usuario.apellido + ", " + afil.usuario.nombre);
-            }*/
-
-        }
-
-        private void rbExistente_CheckedChanged(object sender, EventArgs e) {
-            if (rbExistente.Checked)
-                cmbGrupoFamiliar.Enabled = true;
-            else
-                cmbGrupoFamiliar.Enabled = false;
+            }
         }
 
         private void bGuardar_Click(object sender, EventArgs e) {
+
+            //--Grabar o editar al titular
             if (nueva) {
 
                 //--INSERT
@@ -197,9 +150,19 @@ namespace Clinica_Frba.AbmAfiliados{
                 //--UPDATE
 
             }
-            
 
-            //--TODO cuando guarda todo tiene que asignar los ordenes, y asignar al conyuge el 2
+            //--Agregar a la DB a los integrantes que estén para grabar
+            foreach (Integrante inte in lbIntegrantes.Items) {
+                if (inte.faltaGrabar) {
+                    //--Grabarlo
+                    if (inte.esConyuge) {
+                        //--********----------------****Acá le asignás el 2 en orden
+                    } else {
+                        //--********----------------****Acá tenés el próximo orden, bofi
+                        //grupoFamiliar.proximoOrden;
+                    }
+                }
+            }
 
             //--Si está todo piola
             DialogResult = DialogResult.OK;

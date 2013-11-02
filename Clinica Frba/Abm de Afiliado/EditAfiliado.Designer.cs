@@ -27,12 +27,6 @@
             this.bAgregarACargo = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lbIntegrantes = new System.Windows.Forms.ListBox();
-            this.gbGrupo = new System.Windows.Forms.GroupBox();
-            this.rbExistente = new System.Windows.Forms.RadioButton();
-            this.tbOrden = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.rbNuevo = new System.Windows.Forms.RadioButton();
-            this.cmbGrupoFamiliar = new System.Windows.Forms.ComboBox();
             this.cmbEstadoCivil = new System.Windows.Forms.ComboBox();
             this.cmbPlanMedico = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -57,15 +51,13 @@
             this.tbNombre = new System.Windows.Forms.TextBox();
             this.bGuardar = new System.Windows.Forms.Button();
             this.gbDatos.SuspendLayout();
-            this.gbGrupo.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbDatos
             // 
-            this.gbDatos.Controls.Add(this.bAgregarACargo);
             this.gbDatos.Controls.Add(this.label1);
+            this.gbDatos.Controls.Add(this.bAgregarACargo);
             this.gbDatos.Controls.Add(this.lbIntegrantes);
-            this.gbDatos.Controls.Add(this.gbGrupo);
             this.gbDatos.Controls.Add(this.cmbEstadoCivil);
             this.gbDatos.Controls.Add(this.cmbPlanMedico);
             this.gbDatos.Controls.Add(this.label14);
@@ -91,16 +83,16 @@
             this.gbDatos.Controls.Add(this.bGuardar);
             this.gbDatos.Location = new System.Drawing.Point(12, 12);
             this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(702, 354);
+            this.gbDatos.Size = new System.Drawing.Size(562, 300);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
-            this.gbDatos.Text = "Datos:";
+            this.gbDatos.Text = "Datos del titular:";
             // 
             // bAgregarACargo
             // 
-            this.bAgregarACargo.Location = new System.Drawing.Point(473, 319);
+            this.bAgregarACargo.Location = new System.Drawing.Point(227, 245);
             this.bAgregarACargo.Name = "bAgregarACargo";
-            this.bAgregarACargo.Size = new System.Drawing.Size(223, 21);
+            this.bAgregarACargo.Size = new System.Drawing.Size(322, 41);
             this.bAgregarACargo.TabIndex = 70;
             this.bAgregarACargo.Text = "Agregar integrante";
             this.bAgregarACargo.UseVisualStyleBackColor = true;
@@ -109,7 +101,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(448, 176);
+            this.label1.Location = new System.Drawing.Point(209, 156);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(110, 13);
             this.label1.TabIndex = 68;
@@ -118,77 +110,15 @@
             // lbIntegrantes
             // 
             this.lbIntegrantes.FormattingEnabled = true;
-            this.lbIntegrantes.Location = new System.Drawing.Point(473, 192);
+            this.lbIntegrantes.Location = new System.Drawing.Point(227, 172);
             this.lbIntegrantes.Name = "lbIntegrantes";
-            this.lbIntegrantes.Size = new System.Drawing.Size(223, 121);
+            this.lbIntegrantes.Size = new System.Drawing.Size(320, 56);
             this.lbIntegrantes.TabIndex = 67;
-            // 
-            // gbGrupo
-            // 
-            this.gbGrupo.Controls.Add(this.rbExistente);
-            this.gbGrupo.Controls.Add(this.tbOrden);
-            this.gbGrupo.Controls.Add(this.label2);
-            this.gbGrupo.Controls.Add(this.rbNuevo);
-            this.gbGrupo.Controls.Add(this.cmbGrupoFamiliar);
-            this.gbGrupo.Location = new System.Drawing.Point(214, 176);
-            this.gbGrupo.Name = "gbGrupo";
-            this.gbGrupo.Size = new System.Drawing.Size(217, 164);
-            this.gbGrupo.TabIndex = 66;
-            this.gbGrupo.TabStop = false;
-            this.gbGrupo.Text = "Grupo familiar:";
-            // 
-            // rbExistente
-            // 
-            this.rbExistente.AutoSize = true;
-            this.rbExistente.Checked = true;
-            this.rbExistente.Location = new System.Drawing.Point(24, 30);
-            this.rbExistente.Name = "rbExistente";
-            this.rbExistente.Size = new System.Drawing.Size(71, 17);
-            this.rbExistente.TabIndex = 64;
-            this.rbExistente.TabStop = true;
-            this.rbExistente.Text = "Existente:";
-            this.rbExistente.UseVisualStyleBackColor = true;
-            this.rbExistente.CheckedChanged += new System.EventHandler(this.rbExistente_CheckedChanged);
-            // 
-            // tbOrden
-            // 
-            this.tbOrden.Enabled = false;
-            this.tbOrden.Location = new System.Drawing.Point(47, 130);
-            this.tbOrden.Name = "tbOrden";
-            this.tbOrden.Size = new System.Drawing.Size(140, 20);
-            this.tbOrden.TabIndex = 34;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 114);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 13);
-            this.label2.TabIndex = 36;
-            this.label2.Text = "Orden:";
-            // 
-            // rbNuevo
-            // 
-            this.rbNuevo.AutoSize = true;
-            this.rbNuevo.Location = new System.Drawing.Point(24, 80);
-            this.rbNuevo.Name = "rbNuevo";
-            this.rbNuevo.Size = new System.Drawing.Size(60, 17);
-            this.rbNuevo.TabIndex = 63;
-            this.rbNuevo.Text = "Nuevo:";
-            this.rbNuevo.UseVisualStyleBackColor = true;
-            // 
-            // cmbGrupoFamiliar
-            // 
-            this.cmbGrupoFamiliar.FormattingEnabled = true;
-            this.cmbGrupoFamiliar.Location = new System.Drawing.Point(47, 53);
-            this.cmbGrupoFamiliar.Name = "cmbGrupoFamiliar";
-            this.cmbGrupoFamiliar.Size = new System.Drawing.Size(140, 21);
-            this.cmbGrupoFamiliar.TabIndex = 59;
             // 
             // cmbEstadoCivil
             // 
             this.cmbEstadoCivil.FormattingEnabled = true;
-            this.cmbEstadoCivil.Location = new System.Drawing.Point(46, 192);
+            this.cmbEstadoCivil.Location = new System.Drawing.Point(46, 172);
             this.cmbEstadoCivil.Name = "cmbEstadoCivil";
             this.cmbEstadoCivil.Size = new System.Drawing.Size(140, 21);
             this.cmbEstadoCivil.TabIndex = 61;
@@ -196,7 +126,7 @@
             // cmbPlanMedico
             // 
             this.cmbPlanMedico.FormattingEnabled = true;
-            this.cmbPlanMedico.Location = new System.Drawing.Point(48, 248);
+            this.cmbPlanMedico.Location = new System.Drawing.Point(48, 215);
             this.cmbPlanMedico.Name = "cmbPlanMedico";
             this.cmbPlanMedico.Size = new System.Drawing.Size(140, 21);
             this.cmbPlanMedico.TabIndex = 60;
@@ -204,7 +134,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(30, 229);
+            this.label14.Location = new System.Drawing.Point(30, 196);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(68, 13);
             this.label14.TabIndex = 58;
@@ -213,7 +143,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(30, 176);
+            this.label12.Location = new System.Drawing.Point(30, 156);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(64, 13);
             this.label12.TabIndex = 55;
@@ -225,7 +155,7 @@
             this.cmbSexo.Items.AddRange(new object[] {
             "Masculino",
             "Femenino"});
-            this.cmbSexo.Location = new System.Drawing.Point(501, 133);
+            this.cmbSexo.Location = new System.Drawing.Point(409, 133);
             this.cmbSexo.Name = "cmbSexo";
             this.cmbSexo.Size = new System.Drawing.Size(138, 21);
             this.cmbSexo.TabIndex = 54;
@@ -233,7 +163,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(483, 113);
+            this.label11.Location = new System.Drawing.Point(391, 113);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(34, 13);
             this.label11.TabIndex = 53;
@@ -242,7 +172,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(483, 70);
+            this.label10.Location = new System.Drawing.Point(391, 70);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(99, 13);
             this.label10.TabIndex = 52;
@@ -250,7 +180,7 @@
             // 
             // tbNombreUsuario
             // 
-            this.tbNombreUsuario.Location = new System.Drawing.Point(499, 90);
+            this.tbNombreUsuario.Location = new System.Drawing.Point(407, 90);
             this.tbNombreUsuario.Name = "tbNombreUsuario";
             this.tbNombreUsuario.Size = new System.Drawing.Size(140, 20);
             this.tbNombreUsuario.TabIndex = 51;
@@ -258,7 +188,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(483, 27);
+            this.label9.Location = new System.Drawing.Point(391, 27);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(29, 13);
             this.label9.TabIndex = 50;
@@ -266,7 +196,7 @@
             // 
             // tbMail
             // 
-            this.tbMail.Location = new System.Drawing.Point(499, 47);
+            this.tbMail.Location = new System.Drawing.Point(407, 47);
             this.tbMail.Name = "tbMail";
             this.tbMail.Size = new System.Drawing.Size(140, 20);
             this.tbMail.TabIndex = 49;
@@ -274,7 +204,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(258, 113);
+            this.label8.Location = new System.Drawing.Point(209, 113);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(52, 13);
             this.label8.TabIndex = 48;
@@ -282,7 +212,7 @@
             // 
             // tbTelefono
             // 
-            this.tbTelefono.Location = new System.Drawing.Point(274, 133);
+            this.tbTelefono.Location = new System.Drawing.Point(225, 133);
             this.tbTelefono.Name = "tbTelefono";
             this.tbTelefono.Size = new System.Drawing.Size(140, 20);
             this.tbTelefono.TabIndex = 47;
@@ -290,7 +220,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(258, 70);
+            this.label7.Location = new System.Drawing.Point(209, 70);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(118, 13);
             this.label7.TabIndex = 46;
@@ -298,7 +228,7 @@
             // 
             // tbNumeroDni
             // 
-            this.tbNumeroDni.Location = new System.Drawing.Point(274, 90);
+            this.tbNumeroDni.Location = new System.Drawing.Point(225, 90);
             this.tbNumeroDni.Name = "tbNumeroDni";
             this.tbNumeroDni.Size = new System.Drawing.Size(140, 20);
             this.tbNumeroDni.TabIndex = 45;
@@ -310,7 +240,7 @@
             "DNI",
             "LE",
             "LC"});
-            this.cmbTipoDNI.Location = new System.Drawing.Point(276, 47);
+            this.cmbTipoDNI.Location = new System.Drawing.Point(227, 47);
             this.cmbTipoDNI.Name = "cmbTipoDNI";
             this.cmbTipoDNI.Size = new System.Drawing.Size(61, 21);
             this.cmbTipoDNI.TabIndex = 44;
@@ -318,7 +248,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(258, 27);
+            this.label6.Location = new System.Drawing.Point(209, 27);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(102, 13);
             this.label6.TabIndex = 43;
@@ -374,9 +304,9 @@
             // 
             // bGuardar
             // 
-            this.bGuardar.Location = new System.Drawing.Point(33, 297);
+            this.bGuardar.Location = new System.Drawing.Point(33, 245);
             this.bGuardar.Name = "bGuardar";
-            this.bGuardar.Size = new System.Drawing.Size(153, 37);
+            this.bGuardar.Size = new System.Drawing.Size(153, 41);
             this.bGuardar.TabIndex = 0;
             this.bGuardar.Text = "Guardar";
             this.bGuardar.UseVisualStyleBackColor = true;
@@ -386,15 +316,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(726, 374);
+            this.ClientSize = new System.Drawing.Size(588, 320);
             this.Controls.Add(this.gbDatos);
             this.Name = "EditAfiliado";
-            this.Text = "EditAfiliado";
+            this.Text = "Edición de afiliado";
             this.Load += new System.EventHandler(this.EditAfiliado_Load);
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();
-            this.gbGrupo.ResumeLayout(false);
-            this.gbGrupo.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -403,7 +331,6 @@
 
         private System.Windows.Forms.GroupBox gbDatos;
         private System.Windows.Forms.Button bGuardar;
-        private System.Windows.Forms.ComboBox cmbGrupoFamiliar;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cmbSexo;
@@ -424,13 +351,8 @@
         private System.Windows.Forms.TextBox tbApellido;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbNombre;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tbOrden;
         private System.Windows.Forms.ComboBox cmbEstadoCivil;
         private System.Windows.Forms.ComboBox cmbPlanMedico;
-        private System.Windows.Forms.RadioButton rbExistente;
-        private System.Windows.Forms.RadioButton rbNuevo;
-        private System.Windows.Forms.GroupBox gbGrupo;
         private System.Windows.Forms.Button bAgregarACargo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox lbIntegrantes;

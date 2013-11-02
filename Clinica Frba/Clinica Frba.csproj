@@ -54,6 +54,12 @@
     <Compile Include="Abm de Afiliado\EditAfiliado.Designer.cs">
       <DependentUpon>EditAfiliado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm de Afiliado\EditIntegrante.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm de Afiliado\EditIntegrante.Designer.cs">
+      <DependentUpon>EditIntegrante.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm de Profesional\AbmProfesionales.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,7 @@
     <Compile Include="Clases\FuncionesBoludas.cs" />
     <Compile Include="Clases\GrupoFamiliar.cs" />
     <Compile Include="Clases\GruposFamiliares.cs" />
+    <Compile Include="Clases\Integrante.cs" />
     <Compile Include="Clases\PlanesMedicos.cs" />
     <Compile Include="Clases\PlanMedico.cs" />
     <Compile Include="Clases\Profesional.cs" />
@@ -194,6 +201,9 @@
     <EmbeddedResource Include="Abm de Afiliado\EditAfiliado.resx">
       <DependentUpon>EditAfiliado.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm de Afiliado\EditIntegrante.resx">
+      <DependentUpon>EditIntegrante.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm de Profesional\AbmProfesionales.resx">
       <DependentUpon>AbmProfesionales.cs</DependentUpon>
     </EmbeddedResource>
@@ -244,6 +254,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Cosas\fecha.txt" />
+    <Content Include="Restricciones.txt" />
     <Content Include="ToDo.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
