@@ -30,7 +30,7 @@ namespace Clinica_Frba.AbmAfiliados {
         private void bGuardar_Click(object sender, EventArgs e) {
             integrante = new Integrante(tbNombre.Text, tbApellido.Text, tbDireccion.Text, tbMail.Text, cmbTipoDNI.SelectedText,
                 Convert.ToInt64(tbNumeroDni.Text), Convert.ToInt64(tbTelefono), (EstadoCivil)cmbEstadoCivil.SelectedItem,
-                (cmbSexo.SelectedText == "Masculino") ? "M" : "F", tbNombreUsuario.Text, cbConyuge.Checked);
+                (cmbSexo.SelectedText == "Masculino") ? "M" : "F", tbNombreUsuario.Text, cbConyuge.Checked, dtpFechaNacimiento.Value);
 
             this.Close();
         }

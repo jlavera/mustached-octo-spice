@@ -24,6 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.dtpFechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.bAgregarACargo = new System.Windows.Forms.Button();
             this.lbIntegrantes = new System.Windows.Forms.ListBox();
@@ -50,12 +51,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbNombre = new System.Windows.Forms.TextBox();
             this.bGuardar = new System.Windows.Forms.Button();
-            this.dtpFechaNacimiento = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
             this.gbDatos.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.label2);
             this.gbDatos.Controls.Add(this.dtpFechaNacimiento);
             this.gbDatos.Controls.Add(this.label1);
             this.gbDatos.Controls.Add(this.bAgregarACargo);
@@ -90,10 +92,18 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del titular:";
             // 
+            // dtpFechaNacimiento
+            // 
+            this.dtpFechaNacimiento.Location = new System.Drawing.Point(225, 173);
+            this.dtpFechaNacimiento.Name = "dtpFechaNacimiento";
+            this.dtpFechaNacimiento.Size = new System.Drawing.Size(209, 20);
+            this.dtpFechaNacimiento.TabIndex = 71;
+            this.dtpFechaNacimiento.Value = new System.DateTime(2013, 11, 1, 0, 0, 0, 0);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(209, 156);
+            this.label1.Location = new System.Drawing.Point(209, 196);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(110, 13);
             this.label1.TabIndex = 68;
@@ -101,9 +111,9 @@
             // 
             // bAgregarACargo
             // 
-            this.bAgregarACargo.Location = new System.Drawing.Point(227, 245);
+            this.bAgregarACargo.Location = new System.Drawing.Point(227, 265);
             this.bAgregarACargo.Name = "bAgregarACargo";
-            this.bAgregarACargo.Size = new System.Drawing.Size(322, 41);
+            this.bAgregarACargo.Size = new System.Drawing.Size(322, 21);
             this.bAgregarACargo.TabIndex = 70;
             this.bAgregarACargo.Text = "Agregar integrante";
             this.bAgregarACargo.UseVisualStyleBackColor = true;
@@ -112,9 +122,9 @@
             // lbIntegrantes
             // 
             this.lbIntegrantes.FormattingEnabled = true;
-            this.lbIntegrantes.Location = new System.Drawing.Point(227, 172);
+            this.lbIntegrantes.Location = new System.Drawing.Point(227, 216);
             this.lbIntegrantes.Name = "lbIntegrantes";
-            this.lbIntegrantes.Size = new System.Drawing.Size(320, 56);
+            this.lbIntegrantes.Size = new System.Drawing.Size(320, 43);
             this.lbIntegrantes.TabIndex = 67;
             // 
             // cmbEstadoCivil
@@ -314,13 +324,14 @@
             this.bGuardar.UseVisualStyleBackColor = true;
             this.bGuardar.Click += new System.EventHandler(this.bGuardar_Click);
             // 
-            // dtpFechaNacimiento
+            // label2
             // 
-            this.dtpFechaNacimiento.Location = new System.Drawing.Point(212, 0);
-            this.dtpFechaNacimiento.Name = "dtpFechaNacimiento";
-            this.dtpFechaNacimiento.Size = new System.Drawing.Size(200, 20);
-            this.dtpFechaNacimiento.TabIndex = 71;
-            this.dtpFechaNacimiento.Value = new System.DateTime(2013, 11, 1, 0, 0, 0, 0);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(209, 156);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(109, 13);
+            this.label2.TabIndex = 72;
+            this.label2.Text = "Fecha de nacimiento:";
             // 
             // EditAfiliado
             // 
@@ -367,5 +378,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox lbIntegrantes;
         private System.Windows.Forms.DateTimePicker dtpFechaNacimiento;
+        private System.Windows.Forms.Label label2;
     }
 }

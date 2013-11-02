@@ -63,7 +63,7 @@ namespace Clinica_Frba.Clases {
             int p_orden,
             int p_familiares) {
 
-            string query = "SELECT * FROM " + DB.schema + "vAfiliado WHERE";
+            string query = "SELECT *, ' ' AS grp_proximoOrden FROM " + DB.schema + "vAfiliado WHERE"; //--Proximo orden para mantener polimorfismo
             if(p_apellido!="")
                 query+=" usu_apellido LIKE '%"+p_apellido+"%' AND ";
             if (p_direccion != "")

@@ -28,6 +28,7 @@ namespace Clinica_Frba.AbmAfiliados{
         public string mail;
         public string nombreUsuario;
         public string sexo;
+        public DateTime fechaNacimiento;
         public EstadoCivil estadoCivil;
         public PlanMedico planMedico;
         public GrupoFamiliar grupoFamiliar;
@@ -67,6 +68,7 @@ namespace Clinica_Frba.AbmAfiliados{
             planMedico = p_afil.planMedico;
             grupoFamiliar = p_afil.grupoFamiliar;
             orden = p_afil.orden;
+            fechaNacimiento = p_afil.usuario.fechaNacimiento;
 
             tbNombre.Enabled = false;
             tbApellido.Enabled = false;
@@ -77,18 +79,6 @@ namespace Clinica_Frba.AbmAfiliados{
             cmbSexo.Enabled = false;         
 
             nueva = false;
-        }
-
-        /// <summary>
-        /// Formulario para crear afiliado (integrante de un grupo)
-        /// </summary>
-        /// <param name="p_grupoFamiliar">Grupo familiar al que pertenece</param>
-        /// <param name="p_orden">Orden que va a tener</param>
-        public EditAfiliado(int p_grupoFamiliar, int p_orden) {
-
-            InitializeComponent();
-
-            nueva = true;
         }
 
         private void EditAfiliado_Load(object sender, EventArgs e) {
@@ -117,10 +107,12 @@ namespace Clinica_Frba.AbmAfiliados{
                 if (sexo == "F")
                     cmbSexo.SelectedItem = "Femenino";
 
+                dtpFechaNacimiento.Value = fechaNacimiento;
+
                 cmbEstadoCivil.SelectedItem = estadoCivil;
                 cmbPlanMedico.SelectedItem = planMedico;
 
-                //--Traer los integrantes del grupo y si alguno es conyuge, marcar la flag
+                //--Traer los integrantes del grupo
                 foreach (DataRow dr in DB.ExecuteReader(
                     "SELECT * FROM moustache_spice.vAfiliado va WHERE va.afi_grupoFamiliar = " + grupoFamiliar.grupo + " AND va.afi_orden > 1 ORDER BY va.afi_grupoFamiliar ASC").Rows) {
 
@@ -128,6 +120,7 @@ namespace Clinica_Frba.AbmAfiliados{
                     Integrante integrante = new Integrante(dr);
                     lbIntegrantes.Items.Add(integrante);
 
+                    //--Si algún integrante es conyuge, marca la flag
                     if (Convert.ToInt32(dr["afi_orden"]) == 2)
                         tieneConyuge = true;
                 }

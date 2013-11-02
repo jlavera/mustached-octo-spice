@@ -24,6 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.dtpFechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.cbConyuge = new System.Windows.Forms.CheckBox();
             this.cmbEstadoCivil = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -46,12 +47,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbNombre = new System.Windows.Forms.TextBox();
             this.bGuardar = new System.Windows.Forms.Button();
-            this.dtpFechaNacimiento = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
             this.gbDatos.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.label1);
             this.gbDatos.Controls.Add(this.dtpFechaNacimiento);
             this.gbDatos.Controls.Add(this.cbConyuge);
             this.gbDatos.Controls.Add(this.cmbEstadoCivil);
@@ -77,15 +79,23 @@
             this.gbDatos.Controls.Add(this.bGuardar);
             this.gbDatos.Location = new System.Drawing.Point(12, 12);
             this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(428, 306);
+            this.gbDatos.Size = new System.Drawing.Size(407, 342);
             this.gbDatos.TabIndex = 1;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos:";
             // 
+            // dtpFechaNacimiento
+            // 
+            this.dtpFechaNacimiento.Location = new System.Drawing.Point(48, 303);
+            this.dtpFechaNacimiento.Name = "dtpFechaNacimiento";
+            this.dtpFechaNacimiento.Size = new System.Drawing.Size(200, 20);
+            this.dtpFechaNacimiento.TabIndex = 72;
+            this.dtpFechaNacimiento.Value = new System.DateTime(2013, 11, 1, 0, 0, 0, 0);
+            // 
             // cbConyuge
             // 
             this.cbConyuge.AutoSize = true;
-            this.cbConyuge.Location = new System.Drawing.Point(33, 268);
+            this.cbConyuge.Location = new System.Drawing.Point(33, 246);
             this.cbConyuge.Name = "cbConyuge";
             this.cbConyuge.Size = new System.Drawing.Size(68, 17);
             this.cbConyuge.TabIndex = 62;
@@ -123,7 +133,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(30, 199);
+            this.label11.Location = new System.Drawing.Point(30, 196);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(34, 13);
             this.label11.TabIndex = 53;
@@ -264,27 +274,28 @@
             // 
             // bGuardar
             // 
-            this.bGuardar.Location = new System.Drawing.Point(235, 257);
+            this.bGuardar.Location = new System.Drawing.Point(275, 270);
             this.bGuardar.Name = "bGuardar";
-            this.bGuardar.Size = new System.Drawing.Size(153, 37);
+            this.bGuardar.Size = new System.Drawing.Size(113, 53);
             this.bGuardar.TabIndex = 0;
             this.bGuardar.Text = "Agregar";
             this.bGuardar.UseVisualStyleBackColor = true;
             this.bGuardar.Click += new System.EventHandler(this.bGuardar_Click);
             // 
-            // dtpFechaNacimiento
+            // label1
             // 
-            this.dtpFechaNacimiento.Location = new System.Drawing.Point(121, 0);
-            this.dtpFechaNacimiento.Name = "dtpFechaNacimiento";
-            this.dtpFechaNacimiento.Size = new System.Drawing.Size(200, 20);
-            this.dtpFechaNacimiento.TabIndex = 72;
-            this.dtpFechaNacimiento.Value = new System.DateTime(2013, 11, 1, 0, 0, 0, 0);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(30, 283);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(109, 13);
+            this.label1.TabIndex = 73;
+            this.label1.Text = "Fecha de nacimiento:";
             // 
             // EditIntegrante
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(450, 327);
+            this.ClientSize = new System.Drawing.Size(429, 366);
             this.Controls.Add(this.gbDatos);
             this.Name = "EditIntegrante";
             this.Text = "EditIntegrante";
@@ -321,5 +332,6 @@
         private System.Windows.Forms.Button bGuardar;
         private System.Windows.Forms.CheckBox cbConyuge;
         private System.Windows.Forms.DateTimePicker dtpFechaNacimiento;
+        private System.Windows.Forms.Label label1;
     }
 }
