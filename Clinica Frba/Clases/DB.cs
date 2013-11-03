@@ -27,7 +27,7 @@ namespace Clinica_Frba.Clases {
         /// <param name="command">Comando</param>
         /// <returns></returns>
         static public DataTable ExecuteReader(string command){
-            if (command.IndexOf("vProfesional") > -1){
+            if (command.IndexOf("grp_proximoOrden") > -1) {
 
             }
             DataTable dt = new DataTable();

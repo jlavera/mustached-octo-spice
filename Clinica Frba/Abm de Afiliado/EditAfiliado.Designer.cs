@@ -24,6 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.tbContrasegna = new System.Windows.Forms.TextBox();
             this.tbRazon = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.tbNumeroDni = new System.Windows.Forms.MaskedTextBox();
@@ -55,8 +57,6 @@
             this.tbNombre = new System.Windows.Forms.TextBox();
             this.bGuardar = new System.Windows.Forms.Button();
             this.bCambiarGrupo = new System.Windows.Forms.Button();
-            this.label15 = new System.Windows.Forms.Label();
-            this.tbContrasegna = new System.Windows.Forms.TextBox();
             this.gbDatos.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -102,13 +102,30 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del titular:";
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(448, 113);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(61, 13);
+            this.label15.TabIndex = 78;
+            this.label15.Text = "Contraseña";
+            // 
+            // tbContrasegna
+            // 
+            this.tbContrasegna.Location = new System.Drawing.Point(466, 133);
+            this.tbContrasegna.Name = "tbContrasegna";
+            this.tbContrasegna.PasswordChar = '*';
+            this.tbContrasegna.Size = new System.Drawing.Size(140, 20);
+            this.tbContrasegna.TabIndex = 12;
+            // 
             // tbRazon
             // 
             this.tbRazon.Location = new System.Drawing.Point(227, 216);
             this.tbRazon.MaxLength = 255;
             this.tbRazon.Name = "tbRazon";
             this.tbRazon.Size = new System.Drawing.Size(140, 20);
-            this.tbRazon.TabIndex = 76;
+            this.tbRazon.TabIndex = 9;
             this.tbRazon.Visible = false;
             // 
             // label13
@@ -127,7 +144,7 @@
             this.tbNumeroDni.Mask = "000000000000000000";
             this.tbNumeroDni.Name = "tbNumeroDni";
             this.tbNumeroDni.Size = new System.Drawing.Size(138, 20);
-            this.tbNumeroDni.TabIndex = 73;
+            this.tbNumeroDni.TabIndex = 6;
             // 
             // tbTelefono
             // 
@@ -135,7 +152,7 @@
             this.tbTelefono.Mask = "000000000000000000";
             this.tbTelefono.Name = "tbTelefono";
             this.tbTelefono.Size = new System.Drawing.Size(138, 20);
-            this.tbTelefono.TabIndex = 74;
+            this.tbTelefono.TabIndex = 7;
             // 
             // label2
             // 
@@ -168,7 +185,7 @@
             this.bAgregarACargo.Location = new System.Drawing.Point(468, 265);
             this.bAgregarACargo.Name = "bAgregarACargo";
             this.bAgregarACargo.Size = new System.Drawing.Size(140, 21);
-            this.bAgregarACargo.TabIndex = 70;
+            this.bAgregarACargo.TabIndex = 15;
             this.bAgregarACargo.Text = "Agregar integrante";
             this.bAgregarACargo.UseVisualStyleBackColor = true;
             this.bAgregarACargo.Click += new System.EventHandler(this.bAgregarACargo_Click);
@@ -181,7 +198,7 @@
             this.lbIntegrantes.Name = "lbIntegrantes";
             this.lbIntegrantes.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.lbIntegrantes.Size = new System.Drawing.Size(140, 43);
-            this.lbIntegrantes.TabIndex = 67;
+            this.lbIntegrantes.TabIndex = 14;
             // 
             // cmbEstadoCivil
             // 
@@ -190,7 +207,7 @@
             this.cmbEstadoCivil.Location = new System.Drawing.Point(46, 172);
             this.cmbEstadoCivil.Name = "cmbEstadoCivil";
             this.cmbEstadoCivil.Size = new System.Drawing.Size(140, 21);
-            this.cmbEstadoCivil.TabIndex = 4;
+            this.cmbEstadoCivil.TabIndex = 3;
             // 
             // cmbPlanMedico
             // 
@@ -199,7 +216,7 @@
             this.cmbPlanMedico.Location = new System.Drawing.Point(46, 215);
             this.cmbPlanMedico.Name = "cmbPlanMedico";
             this.cmbPlanMedico.Size = new System.Drawing.Size(140, 21);
-            this.cmbPlanMedico.TabIndex = 5;
+            this.cmbPlanMedico.TabIndex = 4;
             this.cmbPlanMedico.SelectedIndexChanged += new System.EventHandler(this.cmbPlanMedico_SelectedIndexChanged);
             // 
             // label14
@@ -230,7 +247,7 @@
             this.cmbSexo.Location = new System.Drawing.Point(468, 172);
             this.cmbSexo.Name = "cmbSexo";
             this.cmbSexo.Size = new System.Drawing.Size(138, 21);
-            this.cmbSexo.TabIndex = 10;
+            this.cmbSexo.TabIndex = 13;
             // 
             // label11
             // 
@@ -255,7 +272,7 @@
             this.tbNombreUsuario.Location = new System.Drawing.Point(468, 90);
             this.tbNombreUsuario.Name = "tbNombreUsuario";
             this.tbNombreUsuario.Size = new System.Drawing.Size(140, 20);
-            this.tbNombreUsuario.TabIndex = 9;
+            this.tbNombreUsuario.TabIndex = 11;
             // 
             // label9
             // 
@@ -271,7 +288,7 @@
             this.tbMail.Location = new System.Drawing.Point(468, 47);
             this.tbMail.Name = "tbMail";
             this.tbMail.Size = new System.Drawing.Size(138, 20);
-            this.tbMail.TabIndex = 49;
+            this.tbMail.TabIndex = 10;
             // 
             // label8
             // 
@@ -302,7 +319,7 @@
             this.cmbTipoDNI.Location = new System.Drawing.Point(227, 47);
             this.cmbTipoDNI.Name = "cmbTipoDNI";
             this.cmbTipoDNI.Size = new System.Drawing.Size(61, 21);
-            this.cmbTipoDNI.TabIndex = 6;
+            this.cmbTipoDNI.TabIndex = 5;
             // 
             // label6
             // 
@@ -327,7 +344,7 @@
             this.tbDireccion.Location = new System.Drawing.Point(46, 133);
             this.tbDireccion.Name = "tbDireccion";
             this.tbDireccion.Size = new System.Drawing.Size(140, 20);
-            this.tbDireccion.TabIndex = 3;
+            this.tbDireccion.TabIndex = 2;
             // 
             // label4
             // 
@@ -366,7 +383,7 @@
             this.bGuardar.Location = new System.Drawing.Point(46, 245);
             this.bGuardar.Name = "bGuardar";
             this.bGuardar.Size = new System.Drawing.Size(140, 41);
-            this.bGuardar.TabIndex = 12;
+            this.bGuardar.TabIndex = 17;
             this.bGuardar.Text = "Guardar";
             this.bGuardar.UseVisualStyleBackColor = true;
             this.bGuardar.Click += new System.EventHandler(this.bGuardar_Click);
@@ -376,27 +393,10 @@
             this.bCambiarGrupo.Location = new System.Drawing.Point(225, 245);
             this.bCambiarGrupo.Name = "bCambiarGrupo";
             this.bCambiarGrupo.Size = new System.Drawing.Size(140, 41);
-            this.bCambiarGrupo.TabIndex = 73;
+            this.bCambiarGrupo.TabIndex = 16;
             this.bCambiarGrupo.Text = "Cambiar grupo familiar";
             this.bCambiarGrupo.UseVisualStyleBackColor = true;
             this.bCambiarGrupo.Click += new System.EventHandler(this.bCambiarGrupo_Click);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(448, 113);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(61, 13);
-            this.label15.TabIndex = 78;
-            this.label15.Text = "Contraseña";
-            // 
-            // tbContrasegna
-            // 
-            this.tbContrasegna.Location = new System.Drawing.Point(466, 133);
-            this.tbContrasegna.Name = "tbContrasegna";
-            this.tbContrasegna.PasswordChar = '*';
-            this.tbContrasegna.Size = new System.Drawing.Size(140, 20);
-            this.tbContrasegna.TabIndex = 77;
             // 
             // EditAfiliado
             // 

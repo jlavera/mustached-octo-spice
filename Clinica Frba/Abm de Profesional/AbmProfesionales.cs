@@ -54,7 +54,7 @@ namespace Clinica_Frba.AbmProfesionales {
 
             //--Llena dgv
             foreach (Profesional prof in profs.items) {
-                dgvProfesionales.Rows.Add((prof.matricula == -1)? "Falta cargar": prof.matricula.ToString(),
+                dgvProfesionales.Rows.Add(prof.id, (prof.matricula == -1)? "Falta cargar": prof.matricula.ToString(),
                     prof.usuario.nombre, prof.usuario.apellido,
                     (prof.usuario.tipoDocumento == "") ? "Faltar cargar" : prof.usuario.tipoDocumento, prof.usuario.numeroDocumento,
                     prof.usuario.direccion, prof.usuario.telefono, prof.usuario.mail, prof.usuario.fechaNacimiento,
@@ -82,7 +82,7 @@ namespace Clinica_Frba.AbmProfesionales {
 
             //--Abrir ventana para editar afiliado
             if (dgvProfesionales.Columns[e.ColumnIndex].HeaderText == "Seleccionar") {
-                EditProfesional formEdit = new EditProfesional(profs[e.RowIndex]);
+                EditProfesional formEdit = new EditProfesional(profs[dgvProfesionales["id", e.RowIndex].Value.ToString()]);
                 formEdit.ShowDialog();
 
                 //--Si el diálogo tiene resultado OK, volver a llenar dgv
@@ -94,8 +94,10 @@ namespace Clinica_Frba.AbmProfesionales {
 
         private void bEliminar_Click(object sender, EventArgs e) {
 
-            //--Elimina los roles seleccionados
-            //profs.DeleteSelected(dgvProfesionales);
+            //--Elimina los profesionales seleccionados
+            if (MessageBox.Show("Está seguro de que desea eliminar los " + dgvProfesionales.SelectedRows.Count + " elementos seleccionados?", "Confirmación",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                profs.DeleteSelected(dgvProfesionales);
         }
 
         private void button1_Click(object sender, EventArgs e) {

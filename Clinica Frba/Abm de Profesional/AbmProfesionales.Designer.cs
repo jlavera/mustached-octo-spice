@@ -57,6 +57,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lbEspecialidades = new System.Windows.Forms.ListBox();
             this.dgvProfesionales = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.matrícula = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,7 +82,7 @@
             this.bEliminar.Location = new System.Drawing.Point(189, 186);
             this.bEliminar.Name = "bEliminar";
             this.bEliminar.Size = new System.Drawing.Size(134, 29);
-            this.bEliminar.TabIndex = 9;
+            this.bEliminar.TabIndex = 1;
             this.bEliminar.Text = "Eliminar seleccionados";
             this.bEliminar.UseVisualStyleBackColor = true;
             this.bEliminar.Click += new System.EventHandler(this.bEliminar_Click);
@@ -92,7 +93,7 @@
             this.bAgregar.Location = new System.Drawing.Point(12, 186);
             this.bAgregar.Name = "bAgregar";
             this.bAgregar.Size = new System.Drawing.Size(134, 29);
-            this.bAgregar.TabIndex = 8;
+            this.bAgregar.TabIndex = 0;
             this.bAgregar.Text = "Agregar";
             this.bAgregar.UseVisualStyleBackColor = true;
             this.bAgregar.Click += new System.EventHandler(this.bAgregar_Click);
@@ -103,7 +104,7 @@
             this.bBuscar.Location = new System.Drawing.Point(1111, 186);
             this.bBuscar.Name = "bBuscar";
             this.bBuscar.Size = new System.Drawing.Size(91, 29);
-            this.bBuscar.TabIndex = 7;
+            this.bBuscar.TabIndex = 2;
             this.bBuscar.Text = "Buscar";
             this.bBuscar.UseVisualStyleBackColor = true;
             this.bBuscar.Click += new System.EventHandler(this.bBuscar_Click);
@@ -140,7 +141,7 @@
             this.gbFiltros.Location = new System.Drawing.Point(12, 12);
             this.gbFiltros.Name = "gbFiltros";
             this.gbFiltros.Size = new System.Drawing.Size(1190, 168);
-            this.gbFiltros.TabIndex = 6;
+            this.gbFiltros.TabIndex = 0;
             this.gbFiltros.TabStop = false;
             this.gbFiltros.Text = "Filtros";
             // 
@@ -158,7 +159,7 @@
             this.tbMatricula.Location = new System.Drawing.Point(37, 40);
             this.tbMatricula.Name = "tbMatricula";
             this.tbMatricula.Size = new System.Drawing.Size(140, 20);
-            this.tbMatricula.TabIndex = 41;
+            this.tbMatricula.TabIndex = 0;
             // 
             // label15
             // 
@@ -184,7 +185,7 @@
             0});
             this.nLimit.Name = "nLimit";
             this.nLimit.Size = new System.Drawing.Size(140, 20);
-            this.nLimit.TabIndex = 39;
+            this.nLimit.TabIndex = 11;
             this.nLimit.Value = new decimal(new int[] {
             20,
             0,
@@ -200,7 +201,7 @@
             this.cmbSexo.Location = new System.Drawing.Point(984, 40);
             this.cmbSexo.Name = "cmbSexo";
             this.cmbSexo.Size = new System.Drawing.Size(138, 21);
-            this.cmbSexo.TabIndex = 24;
+            this.cmbSexo.TabIndex = 10;
             this.cmbSexo.SelectedIndexChanged += new System.EventHandler(this.cmbSexo_SelectedIndexChanged);
             // 
             // label11
@@ -226,7 +227,7 @@
             this.tbNombreUsuario.Location = new System.Drawing.Point(265, 83);
             this.tbNombreUsuario.Name = "tbNombreUsuario";
             this.tbNombreUsuario.Size = new System.Drawing.Size(140, 20);
-            this.tbNombreUsuario.TabIndex = 21;
+            this.tbNombreUsuario.TabIndex = 4;
             // 
             // label9
             // 
@@ -242,7 +243,7 @@
             this.tbMail.Location = new System.Drawing.Point(265, 40);
             this.tbMail.Name = "tbMail";
             this.tbMail.Size = new System.Drawing.Size(140, 20);
-            this.tbMail.TabIndex = 19;
+            this.tbMail.TabIndex = 3;
             // 
             // label8
             // 
@@ -258,7 +259,7 @@
             this.tbTelefono.Location = new System.Drawing.Point(503, 126);
             this.tbTelefono.Name = "tbTelefono";
             this.tbTelefono.Size = new System.Drawing.Size(140, 20);
-            this.tbTelefono.TabIndex = 17;
+            this.tbTelefono.TabIndex = 8;
             // 
             // label7
             // 
@@ -274,7 +275,7 @@
             this.tbNumeroDni.Location = new System.Drawing.Point(503, 83);
             this.tbNumeroDni.Name = "tbNumeroDni";
             this.tbNumeroDni.Size = new System.Drawing.Size(140, 20);
-            this.tbNumeroDni.TabIndex = 15;
+            this.tbNumeroDni.TabIndex = 7;
             // 
             // cmbTipoDNI
             // 
@@ -286,7 +287,7 @@
             this.cmbTipoDNI.Location = new System.Drawing.Point(505, 40);
             this.cmbTipoDNI.Name = "cmbTipoDNI";
             this.cmbTipoDNI.Size = new System.Drawing.Size(61, 21);
-            this.cmbTipoDNI.TabIndex = 14;
+            this.cmbTipoDNI.TabIndex = 6;
             // 
             // label6
             // 
@@ -311,7 +312,7 @@
             this.tbDireccion.Location = new System.Drawing.Point(265, 126);
             this.tbDireccion.Name = "tbDireccion";
             this.tbDireccion.Size = new System.Drawing.Size(140, 20);
-            this.tbDireccion.TabIndex = 11;
+            this.tbDireccion.TabIndex = 5;
             // 
             // label4
             // 
@@ -327,7 +328,7 @@
             this.tbApellido.Location = new System.Drawing.Point(37, 126);
             this.tbApellido.Name = "tbApellido";
             this.tbApellido.Size = new System.Drawing.Size(140, 20);
-            this.tbApellido.TabIndex = 9;
+            this.tbApellido.TabIndex = 2;
             // 
             // label3
             // 
@@ -343,7 +344,7 @@
             this.tbNombre.Location = new System.Drawing.Point(37, 83);
             this.tbNombre.Name = "tbNombre";
             this.tbNombre.Size = new System.Drawing.Size(140, 20);
-            this.tbNombre.TabIndex = 7;
+            this.tbNombre.TabIndex = 1;
             // 
             // label1
             // 
@@ -362,7 +363,7 @@
             this.lbEspecialidades.Name = "lbEspecialidades";
             this.lbEspecialidades.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbEspecialidades.Size = new System.Drawing.Size(140, 108);
-            this.lbEspecialidades.TabIndex = 3;
+            this.lbEspecialidades.TabIndex = 9;
             this.lbEspecialidades.ValueMember = "id";
             // 
             // dgvProfesionales
@@ -370,6 +371,7 @@
             this.dgvProfesionales.AllowUserToAddRows = false;
             this.dgvProfesionales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProfesionales.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
             this.matrícula,
             this.Nombre,
             this.Apellido,
@@ -387,8 +389,14 @@
             this.dgvProfesionales.Location = new System.Drawing.Point(0, 221);
             this.dgvProfesionales.Name = "dgvProfesionales";
             this.dgvProfesionales.Size = new System.Drawing.Size(1212, 431);
-            this.dgvProfesionales.TabIndex = 5;
+            this.dgvProfesionales.TabIndex = 3;
             this.dgvProfesionales.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAfiliados_CellContentClick);
+            // 
+            // id
+            // 
+            this.id.HeaderText = "Id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
             // 
             // matrícula
             // 
@@ -519,6 +527,7 @@
         private System.Windows.Forms.NumericUpDown nLimit;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox tbMatricula;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn matrícula;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;

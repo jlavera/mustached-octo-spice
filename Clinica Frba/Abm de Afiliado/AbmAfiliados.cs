@@ -58,7 +58,7 @@ namespace Clinica_Frba.AbmAfiliados {
 
             //--Abrir ventana para editar afiliado
             if (dgvAfiliados.Columns[e.ColumnIndex].HeaderText == "Seleccionar") {
-                EditAfiliado formEdit = new EditAfiliado(afiliados[e.RowIndex]);
+                EditAfiliado formEdit = new EditAfiliado(afiliados[dgvAfiliados.Rows[e.RowIndex].Cells[0].Value.ToString()]);
                 formEdit.ShowDialog();
 
                 //--Si el diálogo tiene resultado OK, volver a llenar dgv
@@ -104,8 +104,10 @@ namespace Clinica_Frba.AbmAfiliados {
 
         private void bEliminar_Click(object sender, EventArgs e) {
 
-            //--Elimina los roles seleccionados
-            afiliados.DeleteSelected(dgvAfiliados);
+            if (MessageBox.Show("Está seguro de que desea eliminar los " + dgvAfiliados.SelectedRows.Count + " elementos seleccionados?", "Confirmación",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                //--Elimina los roles seleccionados
+                afiliados.DeleteSelected(dgvAfiliados);
         }
 
         private void button1_Click(object sender, EventArgs e)

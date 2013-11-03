@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Security.Cryptography;
 
 namespace Clinica_Frba.Clases {
     static class FuncionesBoludas {
@@ -46,5 +47,26 @@ namespace Clinica_Frba.Clases {
             sw.Close();
             sw.Dispose();
         }
+
+        /// <summary>
+        /// Devuelve la cadena encriptada en Sha256
+        /// </summary>
+        /// <param name="text">Cadena a encriptar</param>
+        /// <returns></returns>
+        public static string getHashSha256(string text) {
+
+            SHA256Managed hashstring = new SHA256Managed();
+
+            byte[] bytes = Encoding.Unicode.GetBytes(text);
+            byte[] hash = hashstring.ComputeHash(bytes);
+            string hashString = string.Empty;
+
+            foreach (byte x in hash) {
+                hashString += String.Format("{0:x2}", x);
+            }
+
+            return hashString;
+        }
+
     }
 }

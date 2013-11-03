@@ -125,7 +125,7 @@ namespace Clinica_Frba.Clases {
         }
 
         /// <summary>
-        /// Elimina de la db, de la lista entidad y del dgv los roles seleccionados
+        /// Elimina de la db, de la lista entidad y del dgv los afiliados seleccionados
         /// </summary>
         /// <param name="dgv"></param>
         public void DeleteSelected(DataGridView dgv) {
@@ -151,9 +151,9 @@ namespace Clinica_Frba.Clases {
                 }
 
                 //--Eliminar del dgv
-                foreach (DataGridViewRow rol in p_objects)
+                foreach (DataGridViewRow afiliado in p_objects)
                 {
-                    dgv.Rows.Remove(rol);
+                    dgv.Rows.Remove(afiliado);
                 }
             }
             else {

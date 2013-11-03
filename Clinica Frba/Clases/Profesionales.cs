@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using Clinica_Frba.Clases;
 
 namespace Clinica_Frba.Clases {
-    class Profesionales:ListaEntidad {
+    class Profesionales : ListaEntidad {
         //--------------HOMOGENEO A TODAS LAS ENTIDADES------
         #region homogeneo
         public Profesionales()
@@ -37,6 +37,17 @@ namespace Clinica_Frba.Clases {
         #endregion
         //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
 
+
+        public Profesional this[string id] {
+            get {
+                foreach (Profesional item in items) {
+                    if (item.id.ToString() == id) {
+                        return item;
+                    }
+                }
+                return null;
+            }
+        }
 
         /// <summary>
         /// Devuelve los profesionales junto con sus entidades FK desde la vista
@@ -94,5 +105,39 @@ namespace Clinica_Frba.Clases {
 
         }
 
+        /// <summary>
+        /// Elimina de la db, de la lista entidad y del dgv los profesionales seleccionados
+        /// </summary>
+        /// <param name="dgv"></param>
+        public void DeleteSelected(DataGridView dgv) {
+
+            DataGridViewSelectedRowCollection p_objects = dgv.SelectedRows;
+
+            //--Eliminar de la DB
+            if (p_objects.Count > 0) {
+                string query = "UPDATE " + DB.schema + tabla + " SET pro_habilitado=0 WHERE";
+
+                foreach (DataGridViewRow profesional in p_objects) {
+                    query += " pro_id = " + profesional.Cells["id"].Value.ToString() + " OR ";
+                }
+                //Para sacar el ultimo or
+                query = query.Substring(0, query.Length - 3);
+
+                if (DB.ExecuteNonQuery(query) == -1)
+                    MessageBox.Show("Error en la delecion");
+
+                //--Eliminar del ArrayList
+                foreach (DataGridViewRow profesional in p_objects) {
+                    items.Remove(this[profesional.Cells["id"].Value.ToString()]);
+                }
+
+                //--Eliminar del dgv
+                foreach (DataGridViewRow profesional in p_objects) {
+                    dgv.Rows.Remove(profesional);
+                }
+            } else {
+                MessageBox.Show("Nada seleccionado para borrar");
+            }
+        }
     }
 }

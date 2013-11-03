@@ -24,6 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbContrasegna = new System.Windows.Forms.TextBox();
             this.tbNumeroDni = new System.Windows.Forms.MaskedTextBox();
             this.tbTelefono = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -48,8 +50,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbNombre = new System.Windows.Forms.TextBox();
             this.bGuardar = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tbContrasegna = new System.Windows.Forms.TextBox();
             this.gbDatos.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,13 +88,30 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos:";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(232, 244);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(64, 13);
+            this.label2.TabIndex = 75;
+            this.label2.Text = "Contraseña:";
+            // 
+            // tbContrasegna
+            // 
+            this.tbContrasegna.Location = new System.Drawing.Point(248, 264);
+            this.tbContrasegna.Name = "tbContrasegna";
+            this.tbContrasegna.PasswordChar = '*';
+            this.tbContrasegna.Size = new System.Drawing.Size(140, 20);
+            this.tbContrasegna.TabIndex = 12;
+            // 
             // tbNumeroDni
             // 
             this.tbNumeroDni.Location = new System.Drawing.Point(248, 90);
             this.tbNumeroDni.Mask = "000000000000000000";
             this.tbNumeroDni.Name = "tbNumeroDni";
             this.tbNumeroDni.Size = new System.Drawing.Size(140, 20);
-            this.tbNumeroDni.TabIndex = 6;
+            this.tbNumeroDni.TabIndex = 8;
             // 
             // tbTelefono
             // 
@@ -102,7 +119,7 @@
             this.tbTelefono.Mask = "000000000000000000";
             this.tbTelefono.Name = "tbTelefono";
             this.tbTelefono.Size = new System.Drawing.Size(140, 20);
-            this.tbTelefono.TabIndex = 7;
+            this.tbTelefono.TabIndex = 9;
             // 
             // label1
             // 
@@ -118,7 +135,7 @@
             this.dtpFechaNacimiento.Location = new System.Drawing.Point(48, 303);
             this.dtpFechaNacimiento.Name = "dtpFechaNacimiento";
             this.dtpFechaNacimiento.Size = new System.Drawing.Size(200, 20);
-            this.dtpFechaNacimiento.TabIndex = 11;
+            this.dtpFechaNacimiento.TabIndex = 6;
             this.dtpFechaNacimiento.Value = new System.DateTime(2013, 11, 1, 0, 0, 0, 0);
             // 
             // cbConyuge
@@ -127,7 +144,7 @@
             this.cbConyuge.Location = new System.Drawing.Point(33, 254);
             this.cbConyuge.Name = "cbConyuge";
             this.cbConyuge.Size = new System.Drawing.Size(68, 17);
-            this.cbConyuge.TabIndex = 10;
+            this.cbConyuge.TabIndex = 5;
             this.cbConyuge.Text = "Conyuge";
             this.cbConyuge.UseVisualStyleBackColor = true;
             // 
@@ -184,7 +201,7 @@
             this.tbNombreUsuario.Location = new System.Drawing.Point(248, 219);
             this.tbNombreUsuario.Name = "tbNombreUsuario";
             this.tbNombreUsuario.Size = new System.Drawing.Size(140, 20);
-            this.tbNombreUsuario.TabIndex = 9;
+            this.tbNombreUsuario.TabIndex = 11;
             // 
             // label9
             // 
@@ -200,7 +217,7 @@
             this.tbMail.Location = new System.Drawing.Point(248, 176);
             this.tbMail.Name = "tbMail";
             this.tbMail.Size = new System.Drawing.Size(140, 20);
-            this.tbMail.TabIndex = 8;
+            this.tbMail.TabIndex = 10;
             // 
             // label8
             // 
@@ -231,7 +248,7 @@
             this.cmbTipoDNI.Location = new System.Drawing.Point(250, 47);
             this.cmbTipoDNI.Name = "cmbTipoDNI";
             this.cmbTipoDNI.Size = new System.Drawing.Size(61, 21);
-            this.cmbTipoDNI.TabIndex = 5;
+            this.cmbTipoDNI.TabIndex = 7;
             // 
             // label6
             // 
@@ -295,27 +312,10 @@
             this.bGuardar.Location = new System.Drawing.Point(254, 290);
             this.bGuardar.Name = "bGuardar";
             this.bGuardar.Size = new System.Drawing.Size(134, 33);
-            this.bGuardar.TabIndex = 0;
+            this.bGuardar.TabIndex = 13;
             this.bGuardar.Text = "Agregar";
             this.bGuardar.UseVisualStyleBackColor = true;
             this.bGuardar.Click += new System.EventHandler(this.bGuardar_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(232, 244);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 13);
-            this.label2.TabIndex = 75;
-            this.label2.Text = "Contraseña:";
-            // 
-            // tbContrasegna
-            // 
-            this.tbContrasegna.Location = new System.Drawing.Point(248, 264);
-            this.tbContrasegna.Name = "tbContrasegna";
-            this.tbContrasegna.PasswordChar = '*';
-            this.tbContrasegna.Size = new System.Drawing.Size(140, 20);
-            this.tbContrasegna.TabIndex = 74;
             // 
             // EditIntegrante
             // 

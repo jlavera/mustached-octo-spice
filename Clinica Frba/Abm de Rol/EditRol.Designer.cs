@@ -24,6 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbHabilitado = new System.Windows.Forms.CheckBox();
             this.lbFuncionalidades = new System.Windows.Forms.ListBox();
             this.tbNombre = new System.Windows.Forms.TextBox();
             this.tbId = new System.Windows.Forms.TextBox();
@@ -31,7 +32,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.bGuardar = new System.Windows.Forms.Button();
-            this.cbHabilitado = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,6 +52,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos";
             // 
+            // cbHabilitado
+            // 
+            this.cbHabilitado.AutoSize = true;
+            this.cbHabilitado.Location = new System.Drawing.Point(22, 157);
+            this.cbHabilitado.Name = "cbHabilitado";
+            this.cbHabilitado.Size = new System.Drawing.Size(73, 17);
+            this.cbHabilitado.TabIndex = 2;
+            this.cbHabilitado.Text = "Habilitado";
+            this.cbHabilitado.UseVisualStyleBackColor = true;
+            // 
             // lbFuncionalidades
             // 
             this.lbFuncionalidades.FormattingEnabled = true;
@@ -59,14 +69,14 @@
             this.lbFuncionalidades.Name = "lbFuncionalidades";
             this.lbFuncionalidades.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.lbFuncionalidades.Size = new System.Drawing.Size(132, 238);
-            this.lbFuncionalidades.TabIndex = 6;
+            this.lbFuncionalidades.TabIndex = 3;
             // 
             // tbNombre
             // 
             this.tbNombre.Location = new System.Drawing.Point(25, 110);
             this.tbNombre.Name = "tbNombre";
             this.tbNombre.Size = new System.Drawing.Size(100, 20);
-            this.tbNombre.TabIndex = 5;
+            this.tbNombre.TabIndex = 1;
             // 
             // tbId
             // 
@@ -74,7 +84,7 @@
             this.tbId.Location = new System.Drawing.Point(25, 49);
             this.tbId.Name = "tbId";
             this.tbId.Size = new System.Drawing.Size(100, 20);
-            this.tbId.TabIndex = 4;
+            this.tbId.TabIndex = 0;
             // 
             // label3
             // 
@@ -108,20 +118,10 @@
             this.bGuardar.Location = new System.Drawing.Point(22, 249);
             this.bGuardar.Name = "bGuardar";
             this.bGuardar.Size = new System.Drawing.Size(103, 38);
-            this.bGuardar.TabIndex = 0;
+            this.bGuardar.TabIndex = 4;
             this.bGuardar.Text = "Guardar";
             this.bGuardar.UseVisualStyleBackColor = true;
             this.bGuardar.Click += new System.EventHandler(this.bGuardar_Click);
-            // 
-            // cbHabilitado
-            // 
-            this.cbHabilitado.AutoSize = true;
-            this.cbHabilitado.Location = new System.Drawing.Point(22, 157);
-            this.cbHabilitado.Name = "cbHabilitado";
-            this.cbHabilitado.Size = new System.Drawing.Size(73, 17);
-            this.cbHabilitado.TabIndex = 7;
-            this.cbHabilitado.Text = "Habilitado";
-            this.cbHabilitado.UseVisualStyleBackColor = true;
             // 
             // EditRol
             // 

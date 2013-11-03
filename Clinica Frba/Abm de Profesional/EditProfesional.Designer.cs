@@ -82,7 +82,7 @@
             this.gbDatos.Location = new System.Drawing.Point(12, 12);
             this.gbDatos.Name = "gbDatos";
             this.gbDatos.Size = new System.Drawing.Size(633, 339);
-            this.gbDatos.TabIndex = 1;
+            this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del titular:";
             // 
@@ -92,7 +92,7 @@
             this.tbNumeroDni.Mask = "000000000000000000";
             this.tbNumeroDni.Name = "tbNumeroDni";
             this.tbNumeroDni.Size = new System.Drawing.Size(138, 20);
-            this.tbNumeroDni.TabIndex = 73;
+            this.tbNumeroDni.TabIndex = 6;
             // 
             // tbTelefono
             // 
@@ -100,7 +100,7 @@
             this.tbTelefono.Mask = "000000000000000000";
             this.tbTelefono.Name = "tbTelefono";
             this.tbTelefono.Size = new System.Drawing.Size(138, 20);
-            this.tbTelefono.TabIndex = 74;
+            this.tbTelefono.TabIndex = 7;
             // 
             // label2
             // 
@@ -126,7 +126,7 @@
             this.lbEspecialidades.Name = "lbEspecialidades";
             this.lbEspecialidades.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.lbEspecialidades.Size = new System.Drawing.Size(140, 264);
-            this.lbEspecialidades.TabIndex = 67;
+            this.lbEspecialidades.TabIndex = 11;
             // 
             // cmbSexo
             // 
@@ -138,7 +138,7 @@
             this.cmbSexo.Location = new System.Drawing.Point(43, 220);
             this.cmbSexo.Name = "cmbSexo";
             this.cmbSexo.Size = new System.Drawing.Size(138, 21);
-            this.cmbSexo.TabIndex = 10;
+            this.cmbSexo.TabIndex = 4;
             // 
             // label11
             // 
@@ -179,7 +179,7 @@
             this.tbMail.Location = new System.Drawing.Point(46, 177);
             this.tbMail.Name = "tbMail";
             this.tbMail.Size = new System.Drawing.Size(140, 20);
-            this.tbMail.TabIndex = 49;
+            this.tbMail.TabIndex = 3;
             // 
             // label8
             // 
@@ -210,7 +210,7 @@
             this.cmbTipoDNI.Location = new System.Drawing.Point(227, 47);
             this.cmbTipoDNI.Name = "cmbTipoDNI";
             this.cmbTipoDNI.Size = new System.Drawing.Size(61, 21);
-            this.cmbTipoDNI.TabIndex = 6;
+            this.cmbTipoDNI.TabIndex = 5;
             // 
             // label6
             // 
@@ -235,7 +235,7 @@
             this.tbDireccion.Location = new System.Drawing.Point(46, 133);
             this.tbDireccion.Name = "tbDireccion";
             this.tbDireccion.Size = new System.Drawing.Size(140, 20);
-            this.tbDireccion.TabIndex = 3;
+            this.tbDireccion.TabIndex = 2;
             // 
             // label4
             // 
@@ -303,7 +303,7 @@
             this.tbContrasegna.Name = "tbContrasegna";
             this.tbContrasegna.PasswordChar = '*';
             this.tbContrasegna.Size = new System.Drawing.Size(138, 20);
-            this.tbContrasegna.TabIndex = 75;
+            this.tbContrasegna.TabIndex = 10;
             // 
             // EditProfesional
             // 

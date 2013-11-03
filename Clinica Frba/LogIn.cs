@@ -28,7 +28,7 @@ namespace Clinica_Frba {
 
                 //--Traer usuarios con ese user y pass
                 Usuarios users = new Usuarios();
-                userTemp = users.VerifyUser(tbUsuario.Text, getHashSha256(tbPassword.Text));
+                userTemp = users.VerifyUser(tbUsuario.Text, FuncionesBoludas.getHashSha256(tbPassword.Text));
 
                 //--Si hay más de 0
                 if (userTemp == null) {
@@ -59,21 +59,6 @@ namespace Clinica_Frba {
             user = userTemp;
 
             DialogResult = DialogResult.OK;
-        }
-
-        public static string getHashSha256(string text) {
-
-            SHA256Managed hashstring = new SHA256Managed();
-
-            byte[] bytes = Encoding.Unicode.GetBytes(text);
-            byte[] hash = hashstring.ComputeHash(bytes);
-            string hashString = string.Empty;
-
-            foreach (byte x in hash) {
-                hashString += String.Format("{0:x2}", x);
-            }
-
-            return hashString;
         }
 
         private void LogIn_Load(object sender, EventArgs e) {

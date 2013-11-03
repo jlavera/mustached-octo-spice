@@ -60,7 +60,7 @@
             this.bFiltrar.Location = new System.Drawing.Point(256, 70);
             this.bFiltrar.Name = "bFiltrar";
             this.bFiltrar.Size = new System.Drawing.Size(147, 25);
-            this.bFiltrar.TabIndex = 8;
+            this.bFiltrar.TabIndex = 4;
             this.bFiltrar.Text = "Filtrar";
             this.bFiltrar.UseVisualStyleBackColor = true;
             this.bFiltrar.Click += new System.EventHandler(this.bFiltrar_Click);
@@ -71,7 +71,7 @@
             this.tbFiltro.Location = new System.Drawing.Point(256, 44);
             this.tbFiltro.Name = "tbFiltro";
             this.tbFiltro.Size = new System.Drawing.Size(147, 20);
-            this.tbFiltro.TabIndex = 7;
+            this.tbFiltro.TabIndex = 3;
             // 
             // lFiltro
             // 
@@ -98,7 +98,7 @@
             this.rbExistente.Location = new System.Drawing.Point(166, 77);
             this.rbExistente.Name = "rbExistente";
             this.rbExistente.Size = new System.Drawing.Size(68, 17);
-            this.rbExistente.TabIndex = 4;
+            this.rbExistente.TabIndex = 2;
             this.rbExistente.Text = "Existente";
             this.rbExistente.UseVisualStyleBackColor = true;
             this.rbExistente.CheckedChanged += new System.EventHandler(this.rbExistente_CheckedChanged);
@@ -110,7 +110,7 @@
             this.rbNueva.Location = new System.Drawing.Point(166, 44);
             this.rbNueva.Name = "rbNueva";
             this.rbNueva.Size = new System.Drawing.Size(57, 17);
-            this.rbNueva.TabIndex = 3;
+            this.rbNueva.TabIndex = 1;
             this.rbNueva.TabStop = true;
             this.rbNueva.Text = "Nueva";
             this.rbNueva.UseVisualStyleBackColor = true;
@@ -121,7 +121,7 @@
             this.tbActual.Location = new System.Drawing.Point(31, 44);
             this.tbActual.Name = "tbActual";
             this.tbActual.Size = new System.Drawing.Size(100, 20);
-            this.tbActual.TabIndex = 2;
+            this.tbActual.TabIndex = 0;
             // 
             // label1
             // 
@@ -137,7 +137,7 @@
             this.bGuardar.Location = new System.Drawing.Point(31, 77);
             this.bGuardar.Name = "bGuardar";
             this.bGuardar.Size = new System.Drawing.Size(100, 31);
-            this.bGuardar.TabIndex = 0;
+            this.bGuardar.TabIndex = 6;
             this.bGuardar.Text = "Guardar";
             this.bGuardar.UseVisualStyleBackColor = true;
             this.bGuardar.Click += new System.EventHandler(this.bGuardar_Click);

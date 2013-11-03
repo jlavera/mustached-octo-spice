@@ -83,6 +83,7 @@ namespace Clinica_Frba.AbmProfesionales{
                 cmbSexo.SelectedItem = sexo;
                 cmbTipoDNI.SelectedItem = tipoDocumento;
                 dtpFechaNacimiento.Value = fechaNacimiento;
+                tbContrasegna.Text = "****";
 
                 foreach (string func in especialidades) {
                     for (int i = 0; i < lbEspecialidades.Items.Count; i++) {
@@ -97,50 +98,60 @@ namespace Clinica_Frba.AbmProfesionales{
         }
 
         private void bGuardar_Click(object sender, EventArgs e) {
-
-            string subQuery = "";
-            foreach (Especialidad esp in lbEspecialidades.SelectedItems) {
-                subQuery += "(" + profId + ", " + esp.id + "), ";
-            }
-            //Comoconcatena con ", " le saco los ultimos dos caracteres al string
-            if (lbEspecialidades.SelectedItems.Count > 0)
-                subQuery = subQuery.Substring(0, subQuery.Length - 2);
-
-
-            if (nueva) {
-                //--Insertar Usuario
-                if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "usuario " +
-                    " (usu_nombre, usu_apellido, usu_tipoDocumento, usu_numeroDocumento, usu_direccion, usu_telefono, usu_mail, usu_fechaNacimiento, usu_sexo, usu_nombreUsuario, usu_contrasegna) " +
-                    " VALUES " +
-                    " ('" + tbNombre.Text + "', '" + tbApellido.Text + "', '" + cmbTipoDNI.Text + "', '" + tbNumeroDni.Text + "', '" + tbDireccion.Text + "', '" + tbTelefono.Text + "', '" + tbMail.Text + "', '" + dtpFechaNacimiento.Value + "', '" + cmbSexo.Text + "', '" + tbNombreUsuario.Text + "', '" + tbContrasegna.Text + "', );") < 0) {
-                    MessageBox.Show("Error en inserscion de usuario");
-                    return;
+            bool invalidez = false;
+            foreach (Control ctrl in gbDatos.Controls) {
+                if ((ctrl.Visible && ctrl is TextBox && ((TextBox)ctrl).Text == "") || (ctrl is MaskedTextBox && ((MaskedTextBox)ctrl).Text == "") || (ctrl is ComboBox && ((ComboBox)ctrl).SelectedIndex == -1)) {
+                    invalidez = true;
+                    ctrl.BackColor = Color.RosyBrown;
                 }
-
-                /********FALTAN MODIFICAR TODOS ESTOS QUERYS**********/
-                //--Insertar Profesional
-                if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "profesional " +
-                    " (rol_nombre) " +
-                    " VALUES " +
-                    " ('" + tbNombre.Text + "');") < 0) {
-                    MessageBox.Show("Error en inserscion de profesional");
-                    return;
+            }
+            if (invalidez)
+                MessageBox.Show("Falta completar campos");
+            else {
+                string subQuery = "";
+                foreach (Especialidad esp in lbEspecialidades.SelectedItems) {
+                    subQuery += "(" + profId + ", " + esp.id + "), ";
                 }
-            } else {
-                //Es mas facil borrar todos los rol_x_funcionalidad que revisar cuales cambiaron
-                if (DB.ExecuteNonQuery("DELETE " + DB.schema + "rol_x_funcionalidad WHERE rxf_rol=" + profId + "; " +
-                                        "UPDATE " + DB.schema + "rol SET rol_nombre='" + tbNombre.Text + "', rol_habilitado=" + Convert.ToInt32(true) + " WHERE rol_id=" + profId) < 0)
-                    MessageBox.Show("Error en modificacion de rol");
-            }
-            if (lbEspecialidades.SelectedItems.Count > 0) {
-                if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "rol_x_funcionalidad(rxf_funcionalidad, rxf_rol) VALUES " + subQuery) < 0)
-                    MessageBox.Show("Error en inserscion de rol_x_funcionalidad");
-            }
+                //Comoconcatena con ", " le saco los ultimos dos caracteres al string
+                if (lbEspecialidades.SelectedItems.Count > 0)
+                    subQuery = subQuery.Substring(0, subQuery.Length - 2);
+
+
+                if (nueva) {
+                    //--Insertar Usuario
+                    if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "usuario " +
+                        " (usu_nombre, usu_apellido, usu_tipoDocumento, usu_numeroDocumento, usu_direccion, usu_telefono, usu_mail, usu_fechaNacimiento, usu_sexo, usu_nombreUsuario, usu_contrasegna) " +
+                        " VALUES " +
+                        " ('" + tbNombre.Text + "', '" + tbApellido.Text + "', '" + cmbTipoDNI.Text + "', '" + tbNumeroDni.Text + "', '" + tbDireccion.Text + "', '" + tbTelefono.Text + "', '" + tbMail.Text + "', '" + dtpFechaNacimiento.Value + "', '" + cmbSexo.Text + "', '" + tbNombreUsuario.Text + "', '" + tbContrasegna.Text + "', );") < 0) {
+                        MessageBox.Show("Error en inserscion de usuario");
+                        return;
+                    }
+
+                    /********FALTAN MODIFICAR TODOS ESTOS QUERYS**********/
+                    //--Insertar Profesional
+                    if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "profesional " +
+                        " (rol_nombre) " +
+                        " VALUES " +
+                        " ('" + tbNombre.Text + "');") < 0) {
+                        MessageBox.Show("Error en inserscion de profesional");
+                        return;
+                    }
+                } else {
+                    //Es mas facil borrar todos los rol_x_funcionalidad que revisar cuales cambiaron
+                    if (DB.ExecuteNonQuery("DELETE " + DB.schema + "rol_x_funcionalidad WHERE rxf_rol=" + profId + "; " +
+                                            "UPDATE " + DB.schema + "rol SET rol_nombre='" + tbNombre.Text + "', rol_habilitado=" + Convert.ToInt32(true) + " WHERE rol_id=" + profId) < 0)
+                        MessageBox.Show("Error en modificacion de rol");
+                }
+                if (lbEspecialidades.SelectedItems.Count > 0) {
+                    if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "rol_x_funcionalidad(rxf_funcionalidad, rxf_rol) VALUES " + subQuery) < 0)
+                        MessageBox.Show("Error en inserscion de rol_x_funcionalidad");
+                }
 
                 /********HASTA ACA**************/
 
-            this.Close();
-            DialogResult = DialogResult.OK;
+                this.Close();
+                DialogResult = DialogResult.OK;
+            }
         }
     }
 }
