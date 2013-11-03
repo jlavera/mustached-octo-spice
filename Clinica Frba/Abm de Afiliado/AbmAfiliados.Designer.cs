@@ -109,7 +109,7 @@
             // bBuscar
             // 
             this.bBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bBuscar.Location = new System.Drawing.Point(1056, 186);
+            this.bBuscar.Location = new System.Drawing.Point(993, 186);
             this.bBuscar.Name = "bBuscar";
             this.bBuscar.Size = new System.Drawing.Size(146, 29);
             this.bBuscar.TabIndex = 0;
@@ -154,7 +154,7 @@
             this.gbFiltros.Controls.Add(this.lbGrupoFamiliar);
             this.gbFiltros.Location = new System.Drawing.Point(12, 12);
             this.gbFiltros.Name = "gbFiltros";
-            this.gbFiltros.Size = new System.Drawing.Size(1190, 168);
+            this.gbFiltros.Size = new System.Drawing.Size(1127, 168);
             this.gbFiltros.TabIndex = 6;
             this.gbFiltros.TabStop = false;
             this.gbFiltros.Text = "Filtros";
@@ -182,7 +182,8 @@
             0,
             0});
             this.nLimit.Name = "nLimit";
-            this.nLimit.Size = new System.Drawing.Size(120, 20);
+            this.nLimit.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.nLimit.Size = new System.Drawing.Size(54, 20);
             this.nLimit.TabIndex = 14;
             this.nLimit.Value = new decimal(new int[] {
             20,
@@ -195,7 +196,8 @@
             this.tbOrden.Location = new System.Drawing.Point(1031, 36);
             this.tbOrden.Mask = "00";
             this.tbOrden.Name = "tbOrden";
-            this.tbOrden.Size = new System.Drawing.Size(140, 20);
+            this.tbOrden.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tbOrden.Size = new System.Drawing.Size(54, 20);
             this.tbOrden.TabIndex = 12;
             // 
             // tbFamiliaresACargo
@@ -203,7 +205,8 @@
             this.tbFamiliaresACargo.Location = new System.Drawing.Point(1031, 83);
             this.tbFamiliaresACargo.Mask = "00";
             this.tbFamiliaresACargo.Name = "tbFamiliaresACargo";
-            this.tbFamiliaresACargo.Size = new System.Drawing.Size(140, 20);
+            this.tbFamiliaresACargo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tbFamiliaresACargo.Size = new System.Drawing.Size(54, 20);
             this.tbFamiliaresACargo.TabIndex = 13;
             // 
             // tbNumeroDni
@@ -211,7 +214,8 @@
             this.tbNumeroDni.Location = new System.Drawing.Point(177, 79);
             this.tbNumeroDni.Mask = "000000000000000000";
             this.tbNumeroDni.Name = "tbNumeroDni";
-            this.tbNumeroDni.Size = new System.Drawing.Size(153, 20);
+            this.tbNumeroDni.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tbNumeroDni.Size = new System.Drawing.Size(127, 20);
             this.tbNumeroDni.TabIndex = 4;
             // 
             // tbTelefono
@@ -219,7 +223,8 @@
             this.tbTelefono.Location = new System.Drawing.Point(177, 128);
             this.tbTelefono.Mask = "000000000000000000";
             this.tbTelefono.Name = "tbTelefono";
-            this.tbTelefono.Size = new System.Drawing.Size(153, 20);
+            this.tbTelefono.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tbTelefono.Size = new System.Drawing.Size(127, 20);
             this.tbTelefono.TabIndex = 5;
             // 
             // lbPlanMedico
@@ -462,7 +467,7 @@
             this.dgvAfiliados.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvAfiliados.Location = new System.Drawing.Point(0, 221);
             this.dgvAfiliados.Name = "dgvAfiliados";
-            this.dgvAfiliados.Size = new System.Drawing.Size(1212, 431);
+            this.dgvAfiliados.Size = new System.Drawing.Size(1149, 431);
             this.dgvAfiliados.TabIndex = 4;
             this.dgvAfiliados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAfiliados_CellContentClick);
             // 
@@ -559,7 +564,7 @@
             // 
             this.bLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.bLimpiar.Location = new System.Drawing.Point(922, 186);
+            this.bLimpiar.Location = new System.Drawing.Point(859, 186);
             this.bLimpiar.Name = "bLimpiar";
             this.bLimpiar.Size = new System.Drawing.Size(93, 29);
             this.bLimpiar.TabIndex = 1;
@@ -571,7 +576,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1212, 652);
+            this.ClientSize = new System.Drawing.Size(1149, 652);
             this.Controls.Add(this.bLimpiar);
             this.Controls.Add(this.bEliminar);
             this.Controls.Add(this.bAgregar);

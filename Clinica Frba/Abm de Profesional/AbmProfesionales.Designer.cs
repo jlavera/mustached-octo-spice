@@ -151,7 +151,8 @@
             this.tbTelefono.Location = new System.Drawing.Point(503, 126);
             this.tbTelefono.Mask = "0000000000";
             this.tbTelefono.Name = "tbTelefono";
-            this.tbTelefono.Size = new System.Drawing.Size(140, 20);
+            this.tbTelefono.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tbTelefono.Size = new System.Drawing.Size(80, 20);
             this.tbTelefono.TabIndex = 45;
             // 
             // tbNumeroDni
@@ -159,7 +160,8 @@
             this.tbNumeroDni.Location = new System.Drawing.Point(503, 83);
             this.tbNumeroDni.Mask = "0000000000";
             this.tbNumeroDni.Name = "tbNumeroDni";
-            this.tbNumeroDni.Size = new System.Drawing.Size(140, 20);
+            this.tbNumeroDni.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tbNumeroDni.Size = new System.Drawing.Size(80, 20);
             this.tbNumeroDni.TabIndex = 44;
             // 
             // tbMatricula
@@ -167,7 +169,8 @@
             this.tbMatricula.Location = new System.Drawing.Point(37, 36);
             this.tbMatricula.Mask = "0000000000";
             this.tbMatricula.Name = "tbMatricula";
-            this.tbMatricula.Size = new System.Drawing.Size(140, 20);
+            this.tbMatricula.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tbMatricula.Size = new System.Drawing.Size(80, 20);
             this.tbMatricula.TabIndex = 43;
             // 
             // label12
@@ -202,7 +205,8 @@
             0,
             0});
             this.nLimit.Name = "nLimit";
-            this.nLimit.Size = new System.Drawing.Size(140, 20);
+            this.nLimit.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.nLimit.Size = new System.Drawing.Size(57, 20);
             this.nLimit.TabIndex = 11;
             this.nLimit.Value = new decimal(new int[] {
             20,
