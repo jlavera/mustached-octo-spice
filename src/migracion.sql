@@ -49,10 +49,10 @@ BEGIN
 	IF (((@dia  BETWEEN 2 AND 6 AND
 		@hora BETWEEN '07:00:00' AND '19:30:00')
 	OR
-	   (@dia = 7 AND
+	   ((@dia = 7 or @dia = 1) AND
 		@hora BETWEEN '10:00:00' AND '15:00:00')))
-		RETURN 0
-	RETURN 1
+		RETURN 1
+	RETURN 0
 END
 GO
 
@@ -194,7 +194,7 @@ CREATE TABLE moustache_spice.semanal (
   sem_habilitado TINYINT NOT NULL DEFAULT 1
   PRIMARY KEY(sem_agenda, sem_dia, sem_hora),
   CHECK(
-    sem_habilitado=1 AND moustache_spice.semanalHabilitado(sem_dia, sem_hora) = 0
+    sem_habilitado=1 AND moustache_spice.semanalHabilitado(sem_dia, sem_hora) = 1
   )
 );
 
@@ -359,6 +359,13 @@ CREATE VIEW moustache_spice.vAfiliado AS
 		WHERE afi_habilitado=1 AND usu_habilitado=1
 GO
 
+CREATE VIEW moustache_spice.vAgenda AS
+	SELECT age_id, age_desde, age_hasta, (usu_apellido + ', ' + usu_nombre) 'profesional', sem_dia, sem_hora
+	FROM moustache_spice.agenda
+	JOIN moustache_spice.semanal ON sem_agenda = age_id
+	JOIN moustache_spice.vProfesional ON age_profesional = pro_id
+GO
+
 
 -- -----------------------------------------------------
 -- INSERTs a mano
@@ -511,7 +518,7 @@ INSERT INTO moustache_spice.agenda(age_profesional, age_hasta, age_desde)
 		LEFT JOIN moustache_spice.vProfesional ON usu_numeroDocumento = Medico_Dni 
 		WHERE Medico_Dni IS NOT NULL AND Turno_Fecha IS NOT NULL
 	GROUP BY pro_id);
-
+	
 -- -----------------------------------------------------
 -- migracion tabla semanal
 -- -----------------------------------------------------
@@ -520,6 +527,8 @@ INSERT INTO moustache_spice.semanal(sem_agenda, sem_dia, sem_hora, sem_habilitad
 	moustache_spice.semanalHabilitado(DATEPART(dw, tur_fechaYHoraTurno), CAST(tur_fechaYHoraTurno AS TIME))
 	FROM moustache_spice.turno
 		JOIN moustache_spice.agenda ON tur_profesional = age_profesional);
+	
+	--Check: sem_habilitado=1 AND moustache_spice.semanalHabilitado(sem_dia, sem_hora) = 1
 	
 -- -----------------------------------------------------
 -- migracion tabla medicamento

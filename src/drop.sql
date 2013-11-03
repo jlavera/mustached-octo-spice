@@ -69,5 +69,7 @@ IF OBJECT_ID('moustache_spice.vProfesional', 'V') IS NOT NULL
 	DROP VIEW moustache_spice.vProfesional
 IF OBJECT_ID('moustache_spice.vAfiliado', 'V') IS NOT NULL
 	DROP VIEW moustache_spice.vAfiliado
+IF OBJECT_ID('moustache_spice.vAgenda', 'V') IS NOT NULL
+	DROP VIEW moustache_spice.vAgenda
 
 	DROP SCHEMA moustache_spice
