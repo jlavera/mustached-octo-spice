@@ -48,7 +48,7 @@ namespace Clinica_Frba.AbmRoles {
             //--Si era en la columna de seleccionar (editar)
             if (dgvRoles.Columns[e.ColumnIndex].HeaderText == "Seleccionar") {
                 //--Abrir ventana de edición mandando el rol seleccionado
-                Abm_de_Rol.EditRol formEdit = new Clinica_Frba.Abm_de_Rol.EditRol(roles[e.RowIndex]);
+                Abm_de_Rol.EditRol formEdit = new Clinica_Frba.Abm_de_Rol.EditRol(roles[dgvRoles.Rows[e.RowIndex].Cells["id"].Value.ToString()]);
                 formEdit.ShowDialog();
 
                 //--Si el resultado del diálogo es OK, recargar dgv

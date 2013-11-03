@@ -47,7 +47,7 @@ namespace Clinica_Frba.RegistrarAgendas {
 
         private void dgvAgenda_CellContentClick(object sender, DataGridViewCellEventArgs e) {
             if (dgvAgenda.Columns[e.ColumnIndex].HeaderText == "Seleccionar") {
-                Registrar_Agenda.EditAgenda formEdit = new Registrar_Agenda.EditAgenda(agendas[e.RowIndex]);
+                Registrar_Agenda.EditAgenda formEdit = new Registrar_Agenda.EditAgenda(agendas[dgvAgenda.Rows[e.RowIndex].Cells["id"].Value.ToString()]);
                 formEdit.ShowDialog();
 
                 if (formEdit.DialogResult == DialogResult.OK) {

@@ -39,9 +39,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.cbProfesional = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.bGuardar = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.listBox3 = new System.Windows.Forms.ListBox();
@@ -53,7 +52,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 13);
+            this.label1.Location = new System.Drawing.Point(39, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 13);
             this.label1.TabIndex = 0;
@@ -62,25 +61,25 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(42, 72);
+            this.label3.Location = new System.Drawing.Point(39, 73);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.Size = new System.Drawing.Size(38, 13);
             this.label3.TabIndex = 9;
-            this.label3.Text = "Hasta";
+            this.label3.Text = "Hasta:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(39, 46);
+            this.label2.Location = new System.Drawing.Point(39, 43);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 13);
+            this.label2.Size = new System.Drawing.Size(41, 13);
             this.label2.TabIndex = 8;
-            this.label2.Text = "Desde";
+            this.label2.Text = "Desde:";
             // 
             // dtpHasta
             // 
             this.dtpHasta.CustomFormat = "dd/mm/yyyy";
-            this.dtpHasta.Location = new System.Drawing.Point(83, 66);
+            this.dtpHasta.Location = new System.Drawing.Point(86, 67);
             this.dtpHasta.MinDate = new System.DateTime(2012, 1, 1, 0, 0, 0, 0);
             this.dtpHasta.Name = "dtpHasta";
             this.dtpHasta.Size = new System.Drawing.Size(200, 20);
@@ -90,7 +89,7 @@
             // dtpDesde
             // 
             this.dtpDesde.CustomFormat = "dd/mm/yyyy";
-            this.dtpDesde.Location = new System.Drawing.Point(83, 40);
+            this.dtpDesde.Location = new System.Drawing.Point(86, 40);
             this.dtpDesde.MinDate = new System.DateTime(2012, 1, 1, 0, 0, 0, 0);
             this.dtpDesde.Name = "dtpDesde";
             this.dtpDesde.Size = new System.Drawing.Size(200, 20);
@@ -151,32 +150,23 @@
             this.label9.TabIndex = 16;
             this.label9.Text = "Sabado";
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(411, 103);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(49, 13);
-            this.label10.TabIndex = 17;
-            this.label10.Text = "Domingo";
-            // 
             // cbProfesional
             // 
             this.cbProfesional.FormattingEnabled = true;
-            this.cbProfesional.Location = new System.Drawing.Point(81, 10);
+            this.cbProfesional.Location = new System.Drawing.Point(107, 10);
             this.cbProfesional.Name = "cbProfesional";
-            this.cbProfesional.Size = new System.Drawing.Size(200, 21);
+            this.cbProfesional.Size = new System.Drawing.Size(177, 21);
             this.cbProfesional.TabIndex = 18;
             // 
-            // button1
+            // bGuardar
             // 
-            this.button1.Location = new System.Drawing.Point(305, 13);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(103, 73);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "Guardar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.bGuardar.Location = new System.Drawing.Point(305, 13);
+            this.bGuardar.Name = "bGuardar";
+            this.bGuardar.Size = new System.Drawing.Size(103, 73);
+            this.bGuardar.TabIndex = 19;
+            this.bGuardar.Text = "Guardar";
+            this.bGuardar.UseVisualStyleBackColor = true;
+            this.bGuardar.Click += new System.EventHandler(this.bGuardar_Click);
             // 
             // listBox1
             // 
@@ -211,7 +201,7 @@
             this.listBox1.Location = new System.Drawing.Point(45, 119);
             this.listBox1.Name = "listBox1";
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox1.Size = new System.Drawing.Size(56, 173);
+            this.listBox1.Size = new System.Drawing.Size(56, 342);
             this.listBox1.TabIndex = 20;
             // 
             // listBox2
@@ -247,7 +237,7 @@
             this.listBox2.Location = new System.Drawing.Point(104, 119);
             this.listBox2.Name = "listBox2";
             this.listBox2.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox2.Size = new System.Drawing.Size(56, 173);
+            this.listBox2.Size = new System.Drawing.Size(56, 342);
             this.listBox2.TabIndex = 21;
             // 
             // listBox3
@@ -283,7 +273,7 @@
             this.listBox3.Location = new System.Drawing.Point(166, 119);
             this.listBox3.Name = "listBox3";
             this.listBox3.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox3.Size = new System.Drawing.Size(56, 173);
+            this.listBox3.Size = new System.Drawing.Size(56, 342);
             this.listBox3.TabIndex = 22;
             // 
             // listBox4
@@ -319,7 +309,7 @@
             this.listBox4.Location = new System.Drawing.Point(228, 119);
             this.listBox4.Name = "listBox4";
             this.listBox4.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox4.Size = new System.Drawing.Size(56, 173);
+            this.listBox4.Size = new System.Drawing.Size(56, 342);
             this.listBox4.TabIndex = 23;
             // 
             // listBox5
@@ -355,7 +345,7 @@
             this.listBox5.Location = new System.Drawing.Point(290, 119);
             this.listBox5.Name = "listBox5";
             this.listBox5.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox5.Size = new System.Drawing.Size(56, 173);
+            this.listBox5.Size = new System.Drawing.Size(56, 342);
             this.listBox5.TabIndex = 24;
             // 
             // listBox6
@@ -372,26 +362,25 @@
             "13:30",
             "14:00",
             "14:30"});
-            this.listBox6.Location = new System.Drawing.Point(352, 119);
+            this.listBox6.Location = new System.Drawing.Point(352, 197);
             this.listBox6.Name = "listBox6";
             this.listBox6.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox6.Size = new System.Drawing.Size(56, 173);
+            this.listBox6.Size = new System.Drawing.Size(56, 134);
             this.listBox6.TabIndex = 25;
             // 
             // EditAgenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(505, 311);
+            this.ClientSize = new System.Drawing.Size(440, 473);
             this.Controls.Add(this.listBox6);
             this.Controls.Add(this.listBox5);
             this.Controls.Add(this.listBox4);
             this.Controls.Add(this.listBox3);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.bGuardar);
             this.Controls.Add(this.cbProfesional);
-            this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -424,9 +413,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox cbProfesional;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button bGuardar;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.ListBox listBox3;
