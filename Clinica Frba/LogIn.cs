@@ -58,7 +58,7 @@ namespace Clinica_Frba {
             rol = (Rol)lbRoles.SelectedItem;
             user = userTemp;
 
-            this.Close();
+            DialogResult = DialogResult.OK;
         }
 
         public static string getHashSha256(string text) {

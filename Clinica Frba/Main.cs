@@ -25,8 +25,8 @@ namespace Clinica_Frba {
             login.ShowDialog();
 
             //--Si se cerró el login sin usuario => cerrar ventana
-            if (login.user == null)
-                this.Close();
+            if (login.user == null || login.DialogResult != DialogResult.OK)
+                Application.Exit();
 
             user = login.user;
             rol = login.rol;

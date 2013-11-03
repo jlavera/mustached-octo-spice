@@ -111,7 +111,7 @@ namespace Clinica_Frba.Clases {
                     query += "pla_id =" + pm.id + " OR ";
                 query += "1!=1) AND ";
             }
-            if (p_sexo != null)
+            if (p_sexo != "")
                 query += " usu_sexo='" + ((p_sexo=="Masculino") ? "M" : "F") + "' AND ";
             if (p_telefono != -1)
                 query += " usu_telefono =" + p_telefono+ " AND ";

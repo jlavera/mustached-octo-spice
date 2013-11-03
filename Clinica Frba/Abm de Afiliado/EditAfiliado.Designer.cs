@@ -53,11 +53,15 @@
             this.tbNombre = new System.Windows.Forms.TextBox();
             this.bGuardar = new System.Windows.Forms.Button();
             this.bCambiarGrupo = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.tbRazon = new System.Windows.Forms.TextBox();
             this.gbDatos.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.tbRazon);
+            this.gbDatos.Controls.Add(this.label13);
             this.gbDatos.Controls.Add(this.tbNumeroDni);
             this.gbDatos.Controls.Add(this.tbTelefono);
             this.gbDatos.Controls.Add(this.label2);
@@ -173,6 +177,7 @@
             this.cmbPlanMedico.Name = "cmbPlanMedico";
             this.cmbPlanMedico.Size = new System.Drawing.Size(140, 21);
             this.cmbPlanMedico.TabIndex = 5;
+            this.cmbPlanMedico.SelectedIndexChanged += new System.EventHandler(this.cmbPlanMedico_SelectedIndexChanged);
             // 
             // label14
             // 
@@ -353,6 +358,25 @@
             this.bCambiarGrupo.UseVisualStyleBackColor = true;
             this.bCambiarGrupo.Click += new System.EventHandler(this.bCambiarGrupo_Click);
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(214, 196);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(131, 13);
+            this.label13.TabIndex = 75;
+            this.label13.Text = "Razon de cambio de plan:";
+            this.label13.Visible = false;
+            // 
+            // tbRazon
+            // 
+            this.tbRazon.Location = new System.Drawing.Point(227, 216);
+            this.tbRazon.MaxLength = 255;
+            this.tbRazon.Name = "tbRazon";
+            this.tbRazon.Size = new System.Drawing.Size(140, 20);
+            this.tbRazon.TabIndex = 76;
+            this.tbRazon.Visible = false;
+            // 
             // EditAfiliado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -400,5 +424,7 @@
         private System.Windows.Forms.MaskedTextBox tbNumeroDni;
         private System.Windows.Forms.MaskedTextBox tbTelefono;
         private System.Windows.Forms.Button bCambiarGrupo;
+        private System.Windows.Forms.TextBox tbRazon;
+        private System.Windows.Forms.Label label13;
     }
 }

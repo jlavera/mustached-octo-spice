@@ -24,6 +24,7 @@ namespace Clinica_Frba.AbmAfiliados{
         public string apellido;
         public string direccion;
         public string tipoDocumento;
+        public int planViejo; //Para guardar el plan viejo y auditarlo
         public decimal numeroDocumento;
         public decimal telefono;
         public string mail;
@@ -69,6 +70,7 @@ namespace Clinica_Frba.AbmAfiliados{
             sexo = p_afil.usuario.sexo;
             estadoCivil = p_afil.estadoCivil;
             planMedico = p_afil.planMedico;
+                planViejo = planMedico.id;
             grupoFamiliar = p_afil.grupoFamiliar;
             orden = p_afil.orden;
             fechaNacimiento = p_afil.usuario.fechaNacimiento;
@@ -125,6 +127,9 @@ namespace Clinica_Frba.AbmAfiliados{
 
                 cmbEstadoCivil.SelectedItem = estadoCivil;
                 cmbPlanMedico.SelectedItem = planMedico;
+                //Tengo que hacerlos invisibles aca, porque sino salta el evento
+                tbRazon.Visible = false;
+                label13.Visible = false;
 
                 //--Traer los integrantes del grupo
                 foreach (DataRow dr in DB.ExecuteReader(
@@ -163,14 +168,17 @@ namespace Clinica_Frba.AbmAfiliados{
 
         private void bGuardar_Click(object sender, EventArgs e)
         {
-            string invalidez="";
+            bool invalidez = false;
             foreach (Control ctrl in gbDatos.Controls)
             {
-                if ((ctrl is TextBox && ((TextBox)ctrl).Text == "") || (ctrl is MaskedTextBox && ((MaskedTextBox)ctrl).Text == "") || (ctrl is ComboBox && ((ComboBox)ctrl).SelectedIndex == -1))
-                    invalidez += ctrl.Name + ", ";
+                if ((ctrl.Visible && ctrl is TextBox && ((TextBox)ctrl).Text == "") || (ctrl is MaskedTextBox && ((MaskedTextBox)ctrl).Text == "") || (ctrl is ComboBox && ((ComboBox)ctrl).SelectedIndex == -1))
+                {
+                    invalidez = true;
+                    ctrl.BackColor = Color.RosyBrown;
+                }
             }
-            if (invalidez != "")
-                MessageBox.Show("Faltan los siguientes campos: " + invalidez);
+            if (invalidez)
+                MessageBox.Show("Faltan algunos campos");
             else
             {
 
@@ -216,7 +224,8 @@ namespace Clinica_Frba.AbmAfiliados{
                             inte.estadoCivil.id + ", 0, SCOPE_Identity(), " + ((inte.esConyuge) ? 2 : ordenInsertado) + ", " + ((PlanMedico)cmbPlanMedico.SelectedItem).id + ", " + afiliadoID + "); ";
                     }
                 }
-
+                if (tbRazon.Visible)
+                    query += " INSERT INTO " + DB.schema + "planMedicoAudit(grA_afiliado, grA_plan_medicoViejo, grA_razon) VALUES(" + afiliadoID +", " + planViejo + ", '" + tbRazon.Text + "'); ";
                 if (DB.ExecuteNonQuery(query) == -1)
                 {
                     MessageBox.Show("Error en la insercion, probablemente algun campo unico este repetido");
@@ -251,6 +260,15 @@ namespace Clinica_Frba.AbmAfiliados{
                 } else
                     bAgregarACargo.Enabled = true;
                 DialogResult = DialogResult.OK;
+            }
+        }
+
+        private void cmbPlanMedico_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!nueva)
+            {
+                label13.Visible = true;
+                tbRazon.Visible = true;
             }
         }
     }
