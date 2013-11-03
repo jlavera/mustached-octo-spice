@@ -13,6 +13,7 @@ namespace Clinica_Frba.Registrar_Agenda
     public partial class EditAgenda : Form
     {
         public bool nueva = false;
+        Profesionales pros = new Profesionales();
 
         public EditAgenda(Agenda _agenda)
         {
@@ -32,6 +33,8 @@ namespace Clinica_Frba.Registrar_Agenda
 
         private void EditAgenda_Load(object sender, EventArgs e)
         {
+            pros.FillWithAll();
+            cbProfesional.Items.AddRange(pros.ToList());
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -44,7 +47,14 @@ namespace Clinica_Frba.Registrar_Agenda
             }else{
             }
 
-            DB.ExecuteNonQuery(query);
+            foreach (Control lb in this.Controls)
+            {
+                if (lb is ListBox) {
+                    MessageBox.Show(((ListBox)lb).SelectedItems.ToString());
+                }
+            }
+
+            //DB.ExecuteNonQuery(query);
             this.Close();
             DialogResult = DialogResult.OK;
         }

@@ -24,6 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.tbNumeroDni = new System.Windows.Forms.MaskedTextBox();
+            this.tbTelefono = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dtpFechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.cbConyuge = new System.Windows.Forms.CheckBox();
@@ -46,13 +48,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbNombre = new System.Windows.Forms.TextBox();
             this.bGuardar = new System.Windows.Forms.Button();
-            this.tbNumeroDni = new System.Windows.Forms.MaskedTextBox();
-            this.tbTelefono = new System.Windows.Forms.MaskedTextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbContrasegna = new System.Windows.Forms.TextBox();
             this.gbDatos.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.label2);
+            this.gbDatos.Controls.Add(this.tbContrasegna);
             this.gbDatos.Controls.Add(this.tbNumeroDni);
             this.gbDatos.Controls.Add(this.tbTelefono);
             this.gbDatos.Controls.Add(this.label1);
@@ -83,6 +87,22 @@
             this.gbDatos.TabIndex = 1;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos:";
+            // 
+            // tbNumeroDni
+            // 
+            this.tbNumeroDni.Location = new System.Drawing.Point(248, 90);
+            this.tbNumeroDni.Mask = "000000000000000000";
+            this.tbNumeroDni.Name = "tbNumeroDni";
+            this.tbNumeroDni.Size = new System.Drawing.Size(140, 20);
+            this.tbNumeroDni.TabIndex = 6;
+            // 
+            // tbTelefono
+            // 
+            this.tbTelefono.Location = new System.Drawing.Point(248, 129);
+            this.tbTelefono.Mask = "000000000000000000";
+            this.tbTelefono.Name = "tbTelefono";
+            this.tbTelefono.Size = new System.Drawing.Size(140, 20);
+            this.tbTelefono.TabIndex = 7;
             // 
             // label1
             // 
@@ -272,29 +292,30 @@
             // 
             // bGuardar
             // 
-            this.bGuardar.Location = new System.Drawing.Point(275, 270);
+            this.bGuardar.Location = new System.Drawing.Point(254, 290);
             this.bGuardar.Name = "bGuardar";
-            this.bGuardar.Size = new System.Drawing.Size(113, 53);
+            this.bGuardar.Size = new System.Drawing.Size(134, 33);
             this.bGuardar.TabIndex = 0;
             this.bGuardar.Text = "Agregar";
             this.bGuardar.UseVisualStyleBackColor = true;
             this.bGuardar.Click += new System.EventHandler(this.bGuardar_Click);
             // 
-            // tbNumeroDni
+            // label2
             // 
-            this.tbNumeroDni.Location = new System.Drawing.Point(248, 90);
-            this.tbNumeroDni.Mask = "000000000000000000";
-            this.tbNumeroDni.Name = "tbNumeroDni";
-            this.tbNumeroDni.Size = new System.Drawing.Size(140, 20);
-            this.tbNumeroDni.TabIndex = 6;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(232, 244);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(64, 13);
+            this.label2.TabIndex = 75;
+            this.label2.Text = "Contraseña:";
             // 
-            // tbTelefono
+            // tbContrasegna
             // 
-            this.tbTelefono.Location = new System.Drawing.Point(248, 129);
-            this.tbTelefono.Mask = "000000000000000000";
-            this.tbTelefono.Name = "tbTelefono";
-            this.tbTelefono.Size = new System.Drawing.Size(140, 20);
-            this.tbTelefono.TabIndex = 7;
+            this.tbContrasegna.Location = new System.Drawing.Point(248, 264);
+            this.tbContrasegna.Name = "tbContrasegna";
+            this.tbContrasegna.PasswordChar = '*';
+            this.tbContrasegna.Size = new System.Drawing.Size(140, 20);
+            this.tbContrasegna.TabIndex = 74;
             // 
             // EditIntegrante
             // 
@@ -338,5 +359,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.MaskedTextBox tbNumeroDni;
         private System.Windows.Forms.MaskedTextBox tbTelefono;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox tbContrasegna;
     }
 }

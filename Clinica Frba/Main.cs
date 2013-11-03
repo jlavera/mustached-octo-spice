@@ -30,7 +30,8 @@ namespace Clinica_Frba {
 
             user = login.user;
             rol = login.rol;
-            funcs.FillByRol(rol.id);
+            if(rol!=null)
+                funcs.FillByRol(rol.id);
 
             foreach (Funcionalidad func in funcs.items) {
                 if (flp1.Controls.ContainsKey(func.ToString()))

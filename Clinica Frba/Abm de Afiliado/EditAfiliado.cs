@@ -124,6 +124,7 @@ namespace Clinica_Frba.AbmAfiliados{
                     cmbSexo.SelectedItem = "Femenino";
 
                 dtpFechaNacimiento.Value = fechaNacimiento;
+                tbContrasegna.Text = "****";
 
                 cmbEstadoCivil.SelectedItem = estadoCivil;
                 cmbPlanMedico.SelectedItem = planMedico;
@@ -186,8 +187,8 @@ namespace Clinica_Frba.AbmAfiliados{
                 //--Grabar o editar al titular
                 if (nueva)
                 {
-                    query = "INSERT INTO moustache_spice.usuario(usu_nombre, usu_apellido, usu_direccion, usu_tipoDocumento, usu_numeroDocumento, usu_telefono, usu_mail, usu_sexo, usu_nombreUsuario, usu_fechaNacimiento ) VALUES " +
-                            "('" + tbNombre.Text + "', '" + tbApellido.Text + "', '" + tbDireccion.Text + "', '" + cmbTipoDNI.Text + "', " + tbNumeroDni.Text + ", " + tbTelefono.Text + ", '" + tbMail.Text + "', '" + ((cmbSexo.SelectedText == "Masculino") ? "M" : "F") + "', '" + tbNombreUsuario.Text + "', '" + dtpFechaNacimiento.Value.ToString("yyyy-MM-dd") + "'); ";
+                    query = "INSERT INTO moustache_spice.usuario(usu_nombre, usu_apellido, usu_direccion, usu_tipoDocumento, usu_numeroDocumento, usu_telefono, usu_mail, usu_sexo, usu_nombreUsuario, usu_fechaNacimiento" + ((tbContrasegna.Text == "****") ? "" : ", usu_contrasegna") + ") VALUES " +
+                            "('" + tbNombre.Text + "', '" + tbApellido.Text + "', '" + tbDireccion.Text + "', '" + cmbTipoDNI.Text + "', " + tbNumeroDni.Text + ", " + tbTelefono.Text + ", '" + tbMail.Text + "', '" + ((cmbSexo.SelectedText == "Masculino") ? "M" : "F") + "', '" + tbNombreUsuario.Text + "', '" + dtpFechaNacimiento.Value.ToString("yyyy-MM-dd") + "'" + ((tbContrasegna.Text == "****") ? "" : ", '" + LogIn.getHashSha256(tbContrasegna.Text) +"'" ) + "); ";
                     query += "INSERT INTO moustache_spice.afiliado(afi_estadoCivil, afi_familiaresACargo, afi_usuario, afi_orden, afi_planMedico) VALUES (" +
                             ((EstadoCivil)cmbEstadoCivil.SelectedItem).id + ", " + lbIntegrantes.Items.Count + ", SCOPE_Identity(), 1, " + ((PlanMedico)cmbPlanMedico.SelectedItem).id + "); ";
 
@@ -201,6 +202,7 @@ namespace Clinica_Frba.AbmAfiliados{
                             ", usu_telefono=" + tbTelefono.Text +
                             ", usu_mail='" + tbMail.Text + "' " +
                             ", usu_tipoDocumento='" + cmbTipoDNI.Text + "' " +
+                            ((tbContrasegna.Text == "****") ? "" : (", usu_contrasegna='" + LogIn.getHashSha256(tbContrasegna.Text) + "' ")) +
                             ", usu_sexo='" + ((cmbSexo.SelectedText == "Masculino") ? "M" : "F") + "' " +
                             "WHERE usu_id=" + usuarioID + "; ";
                     query += "UPDATE moustache_spice.afiliado SET afi_estadoCivil=" + ((EstadoCivil)cmbEstadoCivil.SelectedItem).id +
@@ -218,8 +220,8 @@ namespace Clinica_Frba.AbmAfiliados{
                     if (inte.faltaGrabar)
                     {
                         //--Grabarlo
-                        query += "INSERT INTO moustache_spice.usuario(usu_nombre, usu_apellido, usu_direccion, usu_tipoDocumento, usu_numeroDocumento, usu_telefono, usu_mail, usu_sexo, usu_nombreUsuario, usu_fechaNacimiento ) VALUES " +
-                                "('" + inte.nombre + "', '" + inte.apellido + "', '" + inte.direccion + "', '" + inte.tipoDocumento + "', " + inte.numeroDocumento + ", " + inte.telefono + ", '" + inte.mail + "', '" + inte.sexo + "', '" + inte.nombreUsuario + "', '" + inte.fechaNacimiento + "'); ";
+                        query += "INSERT INTO moustache_spice.usuario(usu_nombre, usu_apellido, usu_direccion, usu_tipoDocumento, usu_numeroDocumento, usu_telefono, usu_mail, usu_sexo, usu_nombreUsuario, usu_fechaNacimiento, usu_contrasegna) VALUES " +
+                                "('" + inte.nombre + "', '" + inte.apellido + "', '" + inte.direccion + "', '" + inte.tipoDocumento + "', " + inte.numeroDocumento + ", " + inte.telefono + ", '" + inte.mail + "', '" + inte.sexo + "', '" + inte.nombreUsuario + "', '" + inte.fechaNacimiento + "', '" + LogIn.getHashSha256(inte.contrasegna) + "'); ";
                         query += "INSERT INTO moustache_spice.afiliado(afi_estadoCivil, afi_familiaresACargo, afi_usuario, afi_orden, afi_planMedico, afi_grupoFamiliar2) VALUES (" +
                             inte.estadoCivil.id + ", 0, SCOPE_Identity(), " + ((inte.esConyuge) ? 2 : ordenInsertado) + ", " + ((PlanMedico)cmbPlanMedico.SelectedItem).id + ", " + afiliadoID + "); ";
                     }

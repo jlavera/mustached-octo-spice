@@ -11,6 +11,7 @@ using Clinica_Frba.Clases;
 namespace Clinica_Frba.RegistrarAgendas {
     public partial class RegistrarAgendas : Form {
         Agendas agendas = new Agendas();
+        Profesionales pros = new Profesionales();
 
         public RegistrarAgendas() {
             InitializeComponent();
@@ -19,6 +20,9 @@ namespace Clinica_Frba.RegistrarAgendas {
         private void RegistrarAgendas_Load(object sender, EventArgs e) {
             dtpDesde.Value = DateTime.Today;
             dtpHasta.Value = DateTime.Today;
+
+            pros.FillWithAll();
+            cbProfesional.Items.AddRange(pros.ToList());
 
             //La primera carga se hace a mano
             agendas.FillWithAll();

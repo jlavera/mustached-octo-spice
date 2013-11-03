@@ -24,6 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.tbRazon = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.tbNumeroDni = new System.Windows.Forms.MaskedTextBox();
             this.tbTelefono = new System.Windows.Forms.MaskedTextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -53,13 +55,15 @@
             this.tbNombre = new System.Windows.Forms.TextBox();
             this.bGuardar = new System.Windows.Forms.Button();
             this.bCambiarGrupo = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.tbRazon = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.tbContrasegna = new System.Windows.Forms.TextBox();
             this.gbDatos.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.label15);
+            this.gbDatos.Controls.Add(this.tbContrasegna);
             this.gbDatos.Controls.Add(this.tbRazon);
             this.gbDatos.Controls.Add(this.label13);
             this.gbDatos.Controls.Add(this.tbNumeroDni);
@@ -98,6 +102,25 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del titular:";
             // 
+            // tbRazon
+            // 
+            this.tbRazon.Location = new System.Drawing.Point(227, 216);
+            this.tbRazon.MaxLength = 255;
+            this.tbRazon.Name = "tbRazon";
+            this.tbRazon.Size = new System.Drawing.Size(140, 20);
+            this.tbRazon.TabIndex = 76;
+            this.tbRazon.Visible = false;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(214, 196);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(131, 13);
+            this.label13.TabIndex = 75;
+            this.label13.Text = "Razon de cambio de plan:";
+            this.label13.Visible = false;
+            // 
             // tbNumeroDni
             // 
             this.tbNumeroDni.Location = new System.Drawing.Point(227, 86);
@@ -134,7 +157,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(450, 157);
+            this.label1.Location = new System.Drawing.Point(450, 196);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(110, 13);
             this.label1.TabIndex = 68;
@@ -144,7 +167,7 @@
             // 
             this.bAgregarACargo.Location = new System.Drawing.Point(468, 265);
             this.bAgregarACargo.Name = "bAgregarACargo";
-            this.bAgregarACargo.Size = new System.Drawing.Size(138, 21);
+            this.bAgregarACargo.Size = new System.Drawing.Size(140, 21);
             this.bAgregarACargo.TabIndex = 70;
             this.bAgregarACargo.Text = "Agregar integrante";
             this.bAgregarACargo.UseVisualStyleBackColor = true;
@@ -154,10 +177,10 @@
             // 
             this.lbIntegrantes.Enabled = false;
             this.lbIntegrantes.FormattingEnabled = true;
-            this.lbIntegrantes.Location = new System.Drawing.Point(468, 173);
+            this.lbIntegrantes.Location = new System.Drawing.Point(468, 215);
             this.lbIntegrantes.Name = "lbIntegrantes";
             this.lbIntegrantes.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.lbIntegrantes.Size = new System.Drawing.Size(140, 69);
+            this.lbIntegrantes.Size = new System.Drawing.Size(140, 43);
             this.lbIntegrantes.TabIndex = 67;
             // 
             // cmbEstadoCivil
@@ -204,7 +227,7 @@
             this.cmbSexo.Items.AddRange(new object[] {
             "Masculino",
             "Femenino"});
-            this.cmbSexo.Location = new System.Drawing.Point(468, 133);
+            this.cmbSexo.Location = new System.Drawing.Point(468, 172);
             this.cmbSexo.Name = "cmbSexo";
             this.cmbSexo.Size = new System.Drawing.Size(138, 21);
             this.cmbSexo.TabIndex = 10;
@@ -212,7 +235,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(450, 113);
+            this.label11.Location = new System.Drawing.Point(450, 152);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(34, 13);
             this.label11.TabIndex = 53;
@@ -358,24 +381,22 @@
             this.bCambiarGrupo.UseVisualStyleBackColor = true;
             this.bCambiarGrupo.Click += new System.EventHandler(this.bCambiarGrupo_Click);
             // 
-            // label13
+            // label15
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(214, 196);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(131, 13);
-            this.label13.TabIndex = 75;
-            this.label13.Text = "Razon de cambio de plan:";
-            this.label13.Visible = false;
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(448, 113);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(61, 13);
+            this.label15.TabIndex = 78;
+            this.label15.Text = "Contraseña";
             // 
-            // tbRazon
+            // tbContrasegna
             // 
-            this.tbRazon.Location = new System.Drawing.Point(227, 216);
-            this.tbRazon.MaxLength = 255;
-            this.tbRazon.Name = "tbRazon";
-            this.tbRazon.Size = new System.Drawing.Size(140, 20);
-            this.tbRazon.TabIndex = 76;
-            this.tbRazon.Visible = false;
+            this.tbContrasegna.Location = new System.Drawing.Point(466, 133);
+            this.tbContrasegna.Name = "tbContrasegna";
+            this.tbContrasegna.PasswordChar = '*';
+            this.tbContrasegna.Size = new System.Drawing.Size(140, 20);
+            this.tbContrasegna.TabIndex = 77;
             // 
             // EditAfiliado
             // 
@@ -426,5 +447,7 @@
         private System.Windows.Forms.Button bCambiarGrupo;
         private System.Windows.Forms.TextBox tbRazon;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox tbContrasegna;
     }
 }

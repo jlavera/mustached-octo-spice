@@ -12,6 +12,7 @@ namespace Clinica_Frba.Clases {
         public string direccion;
         public string mail;
         public string tipoDocumento;
+        public string contrasegna;
         public decimal numeroDocumento;
         public decimal telefono;
         public EstadoCivil estadoCivil;
@@ -38,6 +39,7 @@ namespace Clinica_Frba.Clases {
             mail = (string)dr["usu_mail"];
             sexo = (dr["usu_sexo"] == System.DBNull.Value) ? "" : dr["usu_sexo"].ToString();
             fechaNacimiento = (DateTime)dr["usu_fechaNacimiento"];
+            contrasegna = (string)dr["usu_contrasegna"];
 
             //--Marcar que NO falta grabar en DB
             faltaGrabar = false;
@@ -60,7 +62,7 @@ namespace Clinica_Frba.Clases {
         public Integrante(string p_nombre, string p_apellido, string p_direccion,
             string p_mail, string p_tipoDocumento, long p_numeroDocumento,
             long p_telefono, EstadoCivil p_estado, string p_sexo,
-            string p_nombreUsuario, bool p_esConyuge, DateTime p_fechaNacimiento) {
+            string p_nombreUsuario, bool p_esConyuge, DateTime p_fechaNacimiento, string p_contrasegna) {
 
             nombre = p_nombre;
             apellido = p_apellido;
@@ -74,6 +76,7 @@ namespace Clinica_Frba.Clases {
             nombreUsuario = p_nombreUsuario;
             fechaNacimiento = p_fechaNacimiento;
             esConyuge = p_esConyuge;
+            contrasegna = p_contrasegna;
 
             //--Marcar que falta grabar en DB
             faltaGrabar = true;
