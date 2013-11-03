@@ -74,5 +74,70 @@ namespace Clinica_Frba {
         {
             MessageBox.Show("Para reducir el tiempo de confección del TP y así beneficiar al alumno se determinó que no será necesario que se implemente/codifique el ABM de usuarios.");
         }
+
+        //--Hotkeys para las funcionalidades
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
+            switch (keyData) {
+                case (Keys.Control | Keys.A):
+                    if (flp1.Controls.ContainsKey("Abm_afiliado"))
+                        ((Button)flp1.Controls["Abm_afiliado"]).PerformClick();                    
+                    break;
+                case (Keys.Control | Keys.L):
+                    if (flp1.Controls.ContainsKey("Abm_Planes_Medicos"))
+                        ((Button)flp1.Controls["Abm_Planes_Medicos"]).PerformClick();  
+                    break;
+                case (Keys.Control | Keys.P):
+                    if (flp1.Controls.ContainsKey("Abm_Profesional"))
+                        ((Button)flp1.Controls["Abm_Profesional"]).PerformClick();  
+                    break;
+                case (Keys.Control | Keys.E):
+                    if (flp1.Controls.ContainsKey("Abm_Especialidades_Medicas"))
+                        ((Button)flp1.Controls["Abm_Especialidades_Medicas"]).PerformClick();  
+                    break;
+                case (Keys.Control | Keys.H):
+                    if (flp1.Controls.ContainsKey("Abm_Rol"))
+                        ((Button)flp1.Controls["Abm_Rol"]).PerformClick();  
+                    break;
+                case (Keys.Control | Keys.U):
+                    if (flp1.Controls.ContainsKey("Abm_Usuario"))
+                        ((Button)flp1.Controls["Abm_Usuario"]).PerformClick();  
+                    break;
+            }
+            switch (keyData) {
+                case (Keys.Shift | Keys.A):
+                    if (flp2.Controls.ContainsKey("Agendas"))
+                        ((Button)flp2.Controls["Agendas"]).PerformClick();
+                    break;
+                case (Keys.Shift | Keys.B):
+                    if (flp2.Controls.ContainsKey("Bonos"))
+                        ((Button)flp2.Controls["Bonos"]).PerformClick();
+                    break;
+                case (Keys.Shift | Keys.T):
+                    if (flp2.Controls.ContainsKey("Turnos"))
+                        ((Button)flp2.Controls["Turnos"]).PerformClick();
+                    break;
+                case (Keys.Shift | Keys.L):
+                    if (flp2.Controls.ContainsKey("Registro_de_Llegada"))
+                        ((Button)flp2.Controls["Registro_de_Llegada"]).PerformClick();
+                    break;
+                case (Keys.Shift | Keys.R):
+                    if (flp2.Controls.ContainsKey("Registro_de_Resultado"))
+                        ((Button)flp2.Controls["Registro_de_Resultado"]).PerformClick();
+                    break;
+                case (Keys.Shift | Keys.C):
+                    if (flp2.Controls.ContainsKey("Cancelar_atencion"))
+                        ((Button)flp2.Controls["Cancelar_atencion"]).PerformClick();
+                    break;
+                case (Keys.Shift | Keys.X):
+                    if (flp2.Controls.ContainsKey("Receta"))
+                        ((Button)flp2.Controls["Receta"]).PerformClick();
+                    break;
+                case (Keys.Shift | Keys.E):
+                    if (flp2.Controls.ContainsKey("Estadisticas"))
+                        ((Button)flp2.Controls["Estadisticas"]).PerformClick();
+                    break;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
     }
 }

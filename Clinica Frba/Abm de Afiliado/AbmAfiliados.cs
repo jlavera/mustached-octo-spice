@@ -110,7 +110,7 @@ namespace Clinica_Frba.AbmAfiliados {
                 afiliados.DeleteSelected(dgvAfiliados);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void bLimpiar_Click(object sender, EventArgs e)
         {
             //Limpiar las cosa para buscar
             foreach (Control ctrl in gbFiltros.Controls) {
@@ -124,5 +124,25 @@ namespace Clinica_Frba.AbmAfiliados {
                     ((ListBox)ctrl).ClearSelected();
             }
         }
+
+        //--Hotkeys para las funcionalidades
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
+            switch (keyData) {
+                case (Keys.Control | Keys.A):
+                    bAgregar.PerformClick();
+                    break;
+                case (Keys.Control | Keys.Delete):
+                    bEliminar.PerformClick();
+                    break;
+                case (Keys.Control | Keys.L):
+                    bLimpiar.PerformClick();
+                    break;
+                case (Keys.Control | Keys.Enter):
+                    bBuscar.PerformClick();
+                    break;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
     }
 }

@@ -110,7 +110,8 @@
             this.tbNumeroDni.Location = new System.Drawing.Point(248, 90);
             this.tbNumeroDni.Mask = "000000000000000000";
             this.tbNumeroDni.Name = "tbNumeroDni";
-            this.tbNumeroDni.Size = new System.Drawing.Size(140, 20);
+            this.tbNumeroDni.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tbNumeroDni.Size = new System.Drawing.Size(122, 20);
             this.tbNumeroDni.TabIndex = 8;
             // 
             // tbTelefono
@@ -118,7 +119,8 @@
             this.tbTelefono.Location = new System.Drawing.Point(248, 129);
             this.tbTelefono.Mask = "000000000000000000";
             this.tbTelefono.Name = "tbTelefono";
-            this.tbTelefono.Size = new System.Drawing.Size(140, 20);
+            this.tbTelefono.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tbTelefono.Size = new System.Drawing.Size(122, 20);
             this.tbTelefono.TabIndex = 9;
             // 
             // label1
@@ -323,7 +325,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(429, 366);
             this.Controls.Add(this.gbDatos);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "EditIntegrante";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EditIntegrante";
             this.Load += new System.EventHandler(this.EditIntegrante_Load);
             this.gbDatos.ResumeLayout(false);

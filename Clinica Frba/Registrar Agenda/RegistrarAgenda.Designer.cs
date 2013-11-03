@@ -59,9 +59,9 @@
             this.hasta,
             this.seleccionar});
             this.dgvAgenda.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvAgenda.Location = new System.Drawing.Point(0, 160);
+            this.dgvAgenda.Location = new System.Drawing.Point(0, 162);
             this.dgvAgenda.Name = "dgvAgenda";
-            this.dgvAgenda.Size = new System.Drawing.Size(643, 150);
+            this.dgvAgenda.Size = new System.Drawing.Size(648, 150);
             this.dgvAgenda.TabIndex = 0;
             this.dgvAgenda.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAgenda_CellContentClick);
             // 
@@ -199,7 +199,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(643, 310);
+            this.ClientSize = new System.Drawing.Size(648, 312);
             this.Controls.Add(this.bEliminar);
             this.Controls.Add(this.bAgregar);
             this.Controls.Add(this.groupBox1);

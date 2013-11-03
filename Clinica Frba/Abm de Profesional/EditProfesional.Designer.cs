@@ -24,6 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.tbMatricula = new System.Windows.Forms.MaskedTextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.tbContrasegna = new System.Windows.Forms.TextBox();
             this.tbNumeroDni = new System.Windows.Forms.MaskedTextBox();
@@ -49,8 +51,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbNombre = new System.Windows.Forms.TextBox();
             this.bGuardar = new System.Windows.Forms.Button();
-            this.tbMatricula = new System.Windows.Forms.MaskedTextBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.gbDatos.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,6 +90,24 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del titular:";
             // 
+            // tbMatricula
+            // 
+            this.tbMatricula.Location = new System.Drawing.Point(223, 43);
+            this.tbMatricula.Mask = "000000000000000000";
+            this.tbMatricula.Name = "tbMatricula";
+            this.tbMatricula.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tbMatricula.Size = new System.Drawing.Size(127, 20);
+            this.tbMatricula.TabIndex = 77;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(207, 27);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(53, 13);
+            this.label13.TabIndex = 78;
+            this.label13.Text = "Matricula:";
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -112,7 +130,8 @@
             this.tbNumeroDni.Location = new System.Drawing.Point(223, 129);
             this.tbNumeroDni.Mask = "000000000000000000";
             this.tbNumeroDni.Name = "tbNumeroDni";
-            this.tbNumeroDni.Size = new System.Drawing.Size(138, 20);
+            this.tbNumeroDni.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tbNumeroDni.Size = new System.Drawing.Size(127, 20);
             this.tbNumeroDni.TabIndex = 6;
             // 
             // tbTelefono
@@ -120,7 +139,8 @@
             this.tbTelefono.Location = new System.Drawing.Point(223, 172);
             this.tbTelefono.Mask = "000000000000000000";
             this.tbTelefono.Name = "tbTelefono";
-            this.tbTelefono.Size = new System.Drawing.Size(138, 20);
+            this.tbTelefono.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tbTelefono.Size = new System.Drawing.Size(127, 20);
             this.tbTelefono.TabIndex = 7;
             // 
             // label2
@@ -155,7 +175,7 @@
             this.lbEspecialidades.Location = new System.Drawing.Point(461, 43);
             this.lbEspecialidades.Name = "lbEspecialidades";
             this.lbEspecialidades.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lbEspecialidades.Size = new System.Drawing.Size(140, 264);
+            this.lbEspecialidades.Size = new System.Drawing.Size(140, 277);
             this.lbEspecialidades.TabIndex = 11;
             // 
             // cmbSexo
@@ -165,9 +185,9 @@
             this.cmbSexo.Items.AddRange(new object[] {
             "Masculino",
             "Femenino"});
-            this.cmbSexo.Location = new System.Drawing.Point(43, 220);
+            this.cmbSexo.Location = new System.Drawing.Point(46, 220);
             this.cmbSexo.Name = "cmbSexo";
-            this.cmbSexo.Size = new System.Drawing.Size(138, 21);
+            this.cmbSexo.Size = new System.Drawing.Size(140, 21);
             this.cmbSexo.TabIndex = 4;
             // 
             // label11
@@ -301,7 +321,7 @@
             // 
             // bGuardar
             // 
-            this.bGuardar.Location = new System.Drawing.Point(46, 260);
+            this.bGuardar.Location = new System.Drawing.Point(46, 282);
             this.bGuardar.Name = "bGuardar";
             this.bGuardar.Size = new System.Drawing.Size(140, 41);
             this.bGuardar.TabIndex = 12;
@@ -309,30 +329,16 @@
             this.bGuardar.UseVisualStyleBackColor = true;
             this.bGuardar.Click += new System.EventHandler(this.bGuardar_Click);
             // 
-            // tbMatricula
-            // 
-            this.tbMatricula.Location = new System.Drawing.Point(223, 43);
-            this.tbMatricula.Mask = "000000000000000000";
-            this.tbMatricula.Name = "tbMatricula";
-            this.tbMatricula.Size = new System.Drawing.Size(138, 20);
-            this.tbMatricula.TabIndex = 77;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(207, 27);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(53, 13);
-            this.label13.TabIndex = 78;
-            this.label13.Text = "Matricula:";
-            // 
             // EditProfesional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(659, 361);
             this.Controls.Add(this.gbDatos);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "EditProfesional";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EditAfiliado";
             this.Load += new System.EventHandler(this.EditProfesional_Load);
             this.gbDatos.ResumeLayout(false);

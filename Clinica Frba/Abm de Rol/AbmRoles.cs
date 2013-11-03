@@ -48,7 +48,7 @@ namespace Clinica_Frba.AbmRoles {
             //--Si era en la columna de seleccionar (editar)
             if (dgvRoles.Columns[e.ColumnIndex].HeaderText == "Seleccionar") {
                 //--Abrir ventana de edición mandando el rol seleccionado
-                Abm_de_Rol.EditRol formEdit = new Clinica_Frba.Abm_de_Rol.EditRol(roles[e.RowIndex]);
+                Abm_de_Rol.EditRol formEdit = new Clinica_Frba.Abm_de_Rol.EditRol(roles[dgvRoles.Rows[e.RowIndex].Cells["id"].Value.ToString()]);
                 formEdit.ShowDialog();
 
                 //--Si el resultado del diálogo es OK, recargar dgv
@@ -91,6 +91,22 @@ namespace Clinica_Frba.AbmRoles {
             foreach (Rol rol in roles.items)
                 dgvRoles.Rows.Add(rol.id, rol.nombre, rol.funcionalidades, rol.habilitado);
 
+        }
+
+        //--Hotkeys para las funcionalidades
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
+            switch (keyData) {
+                case (Keys.Control | Keys.A):
+                    bAgregar.PerformClick();
+                    break;
+                case (Keys.Control | Keys.Delete):
+                    bEliminar.PerformClick();
+                    break;
+                case (Keys.Control | Keys.Enter):
+                    bBuscar.PerformClick();
+                    break;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
     }

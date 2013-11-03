@@ -143,7 +143,8 @@
             this.tbNumeroDni.Location = new System.Drawing.Point(227, 86);
             this.tbNumeroDni.Mask = "000000000000000000";
             this.tbNumeroDni.Name = "tbNumeroDni";
-            this.tbNumeroDni.Size = new System.Drawing.Size(138, 20);
+            this.tbNumeroDni.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tbNumeroDni.Size = new System.Drawing.Size(118, 20);
             this.tbNumeroDni.TabIndex = 6;
             // 
             // tbTelefono
@@ -151,7 +152,8 @@
             this.tbTelefono.Location = new System.Drawing.Point(227, 129);
             this.tbTelefono.Mask = "000000000000000000";
             this.tbTelefono.Name = "tbTelefono";
-            this.tbTelefono.Size = new System.Drawing.Size(138, 20);
+            this.tbTelefono.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tbTelefono.Size = new System.Drawing.Size(118, 20);
             this.tbTelefono.TabIndex = 7;
             // 
             // label2
@@ -404,7 +406,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(658, 320);
             this.Controls.Add(this.gbDatos);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "EditAfiliado";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edición de afiliado";
             this.Load += new System.EventHandler(this.EditAfiliado_Load);
             this.gbDatos.ResumeLayout(false);
