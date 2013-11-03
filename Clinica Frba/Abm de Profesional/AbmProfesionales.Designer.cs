@@ -201,6 +201,7 @@
             this.cmbSexo.Name = "cmbSexo";
             this.cmbSexo.Size = new System.Drawing.Size(138, 21);
             this.cmbSexo.TabIndex = 24;
+            this.cmbSexo.SelectedIndexChanged += new System.EventHandler(this.cmbSexo_SelectedIndexChanged);
             // 
             // label11
             // 

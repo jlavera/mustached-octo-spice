@@ -80,7 +80,7 @@ namespace Clinica_Frba.Clases {
             if (p_numDocumento != -1)
                 query += " usu_numeroDocumento=" + p_numDocumento + " AND ";
 
-            if (p_sexo != null)
+            if (p_sexo != "")
                 query += " usu_sexo='" + ((p_sexo == "Masculino") ? "M" : "F") + "' AND ";
             if (p_telefono != -1)
                 query += " usu_telefono =" + p_telefono + " AND ";

@@ -48,13 +48,13 @@ namespace Clinica_Frba.AbmProfesionales {
                 Convert.ToInt64((tbTelefono.Text == "") ? "-1" : tbTelefono.Text),
                 tbMail.Text,
                 tbNombreUsuario.Text,
-                cmbSexo.SelectedText,
+                cmbSexo.Text,
                 lbEspecialidades.SelectedItems,
                 Convert.ToInt32(nLimit.Value));
 
             //--Llena dgv
             foreach (Profesional prof in profs.items) {
-                dgvProfesionales.Rows.Add(prof.matricula,
+                dgvProfesionales.Rows.Add((prof.matricula == -1)? "Falta cargar": prof.matricula.ToString(),
                     prof.usuario.nombre, prof.usuario.apellido,
                     (prof.usuario.tipoDocumento == "") ? "Faltar cargar" : prof.usuario.tipoDocumento, prof.usuario.numeroDocumento,
                     prof.usuario.direccion, prof.usuario.telefono, prof.usuario.mail, prof.usuario.fechaNacimiento,
@@ -110,6 +110,10 @@ namespace Clinica_Frba.AbmProfesionales {
                 if (ctrl is ListBox)
                     ((ListBox)ctrl).ClearSelected();
             }
+        }
+
+        private void cmbSexo_SelectedIndexChanged(object sender, EventArgs e) {
+
         }
     }
 }
