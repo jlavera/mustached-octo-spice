@@ -41,12 +41,12 @@
             this.label9 = new System.Windows.Forms.Label();
             this.cbProfesional = new System.Windows.Forms.ComboBox();
             this.bGuardar = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.listBox3 = new System.Windows.Forms.ListBox();
-            this.listBox4 = new System.Windows.Forms.ListBox();
-            this.listBox5 = new System.Windows.Forms.ListBox();
-            this.listBox6 = new System.Windows.Forms.ListBox();
+            this.lbDia2 = new System.Windows.Forms.ListBox();
+            this.lbDia3 = new System.Windows.Forms.ListBox();
+            this.lbDia4 = new System.Windows.Forms.ListBox();
+            this.lbDia5 = new System.Windows.Forms.ListBox();
+            this.lbDia6 = new System.Windows.Forms.ListBox();
+            this.lbDia7 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // label1
@@ -152,6 +152,7 @@
             // 
             // cbProfesional
             // 
+            this.cbProfesional.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbProfesional.FormattingEnabled = true;
             this.cbProfesional.Location = new System.Drawing.Point(107, 10);
             this.cbProfesional.Name = "cbProfesional";
@@ -168,10 +169,10 @@
             this.bGuardar.UseVisualStyleBackColor = true;
             this.bGuardar.Click += new System.EventHandler(this.bGuardar_Click);
             // 
-            // listBox1
+            // lbDia2
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Items.AddRange(new object[] {
+            this.lbDia2.FormattingEnabled = true;
+            this.lbDia2.Items.AddRange(new object[] {
             "7:00",
             "7:30",
             "8:00",
@@ -198,16 +199,16 @@
             "18:30",
             "19:00",
             "19:30"});
-            this.listBox1.Location = new System.Drawing.Point(45, 119);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox1.Size = new System.Drawing.Size(56, 342);
-            this.listBox1.TabIndex = 20;
+            this.lbDia2.Location = new System.Drawing.Point(45, 119);
+            this.lbDia2.Name = "lbDia2";
+            this.lbDia2.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lbDia2.Size = new System.Drawing.Size(56, 342);
+            this.lbDia2.TabIndex = 20;
             // 
-            // listBox2
+            // lbDia3
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Items.AddRange(new object[] {
+            this.lbDia3.FormattingEnabled = true;
+            this.lbDia3.Items.AddRange(new object[] {
             "7:00",
             "7:30",
             "8:00",
@@ -234,16 +235,16 @@
             "18:30",
             "19:00",
             "19:30"});
-            this.listBox2.Location = new System.Drawing.Point(104, 119);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox2.Size = new System.Drawing.Size(56, 342);
-            this.listBox2.TabIndex = 21;
+            this.lbDia3.Location = new System.Drawing.Point(104, 119);
+            this.lbDia3.Name = "lbDia3";
+            this.lbDia3.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lbDia3.Size = new System.Drawing.Size(56, 342);
+            this.lbDia3.TabIndex = 21;
             // 
-            // listBox3
+            // lbDia4
             // 
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.Items.AddRange(new object[] {
+            this.lbDia4.FormattingEnabled = true;
+            this.lbDia4.Items.AddRange(new object[] {
             "7:00",
             "7:30",
             "8:00",
@@ -270,16 +271,16 @@
             "18:30",
             "19:00",
             "19:30"});
-            this.listBox3.Location = new System.Drawing.Point(166, 119);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox3.Size = new System.Drawing.Size(56, 342);
-            this.listBox3.TabIndex = 22;
+            this.lbDia4.Location = new System.Drawing.Point(166, 119);
+            this.lbDia4.Name = "lbDia4";
+            this.lbDia4.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lbDia4.Size = new System.Drawing.Size(56, 342);
+            this.lbDia4.TabIndex = 22;
             // 
-            // listBox4
+            // lbDia5
             // 
-            this.listBox4.FormattingEnabled = true;
-            this.listBox4.Items.AddRange(new object[] {
+            this.lbDia5.FormattingEnabled = true;
+            this.lbDia5.Items.AddRange(new object[] {
             "7:00",
             "7:30",
             "8:00",
@@ -306,16 +307,16 @@
             "18:30",
             "19:00",
             "19:30"});
-            this.listBox4.Location = new System.Drawing.Point(228, 119);
-            this.listBox4.Name = "listBox4";
-            this.listBox4.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox4.Size = new System.Drawing.Size(56, 342);
-            this.listBox4.TabIndex = 23;
+            this.lbDia5.Location = new System.Drawing.Point(228, 119);
+            this.lbDia5.Name = "lbDia5";
+            this.lbDia5.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lbDia5.Size = new System.Drawing.Size(56, 342);
+            this.lbDia5.TabIndex = 23;
             // 
-            // listBox5
+            // lbDia6
             // 
-            this.listBox5.FormattingEnabled = true;
-            this.listBox5.Items.AddRange(new object[] {
+            this.lbDia6.FormattingEnabled = true;
+            this.lbDia6.Items.AddRange(new object[] {
             "7:00",
             "7:30",
             "8:00",
@@ -342,16 +343,16 @@
             "18:30",
             "19:00",
             "19:30"});
-            this.listBox5.Location = new System.Drawing.Point(290, 119);
-            this.listBox5.Name = "listBox5";
-            this.listBox5.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox5.Size = new System.Drawing.Size(56, 342);
-            this.listBox5.TabIndex = 24;
+            this.lbDia6.Location = new System.Drawing.Point(290, 119);
+            this.lbDia6.Name = "lbDia6";
+            this.lbDia6.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lbDia6.Size = new System.Drawing.Size(56, 342);
+            this.lbDia6.TabIndex = 24;
             // 
-            // listBox6
+            // lbDia7
             // 
-            this.listBox6.FormattingEnabled = true;
-            this.listBox6.Items.AddRange(new object[] {
+            this.lbDia7.FormattingEnabled = true;
+            this.lbDia7.Items.AddRange(new object[] {
             "10:00",
             "10:30",
             "11:00",
@@ -362,23 +363,23 @@
             "13:30",
             "14:00",
             "14:30"});
-            this.listBox6.Location = new System.Drawing.Point(352, 197);
-            this.listBox6.Name = "listBox6";
-            this.listBox6.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox6.Size = new System.Drawing.Size(56, 134);
-            this.listBox6.TabIndex = 25;
+            this.lbDia7.Location = new System.Drawing.Point(352, 197);
+            this.lbDia7.Name = "lbDia7";
+            this.lbDia7.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lbDia7.Size = new System.Drawing.Size(56, 134);
+            this.lbDia7.TabIndex = 25;
             // 
             // EditAgenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(440, 473);
-            this.Controls.Add(this.listBox6);
-            this.Controls.Add(this.listBox5);
-            this.Controls.Add(this.listBox4);
-            this.Controls.Add(this.listBox3);
-            this.Controls.Add(this.listBox2);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.lbDia7);
+            this.Controls.Add(this.lbDia6);
+            this.Controls.Add(this.lbDia5);
+            this.Controls.Add(this.lbDia4);
+            this.Controls.Add(this.lbDia3);
+            this.Controls.Add(this.lbDia2);
             this.Controls.Add(this.bGuardar);
             this.Controls.Add(this.cbProfesional);
             this.Controls.Add(this.label9);
@@ -415,11 +416,11 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox cbProfesional;
         private System.Windows.Forms.Button bGuardar;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.ListBox listBox3;
-        private System.Windows.Forms.ListBox listBox4;
-        private System.Windows.Forms.ListBox listBox5;
-        private System.Windows.Forms.ListBox listBox6;
+        private System.Windows.Forms.ListBox lbDia2;
+        private System.Windows.Forms.ListBox lbDia3;
+        private System.Windows.Forms.ListBox lbDia4;
+        private System.Windows.Forms.ListBox lbDia5;
+        private System.Windows.Forms.ListBox lbDia6;
+        private System.Windows.Forms.ListBox lbDia7;
     }
 }

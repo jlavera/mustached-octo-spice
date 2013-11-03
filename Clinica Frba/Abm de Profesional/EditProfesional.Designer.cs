@@ -97,7 +97,7 @@
             this.tbMatricula.Name = "tbMatricula";
             this.tbMatricula.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tbMatricula.Size = new System.Drawing.Size(127, 20);
-            this.tbMatricula.TabIndex = 77;
+            this.tbMatricula.TabIndex = 5;
             // 
             // label13
             // 
@@ -123,7 +123,7 @@
             this.tbContrasegna.Name = "tbContrasegna";
             this.tbContrasegna.PasswordChar = '*';
             this.tbContrasegna.Size = new System.Drawing.Size(138, 20);
-            this.tbContrasegna.TabIndex = 10;
+            this.tbContrasegna.TabIndex = 11;
             // 
             // tbNumeroDni
             // 
@@ -132,7 +132,7 @@
             this.tbNumeroDni.Name = "tbNumeroDni";
             this.tbNumeroDni.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tbNumeroDni.Size = new System.Drawing.Size(127, 20);
-            this.tbNumeroDni.TabIndex = 6;
+            this.tbNumeroDni.TabIndex = 7;
             // 
             // tbTelefono
             // 
@@ -141,7 +141,7 @@
             this.tbTelefono.Name = "tbTelefono";
             this.tbTelefono.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tbTelefono.Size = new System.Drawing.Size(127, 20);
-            this.tbTelefono.TabIndex = 7;
+            this.tbTelefono.TabIndex = 8;
             // 
             // label2
             // 
@@ -157,7 +157,7 @@
             this.dtpFechaNacimiento.Location = new System.Drawing.Point(223, 220);
             this.dtpFechaNacimiento.Name = "dtpFechaNacimiento";
             this.dtpFechaNacimiento.Size = new System.Drawing.Size(209, 20);
-            this.dtpFechaNacimiento.TabIndex = 8;
+            this.dtpFechaNacimiento.TabIndex = 9;
             this.dtpFechaNacimiento.Value = new System.DateTime(2013, 11, 1, 0, 0, 0, 0);
             // 
             // label1
@@ -176,7 +176,7 @@
             this.lbEspecialidades.Name = "lbEspecialidades";
             this.lbEspecialidades.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.lbEspecialidades.Size = new System.Drawing.Size(140, 277);
-            this.lbEspecialidades.TabIndex = 11;
+            this.lbEspecialidades.TabIndex = 12;
             // 
             // cmbSexo
             // 
@@ -213,7 +213,7 @@
             this.tbNombreUsuario.Location = new System.Drawing.Point(223, 263);
             this.tbNombreUsuario.Name = "tbNombreUsuario";
             this.tbNombreUsuario.Size = new System.Drawing.Size(138, 20);
-            this.tbNombreUsuario.TabIndex = 9;
+            this.tbNombreUsuario.TabIndex = 10;
             // 
             // label9
             // 
@@ -260,7 +260,7 @@
             this.cmbTipoDNI.Location = new System.Drawing.Point(225, 90);
             this.cmbTipoDNI.Name = "cmbTipoDNI";
             this.cmbTipoDNI.Size = new System.Drawing.Size(61, 21);
-            this.cmbTipoDNI.TabIndex = 5;
+            this.cmbTipoDNI.TabIndex = 6;
             // 
             // label6
             // 
@@ -324,7 +324,7 @@
             this.bGuardar.Location = new System.Drawing.Point(46, 282);
             this.bGuardar.Name = "bGuardar";
             this.bGuardar.Size = new System.Drawing.Size(140, 41);
-            this.bGuardar.TabIndex = 12;
+            this.bGuardar.TabIndex = 13;
             this.bGuardar.Text = "Guardar";
             this.bGuardar.UseVisualStyleBackColor = true;
             this.bGuardar.Click += new System.EventHandler(this.bGuardar_Click);

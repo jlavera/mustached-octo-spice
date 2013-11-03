@@ -26,5 +26,10 @@ namespace Clinica_Frba.Clases {
 
             usuario = new Usuario(dr);
         }
+
+        public override string ToString()
+        {
+            return usuario.ToString();
+        }
     }
 }

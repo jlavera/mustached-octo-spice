@@ -68,5 +68,28 @@ namespace Clinica_Frba.Clases {
             return hashString;
         }
 
+
+        internal static int diaCereal(string _dia)
+        {
+            switch (_dia){
+                case "Lunes":
+                    return 2;
+                case "Martes":
+                    return 3;
+                case "Miercoles":
+                    return 4;
+                case "Jueves":
+                    return 5;
+                case "Viernes":
+                    return 6;
+                case "Sabado":
+                    return 7;
+                case "Domingo":
+                    return 1;
+
+            }
+            return -1;
+        }
+
     }
 }

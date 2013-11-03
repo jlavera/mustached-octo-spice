@@ -49,7 +49,7 @@ BEGIN
 	IF (((@dia  BETWEEN 2 AND 6 AND
 		@hora BETWEEN '07:00:00' AND '19:30:00')
 	OR
-	   ((@dia = 7 or @dia = 1) AND
+	   (@dia = 7 AND
 		@hora BETWEEN '10:00:00' AND '15:00:00')))
 		RETURN 1
 	RETURN 0
@@ -192,10 +192,7 @@ CREATE TABLE moustache_spice.semanal (
   sem_dia INT NOT NULL, -- 1: DOMINGO
   sem_hora TIME NOT NULL, --Se separan cada 30 minutos
   sem_habilitado TINYINT NOT NULL DEFAULT 1
-  PRIMARY KEY(sem_agenda, sem_dia, sem_hora),
-  CHECK(
-    sem_habilitado=1 AND moustache_spice.semanalHabilitado(sem_dia, sem_hora) = 1
-  )
+  PRIMARY KEY(sem_agenda, sem_dia, sem_hora)
 );
 
 -- -----------------------------------------------------
@@ -322,8 +319,7 @@ CREATE TABLE moustache_spice.bonoFarmacia (
   bfa_fechaImpresion DATE NOT NULL,
   bfa_fechaVencimiento DATE NOT NULL,
   bfa_afiliado INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.afiliado(afi_id),
-  PRIMARY KEY (bfa_id),
-  CHECK ( moustache_spice.bonoFarmaciaHabilitado( bfa_fechaImpresion, bfa_fechaVencimiento) = 0 )
+  PRIMARY KEY (bfa_id)
 );
 
 -- -----------------------------------------------------
@@ -333,9 +329,7 @@ CREATE TABLE moustache_spice.medicamento_x_bonoFarmacia (
   mxb_medicamento INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.medicamento(med_id),
   mxb_bonoFarmacia INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.bonoFarmacia(bfa_id),
   mxb_unidades INT NOT NULL DEFAULT 1,
-  PRIMARY KEY (mxb_medicamento, mxb_bonoFarmacia),
-  CHECK (mxb_unidades <= 3 AND
-		(moustache_spice.cantidadMedicamentos(mxb_bonoFarmacia) <= 5))
+  PRIMARY KEY (mxb_medicamento, mxb_bonoFarmacia)
 );
 
 
@@ -360,13 +354,11 @@ CREATE VIEW moustache_spice.vAfiliado AS
 GO
 
 CREATE VIEW moustache_spice.vAgenda AS
-	SELECT age_id, age_desde, age_hasta, (usu_apellido + ', ' + usu_nombre) 'profesional', sem_dia, sem_hora
+	SELECT age_id, age_desde, age_hasta, age_profesional, (usu_apellido + ', ' + usu_nombre) 'profesional', sem_dia, sem_hora
 	FROM moustache_spice.agenda
 	JOIN moustache_spice.semanal ON sem_agenda = age_id
 	JOIN moustache_spice.vProfesional ON age_profesional = pro_id
 GO
-
-
 
 -- -----------------------------------------------------
 -- INSERTs a mano
@@ -511,6 +503,8 @@ INSERT INTO moustache_spice.bonoFarmacia(bfa_id, bfa_fechaImpresion, bfa_fechaVe
 	WHERE Bono_Farmacia_Numero IS NOT NULL AND moustache_spice.bonoFarmaciaHabilitado(Bono_Farmacia_Fecha_Impresion, Bono_Farmacia_Fecha_Vencimiento) = 0)
 SET IDENTITY_INSERT moustache_spice.bonoFarmacia OFF
 
+ALTER TABLE moustache_spice.bonoFarmacia ADD CONSTRAINT CK_bfa_valido CHECK ( moustache_spice.bonoFarmaciaHabilitado( bfa_fechaImpresion, bfa_fechaVencimiento) = 0 )
+
 -- -----------------------------------------------------
 -- migracion tabla agenda
 -- -----------------------------------------------------
@@ -529,8 +523,10 @@ INSERT INTO moustache_spice.semanal(sem_agenda, sem_dia, sem_hora, sem_habilitad
 	FROM moustache_spice.turno
 		JOIN moustache_spice.agenda ON tur_profesional = age_profesional);
 	
-	--Check: sem_habilitado=1 AND moustache_spice.semanalHabilitado(sem_dia, sem_hora) = 1
+	SELECT * FROM moustache_spice.vAgenda
 	
+ALTER TABLE moustache_spice.semanal ADD CONSTRAINT CK_sem_horarioValido CHECK( moustache_spice.semanalHabilitado(sem_dia, sem_hora)=1 )
+
 -- -----------------------------------------------------
 -- migracion tabla medicamento
 -- -----------------------------------------------------
@@ -546,9 +542,10 @@ INSERT INTO moustache_spice.medicamento_x_bonoFarmacia(mxb_bonoFarmacia, mxb_med
 	FROM gd_esquema.Maestra
 		LEFT JOIN moustache_spice.medicamento ON med_nombre = Bono_Farmacia_Medicamento
 	WHERE Bono_Farmacia_Numero IS NOT NULL
-	AND Bono_Farmacia_Medicamento IS NOT NULL)
+	AND Bono_Farmacia_Medicamento IS NOT NULL);
 	
-	
+ALTER TABLE moustache_spice.medicamento_x_bonoFarmacia ADD CONSTRAINT CK_mxb_cantidadValida CHECK (mxb_unidades <= 3 AND
+		(moustache_spice.cantidadMedicamentos(mxb_bonoFarmacia) <= 5))
 -- -----------------------------------------------------
 -- ##TODO##
 -- >> Grupos familiares (asumismos por apellido, o dejamos vacio?) necesito migrar los planes medicos

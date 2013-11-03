@@ -54,16 +54,19 @@ namespace Clinica_Frba.Clases {
             //--Eliminar de la DB
             if (p_objects.Count > 0)
             {
-                string query = "DELETE " + DB.schema + tabla + " WHERE";
+                string queryAge = "DELETE " + DB.schema + tabla + " WHERE";
+                string querySem = "DELETE " + DB.schema + "semanal WHERE";
 
                 foreach (DataGridViewRow agenda in p_objects)
                 {
-                    query += " age_id=" + agenda.Cells["id"].Value + " OR";
+                    queryAge += " age_id=" + agenda.Cells["id"].Value + " OR";
+                    querySem += " sem_agenda=" + agenda.Cells["id"].Value + " OR";
                 }
                 //Para sacar el ultimo or
-                query = query.Substring(0, query.Length - 3);
+                queryAge = queryAge.Substring(0, queryAge.Length - 3);
+                querySem = querySem.Substring(0, querySem.Length - 3);
 
-                if (DB.ExecuteNonQuery(query) == -1)
+                if (DB.ExecuteNonQuery(querySem + "; " + queryAge) == -1)
                     MessageBox.Show("Error en la delecion");
 
                 //--Eliminar del ArrayList
@@ -80,19 +83,27 @@ namespace Clinica_Frba.Clases {
             }
         }
 
-        public void FillWithFilter(int _profesional, DateTime _desde, DateTime _hasta) {
-            string query = "SELECT A.*, usu_apellido + ', ' + usu_nombre AS profesional FROM " + DB.schema + tabla + " A LEFT JOIN " + DB.schema + "vProfesional ON pro_id = age_profesional WHERE";
-            if (_profesional != -1)
-                query += " age_profesional = " + _profesional + " AND ";
+        public void FillWithFilter(Profesional _profesional, DateTime _desde, DateTime _hasta, int _dia, string _dia_desde, string _dia_hasta)
+        {
+            string query = "SELECT DISTINCT age_id, age_desde, age_hasta, age_profesional, profesional FROM " + DB.schema + "vAgenda WHERE";
+            if (_profesional != null)
+                query += " age_profesional = " + _profesional.id + " AND ";
             if (_desde != _hasta)
-                query += " age_desde > '" + _desde.Date.ToString("yyyy-MM-dd") + "' AND age_hasta < '" + _hasta.Date.ToString("yyy-MM-dd") + "'     ";
+                query += " age_desde > '" + _desde.Date.ToString("yyyy-MM-dd") + "' AND age_hasta < '" + _hasta.Date.ToString("yyy-MM-dd") + "' AND ";
+            if (_dia != -1 && (_dia_desde != "" || _dia_hasta != "")) {
+                query += " sem_dia = " + _dia + " AND ";
+                if (_dia_desde != "")
+                    query += "sem_hora > '" + _dia_desde + "' AND ";
+                if (_dia_hasta != "")
+                    query += "sem_hora < '" + _dia_hasta + "' AND ";
+            }
             query = query.Substring(0, query.Length - 5);
             Fill(DB.ExecuteReader(query));
             
         }
 
         override public DataTable SelectAll(){
-            return DB.ExecuteReader("SELECT A.*, usu_apellido + ', ' + usu_nombre AS profesional FROM " + DB.schema + tabla + " A LEFT JOIN " + DB.schema + "vProfesional ON pro_id = age_profesional");
+            return DB.ExecuteReader("SELECT DISTINCT age_id, age_desde, age_hasta, age_profesional, profesional FROM " + DB.schema + "vAgenda");
         }
     }
 }

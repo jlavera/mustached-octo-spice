@@ -41,5 +41,10 @@ namespace Clinica_Frba.Clases {
             habilitado = (bool)Convert.ToBoolean(dr["usu_habilitado"]);
 
         }
+
+        public override string ToString()
+        {
+            return apellido + ", " + nombre;
+        }
     }
 }

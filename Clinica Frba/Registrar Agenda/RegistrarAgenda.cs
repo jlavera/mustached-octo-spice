@@ -18,8 +18,8 @@ namespace Clinica_Frba.RegistrarAgendas {
         }
 
         private void RegistrarAgendas_Load(object sender, EventArgs e) {
-            dtpDesde.Value = DateTime.Today;
-            dtpHasta.Value = DateTime.Today;
+            dtpDesde.Value = dtpDesde.MinDate;
+            dtpHasta.Value = dtpDesde.MaxDate;
 
             pros.FillWithAll();
             cbProfesional.Items.AddRange(pros.ToList());
@@ -27,13 +27,13 @@ namespace Clinica_Frba.RegistrarAgendas {
             //La primera carga se hace a mano
             agendas.FillWithAll();
             foreach (Agenda agenda in agendas.items)
-                dgvAgenda.Rows.Add(agenda.id, agenda.profesional, agenda.desde, agenda.hasta);
+                dgvAgenda.Rows.Add(agenda.id, agenda.profesional, agenda.desde.ToString("dd-MM-yyyy"), agenda.hasta.ToString("dd-MM-yyyy"));
         }
 
         private void FillDgv() {
             agendas.ClearList();
             dgvAgenda.Rows.Clear();
-            agendas.FillWithFilter(cbProfesional.SelectedIndex, dtpDesde.Value, dtpHasta.Value);
+            agendas.FillWithFilter(((Profesional)cbProfesional.SelectedItem), dtpDesde.Value, dtpHasta.Value, FuncionesBoludas.diaCereal(cbDia.Text), cbDiaDesde.Text, cbDiaHasta.Text);
 
             foreach (Agenda agenda in agendas.items)
                 dgvAgenda.Rows.Add(agenda.id, agenda.profesional, agenda.desde, agenda.hasta);
@@ -72,6 +72,24 @@ namespace Clinica_Frba.RegistrarAgendas {
                 MessageBox.Show("Las fechas no estan en orden");
             else
                 FillDgv();
+        }
+
+        private void bLimpiar_Click(object sender, EventArgs e)
+        {
+            //Limpiar las cosa para buscar
+                        dtpDesde.Value = dtpDesde.MinDate;
+            dtpHasta.Value = dtpDesde.MaxDate;
+            foreach (Control ctrl in gbFiltros.Controls)
+            {
+                if (ctrl is TextBox)
+                    ((TextBox)ctrl).Text = "";
+                if (ctrl is ComboBox)
+                    ((ComboBox)ctrl).SelectedIndex = -1;
+                if (ctrl is MaskedTextBox)
+                    ((MaskedTextBox)ctrl).Text = "";
+                if (ctrl is ListBox)
+                    ((ListBox)ctrl).ClearSelected();
+            }
         }
     }
 }

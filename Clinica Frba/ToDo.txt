@@ -1,3 +1,7 @@
--- (Partial) Agregar en los select si está habilitado
--- Joaquín del futuro (cualquiera de los 2): se que me vas a odiar cuando leas esto, pero faltan hacer los checkeos de tipos de datos (por ejemplos dni son todos números, teléfonos, etc.). Perdón.
+﻿++ (Partial) Agregar en los select si está habilitado
+
+++ Joaquín del futuro (cualquiera de los 2): se que me vas a odiar cuando leas esto, pero faltan hacer los checkeos de tipos de datos (por ejemplos dni son todos números, teléfonos, etc.). Perdón.
+
 -- Mensajes para confirmar eliminaciones y esas cosas
+
+--Esepxiones

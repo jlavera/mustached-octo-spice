@@ -83,7 +83,7 @@
             this.bEliminar.Location = new System.Drawing.Point(189, 186);
             this.bEliminar.Name = "bEliminar";
             this.bEliminar.Size = new System.Drawing.Size(171, 29);
-            this.bEliminar.TabIndex = 1;
+            this.bEliminar.TabIndex = 15;
             this.bEliminar.Text = "Eliminar seleccionados (SUPR)";
             this.bEliminar.UseVisualStyleBackColor = true;
             this.bEliminar.Click += new System.EventHandler(this.bEliminar_Click);
@@ -94,7 +94,7 @@
             this.bAgregar.Location = new System.Drawing.Point(12, 186);
             this.bAgregar.Name = "bAgregar";
             this.bAgregar.Size = new System.Drawing.Size(134, 29);
-            this.bAgregar.TabIndex = 0;
+            this.bAgregar.TabIndex = 14;
             this.bAgregar.Text = "Agregar (A)";
             this.bAgregar.UseVisualStyleBackColor = true;
             this.bAgregar.Click += new System.EventHandler(this.bAgregar_Click);
@@ -105,7 +105,7 @@
             this.bBuscar.Location = new System.Drawing.Point(1082, 186);
             this.bBuscar.Name = "bBuscar";
             this.bBuscar.Size = new System.Drawing.Size(120, 29);
-            this.bBuscar.TabIndex = 2;
+            this.bBuscar.TabIndex = 12;
             this.bBuscar.Text = "Buscar (ENTER)";
             this.bBuscar.UseVisualStyleBackColor = true;
             this.bBuscar.Click += new System.EventHandler(this.bBuscar_Click);
@@ -153,7 +153,7 @@
             this.tbTelefono.Name = "tbTelefono";
             this.tbTelefono.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tbTelefono.Size = new System.Drawing.Size(80, 20);
-            this.tbTelefono.TabIndex = 45;
+            this.tbTelefono.TabIndex = 8;
             // 
             // tbNumeroDni
             // 
@@ -162,7 +162,7 @@
             this.tbNumeroDni.Name = "tbNumeroDni";
             this.tbNumeroDni.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tbNumeroDni.Size = new System.Drawing.Size(80, 20);
-            this.tbNumeroDni.TabIndex = 44;
+            this.tbNumeroDni.TabIndex = 7;
             // 
             // tbMatricula
             // 
@@ -171,7 +171,7 @@
             this.tbMatricula.Name = "tbMatricula";
             this.tbMatricula.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tbMatricula.Size = new System.Drawing.Size(80, 20);
-            this.tbMatricula.TabIndex = 43;
+            this.tbMatricula.TabIndex = 0;
             // 
             // label12
             // 
@@ -491,7 +491,7 @@
             this.bLimpiar.Location = new System.Drawing.Point(939, 186);
             this.bLimpiar.Name = "bLimpiar";
             this.bLimpiar.Size = new System.Drawing.Size(93, 29);
-            this.bLimpiar.TabIndex = 4;
+            this.bLimpiar.TabIndex = 13;
             this.bLimpiar.Text = "Limpiar (L)";
             this.bLimpiar.UseVisualStyleBackColor = true;
             this.bLimpiar.Click += new System.EventHandler(this.bLimpiar_Click);
