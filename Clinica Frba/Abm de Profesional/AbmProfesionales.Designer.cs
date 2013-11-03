@@ -32,6 +32,9 @@
             this.bAgregar = new System.Windows.Forms.Button();
             this.bBuscar = new System.Windows.Forms.Button();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
+            this.tbTelefono = new System.Windows.Forms.MaskedTextBox();
+            this.tbNumeroDni = new System.Windows.Forms.MaskedTextBox();
+            this.tbMatricula = new System.Windows.Forms.MaskedTextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.nLimit = new System.Windows.Forms.NumericUpDown();
@@ -69,9 +72,6 @@
             this.especialidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.bLimpiar = new System.Windows.Forms.Button();
-            this.tbMatricula = new System.Windows.Forms.MaskedTextBox();
-            this.tbNumeroDni = new System.Windows.Forms.MaskedTextBox();
-            this.tbTelefono = new System.Windows.Forms.MaskedTextBox();
             this.gbFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProfesionales)).BeginInit();
@@ -79,34 +79,34 @@
             // 
             // bEliminar
             // 
-            this.bEliminar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.bEliminar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bEliminar.Location = new System.Drawing.Point(189, 186);
             this.bEliminar.Name = "bEliminar";
-            this.bEliminar.Size = new System.Drawing.Size(134, 29);
+            this.bEliminar.Size = new System.Drawing.Size(171, 29);
             this.bEliminar.TabIndex = 1;
-            this.bEliminar.Text = "Eliminar seleccionados";
+            this.bEliminar.Text = "Eliminar seleccionados (SUPR)";
             this.bEliminar.UseVisualStyleBackColor = true;
             this.bEliminar.Click += new System.EventHandler(this.bEliminar_Click);
             // 
             // bAgregar
             // 
-            this.bAgregar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.bAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bAgregar.Location = new System.Drawing.Point(12, 186);
             this.bAgregar.Name = "bAgregar";
             this.bAgregar.Size = new System.Drawing.Size(134, 29);
             this.bAgregar.TabIndex = 0;
-            this.bAgregar.Text = "Agregar";
+            this.bAgregar.Text = "Agregar (A)";
             this.bAgregar.UseVisualStyleBackColor = true;
             this.bAgregar.Click += new System.EventHandler(this.bAgregar_Click);
             // 
             // bBuscar
             // 
-            this.bBuscar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.bBuscar.Location = new System.Drawing.Point(1111, 186);
+            this.bBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bBuscar.Location = new System.Drawing.Point(1082, 186);
             this.bBuscar.Name = "bBuscar";
-            this.bBuscar.Size = new System.Drawing.Size(91, 29);
+            this.bBuscar.Size = new System.Drawing.Size(120, 29);
             this.bBuscar.TabIndex = 2;
-            this.bBuscar.Text = "Buscar";
+            this.bBuscar.Text = "Buscar (ENTER)";
             this.bBuscar.UseVisualStyleBackColor = true;
             this.bBuscar.Click += new System.EventHandler(this.bBuscar_Click);
             // 
@@ -145,6 +145,30 @@
             this.gbFiltros.TabIndex = 0;
             this.gbFiltros.TabStop = false;
             this.gbFiltros.Text = "Filtros";
+            // 
+            // tbTelefono
+            // 
+            this.tbTelefono.Location = new System.Drawing.Point(503, 126);
+            this.tbTelefono.Mask = "0000000000";
+            this.tbTelefono.Name = "tbTelefono";
+            this.tbTelefono.Size = new System.Drawing.Size(140, 20);
+            this.tbTelefono.TabIndex = 45;
+            // 
+            // tbNumeroDni
+            // 
+            this.tbNumeroDni.Location = new System.Drawing.Point(503, 83);
+            this.tbNumeroDni.Mask = "0000000000";
+            this.tbNumeroDni.Name = "tbNumeroDni";
+            this.tbNumeroDni.Size = new System.Drawing.Size(140, 20);
+            this.tbNumeroDni.TabIndex = 44;
+            // 
+            // tbMatricula
+            // 
+            this.tbMatricula.Location = new System.Drawing.Point(37, 36);
+            this.tbMatricula.Mask = "0000000000";
+            this.tbMatricula.Name = "tbMatricula";
+            this.tbMatricula.Size = new System.Drawing.Size(140, 20);
+            this.tbMatricula.TabIndex = 43;
             // 
             // label12
             // 
@@ -458,37 +482,15 @@
             // 
             // bLimpiar
             // 
-            this.bLimpiar.Location = new System.Drawing.Point(1030, 189);
+            this.bLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.bLimpiar.Location = new System.Drawing.Point(939, 186);
             this.bLimpiar.Name = "bLimpiar";
-            this.bLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.bLimpiar.Size = new System.Drawing.Size(93, 29);
             this.bLimpiar.TabIndex = 4;
-            this.bLimpiar.Text = "Limpiar";
+            this.bLimpiar.Text = "Limpiar (L)";
             this.bLimpiar.UseVisualStyleBackColor = true;
             this.bLimpiar.Click += new System.EventHandler(this.bLimpiar_Click);
-            // 
-            // tbMatricula
-            // 
-            this.tbMatricula.Location = new System.Drawing.Point(37, 36);
-            this.tbMatricula.Mask = "0000000000";
-            this.tbMatricula.Name = "tbMatricula";
-            this.tbMatricula.Size = new System.Drawing.Size(140, 20);
-            this.tbMatricula.TabIndex = 43;
-            // 
-            // tbNumeroDni
-            // 
-            this.tbNumeroDni.Location = new System.Drawing.Point(503, 83);
-            this.tbNumeroDni.Mask = "0000000000";
-            this.tbNumeroDni.Name = "tbNumeroDni";
-            this.tbNumeroDni.Size = new System.Drawing.Size(140, 20);
-            this.tbNumeroDni.TabIndex = 44;
-            // 
-            // tbTelefono
-            // 
-            this.tbTelefono.Location = new System.Drawing.Point(503, 126);
-            this.tbTelefono.Mask = "0000000000";
-            this.tbTelefono.Name = "tbTelefono";
-            this.tbTelefono.Size = new System.Drawing.Size(140, 20);
-            this.tbTelefono.TabIndex = 45;
             // 
             // AbmProfesionales
             // 
@@ -501,7 +503,11 @@
             this.Controls.Add(this.bBuscar);
             this.Controls.Add(this.gbFiltros);
             this.Controls.Add(this.dgvProfesionales);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
             this.Name = "AbmProfesionales";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Abm de afiliados";
             this.Load += new System.EventHandler(this.AbmProfesionales_Load);
             this.gbFiltros.ResumeLayout(false);

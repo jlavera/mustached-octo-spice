@@ -60,7 +60,7 @@
             this.dgvRoles.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvRoles.Location = new System.Drawing.Point(0, 259);
             this.dgvRoles.Name = "dgvRoles";
-            this.dgvRoles.Size = new System.Drawing.Size(868, 331);
+            this.dgvRoles.Size = new System.Drawing.Size(675, 331);
             this.dgvRoles.TabIndex = 0;
             this.dgvRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRoles_CellContentClick);
             // 
@@ -107,7 +107,7 @@
             this.gbFiltros.Controls.Add(this.label1);
             this.gbFiltros.Location = new System.Drawing.Point(12, 13);
             this.gbFiltros.Name = "gbFiltros";
-            this.gbFiltros.Size = new System.Drawing.Size(840, 180);
+            this.gbFiltros.Size = new System.Drawing.Size(646, 180);
             this.gbFiltros.TabIndex = 1;
             this.gbFiltros.TabStop = false;
             this.gbFiltros.Text = "Filtros";
@@ -126,10 +126,10 @@
             // 
             this.lbFuncionalidades.DisplayMember = "id";
             this.lbFuncionalidades.FormattingEnabled = true;
-            this.lbFuncionalidades.Location = new System.Drawing.Point(588, 19);
+            this.lbFuncionalidades.Location = new System.Drawing.Point(450, 19);
             this.lbFuncionalidades.Name = "lbFuncionalidades";
             this.lbFuncionalidades.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbFuncionalidades.Size = new System.Drawing.Size(231, 147);
+            this.lbFuncionalidades.Size = new System.Drawing.Size(165, 147);
             this.lbFuncionalidades.TabIndex = 2;
             this.lbFuncionalidades.ValueMember = "id";
             // 
@@ -143,7 +143,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(471, 32);
+            this.label2.Location = new System.Drawing.Point(360, 32);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 13);
             this.label2.TabIndex = 1;
@@ -160,11 +160,11 @@
             // 
             // bBuscar
             // 
-            this.bBuscar.Location = new System.Drawing.Point(708, 206);
+            this.bBuscar.Location = new System.Drawing.Point(502, 206);
             this.bBuscar.Name = "bBuscar";
-            this.bBuscar.Size = new System.Drawing.Size(75, 23);
+            this.bBuscar.Size = new System.Drawing.Size(125, 29);
             this.bBuscar.TabIndex = 0;
-            this.bBuscar.Text = "Buscar";
+            this.bBuscar.Text = "Buscar (ENTER)";
             this.bBuscar.UseVisualStyleBackColor = true;
             this.bBuscar.Click += new System.EventHandler(this.bBuscar_Click);
             // 
@@ -174,7 +174,7 @@
             this.bAgregar.Name = "bAgregar";
             this.bAgregar.Size = new System.Drawing.Size(134, 29);
             this.bAgregar.TabIndex = 1;
-            this.bAgregar.Text = "Agregar";
+            this.bAgregar.Text = "Agregar (A)";
             this.bAgregar.UseVisualStyleBackColor = true;
             this.bAgregar.Click += new System.EventHandler(this.bAgregar_Click);
             // 
@@ -182,9 +182,9 @@
             // 
             this.bEliminar.Location = new System.Drawing.Point(191, 206);
             this.bEliminar.Name = "bEliminar";
-            this.bEliminar.Size = new System.Drawing.Size(134, 29);
+            this.bEliminar.Size = new System.Drawing.Size(184, 29);
             this.bEliminar.TabIndex = 2;
-            this.bEliminar.Text = "Eliminar seleccionados";
+            this.bEliminar.Text = "Eliminar seleccionados (SUPR)";
             this.bEliminar.UseVisualStyleBackColor = true;
             this.bEliminar.Click += new System.EventHandler(this.bEliminar_Click);
             // 
@@ -192,13 +192,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(868, 590);
+            this.ClientSize = new System.Drawing.Size(675, 590);
             this.Controls.Add(this.bEliminar);
             this.Controls.Add(this.bAgregar);
             this.Controls.Add(this.bBuscar);
             this.Controls.Add(this.gbFiltros);
             this.Controls.Add(this.dgvRoles);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
             this.Name = "AbmRoles";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Abm de roles";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoles)).EndInit();

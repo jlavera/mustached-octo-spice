@@ -323,7 +323,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(429, 366);
             this.Controls.Add(this.gbDatos);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "EditIntegrante";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EditIntegrante";
             this.Load += new System.EventHandler(this.EditIntegrante_Load);
             this.gbDatos.ResumeLayout(false);

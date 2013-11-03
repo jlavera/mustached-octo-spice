@@ -404,7 +404,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(658, 320);
             this.Controls.Add(this.gbDatos);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "EditAfiliado";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edición de afiliado";
             this.Load += new System.EventHandler(this.EditAfiliado_Load);
             this.gbDatos.ResumeLayout(false);

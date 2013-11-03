@@ -129,5 +129,25 @@ namespace Clinica_Frba.AbmProfesionales {
                     ((ListBox)ctrl).ClearSelected();
             }
         }
+
+        //--Hotkeys para las funcionalidades
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
+            switch (keyData) {
+                case (Keys.Control | Keys.A):
+                    bAgregar.PerformClick();
+                    break;
+                case (Keys.Control | Keys.Delete):
+                    bEliminar.PerformClick();
+                    break;
+                case (Keys.Control | Keys.L):
+                    bLimpiar.PerformClick();
+                    break;
+                case (Keys.Control | Keys.Enter):
+                    bBuscar.PerformClick();
+                    break;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
     }
 }
