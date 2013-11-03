@@ -15,6 +15,7 @@ namespace Clinica_Frba.AbmProfesionales{
 
         private bool nueva;
         private int profId;
+        private int usuarioID;
         
         public string nombre;
         public string apellido;
@@ -22,6 +23,7 @@ namespace Clinica_Frba.AbmProfesionales{
         public string tipoDocumento;
         public decimal numeroDocumento;
         public decimal telefono;
+        public decimal matricula;
         public string mail;
         public string nombreUsuario;
         public string contrasegna;
@@ -48,6 +50,7 @@ namespace Clinica_Frba.AbmProfesionales{
             InitializeComponent();
 
             profId = p_prof.id;
+            usuarioID = p_prof.usuario.id;
 
             nombre = p_prof.usuario.nombre;
             apellido = p_prof.usuario.apellido;
@@ -58,8 +61,9 @@ namespace Clinica_Frba.AbmProfesionales{
             mail = p_prof.usuario.mail;
             nombreUsuario = p_prof.usuario.nombreUsuario;
             contrasegna = p_prof.usuario.contrasegna;
-            sexo = p_prof.usuario.sexo;
+            sexo = (p_prof.usuario.sexo == "M") ? "Masculino" : ((p_prof.usuario.sexo == "F") ? "Femenino" : "");
             fechaNacimiento = p_prof.usuario.fechaNacimiento;
+            matricula = p_prof.matricula;
 
             especialidades = p_prof.especialidadesLista;
 
@@ -80,10 +84,24 @@ namespace Clinica_Frba.AbmProfesionales{
                 tbContrasegna.Text = contrasegna;
                 tbNumeroDni.Text = numeroDocumento.ToString();
                 tbTelefono.Text = telefono.ToString();
-                cmbSexo.SelectedItem = sexo;
-                cmbTipoDNI.SelectedItem = tipoDocumento;
+                cmbSexo.Text = sexo;
                 dtpFechaNacimiento.Value = fechaNacimiento;
                 tbContrasegna.Text = "****";
+
+                if (matricula != -1)
+                {
+                    tbMatricula.Enabled = false;
+                    tbMatricula.Text = matricula.ToString();
+                }
+                if (tipoDocumento != "")
+                {
+                    cmbTipoDNI.SelectedItem = tipoDocumento;
+                    cmbTipoDNI.Enabled = false;
+                }
+                tbNombre.Enabled = false;
+                tbApellido.Enabled = false;
+ 
+                tbNumeroDni.Enabled = false;
 
                 foreach (string func in especialidades) {
                     for (int i = 0; i < lbEspecialidades.Items.Count; i++) {
@@ -108,46 +126,60 @@ namespace Clinica_Frba.AbmProfesionales{
             if (invalidez)
                 MessageBox.Show("Falta completar campos");
             else {
-                string subQuery = "";
-                foreach (Especialidad esp in lbEspecialidades.SelectedItems) {
-                    subQuery += "(" + profId + ", " + esp.id + "), ";
-                }
-                //Comoconcatena con ", " le saco los ultimos dos caracteres al string
-                if (lbEspecialidades.SelectedItems.Count > 0)
-                    subQuery = subQuery.Substring(0, subQuery.Length - 2);
-
-
                 if (nueva) {
                     //--Insertar Usuario
+                    profId = DB.ExecuteCardinal("SELECT IDENT_CURRENT('" + DB.schema + "profesional')")+1;
+
                     if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "usuario " +
                         " (usu_nombre, usu_apellido, usu_tipoDocumento, usu_numeroDocumento, usu_direccion, usu_telefono, usu_mail, usu_fechaNacimiento, usu_sexo, usu_nombreUsuario, usu_contrasegna) " +
                         " VALUES " +
-                        " ('" + tbNombre.Text + "', '" + tbApellido.Text + "', '" + cmbTipoDNI.Text + "', '" + tbNumeroDni.Text + "', '" + tbDireccion.Text + "', '" + tbTelefono.Text + "', '" + tbMail.Text + "', '" + dtpFechaNacimiento.Value + "', '" + cmbSexo.Text + "', '" + tbNombreUsuario.Text + "', '" + tbContrasegna.Text + "', );") < 0) {
+                        " ('" + tbNombre.Text + "', '" + tbApellido.Text + "', '" + cmbTipoDNI.Text + "', " + tbNumeroDni.Text + ", '" + tbDireccion.Text + "', " + tbTelefono.Text + ", '" + tbMail.Text + "', '" + dtpFechaNacimiento.Value + "', '" + ((cmbSexo.Text  == "Masculino") ? "M" : "F") + "', '" + tbNombreUsuario.Text + "', '" + FuncionesBoludas.getHashSha256(tbContrasegna.Text) + "');") < 0) {
                         MessageBox.Show("Error en inserscion de usuario");
                         return;
                     }
 
-                    /********FALTAN MODIFICAR TODOS ESTOS QUERYS**********/
+                    /********(no) FALTAN MODIFICAR TODOS ESTOS QUERYS**********/
                     //--Insertar Profesional
                     if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "profesional " +
-                        " (rol_nombre) " +
+                        " (pro_matricula, pro_usuario) " +
                         " VALUES " +
-                        " ('" + tbNombre.Text + "');") < 0) {
+                        " ('" + tbMatricula.Text + "', IDENT_CURRENT('" + DB.schema + "usuario') );") < 0)
+                    {
                         MessageBox.Show("Error en inserscion de profesional");
                         return;
                     }
                 } else {
-                    //Es mas facil borrar todos los rol_x_funcionalidad que revisar cuales cambiaron
-                    if (DB.ExecuteNonQuery("DELETE " + DB.schema + "rol_x_funcionalidad WHERE rxf_rol=" + profId + "; " +
-                                            "UPDATE " + DB.schema + "rol SET rol_nombre='" + tbNombre.Text + "', rol_habilitado=" + Convert.ToInt32(true) + " WHERE rol_id=" + profId) < 0)
-                        MessageBox.Show("Error en modificacion de rol");
+                    //Update del profesional
+                    if (DB.ExecuteNonQuery(
+                    "UPDATE " + DB.schema + "profesional SET " +
+                            "pro_matricula=" + tbMatricula.Text +
+                            " WHERE pro_id=" + profId + "; " +
+                    "UPDATE moustache_spice.usuario SET usu_direccion='" + tbDireccion.Text + "'" +
+                            ", usu_telefono=" + tbTelefono.Text +
+                            ", usu_mail='" + tbMail.Text + "' " +
+                            ", usu_tipoDocumento='" + cmbTipoDNI.Text + "' " +
+                            ((tbContrasegna.Text == "****") ? "" : (", usu_contrasegna='" + FuncionesBoludas.getHashSha256(tbContrasegna.Text) + "' ")) +
+                            ", usu_sexo='" + ((cmbSexo.Text == "Masculino") ? "M" : "F") + "' " +
+                            "WHERE usu_id=" + usuarioID + "; ") < 0)
+                        MessageBox.Show("Error en modificacion del profesional");
+
+                    //Es mas facil borrar todos los profesional_x_especialidad que revisar cuales cambiaron
+                    if (DB.ExecuteNonQuery("DELETE " + DB.schema + "profesional_x_especialidad WHERE pxe_profesional=" + profId + "; ") < 0)
+                        MessageBox.Show("Error en modificacion de rol_x_funcionalidad");
                 }
                 if (lbEspecialidades.SelectedItems.Count > 0) {
-                    if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "rol_x_funcionalidad(rxf_funcionalidad, rxf_rol) VALUES " + subQuery) < 0)
+                    string subQuery = "";
+                    foreach (Especialidad esp in lbEspecialidades.SelectedItems)
+                    {
+                        subQuery += "(" + profId + ", " + esp.id + "), ";
+                    }
+                    //Comoconcatena con ", " le saco los ultimos dos caracteres al string
+                    if (lbEspecialidades.SelectedItems.Count > 0)
+                        subQuery = subQuery.Substring(0, subQuery.Length - 2);
+
+                    if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "profesional_x_especialidad(pxe_profesional, pxe_especialidad) VALUES " + subQuery) < 0)
                         MessageBox.Show("Error en inserscion de rol_x_funcionalidad");
                 }
-
-                /********HASTA ACA**************/
 
                 this.Close();
                 DialogResult = DialogResult.OK;

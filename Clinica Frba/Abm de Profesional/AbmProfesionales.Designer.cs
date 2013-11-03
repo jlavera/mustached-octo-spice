@@ -33,7 +33,6 @@
             this.bBuscar = new System.Windows.Forms.Button();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.tbMatricula = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.nLimit = new System.Windows.Forms.NumericUpDown();
             this.cmbSexo = new System.Windows.Forms.ComboBox();
@@ -43,9 +42,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.tbMail = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.tbTelefono = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.tbNumeroDni = new System.Windows.Forms.TextBox();
             this.cmbTipoDNI = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -71,6 +68,10 @@
             this.nombreUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.especialidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.bLimpiar = new System.Windows.Forms.Button();
+            this.tbMatricula = new System.Windows.Forms.MaskedTextBox();
+            this.tbNumeroDni = new System.Windows.Forms.MaskedTextBox();
+            this.tbTelefono = new System.Windows.Forms.MaskedTextBox();
             this.gbFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProfesionales)).BeginInit();
@@ -114,8 +115,10 @@
             this.gbFiltros.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbFiltros.Controls.Add(this.label12);
+            this.gbFiltros.Controls.Add(this.tbTelefono);
+            this.gbFiltros.Controls.Add(this.tbNumeroDni);
             this.gbFiltros.Controls.Add(this.tbMatricula);
+            this.gbFiltros.Controls.Add(this.label12);
             this.gbFiltros.Controls.Add(this.label15);
             this.gbFiltros.Controls.Add(this.nLimit);
             this.gbFiltros.Controls.Add(this.cmbSexo);
@@ -125,9 +128,7 @@
             this.gbFiltros.Controls.Add(this.label9);
             this.gbFiltros.Controls.Add(this.tbMail);
             this.gbFiltros.Controls.Add(this.label8);
-            this.gbFiltros.Controls.Add(this.tbTelefono);
             this.gbFiltros.Controls.Add(this.label7);
-            this.gbFiltros.Controls.Add(this.tbNumeroDni);
             this.gbFiltros.Controls.Add(this.cmbTipoDNI);
             this.gbFiltros.Controls.Add(this.label6);
             this.gbFiltros.Controls.Add(this.label5);
@@ -153,13 +154,6 @@
             this.label12.Size = new System.Drawing.Size(55, 13);
             this.label12.TabIndex = 42;
             this.label12.Text = "Matrícula:";
-            // 
-            // tbMatricula
-            // 
-            this.tbMatricula.Location = new System.Drawing.Point(37, 40);
-            this.tbMatricula.Name = "tbMatricula";
-            this.tbMatricula.Size = new System.Drawing.Size(140, 20);
-            this.tbMatricula.TabIndex = 0;
             // 
             // label15
             // 
@@ -194,6 +188,7 @@
             // 
             // cmbSexo
             // 
+            this.cmbSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSexo.FormattingEnabled = true;
             this.cmbSexo.Items.AddRange(new object[] {
             "Masculino",
@@ -202,7 +197,6 @@
             this.cmbSexo.Name = "cmbSexo";
             this.cmbSexo.Size = new System.Drawing.Size(138, 21);
             this.cmbSexo.TabIndex = 10;
-            this.cmbSexo.SelectedIndexChanged += new System.EventHandler(this.cmbSexo_SelectedIndexChanged);
             // 
             // label11
             // 
@@ -254,13 +248,6 @@
             this.label8.TabIndex = 18;
             this.label8.Text = "Teléfono:";
             // 
-            // tbTelefono
-            // 
-            this.tbTelefono.Location = new System.Drawing.Point(503, 126);
-            this.tbTelefono.Name = "tbTelefono";
-            this.tbTelefono.Size = new System.Drawing.Size(140, 20);
-            this.tbTelefono.TabIndex = 8;
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -270,15 +257,9 @@
             this.label7.TabIndex = 16;
             this.label7.Text = "Número de documento:";
             // 
-            // tbNumeroDni
-            // 
-            this.tbNumeroDni.Location = new System.Drawing.Point(503, 83);
-            this.tbNumeroDni.Name = "tbNumeroDni";
-            this.tbNumeroDni.Size = new System.Drawing.Size(140, 20);
-            this.tbNumeroDni.TabIndex = 7;
-            // 
             // cmbTipoDNI
             // 
+            this.cmbTipoDNI.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoDNI.FormattingEnabled = true;
             this.cmbTipoDNI.Items.AddRange(new object[] {
             "DNI",
@@ -475,11 +456,46 @@
             this.seleccionar.HeaderText = "Seleccionar";
             this.seleccionar.Name = "seleccionar";
             // 
+            // bLimpiar
+            // 
+            this.bLimpiar.Location = new System.Drawing.Point(1030, 189);
+            this.bLimpiar.Name = "bLimpiar";
+            this.bLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.bLimpiar.TabIndex = 4;
+            this.bLimpiar.Text = "Limpiar";
+            this.bLimpiar.UseVisualStyleBackColor = true;
+            this.bLimpiar.Click += new System.EventHandler(this.bLimpiar_Click);
+            // 
+            // tbMatricula
+            // 
+            this.tbMatricula.Location = new System.Drawing.Point(37, 36);
+            this.tbMatricula.Mask = "0000000000";
+            this.tbMatricula.Name = "tbMatricula";
+            this.tbMatricula.Size = new System.Drawing.Size(140, 20);
+            this.tbMatricula.TabIndex = 43;
+            // 
+            // tbNumeroDni
+            // 
+            this.tbNumeroDni.Location = new System.Drawing.Point(503, 83);
+            this.tbNumeroDni.Mask = "0000000000";
+            this.tbNumeroDni.Name = "tbNumeroDni";
+            this.tbNumeroDni.Size = new System.Drawing.Size(140, 20);
+            this.tbNumeroDni.TabIndex = 44;
+            // 
+            // tbTelefono
+            // 
+            this.tbTelefono.Location = new System.Drawing.Point(503, 126);
+            this.tbTelefono.Mask = "0000000000";
+            this.tbTelefono.Name = "tbTelefono";
+            this.tbTelefono.Size = new System.Drawing.Size(140, 20);
+            this.tbTelefono.TabIndex = 45;
+            // 
             // AbmProfesionales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1212, 652);
+            this.Controls.Add(this.bLimpiar);
             this.Controls.Add(this.bEliminar);
             this.Controls.Add(this.bAgregar);
             this.Controls.Add(this.bBuscar);
@@ -508,9 +524,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tbMail;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox tbTelefono;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox tbNumeroDni;
         private System.Windows.Forms.ComboBox cmbTipoDNI;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
@@ -526,7 +540,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.NumericUpDown nLimit;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox tbMatricula;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn matrícula;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
@@ -541,5 +554,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nombreUsuario;
         private System.Windows.Forms.DataGridViewTextBoxColumn especialidades;
         private System.Windows.Forms.DataGridViewButtonColumn seleccionar;
+        private System.Windows.Forms.Button bLimpiar;
+        private System.Windows.Forms.MaskedTextBox tbTelefono;
+        private System.Windows.Forms.MaskedTextBox tbNumeroDni;
+        private System.Windows.Forms.MaskedTextBox tbMatricula;
     }
 }

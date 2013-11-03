@@ -15,6 +15,8 @@ IF OBJECT_ID('moustache_spice.turnoAudit', 'U') IS NOT NULL
 	DROP TABLE moustache_spice.turnoAudit
 IF OBJECT_ID('moustache_spice.turno', 'U') IS NOT NULL
 	DROP TABLE moustache_spice.turno
+IF OBJECT_ID('moustache_spice.planMedicoAudit', 'U') IS NOT NULL
+	DROP TABLE moustache_spice.planMedicoAudit
 IF OBJECT_ID('moustache_spice.afiliadoAudit', 'U') IS NOT NULL
 	DROP TABLE moustache_spice.afiliadoAudit
 IF OBJECT_ID('moustache_spice.afiliado', 'U') IS NOT NULL

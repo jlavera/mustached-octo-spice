@@ -90,13 +90,14 @@ namespace Clinica_Frba.Clases {
                 query += " usu_nombreUsuario LIKE '%" + p_nombreUsuario + "%' AND ";
             if (p_numDocumento != -1)
                 query += " usu_numeroDocumento=" + p_numDocumento + " AND ";
-
             if (p_sexo != "")
                 query += " usu_sexo='" + ((p_sexo == "Masculino") ? "M" : "F") + "' AND ";
             if (p_telefono != -1)
                 query += " usu_telefono =" + p_telefono + " AND ";
             if (p_tipoDocumento != "")
                 query += " usu_tipoDocumento='" + p_tipoDocumento + "' AND ";
+            if (p_matricula != "")
+                query += " pro_matricula='" + p_matricula + "' AND ";
 
 
             //sacar la ultima basura

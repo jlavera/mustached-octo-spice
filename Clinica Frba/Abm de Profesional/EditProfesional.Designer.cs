@@ -24,10 +24,13 @@
         /// </summary>
         private void InitializeComponent() {
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tbContrasegna = new System.Windows.Forms.TextBox();
             this.tbNumeroDni = new System.Windows.Forms.MaskedTextBox();
             this.tbTelefono = new System.Windows.Forms.MaskedTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dtpFechaNacimiento = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
             this.lbEspecialidades = new System.Windows.Forms.ListBox();
             this.cmbSexo = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -46,14 +49,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbNombre = new System.Windows.Forms.TextBox();
             this.bGuardar = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.tbContrasegna = new System.Windows.Forms.TextBox();
+            this.tbMatricula = new System.Windows.Forms.MaskedTextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.gbDatos.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.tbMatricula);
+            this.gbDatos.Controls.Add(this.label13);
             this.gbDatos.Controls.Add(this.label12);
             this.gbDatos.Controls.Add(this.tbContrasegna);
             this.gbDatos.Controls.Add(this.tbNumeroDni);
@@ -86,9 +90,26 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del titular:";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(207, 286);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(64, 13);
+            this.label12.TabIndex = 76;
+            this.label12.Text = "Contraseña:";
+            // 
+            // tbContrasegna
+            // 
+            this.tbContrasegna.Location = new System.Drawing.Point(223, 303);
+            this.tbContrasegna.Name = "tbContrasegna";
+            this.tbContrasegna.PasswordChar = '*';
+            this.tbContrasegna.Size = new System.Drawing.Size(138, 20);
+            this.tbContrasegna.TabIndex = 10;
+            // 
             // tbNumeroDni
             // 
-            this.tbNumeroDni.Location = new System.Drawing.Point(225, 86);
+            this.tbNumeroDni.Location = new System.Drawing.Point(223, 129);
             this.tbNumeroDni.Mask = "000000000000000000";
             this.tbNumeroDni.Name = "tbNumeroDni";
             this.tbNumeroDni.Size = new System.Drawing.Size(138, 20);
@@ -96,7 +117,7 @@
             // 
             // tbTelefono
             // 
-            this.tbTelefono.Location = new System.Drawing.Point(225, 129);
+            this.tbTelefono.Location = new System.Drawing.Point(223, 172);
             this.tbTelefono.Mask = "000000000000000000";
             this.tbTelefono.Name = "tbTelefono";
             this.tbTelefono.Size = new System.Drawing.Size(138, 20);
@@ -105,7 +126,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(209, 157);
+            this.label2.Location = new System.Drawing.Point(207, 200);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(109, 13);
             this.label2.TabIndex = 72;
@@ -113,11 +134,20 @@
             // 
             // dtpFechaNacimiento
             // 
-            this.dtpFechaNacimiento.Location = new System.Drawing.Point(225, 177);
+            this.dtpFechaNacimiento.Location = new System.Drawing.Point(223, 220);
             this.dtpFechaNacimiento.Name = "dtpFechaNacimiento";
             this.dtpFechaNacimiento.Size = new System.Drawing.Size(209, 20);
             this.dtpFechaNacimiento.TabIndex = 8;
             this.dtpFechaNacimiento.Value = new System.DateTime(2013, 11, 1, 0, 0, 0, 0);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(443, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(81, 13);
+            this.label1.TabIndex = 68;
+            this.label1.Text = "Especialidades:";
             // 
             // lbEspecialidades
             // 
@@ -152,7 +182,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(209, 200);
+            this.label10.Location = new System.Drawing.Point(207, 243);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(99, 13);
             this.label10.TabIndex = 52;
@@ -160,7 +190,7 @@
             // 
             // tbNombreUsuario
             // 
-            this.tbNombreUsuario.Location = new System.Drawing.Point(225, 220);
+            this.tbNombreUsuario.Location = new System.Drawing.Point(223, 263);
             this.tbNombreUsuario.Name = "tbNombreUsuario";
             this.tbNombreUsuario.Size = new System.Drawing.Size(138, 20);
             this.tbNombreUsuario.TabIndex = 9;
@@ -184,7 +214,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(209, 113);
+            this.label8.Location = new System.Drawing.Point(207, 156);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(52, 13);
             this.label8.TabIndex = 48;
@@ -193,7 +223,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(209, 70);
+            this.label7.Location = new System.Drawing.Point(207, 113);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(118, 13);
             this.label7.TabIndex = 46;
@@ -207,7 +237,7 @@
             "DNI",
             "LE",
             "LC"});
-            this.cmbTipoDNI.Location = new System.Drawing.Point(227, 47);
+            this.cmbTipoDNI.Location = new System.Drawing.Point(225, 90);
             this.cmbTipoDNI.Name = "cmbTipoDNI";
             this.cmbTipoDNI.Size = new System.Drawing.Size(61, 21);
             this.cmbTipoDNI.TabIndex = 5;
@@ -215,7 +245,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(209, 27);
+            this.label6.Location = new System.Drawing.Point(207, 70);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(102, 13);
             this.label6.TabIndex = 43;
@@ -279,31 +309,22 @@
             this.bGuardar.UseVisualStyleBackColor = true;
             this.bGuardar.Click += new System.EventHandler(this.bGuardar_Click);
             // 
-            // label1
+            // tbMatricula
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(443, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 13);
-            this.label1.TabIndex = 68;
-            this.label1.Text = "Especialidades:";
+            this.tbMatricula.Location = new System.Drawing.Point(223, 43);
+            this.tbMatricula.Mask = "000000000000000000";
+            this.tbMatricula.Name = "tbMatricula";
+            this.tbMatricula.Size = new System.Drawing.Size(138, 20);
+            this.tbMatricula.TabIndex = 77;
             // 
-            // label12
+            // label13
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(209, 243);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(64, 13);
-            this.label12.TabIndex = 76;
-            this.label12.Text = "Contraseña:";
-            // 
-            // tbContrasegna
-            // 
-            this.tbContrasegna.Location = new System.Drawing.Point(225, 260);
-            this.tbContrasegna.Name = "tbContrasegna";
-            this.tbContrasegna.PasswordChar = '*';
-            this.tbContrasegna.Size = new System.Drawing.Size(138, 20);
-            this.tbContrasegna.TabIndex = 10;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(207, 27);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(53, 13);
+            this.label13.TabIndex = 78;
+            this.label13.Text = "Matricula:";
             // 
             // EditProfesional
             // 
@@ -348,5 +369,7 @@
         private System.Windows.Forms.Button bGuardar;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox tbContrasegna;
+        private System.Windows.Forms.MaskedTextBox tbMatricula;
+        private System.Windows.Forms.Label label13;
     }
 }
