@@ -111,6 +111,8 @@
     <Compile Include="Clases\Profesionales.cs" />
     <Compile Include="Clases\Rol.cs" />
     <Compile Include="Clases\Roles.cs" />
+    <Compile Include="Clases\TipoEspecialidad.cs" />
+    <Compile Include="Clases\TiposEspecialidades.cs" />
     <Compile Include="Clases\Transformer.cs">
     </Compile>
     <Compile Include="Clases\Usuario.cs" />

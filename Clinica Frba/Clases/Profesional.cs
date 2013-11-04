@@ -11,11 +11,9 @@ namespace Clinica_Frba.Clases {
         public int matricula;
         public int usuarioId;
         public bool habilitado;
-        public string especialidades;
-        public string[] especialidadesLista;
+        public Especialidades especialidades;
 
         public Usuario usuario;
-        public Especialidad especialidad;
 
         public Profesional() {
         }
@@ -25,16 +23,25 @@ namespace Clinica_Frba.Clases {
             matricula = (dr["pro_matricula"] == DBNull.Value) ? -1 : Convert.ToInt32(dr["pro_matricula"]);
             usuarioId = Convert.ToInt32(dr["pro_usuario"]);
             habilitado = Convert.ToBoolean(dr["pro_habilitado"]);
-            especialidadesLista = dr["especialidades"].ToString().Split(new string[]{", "}, StringSplitOptions.RemoveEmptyEntries);
-            especialidades = dr["especialidades"].ToString();
 
             usuario = new Usuario(dr);
-            //especialidad = new Especialidad(dr);
+            especialidades = new Especialidades(id);
         }
 
         public override string ToString()
         {
             return usuario.ToString();
+        }
+
+        public string concatEsps() {
+            string temp = "";
+            foreach (Especialidad esp in especialidades.items)
+                temp += esp.nombre + ", ";
+            return (temp == "") ? "" : temp.Substring(0, temp.Length - 2);
+        }
+
+        public object[] ToList() {
+            return especialidades.ToList();
         }
     }
 }

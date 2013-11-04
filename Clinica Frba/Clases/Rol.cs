@@ -9,21 +9,21 @@ namespace Clinica_Frba.Clases {
 
         public int id;
         public string nombre;
-        public string funcionalidades;
+        public Funcionalidades funcionalidades;
         public bool habilitado;
 
         public Rol(DataRow dr) {
             id = (int)dr["rol_id"];
             nombre = (string)dr["rol_nombre"];
-            funcionalidades = dr["funcionalidades"].ToString();
+            funcionalidades = new Funcionalidades(Convert.ToInt32(dr["rol_id"]));   
             habilitado = Convert.ToBoolean(dr["rol_habilitado"]);
         }
 
-        public Rol(int p_id, string p_nombre, string p_funcionalidades) {
-            id = p_id;
-            nombre = p_nombre;
-            funcionalidades = p_funcionalidades;
-            habilitado = true;
+        public string concatFuncs() {
+            string temp = "";
+            foreach (Funcionalidad func in funcionalidades.items)
+                temp += func.nombre + ", ";
+            return (temp == "")?"":temp.Substring(0, temp.Length - 2);
         }
 
         public override string ToString() {

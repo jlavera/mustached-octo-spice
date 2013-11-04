@@ -37,7 +37,6 @@ namespace Clinica_Frba.Clases {
         #endregion
         //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
 
-
         public Profesional this[string id] {
             get {
                 foreach (Profesional item in items) {

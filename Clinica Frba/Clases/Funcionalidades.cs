@@ -37,6 +37,12 @@ namespace Clinica_Frba.Clases {
         #endregion
         //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
 
+        public Funcionalidades(int p_id)
+            : base("funcionalidad") {
+            Fill(DB.ExecuteReader("SELECT fun_id, fun_nombre FROM moustache_spice.rol_x_funcionalidad rxf JOIN moustache_spice.funcionalidad f ON f.fun_id = rxf.rxf_funcionalidad WHERE rxf.rxf_rol = " + p_id));
+
+
+        }
 
         /// <summary>
         /// Llena la lista con todos los roles que tienen una funcionalidad

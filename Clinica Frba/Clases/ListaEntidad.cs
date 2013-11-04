@@ -39,13 +39,20 @@ namespace Clinica_Frba {
         }
 
         virtual public DataTable SelectAll() {
-
-            return DB.ExecuteReader("SELECT * FROM " + DB.schema + tabla);
+            try {
+                return DB.ExecuteReader("SELECT * FROM " + DB.schema + tabla);
+            } catch {
+                throw;
+            }
 
         }
 
         public int CantRows() {
-            return DB.ExecuteCardinal("SELECT COUNT(*) FROM " + DB.schema + tabla);
+            try {
+                return DB.ExecuteCardinal("SELECT COUNT(*) FROM " + DB.schema + tabla);
+            } catch {
+                throw;
+            }
         }
 
         /// <summary>
@@ -55,8 +62,8 @@ namespace Clinica_Frba {
         public int GetNextIdentity() {
             try {
                 return DB.ExecuteCardinal("SELECT IDENT_CURRENT('" + DB.schema + tabla + "') +  IDENT_INCR('" + DB.schema + tabla + "')");
-            } catch (Exception ex) {
-                return -1;
+            } catch{
+                throw;
             }
         }
 

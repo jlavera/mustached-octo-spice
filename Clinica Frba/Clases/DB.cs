@@ -15,7 +15,7 @@ namespace Clinica_Frba.Clases {
         /// Ejecuta comando y lo devuelve en un datatable
         /// </summary>
         /// <param name="command">Comando</param>
-        /// <returns></returns>
+        /// <returns></returns
         static public DataTable ExecuteReader(string command) {
             if (command.IndexOf("grp_proximoOrden") > -1) {
 

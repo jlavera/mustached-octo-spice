@@ -11,6 +11,7 @@ using Clinica_Frba.Clases;
 namespace Clinica_Frba.AbmProfesionales{
     public partial class EditProfesional: Form {
 
+        private Especialidades especialidades = new Especialidades();
         private Especialidades esps = new Especialidades();
 
         private bool nueva;
@@ -29,9 +30,6 @@ namespace Clinica_Frba.AbmProfesionales{
         public string contrasegna;
         public string sexo;
         public DateTime fechaNacimiento;
-
-        public string[] especialidades;
-
 
         /// <summary>
         /// Formulario para la creación de profesional nuevo
@@ -65,7 +63,7 @@ namespace Clinica_Frba.AbmProfesionales{
             fechaNacimiento = p_prof.usuario.fechaNacimiento;
             matricula = p_prof.matricula;
 
-            especialidades = p_prof.especialidadesLista;
+            especialidades = p_prof.especialidades;
 
             nueva = false;
         }
@@ -103,15 +101,14 @@ namespace Clinica_Frba.AbmProfesionales{
  
                 tbNumeroDni.Enabled = false;
 
-                foreach (string func in especialidades) {
+                foreach (Especialidad esp in especialidades.items) {
                     for (int i = 0; i < lbEspecialidades.Items.Count; i++) {
-                        if (func == lbEspecialidades.Items[i].ToString()) {
+                        if (esp.Equals(lbEspecialidades.Items[i])) {
                             lbEspecialidades.SetSelected(i, true);
                             break;
                         }
                     }
                 }
-
             }
         }
 

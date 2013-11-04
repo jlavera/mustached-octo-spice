@@ -94,7 +94,7 @@ namespace Clinica_Frba {
                     if (flp1.Controls.ContainsKey("Abm_Especialidades_Medicas"))
                         ((Button)flp1.Controls["Abm_Especialidades_Medicas"]).PerformClick();  
                     break;
-                case (Keys.Control | Keys.H):
+                case (Keys.Control | Keys.R):
                     if (flp1.Controls.ContainsKey("Abm_Rol"))
                         ((Button)flp1.Controls["Abm_Rol"]).PerformClick();  
                     break;

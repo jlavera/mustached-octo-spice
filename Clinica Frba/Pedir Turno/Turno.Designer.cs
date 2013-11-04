@@ -48,15 +48,17 @@
             this.especialidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.gbDia = new System.Windows.Forms.GroupBox();
-            this.bVolver = new System.Windows.Forms.Button();
-            this.bSiguiente = new System.Windows.Forms.Button();
+            this.bVolverDia = new System.Windows.Forms.Button();
+            this.bSiguienteDia = new System.Windows.Forms.Button();
             this.dtpDia = new System.Windows.Forms.DateTimePicker();
             this.gbHorario = new System.Windows.Forms.GroupBox();
+            this.bFinalizar = new System.Windows.Forms.Button();
+            this.bVolverHorario = new System.Windows.Forms.Button();
             this.lbDia6 = new System.Windows.Forms.ListBox();
             this.gbEspecialidad = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbEspecialidades = new System.Windows.Forms.ComboBox();
+            this.bVolverEsp = new System.Windows.Forms.Button();
+            this.bSiguienteEsp = new System.Windows.Forms.Button();
             this.gbProf.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProfesionales)).BeginInit();
@@ -214,6 +216,7 @@
             // 
             // dgvProfesionales
             // 
+            this.dgvProfesionales.AllowUserToAddRows = false;
             this.dgvProfesionales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProfesionales.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
@@ -223,9 +226,11 @@
             this.Seleccionar});
             this.dgvProfesionales.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvProfesionales.Location = new System.Drawing.Point(3, 176);
+            this.dgvProfesionales.MultiSelect = false;
             this.dgvProfesionales.Name = "dgvProfesionales";
             this.dgvProfesionales.Size = new System.Drawing.Size(546, 437);
             this.dgvProfesionales.TabIndex = 0;
+            this.dgvProfesionales.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvProfesionales_KeyDown);
             this.dgvProfesionales.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProfesionales_CellContentClick);
             // 
             // id
@@ -259,8 +264,8 @@
             // 
             // gbDia
             // 
-            this.gbDia.Controls.Add(this.bVolver);
-            this.gbDia.Controls.Add(this.bSiguiente);
+            this.gbDia.Controls.Add(this.bVolverDia);
+            this.gbDia.Controls.Add(this.bSiguienteDia);
             this.gbDia.Controls.Add(this.dtpDia);
             this.gbDia.Enabled = false;
             this.gbDia.Location = new System.Drawing.Point(575, 145);
@@ -270,25 +275,25 @@
             this.gbDia.TabStop = false;
             this.gbDia.Text = "Seleccionar día";
             // 
-            // bVolver
+            // bVolverDia
             // 
-            this.bVolver.Location = new System.Drawing.Point(19, 70);
-            this.bVolver.Name = "bVolver";
-            this.bVolver.Size = new System.Drawing.Size(91, 23);
-            this.bVolver.TabIndex = 2;
-            this.bVolver.Text = "Volver";
-            this.bVolver.UseVisualStyleBackColor = true;
-            this.bVolver.Click += new System.EventHandler(this.bVolver_Click);
+            this.bVolverDia.Location = new System.Drawing.Point(19, 70);
+            this.bVolverDia.Name = "bVolverDia";
+            this.bVolverDia.Size = new System.Drawing.Size(91, 23);
+            this.bVolverDia.TabIndex = 2;
+            this.bVolverDia.Text = "Volver";
+            this.bVolverDia.UseVisualStyleBackColor = true;
+            this.bVolverDia.Click += new System.EventHandler(this.bVolverDia_Click);
             // 
-            // bSiguiente
+            // bSiguienteDia
             // 
-            this.bSiguiente.Location = new System.Drawing.Point(159, 70);
-            this.bSiguiente.Name = "bSiguiente";
-            this.bSiguiente.Size = new System.Drawing.Size(91, 23);
-            this.bSiguiente.TabIndex = 1;
-            this.bSiguiente.Text = "Siguiente";
-            this.bSiguiente.UseVisualStyleBackColor = true;
-            this.bSiguiente.Click += new System.EventHandler(this.bSiguiente_Click);
+            this.bSiguienteDia.Location = new System.Drawing.Point(159, 70);
+            this.bSiguienteDia.Name = "bSiguienteDia";
+            this.bSiguienteDia.Size = new System.Drawing.Size(91, 23);
+            this.bSiguienteDia.TabIndex = 1;
+            this.bSiguienteDia.Text = "Siguiente";
+            this.bSiguienteDia.UseVisualStyleBackColor = true;
+            this.bSiguienteDia.Click += new System.EventHandler(this.bSiguienteDia_Click);
             // 
             // dtpDia
             // 
@@ -299,6 +304,8 @@
             // 
             // gbHorario
             // 
+            this.gbHorario.Controls.Add(this.bFinalizar);
+            this.gbHorario.Controls.Add(this.bVolverHorario);
             this.gbHorario.Controls.Add(this.lbDia6);
             this.gbHorario.Enabled = false;
             this.gbHorario.Location = new System.Drawing.Point(575, 259);
@@ -307,6 +314,26 @@
             this.gbHorario.TabIndex = 2;
             this.gbHorario.TabStop = false;
             this.gbHorario.Text = "Seleccionar horario";
+            // 
+            // bFinalizar
+            // 
+            this.bFinalizar.Location = new System.Drawing.Point(150, 244);
+            this.bFinalizar.Name = "bFinalizar";
+            this.bFinalizar.Size = new System.Drawing.Size(91, 23);
+            this.bFinalizar.TabIndex = 3;
+            this.bFinalizar.Text = "Finalizar";
+            this.bFinalizar.UseVisualStyleBackColor = true;
+            this.bFinalizar.Click += new System.EventHandler(this.bFinalizar_Click);
+            // 
+            // bVolverHorario
+            // 
+            this.bVolverHorario.Location = new System.Drawing.Point(150, 156);
+            this.bVolverHorario.Name = "bVolverHorario";
+            this.bVolverHorario.Size = new System.Drawing.Size(91, 23);
+            this.bVolverHorario.TabIndex = 3;
+            this.bVolverHorario.Text = "Volver";
+            this.bVolverHorario.UseVisualStyleBackColor = true;
+            this.bVolverHorario.Click += new System.EventHandler(this.bVolverHorario_Click);
             // 
             // lbDia6
             // 
@@ -338,17 +365,18 @@
             "18:30",
             "19:00",
             "19:30"});
-            this.lbDia6.Location = new System.Drawing.Point(117, 19);
+            this.lbDia6.Location = new System.Drawing.Point(55, 21);
             this.lbDia6.Name = "lbDia6";
             this.lbDia6.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.lbDia6.Size = new System.Drawing.Size(37, 342);
             this.lbDia6.TabIndex = 25;
+            this.lbDia6.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbDia6_DrawItem);
             // 
             // gbEspecialidad
             // 
-            this.gbEspecialidad.Controls.Add(this.comboBox1);
-            this.gbEspecialidad.Controls.Add(this.button1);
-            this.gbEspecialidad.Controls.Add(this.button2);
+            this.gbEspecialidad.Controls.Add(this.cmbEspecialidades);
+            this.gbEspecialidad.Controls.Add(this.bVolverEsp);
+            this.gbEspecialidad.Controls.Add(this.bSiguienteEsp);
             this.gbEspecialidad.Enabled = false;
             this.gbEspecialidad.Location = new System.Drawing.Point(575, 12);
             this.gbEspecialidad.Name = "gbEspecialidad";
@@ -357,32 +385,34 @@
             this.gbEspecialidad.TabStop = false;
             this.gbEspecialidad.Text = "Seleccionar especialidad";
             // 
-            // button1
+            // cmbEspecialidades
             // 
-            this.button1.Location = new System.Drawing.Point(19, 70);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(91, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Volver";
-            this.button1.UseVisualStyleBackColor = true;
+            this.cmbEspecialidades.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbEspecialidades.FormattingEnabled = true;
+            this.cmbEspecialidades.Location = new System.Drawing.Point(19, 27);
+            this.cmbEspecialidades.Name = "cmbEspecialidades";
+            this.cmbEspecialidades.Size = new System.Drawing.Size(231, 21);
+            this.cmbEspecialidades.TabIndex = 3;
             // 
-            // button2
+            // bVolverEsp
             // 
-            this.button2.Location = new System.Drawing.Point(159, 70);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(91, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Siguiente";
-            this.button2.UseVisualStyleBackColor = true;
+            this.bVolverEsp.Location = new System.Drawing.Point(19, 70);
+            this.bVolverEsp.Name = "bVolverEsp";
+            this.bVolverEsp.Size = new System.Drawing.Size(91, 23);
+            this.bVolverEsp.TabIndex = 2;
+            this.bVolverEsp.Text = "Volver";
+            this.bVolverEsp.UseVisualStyleBackColor = true;
+            this.bVolverEsp.Click += new System.EventHandler(this.bVolverEsp_Click);
             // 
-            // comboBox1
+            // bSiguienteEsp
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(19, 27);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(231, 21);
-            this.comboBox1.TabIndex = 3;
+            this.bSiguienteEsp.Location = new System.Drawing.Point(159, 70);
+            this.bSiguienteEsp.Name = "bSiguienteEsp";
+            this.bSiguienteEsp.Size = new System.Drawing.Size(91, 23);
+            this.bSiguienteEsp.TabIndex = 1;
+            this.bSiguienteEsp.Text = "Siguiente";
+            this.bSiguienteEsp.UseVisualStyleBackColor = true;
+            this.bSiguienteEsp.Click += new System.EventHandler(this.bSiguienteEsp_Click);
             // 
             // Turno
             // 
@@ -434,13 +464,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn profesional;
         private System.Windows.Forms.DataGridViewTextBoxColumn especialidades;
         private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
-        private System.Windows.Forms.Button bVolver;
-        private System.Windows.Forms.Button bSiguiente;
+        private System.Windows.Forms.Button bVolverDia;
+        private System.Windows.Forms.Button bSiguienteDia;
         private System.Windows.Forms.ListBox lbDia6;
         private System.Windows.Forms.GroupBox gbEspecialidad;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button bVolverEsp;
+        private System.Windows.Forms.Button bSiguienteEsp;
+        private System.Windows.Forms.ComboBox cmbEspecialidades;
+        private System.Windows.Forms.Button bFinalizar;
+        private System.Windows.Forms.Button bVolverHorario;
 
 
     }

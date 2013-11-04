@@ -55,18 +55,21 @@ namespace Clinica_Frba.Turno {
             //--Llena dgv
             foreach (Profesional prof in profs.items) {
                 dgvProfesionales.Rows.Add(prof.id, (prof.matricula == -1) ? "Falta cargar" : prof.matricula.ToString(),
-                    prof.usuario.apellido + ", " + prof.usuario.nombre, prof.especialidades);
+                    prof.usuario.apellido + ", " + prof.usuario.nombre, prof.concatEsps());
             }
         }
 
         private void dgvProfesionales_CellContentClick(object sender, DataGridViewCellEventArgs e) {
 
             //--Guardar profesional que clickeo y habilita para seleccionar día
-            if (dgvProfesionales.Columns[e.ColumnIndex].HeaderText == "Elegir") {
+            if (dgvProfesionales.Columns[e.ColumnIndex].Name == "Seleccionar") {
                 prof = profs[dgvProfesionales.Rows[e.RowIndex].Cells["id"].Value.ToString()];
 
-                gbDia.Enabled = true;
                 gbProf.Enabled = false;
+                gbEspecialidad.Enabled = true;
+
+                //--Cargar lb con especialidades
+                cmbEspecialidades.Items.AddRange(prof.especialidades.ToList());
 
                 //--Traer agenda del elegido y setear min y max date
                 DateTime aux = DateTime.Now; //--los igualo así no los agrega al filtro
@@ -74,8 +77,6 @@ namespace Clinica_Frba.Turno {
 
                 dtpDia.MinDate = agendas[0].desde;
                 dtpDia.MaxDate = agendas[0].hasta;
-
-
 
             }
         }
@@ -99,14 +100,56 @@ namespace Clinica_Frba.Turno {
             FillDgv();
         }
 
-        private void bVolver_Click(object sender, EventArgs e) {
-            gbDia.Enabled = false;
+        //--------------ESPECIALIDAD---------
+        private void bSiguienteEsp_Click(object sender, EventArgs e) {
+
+            if (cmbEspecialidades.SelectedIndex == -1) {
+                MessageBox.Show("Debe elegir una especialidad", "Error");
+                return;
+            }
+
+            gbEspecialidad.Enabled = false;
+            gbDia.Enabled = true;
+        }
+        private void bVolverEsp_Click(object sender, EventArgs e) {
+            gbEspecialidad.Enabled = false;
             gbProf.Enabled = true;
         }
 
-        private void bSiguiente_Click(object sender, EventArgs e) {
+        //--------------DIA---------
+        private void bSiguienteDia_Click(object sender, EventArgs e) {
+
+            if (dtpDia.Value.DayOfWeek == DayOfWeek.Sunday) {
+                MessageBox.Show("Los domingos no hay atención", "Error");
+                return;
+            }
+
+            gbDia.Enabled = false;
+            gbHorario.Enabled = true;
+        }
+        private void bVolverDia_Click(object sender, EventArgs e) {
+            gbDia.Enabled = false;
+            gbEspecialidad.Enabled = true;
+        }
+
+        //--------------HORARIO---------
+        private void bVolverHorario_Click(object sender, EventArgs e) {
+            gbDia.Enabled = true;
+            gbHorario.Enabled = false;
+        }
+        private void bFinalizar_Click(object sender, EventArgs e) {
 
         }
 
+        private void dgvProfesionales_KeyDown(object sender, KeyEventArgs e) {
+            e.Handled = true;
+            if (e.KeyCode == Keys.Enter)
+                dgvProfesionales_CellContentClick(sender,
+                    new DataGridViewCellEventArgs(dgvProfesionales.Columns["seleccionar"].Index, dgvProfesionales.CurrentCell.RowIndex));
+        }
+
+        private void lbDia6_DrawItem(object sender, DrawItemEventArgs e) {
+            
+        }
     }
 }

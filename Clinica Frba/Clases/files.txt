@@ -8,3 +8,4 @@ GruposFamiliares.cs;GrupoFamiliar;GruposFamiliares;afiliado
 Profesionales.cs;Profesional;Profesionales;profesional
 Agendas.cs;Agenda;Agendas;agenda
 Especialidades.cs;Especialidad;Especialidades;especialidad
+TiposEspecialidades.cs;TipoEspecialidad;TiposEspecialidades;tipoEspecialidad

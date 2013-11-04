@@ -18,7 +18,7 @@ namespace Clinica_Frba.Abm_de_Rol {
         public Funcionalidades allFuncs = new Funcionalidades();
 
         public bool nueva;
-        private string[] selectedFuncs;
+        private Funcionalidades selectedFuncs;
         private Roles roles = new Roles();
 
         public EditRol() {
@@ -31,7 +31,7 @@ namespace Clinica_Frba.Abm_de_Rol {
         public EditRol(Rol p_rol) {
             id = p_rol.id;
             nombre = p_rol.nombre;
-            selectedFuncs = p_rol.funcionalidades.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
+            selectedFuncs = p_rol.funcionalidades;
 
             nueva = false;
 
@@ -50,9 +50,9 @@ namespace Clinica_Frba.Abm_de_Rol {
                 tbId.Text = id.ToString();
                 tbNombre.Text = nombre;
 
-                foreach (string func in selectedFuncs) {
+                foreach (Funcionalidad func in selectedFuncs.items) {
                     for (int i = 0; i < lbFuncionalidades.Items.Count; i++) {
-                        if (func == lbFuncionalidades.Items[i].ToString()) {
+                        if (func.Equals(lbFuncionalidades.Items[i])) {
                             lbFuncionalidades.SetSelected(i, true);
                             break;
                         }

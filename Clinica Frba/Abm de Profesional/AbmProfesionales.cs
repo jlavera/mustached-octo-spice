@@ -59,7 +59,7 @@ namespace Clinica_Frba.AbmProfesionales {
                     (prof.usuario.tipoDocumento == "") ? "Faltar cargar" : prof.usuario.tipoDocumento, prof.usuario.numeroDocumento,
                     prof.usuario.direccion, prof.usuario.telefono, prof.usuario.mail, prof.usuario.fechaNacimiento,
                     (prof.usuario.sexo == "") ? "Faltar cargar" : prof.usuario.sexo, prof.usuario.nombreUsuario,
-                    prof.especialidades);
+                    prof.concatEsps());
             }
 
         }
