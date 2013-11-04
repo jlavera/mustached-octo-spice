@@ -165,11 +165,11 @@
     <Compile Include="Compra de Bono\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pedir Turno\Form1.cs">
+    <Compile Include="Pedir Turno\Turno.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pedir Turno\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Pedir Turno\Turno.Designer.cs">
+      <DependentUpon>Turno.cs</DependentUpon>
     </Compile>
     <Compile Include="Registro de LLegada\Form1.cs">
       <SubType>Form</SubType>
@@ -235,6 +235,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LogIn.resx">
       <DependentUpon>LogIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pedir Turno\Turno.resx">
+      <DependentUpon>Turno.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

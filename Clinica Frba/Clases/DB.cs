@@ -11,22 +11,12 @@ namespace Clinica_Frba.Clases {
         static private SqlConnection sqlCon = new SqlConnection(strCon);
         static public string schema = "moustache_spice.";
 
-        static private void OpenConnection() {
-
-            sqlCon.Open();
-        }
-
-        static private void CloseConnection() {
-
-            sqlCon.Close();
-        }
-
         /// <summary>
         /// Ejecuta comando y lo devuelve en un datatable
         /// </summary>
         /// <param name="command">Comando</param>
         /// <returns></returns>
-        static public DataTable ExecuteReader(string command){
+        static public DataTable ExecuteReader(string command) {
             if (command.IndexOf("grp_proximoOrden") > -1) {
 
             }
@@ -39,8 +29,8 @@ namespace Clinica_Frba.Clases {
                 da.Fill(dt);
                 da.Dispose();
 
-            } catch (Exception ex) {
-                return null;
+            } catch {
+                throw;
             } finally {
 
                 sqlCon.Close();
@@ -64,10 +54,10 @@ namespace Clinica_Frba.Clases {
                 reader.Read();
 
                 //--Es convert porque hay veces que trae Decimal y el getInt no entiende nada :)
-                temp = Convert.ToInt32(reader[0]); 
+                temp = Convert.ToInt32(reader[0]);
 
-            } catch (Exception ex) {
-                return -1;
+            } catch {
+                throw;
             } finally {
 
                 sqlCon.Close();
@@ -88,13 +78,12 @@ namespace Clinica_Frba.Clases {
 
                 temp = (new SqlCommand(command, sqlCon)).ExecuteNonQuery();
 
-            } catch (Exception ex) {
-                return -1;
+            } catch {
+                throw;
             } finally {
                 sqlCon.Close();
             }
             return temp;
         }
-
     }
 }

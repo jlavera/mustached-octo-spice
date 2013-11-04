@@ -15,6 +15,10 @@ namespace Clinica_Frba.Clases {
         public string[] especialidadesLista;
 
         public Usuario usuario;
+        public Especialidad especialidad;
+
+        public Profesional() {
+        }
 
         public Profesional(DataRow dr) {
             id = Convert.ToInt32(dr["pro_id"]);
@@ -25,6 +29,7 @@ namespace Clinica_Frba.Clases {
             especialidades = dr["especialidades"].ToString();
 
             usuario = new Usuario(dr);
+            //especialidad = new Especialidad(dr);
         }
 
         public override string ToString()

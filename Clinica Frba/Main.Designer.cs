@@ -211,6 +211,7 @@
             this.Turnos.Text = "Turnos (T)";
             this.Turnos.UseVisualStyleBackColor = true;
             this.Turnos.Visible = false;
+            this.Turnos.Click += new System.EventHandler(this.Turnos_Click);
             // 
             // Registro_de_Llegada
             // 

@@ -139,5 +139,10 @@ namespace Clinica_Frba {
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
+
+        private void Turnos_Click(object sender, EventArgs e) {
+            Turno.Turno form = new Turno.Turno();
+            form.ShowDialog();
+        }
     }
 }

@@ -11,6 +11,14 @@ namespace Clinica_Frba.Clases {
         public string nombre;
         public int tipo;
 
+        public Especialidad(int p_id) {
+            DataRow dr = DB.ExecuteReader("SELECT * FROM " + DB.schema + "especialidad WHERE esp_id = " + id).Rows[0];
+
+            id = Convert.ToInt32(dr["esp_id"]);
+            nombre = dr["esp_nombre"].ToString();
+            tipo = Convert.ToInt32(dr["esp_tipo"]);
+        }
+
         public Especialidad(DataRow dr) {
             id = Convert.ToInt32(dr["esp_id"]);
             nombre = dr["esp_descripcion"].ToString();
