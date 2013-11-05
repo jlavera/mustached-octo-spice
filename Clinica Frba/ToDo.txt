@@ -7,3 +7,5 @@
 -- Esepxiones
 
 -- Intentos fallidos de log in
+
+-- CheckedListBox para la elección de turnos
