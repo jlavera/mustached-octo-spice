@@ -4,8 +4,10 @@
 
 -- Mensajes para confirmar eliminaciones y esas cosas
 
--- Esepxiones
+-- Excepciones
 
 -- Intentos fallidos de log in
+    En lugar de traer el usuario que cumpla con nombre + pass, traer el que coincida nombre, comprobar el usuario en C# y aumentar si no coincide
 
 -- CheckedListBox para la elección de turnos
+    Tilde para los turnos que atiende el médico, click para el que elge
