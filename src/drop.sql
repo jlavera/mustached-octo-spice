@@ -5,16 +5,16 @@ IF OBJECT_ID('moustache_spice.cambiarPlanMedico', 'TR') IS NOT NULL
 
 IF OBJECT_ID('moustache_spice.medicamento_x_bonoFarmacia', 'U') IS NOT NULL
 	DROP TABLE moustache_spice.medicamento_x_bonoFarmacia
-IF OBJECT_ID('moustache_spice.bonoFarmacia', 'U') IS NOT NULL
-	DROP TABLE moustache_spice.bonoFarmacia
 IF OBJECT_ID('moustache_spice.medicamento', 'U') IS NOT NULL
 	DROP TABLE moustache_spice.medicamento
-IF OBJECT_ID('moustache_spice.bonoConsulta', 'U') IS NOT NULL
-	DROP TABLE moustache_spice.bonoConsulta
 IF OBJECT_ID('moustache_spice.turnoAudit', 'U') IS NOT NULL
 	DROP TABLE moustache_spice.turnoAudit
 IF OBJECT_ID('moustache_spice.turno', 'U') IS NOT NULL
 	DROP TABLE moustache_spice.turno
+IF OBJECT_ID('moustache_spice.bonoConsulta', 'U') IS NOT NULL
+	DROP TABLE moustache_spice.bonoConsulta
+IF OBJECT_ID('moustache_spice.bonoFarmacia', 'U') IS NOT NULL
+	DROP TABLE moustache_spice.bonoFarmacia
 IF OBJECT_ID('moustache_spice.planMedicoAudit', 'U') IS NOT NULL
 	DROP TABLE moustache_spice.planMedicoAudit
 IF OBJECT_ID('moustache_spice.afiliadoAudit', 'U') IS NOT NULL
