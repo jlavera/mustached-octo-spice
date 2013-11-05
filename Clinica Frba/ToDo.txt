@@ -1,10 +1,12 @@
-﻿++ (Partial) Agregar en los select si está habilitado
+++ (Partial) Agregar en los select si está habilitado
 
 ++ Joaquín del futuro (cualquiera de los 2): se que me vas a odiar cuando leas esto, pero faltan hacer los checkeos de tipos de datos (por ejemplos dni son todos números, teléfonos, etc.). Perdón.
 
 -- Mensajes para confirmar eliminaciones y esas cosas
 
--- Excepciones
+-- Excepciones. 2 opciones para arreglarlo:
+    1º: Dejarlo como está, utilizando un valor de retorno tipo -1 o null.
+    2º: Envolver las llamadas a los DB.executePotato en un try catch, así la excepción va "subiendo de nivel" y en el form mostrarla.
 
 -- Intentos fallidos de log in
     En lugar de traer el usuario que cumpla con nombre + pass, traer el que coincida nombre, comprobar el usuario en C# y aumentar si no coincide
