@@ -111,6 +111,8 @@
     <Compile Include="Clases\Profesionales.cs" />
     <Compile Include="Clases\Rol.cs" />
     <Compile Include="Clases\Roles.cs" />
+    <Compile Include="Clases\Semanal.cs" />
+    <Compile Include="Clases\Semanales.cs" />
     <Compile Include="Clases\TipoEspecialidad.cs" />
     <Compile Include="Clases\TiposEspecialidades.cs" />
     <Compile Include="Clases\Transformer.cs">
@@ -167,11 +169,11 @@
     <Compile Include="Compra de Bono\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pedir Turno\Turno.cs">
+    <Compile Include="Pedir Turno\PedirTurno.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pedir Turno\Turno.Designer.cs">
-      <DependentUpon>Turno.cs</DependentUpon>
+    <Compile Include="Pedir Turno\PedirTurno.Designer.cs">
+      <DependentUpon>PedirTurno.cs</DependentUpon>
     </Compile>
     <Compile Include="Registro de LLegada\Form1.cs">
       <SubType>Form</SubType>
@@ -238,8 +240,8 @@
     <EmbeddedResource Include="LogIn.resx">
       <DependentUpon>LogIn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pedir Turno\Turno.resx">
-      <DependentUpon>Turno.cs</DependentUpon>
+    <EmbeddedResource Include="Pedir Turno\PedirTurno.resx">
+      <DependentUpon>PedirTurno.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

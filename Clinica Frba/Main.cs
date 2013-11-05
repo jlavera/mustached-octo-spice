@@ -141,7 +141,7 @@ namespace Clinica_Frba {
         }
 
         private void Turnos_Click(object sender, EventArgs e) {
-            Turno.Turno form = new Turno.Turno();
+            PedirTurno.PedirTurno form = new PedirTurno.PedirTurno(user);
             form.ShowDialog();
         }
     }

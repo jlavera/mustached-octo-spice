@@ -17,7 +17,7 @@ namespace Clinica_Frba.Clases {
         /// <param name="command">Comando</param>
         /// <returns></returns
         static public DataTable ExecuteReader(string command) {
-            if (command.IndexOf("grp_proximoOrden") > -1) {
+            if (command.IndexOf("vAfiliado") > -1) {
 
             }
             DataTable dt = new DataTable();
@@ -44,6 +44,9 @@ namespace Clinica_Frba.Clases {
         /// <param name="command">Comando</param>
         /// <returns></returns>
         static public int ExecuteCardinal(string command) {
+            if (command.IndexOf("CAST") > -1) {
+
+            }
             SqlDataReader reader = null;
             int temp;
 

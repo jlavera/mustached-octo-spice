@@ -8,19 +8,21 @@ using System.Text;
 using System.Windows.Forms;
 using Clinica_Frba.Clases;
 
-namespace Clinica_Frba.Turno {
-    public partial class Turno : Form {
+namespace Clinica_Frba.PedirTurno {
+    public partial class PedirTurno : Form {
 
         Profesionales profs = new Profesionales();
         Profesional prof;
+        Afiliado afiliado;
 
         Agendas agendas = new Agendas();
-        Agenda agenda;
+        Semanales semanales = new Semanales();
 
         Especialidades esps = new Especialidades();
 
-        public Turno() {
+        public PedirTurno(Usuario user) {
             InitializeComponent();
+            afiliado = new Afiliado(user.id);
         }
 
         private void Turno_Load(object sender, EventArgs e) {
@@ -69,6 +71,7 @@ namespace Clinica_Frba.Turno {
                 gbEspecialidad.Enabled = true;
 
                 //--Cargar lb con especialidades
+                cmbEspecialidades.Items.Clear();
                 cmbEspecialidades.Items.AddRange(prof.especialidades.ToList());
 
                 //--Traer agenda del elegido y setear min y max date
@@ -124,8 +127,15 @@ namespace Clinica_Frba.Turno {
                 return;
             }
 
+            semanales.items.Clear();
+            semanales.FillByProfId(prof.id);
+
+            cmbHorario.Items.Clear();
+            cmbHorario.Items.AddRange(semanales.GetByDay(prof.id, dtpDia.Value));
+
             gbDia.Enabled = false;
             gbHorario.Enabled = true;
+
         }
         private void bVolverDia_Click(object sender, EventArgs e) {
             gbDia.Enabled = false;
@@ -139,17 +149,21 @@ namespace Clinica_Frba.Turno {
         }
         private void bFinalizar_Click(object sender, EventArgs e) {
 
+            if (MessageBox.Show("Turno con el dr. " + prof.usuario.apellido + ", " + prof.usuario.nombre + " para el día " + dtpDia.Value.DayOfWeek + " " + dtpDia.Value.Day + " del " + dtpDia.Value.Month + " a las " + cmbHorario.SelectedItem.ToString(), "Confirmar", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                //--TODO QUERY INSERT
+                if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "turno (tur_afiliado, tur_profesional, tur_especialidad, tur_fechaYHoraTurno) VALUES " +
+                    "(" + afiliado.id + ", " + prof.id + ", " + ((Especialidad)cmbEspecialidades.SelectedItem).id + ", " + 
+                    new DateTime(dtpDia.Value.Year, dtpDia.Value.Month, dtpDia.Value.Day, Convert.ToInt32(cmbHorario.Text.Split(new char[':'])[0]), Convert.ToInt32(cmbHorario.Text.Split(new char[':'])[1]), 00)) < 0)
+                    MessageBox.Show("Error al agregar al turno", "Correción");
         }
 
+        //--Cuando apreta ENTER en una celda, selecciona el profesional
         private void dgvProfesionales_KeyDown(object sender, KeyEventArgs e) {
-            e.Handled = true;
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter) {
+                e.Handled = true;
                 dgvProfesionales_CellContentClick(sender,
                     new DataGridViewCellEventArgs(dgvProfesionales.Columns["seleccionar"].Index, dgvProfesionales.CurrentCell.RowIndex));
-        }
-
-        private void lbDia6_DrawItem(object sender, DrawItemEventArgs e) {
-            
+            }
         }
     }
 }

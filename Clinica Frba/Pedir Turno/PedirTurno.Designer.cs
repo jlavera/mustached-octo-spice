@@ -1,6 +1,6 @@
-﻿namespace Clinica_Frba.Turno
+﻿namespace Clinica_Frba.PedirTurno
 {
-    partial class Turno
+    partial class PedirTurno
     {
         /// <summary>
         /// Required designer variable.
@@ -54,11 +54,11 @@
             this.gbHorario = new System.Windows.Forms.GroupBox();
             this.bFinalizar = new System.Windows.Forms.Button();
             this.bVolverHorario = new System.Windows.Forms.Button();
-            this.lbDia6 = new System.Windows.Forms.ListBox();
             this.gbEspecialidad = new System.Windows.Forms.GroupBox();
             this.cmbEspecialidades = new System.Windows.Forms.ComboBox();
             this.bVolverEsp = new System.Windows.Forms.Button();
             this.bSiguienteEsp = new System.Windows.Forms.Button();
+            this.cmbHorario = new System.Windows.Forms.ComboBox();
             this.gbProf.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProfesionales)).BeginInit();
@@ -84,7 +84,7 @@
             this.gbProf.Controls.Add(this.dgvProfesionales);
             this.gbProf.Location = new System.Drawing.Point(12, 12);
             this.gbProf.Name = "gbProf";
-            this.gbProf.Size = new System.Drawing.Size(552, 616);
+            this.gbProf.Size = new System.Drawing.Size(552, 344);
             this.gbProf.TabIndex = 0;
             this.gbProf.TabStop = false;
             this.gbProf.Text = "Seleccionar profesional";
@@ -93,7 +93,7 @@
             // 
             this.bLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.bLimpiar.Location = new System.Drawing.Point(400, 81);
+            this.bLimpiar.Location = new System.Drawing.Point(400, -191);
             this.bLimpiar.Name = "bLimpiar";
             this.bLimpiar.Size = new System.Drawing.Size(118, 29);
             this.bLimpiar.TabIndex = 15;
@@ -104,7 +104,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(397, 27);
+            this.label15.Location = new System.Drawing.Point(401, 16);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(98, 13);
             this.label15.TabIndex = 52;
@@ -113,7 +113,7 @@
             // bBuscar
             // 
             this.bBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bBuscar.Location = new System.Drawing.Point(398, 124);
+            this.bBuscar.Location = new System.Drawing.Point(398, -148);
             this.bBuscar.Name = "bBuscar";
             this.bBuscar.Size = new System.Drawing.Size(120, 29);
             this.bBuscar.TabIndex = 14;
@@ -128,7 +128,7 @@
             0,
             0,
             0});
-            this.nLimit.Location = new System.Drawing.Point(421, 46);
+            this.nLimit.Location = new System.Drawing.Point(425, 35);
             this.nLimit.Minimum = new decimal(new int[] {
             1,
             0,
@@ -147,7 +147,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(201, 27);
+            this.label1.Location = new System.Drawing.Point(217, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(81, 13);
             this.label1.TabIndex = 49;
@@ -157,7 +157,7 @@
             // 
             this.lbEspecialidades.DisplayMember = "id";
             this.lbEspecialidades.FormattingEnabled = true;
-            this.lbEspecialidades.Location = new System.Drawing.Point(224, 45);
+            this.lbEspecialidades.Location = new System.Drawing.Point(240, 34);
             this.lbEspecialidades.Name = "lbEspecialidades";
             this.lbEspecialidades.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbEspecialidades.Size = new System.Drawing.Size(140, 108);
@@ -166,7 +166,7 @@
             // 
             // tbMatricula
             // 
-            this.tbMatricula.Location = new System.Drawing.Point(47, 45);
+            this.tbMatricula.Location = new System.Drawing.Point(39, 34);
             this.tbMatricula.Mask = "0000000000";
             this.tbMatricula.Name = "tbMatricula";
             this.tbMatricula.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -176,7 +176,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(31, 27);
+            this.label12.Location = new System.Drawing.Point(23, 16);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(55, 13);
             this.label12.TabIndex = 48;
@@ -185,7 +185,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(31, 113);
+            this.label4.Location = new System.Drawing.Point(23, 102);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 47;
@@ -193,7 +193,7 @@
             // 
             // tbApellido
             // 
-            this.tbApellido.Location = new System.Drawing.Point(47, 133);
+            this.tbApellido.Location = new System.Drawing.Point(39, 122);
             this.tbApellido.Name = "tbApellido";
             this.tbApellido.Size = new System.Drawing.Size(140, 20);
             this.tbApellido.TabIndex = 45;
@@ -201,7 +201,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(31, 70);
+            this.label3.Location = new System.Drawing.Point(23, 59);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 13);
             this.label3.TabIndex = 46;
@@ -209,7 +209,7 @@
             // 
             // tbNombre
             // 
-            this.tbNombre.Location = new System.Drawing.Point(47, 90);
+            this.tbNombre.Location = new System.Drawing.Point(39, 79);
             this.tbNombre.Name = "tbNombre";
             this.tbNombre.Size = new System.Drawing.Size(140, 20);
             this.tbNombre.TabIndex = 44;
@@ -225,10 +225,10 @@
             this.especialidades,
             this.Seleccionar});
             this.dgvProfesionales.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvProfesionales.Location = new System.Drawing.Point(3, 176);
+            this.dgvProfesionales.Location = new System.Drawing.Point(3, 159);
             this.dgvProfesionales.MultiSelect = false;
             this.dgvProfesionales.Name = "dgvProfesionales";
-            this.dgvProfesionales.Size = new System.Drawing.Size(546, 437);
+            this.dgvProfesionales.Size = new System.Drawing.Size(546, 182);
             this.dgvProfesionales.TabIndex = 0;
             this.dgvProfesionales.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvProfesionales_KeyDown);
             this.dgvProfesionales.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProfesionales_CellContentClick);
@@ -268,7 +268,7 @@
             this.gbDia.Controls.Add(this.bSiguienteDia);
             this.gbDia.Controls.Add(this.dtpDia);
             this.gbDia.Enabled = false;
-            this.gbDia.Location = new System.Drawing.Point(575, 145);
+            this.gbDia.Location = new System.Drawing.Point(570, 128);
             this.gbDia.Name = "gbDia";
             this.gbDia.Size = new System.Drawing.Size(265, 108);
             this.gbDia.TabIndex = 1;
@@ -304,20 +304,20 @@
             // 
             // gbHorario
             // 
+            this.gbHorario.Controls.Add(this.cmbHorario);
             this.gbHorario.Controls.Add(this.bFinalizar);
             this.gbHorario.Controls.Add(this.bVolverHorario);
-            this.gbHorario.Controls.Add(this.lbDia6);
             this.gbHorario.Enabled = false;
-            this.gbHorario.Location = new System.Drawing.Point(575, 259);
+            this.gbHorario.Location = new System.Drawing.Point(570, 242);
             this.gbHorario.Name = "gbHorario";
-            this.gbHorario.Size = new System.Drawing.Size(265, 369);
+            this.gbHorario.Size = new System.Drawing.Size(265, 114);
             this.gbHorario.TabIndex = 2;
             this.gbHorario.TabStop = false;
             this.gbHorario.Text = "Seleccionar horario";
             // 
             // bFinalizar
             // 
-            this.bFinalizar.Location = new System.Drawing.Point(150, 244);
+            this.bFinalizar.Location = new System.Drawing.Point(159, 73);
             this.bFinalizar.Name = "bFinalizar";
             this.bFinalizar.Size = new System.Drawing.Size(91, 23);
             this.bFinalizar.TabIndex = 3;
@@ -327,7 +327,7 @@
             // 
             // bVolverHorario
             // 
-            this.bVolverHorario.Location = new System.Drawing.Point(150, 156);
+            this.bVolverHorario.Location = new System.Drawing.Point(19, 73);
             this.bVolverHorario.Name = "bVolverHorario";
             this.bVolverHorario.Size = new System.Drawing.Size(91, 23);
             this.bVolverHorario.TabIndex = 3;
@@ -335,52 +335,15 @@
             this.bVolverHorario.UseVisualStyleBackColor = true;
             this.bVolverHorario.Click += new System.EventHandler(this.bVolverHorario_Click);
             // 
-            // lbDia6
-            // 
-            this.lbDia6.FormattingEnabled = true;
-            this.lbDia6.Items.AddRange(new object[] {
-            "7:00",
-            "7:30",
-            "8:00",
-            "8:30",
-            "9:00",
-            "9:30",
-            "10:00",
-            "10:30",
-            "11:00",
-            "11:30",
-            "12:00",
-            "12:30",
-            "13:00",
-            "13:30",
-            "14:00",
-            "14:30",
-            "15:00",
-            "15:30",
-            "16:00",
-            "16:30",
-            "17:00",
-            "17:30",
-            "18:00",
-            "18:30",
-            "19:00",
-            "19:30"});
-            this.lbDia6.Location = new System.Drawing.Point(55, 21);
-            this.lbDia6.Name = "lbDia6";
-            this.lbDia6.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lbDia6.Size = new System.Drawing.Size(37, 342);
-            this.lbDia6.TabIndex = 25;
-            this.lbDia6.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbDia6_DrawItem);
-            // 
             // gbEspecialidad
             // 
             this.gbEspecialidad.Controls.Add(this.cmbEspecialidades);
             this.gbEspecialidad.Controls.Add(this.bVolverEsp);
             this.gbEspecialidad.Controls.Add(this.bSiguienteEsp);
             this.gbEspecialidad.Enabled = false;
-            this.gbEspecialidad.Location = new System.Drawing.Point(575, 12);
+            this.gbEspecialidad.Location = new System.Drawing.Point(570, 12);
             this.gbEspecialidad.Name = "gbEspecialidad";
-            this.gbEspecialidad.Size = new System.Drawing.Size(265, 126);
+            this.gbEspecialidad.Size = new System.Drawing.Size(265, 110);
             this.gbEspecialidad.TabIndex = 3;
             this.gbEspecialidad.TabStop = false;
             this.gbEspecialidad.Text = "Seleccionar especialidad";
@@ -414,18 +377,27 @@
             this.bSiguienteEsp.UseVisualStyleBackColor = true;
             this.bSiguienteEsp.Click += new System.EventHandler(this.bSiguienteEsp_Click);
             // 
-            // Turno
+            // cmbHorario
+            // 
+            this.cmbHorario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHorario.FormattingEnabled = true;
+            this.cmbHorario.Location = new System.Drawing.Point(19, 28);
+            this.cmbHorario.Name = "cmbHorario";
+            this.cmbHorario.Size = new System.Drawing.Size(231, 21);
+            this.cmbHorario.TabIndex = 4;
+            // 
+            // PedirTurno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(852, 637);
+            this.ClientSize = new System.Drawing.Size(845, 362);
             this.Controls.Add(this.gbEspecialidad);
             this.Controls.Add(this.gbHorario);
             this.Controls.Add(this.gbDia);
             this.Controls.Add(this.gbProf);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "Turno";
+            this.Name = "PedirTurno";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pedir turno";
             this.Load += new System.EventHandler(this.Turno_Load);
@@ -466,13 +438,13 @@
         private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
         private System.Windows.Forms.Button bVolverDia;
         private System.Windows.Forms.Button bSiguienteDia;
-        private System.Windows.Forms.ListBox lbDia6;
         private System.Windows.Forms.GroupBox gbEspecialidad;
         private System.Windows.Forms.Button bVolverEsp;
         private System.Windows.Forms.Button bSiguienteEsp;
         private System.Windows.Forms.ComboBox cmbEspecialidades;
         private System.Windows.Forms.Button bFinalizar;
         private System.Windows.Forms.Button bVolverHorario;
+        private System.Windows.Forms.ComboBox cmbHorario;
 
 
     }
