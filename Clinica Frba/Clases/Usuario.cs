@@ -46,5 +46,9 @@ namespace Clinica_Frba.Clases {
         {
             return apellido + ", " + nombre;
         }
+
+        public override bool Equals(object x) {
+            return (x != System.DBNull.Value && ((Usuario)x).id == id);
+        }
     }
 }

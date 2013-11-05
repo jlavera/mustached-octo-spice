@@ -10,12 +10,13 @@ namespace Clinica_Frba.Clases {
         public int id;
         public string nombre;
         public Funcionalidades funcionalidades;
+        public Usuarios usuarios;
         public bool habilitado;
 
         public Rol(DataRow dr) {
             id = (int)dr["rol_id"];
             nombre = (string)dr["rol_nombre"];
-            funcionalidades = new Funcionalidades(Convert.ToInt32(dr["rol_id"]));   
+            funcionalidades = new Funcionalidades(Convert.ToInt32(dr["rol_id"]));
             habilitado = Convert.ToBoolean(dr["rol_habilitado"]);
         }
 

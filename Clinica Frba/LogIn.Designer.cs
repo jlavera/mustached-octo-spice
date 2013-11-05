@@ -30,6 +30,8 @@
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.lbRoles = new System.Windows.Forms.ListBox();
             this.bValidar = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lIntentos = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // bEntrar
@@ -97,11 +99,31 @@
             this.bValidar.UseVisualStyleBackColor = true;
             this.bValidar.Click += new System.EventHandler(this.bValidar_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(256, 66);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(80, 26);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Intentos fallidos\r\nen esta session";
+            // 
+            // lIntentos
+            // 
+            this.lIntentos.AutoSize = true;
+            this.lIntentos.Location = new System.Drawing.Point(291, 97);
+            this.lIntentos.Name = "lIntentos";
+            this.lIntentos.Size = new System.Drawing.Size(13, 13);
+            this.lIntentos.TabIndex = 6;
+            this.lIntentos.Text = "0";
+            // 
             // LogIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(375, 330);
+            this.Controls.Add(this.lIntentos);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.bValidar);
             this.Controls.Add(this.lbRoles);
             this.Controls.Add(this.tbPassword);
@@ -129,5 +151,7 @@
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.ListBox lbRoles;
         private System.Windows.Forms.Button bValidar;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lIntentos;
     }
 }

@@ -85,6 +85,12 @@ CREATE TABLE moustache_spice.usuario (
   usu_habilitado TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (usu_id)
 );
+GO
+CREATE TRIGGER moustache_spice.loginFallido ON moustache_spice.usuario AFTER UPDATE AS
+BEGIN
+	UPDATE moustache_spice.usuario SET usu_habilitado=0 WHERE usu_intentosFallidos>=3
+END
+GO
 
 -- -----------------------------------------------------
 -- creacion tabla rol
@@ -192,7 +198,8 @@ CREATE TABLE moustache_spice.semanal (
   sem_dia INT NOT NULL, -- 1: DOMINGO
   sem_hora TIME NOT NULL, --Se separan cada 30 minutos
   sem_habilitado TINYINT NOT NULL DEFAULT 1
-  PRIMARY KEY(sem_agenda, sem_dia, sem_hora)
+  PRIMARY KEY(sem_agenda, sem_dia, sem_hora),
+  CHECK ( moustache_spice.cargaHoraria(sem_agenda ) <= 48 )
 );
 
 -- -----------------------------------------------------
@@ -342,7 +349,7 @@ CREATE VIEW moustache_spice.vProfesional AS
 		SELECT *, moustache_spice.concatenarEspecialidades(pro_id) AS especialidades
 		FROM moustache_spice.profesional
 			JOIN moustache_spice.usuario ON usu_id = pro_usuario
-		WHERE pro_habilitado = 1 AND usu_habilitado=1
+		WHERE pro_habilitado = 1
 GO
 
 CREATE VIEW moustache_spice.vAfiliado AS
@@ -351,12 +358,11 @@ CREATE VIEW moustache_spice.vAfiliado AS
 			LEFT JOIN moustache_spice.usuario ON usu_id = afi_usuario
 			LEFT JOIN moustache_spice.planMedico ON afi_planMedico = pla_id
 			LEFT JOIN moustache_spice.estadoCivil ON afi_estadoCivil = est_id
-		WHERE afi_habilitado=1 AND usu_habilitado=1
+		WHERE afi_habilitado=1
 GO
 
 CREATE VIEW moustache_spice.vAgenda AS
-	SELECT age_id, age_desde, age_hasta, age_profesional, (usu_apellido + ', ' + usu_nombre) 'profesional', sem_dia, sem_hora,
-	(SELECT TOP 1 1 FROM moustache_spice.turno WHERE tur_profesional = age_profesional AND (DATEPART(dw, tur_fechaYHoraTurno) = sem_dia) AND CAST(tur_fechaYHoraTurno AS TIME) = sem_hora) 'ocupado'
+	SELECT age_id, age_desde, age_hasta, age_profesional, (usu_apellido + ', ' + usu_nombre) 'profesional', sem_dia, sem_hora
 	FROM moustache_spice.agenda
 		JOIN moustache_spice.semanal ON sem_agenda = age_id
 		JOIN moustache_spice.vProfesional ON age_profesional = pro_id

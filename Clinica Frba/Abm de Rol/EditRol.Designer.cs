@@ -32,11 +32,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.bGuardar = new System.Windows.Forms.Button();
+            this.lbUsuarios = new System.Windows.Forms.ListBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lbUsuarios);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.cbHabilitado);
             this.groupBox1.Controls.Add(this.lbFuncionalidades);
             this.groupBox1.Controls.Add(this.tbNombre);
@@ -47,7 +51,7 @@
             this.groupBox1.Controls.Add(this.bGuardar);
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(349, 304);
+            this.groupBox1.Size = new System.Drawing.Size(513, 304);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos";
@@ -123,11 +127,29 @@
             this.bGuardar.UseVisualStyleBackColor = true;
             this.bGuardar.Click += new System.EventHandler(this.bGuardar_Click);
             // 
+            // lbUsuarios
+            // 
+            this.lbUsuarios.FormattingEnabled = true;
+            this.lbUsuarios.Location = new System.Drawing.Point(349, 49);
+            this.lbUsuarios.Name = "lbUsuarios";
+            this.lbUsuarios.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lbUsuarios.Size = new System.Drawing.Size(132, 238);
+            this.lbUsuarios.TabIndex = 6;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(346, 20);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(48, 13);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Usuarios";
+            // 
             // EditRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(381, 329);
+            this.ClientSize = new System.Drawing.Size(538, 329);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -152,5 +174,7 @@
         private System.Windows.Forms.TextBox tbNombre;
         private System.Windows.Forms.TextBox tbId;
         private System.Windows.Forms.CheckBox cbHabilitado;
+        private System.Windows.Forms.ListBox lbUsuarios;
+        private System.Windows.Forms.Label label4;
     }
 }

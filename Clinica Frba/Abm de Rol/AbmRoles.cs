@@ -35,11 +35,7 @@ namespace Clinica_Frba.AbmRoles {
             roles.ClearList();
 
             //--Trae los roles aplicando el filtro y los llena en el dgv
-            //roles.FillWithFilter(tbRol.Text, lbFuncionalidades.SelectedItems, cbHabilitado.Checked);
             FillDgv();
-
-            foreach (Rol rol in roles.items)
-                dgvRoles.Rows.Add(rol.id, rol.nombre, rol.funcionalidades, rol.habilitado);
         }
 
         //--Click en un elemento del dgv

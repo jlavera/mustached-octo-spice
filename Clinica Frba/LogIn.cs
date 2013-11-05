@@ -28,12 +28,11 @@ namespace Clinica_Frba {
 
                 //--Traer usuarios con ese user y pass
                 Usuarios users = new Usuarios();
-                userTemp = users.VerifyUser(tbUsuario.Text, FuncionesBoludas.getHashSha256(tbPassword.Text));
-
-                //--Si hay más de 0
-                if (userTemp == null) {
-                    MessageBox.Show("Fail");
-
+                try{
+                    userTemp = users.VerifyUser(tbUsuario.Text, FuncionesBoludas.getHashSha256(tbPassword.Text));
+                }catch (Exception ex) {
+                    lIntentos.Text = (Convert.ToInt16(lIntentos.Text) + 1).ToString();
+                    MessageBox.Show(ex.Message);
                     return;
                 }
                 
