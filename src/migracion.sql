@@ -58,9 +58,9 @@ GO
 
 CREATE FUNCTION moustache_spice.bonoFarmaciaHabilitado(@impresion DATE, @vencimiento DATE) RETURNS int AS
 BEGIN
-	IF (@impresion < @vencimiento AND DATEDIFF(DAY, @impresion , @vencimiento ) <= 60)
-		RETURN 0
-	RETURN 1
+	IF (@impresion <= @vencimiento AND DATEDIFF(DAY, @impresion , @vencimiento ) <= 60)
+		RETURN 1
+	RETURN 0
 END
 GO
 -- -----------------------------------------------------
@@ -265,6 +265,29 @@ CREATE TABLE moustache_spice.afiliadoAudit (
   afA_usuario INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.usuario(usu_id),
   afA_fecha DATETIME NOT NULL,
 );
+-- -----------------------------------------------------
+-- creacion tabla bonoConsulta
+-- -----------------------------------------------------
+CREATE TABLE moustache_spice.bonoConsulta (
+  bco_id INT NOT NULL Identity,
+  bco_fecha DATE NOT NULL,
+  bco_fechaCompa DATE NOT NULL,
+  bco_comprador INT FOREIGN KEY REFERENCES moustache_spice.afiliado(afi_id),
+  bco_afiliado INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.afiliado(afi_id),
+  PRIMARY KEY (bco_id)
+);
+
+-- -----------------------------------------------------
+-- creacion tabla bonoFarmacia
+-- -----------------------------------------------------
+CREATE TABLE moustache_spice.bonoFarmacia (
+  bfa_id INT NOT NULL Identity,
+  bfa_fechaImpresion DATE NOT NULL,
+  bfa_fechaVencimiento DATE NOT NULL,
+  bfa_afiliado INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.afiliado(afi_id),
+  bfa_habilitado TINYINT NOT NULL DEFAULT 1,
+  PRIMARY KEY (bfa_id)
+);
 
 -- -----------------------------------------------------
 -- creacion tabla turno
@@ -279,7 +302,8 @@ CREATE TABLE moustache_spice.turno (
   tur_fechaYHoraAtencion DATETIME NULL,
   tur_sintomas TEXT NULL,
   tur_diagnostico TEXT NULL,
-  tur_bonoFarmacia INT NULL,
+  tur_bonoFarmacia INT NULL FOREIGN KEY REFERENCES moustache_spice.bonoFarmacia(bfa_id),
+  tur_bonoConsulta INT NULL FOREIGN KEY REFERENCES moustache_spice.bonoConsulta(bco_id),
   tur_habilitado TINYINT NOT NULL DEFAULT 1,-- Sería cuando se cancela un turno
   PRIMARY KEY (tur_id)
 );
@@ -290,19 +314,6 @@ CREATE TABLE moustache_spice.turnoAudit(
 ); 
 
 -- -----------------------------------------------------
--- creacion tabla bonoConsulta
--- -----------------------------------------------------
-CREATE TABLE moustache_spice.bonoConsulta (
-  bco_id INT NOT NULL Identity,
-  bco_fecha DATE NOT NULL,
-  bco_fechaCompa DATE NOT NULL,
-  bco_turno INT FOREIGN KEY REFERENCES moustache_spice.turno(tur_id),
-  bco_comprador INT FOREIGN KEY REFERENCES moustache_spice.afiliado(afi_id),
-  bco_afiliado INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.afiliado(afi_id),
-  PRIMARY KEY (bco_id)
-);
-
--- -----------------------------------------------------
 -- creacion tabla medicamento
 -- -----------------------------------------------------
 CREATE TABLE moustache_spice.medicamento (
@@ -311,16 +322,6 @@ CREATE TABLE moustache_spice.medicamento (
   PRIMARY KEY(med_id)
 );
 
--- -----------------------------------------------------
--- creacion tabla bonoFarmacia
--- -----------------------------------------------------
-CREATE TABLE moustache_spice.bonoFarmacia (
-  bfa_id INT NOT NULL Identity,
-  bfa_fechaImpresion DATE NOT NULL,
-  bfa_fechaVencimiento DATE NOT NULL,
-  bfa_afiliado INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.afiliado(afi_id),
-  PRIMARY KEY (bfa_id)
-);
 
 -- -----------------------------------------------------
 -- creacion tabla medicamento_x_bonoFarmacia
@@ -354,15 +355,17 @@ CREATE VIEW moustache_spice.vAfiliado AS
 GO
 
 CREATE VIEW moustache_spice.vAgenda AS
-	SELECT age_id, age_desde, age_hasta, age_profesional, (usu_apellido + ', ' + usu_nombre) 'profesional', sem_dia, sem_hora
+	SELECT age_id, age_desde, age_hasta, age_profesional, (usu_apellido + ', ' + usu_nombre) 'profesional', sem_dia, sem_hora,
+	(SELECT TOP 1 1 FROM moustache_spice.turno WHERE tur_profesional = age_profesional AND (DATEPART(dw, tur_fechaYHoraTurno) = sem_dia) AND CAST(tur_fechaYHoraTurno AS TIME) = sem_hora) 'ocupado'
 	FROM moustache_spice.agenda
-	JOIN moustache_spice.semanal ON sem_agenda = age_id
-	JOIN moustache_spice.vProfesional ON age_profesional = pro_id
+		JOIN moustache_spice.semanal ON sem_agenda = age_id
+		JOIN moustache_spice.vProfesional ON age_profesional = pro_id
 GO
 
 -- -----------------------------------------------------
 -- INSERTs a mano
 -- -----------------------------------------------------
+PRINT 'INSERT a mano'
 INSERT moustache_spice.funcionalidad (fun_nombre) VALUES ('Abm_Rol')
 														,('Abm_Usuario')
 														,('Abm_Afiliado')
@@ -407,6 +410,7 @@ INSERT moustache_spice.estadoCivil(est_estado) VALUES ('Soltero/a')
 -- -----------------------------------------------------
 -- migracion tabla usuario
 -- -----------------------------------------------------
+PRINT 'migracion tabla usuario'
 INSERT INTO moustache_spice.usuario(usu_numeroDocumento, usu_nombre, usu_apellido, usu_direccion, usu_telefono, usu_mail, usu_fechaNacimiento, usu_nombreUsuario)
         ((SELECT DISTINCT Paciente_Dni, Paciente_Nombre, Paciente_Apellido,
                Paciente_Direccion, Paciente_Telefono,
@@ -425,6 +429,7 @@ INSERT INTO moustache_spice.usuario(usu_numeroDocumento, usu_nombre, usu_apellid
 -- -----------------------------------------------------
 -- migracion tabla planMedico
 -- -----------------------------------------------------
+PRINT 'migracion tabla planMedico'
 INSERT INTO moustache_spice.planMedico(pla_codigo, pla_nombre, pla_precioBonoConsulta, pla_precioBonoFarmacia)
 		(SELECT DISTINCT Plan_Med_Codigo, Plan_Med_Descripcion, Plan_Med_Precio_Bono_Consulta, Plan_Med_Precio_Bono_Farmacia
 		FROM gd_esquema.Maestra WHERE Plan_Med_Codigo IS NOT NULL);
@@ -432,14 +437,17 @@ INSERT INTO moustache_spice.planMedico(pla_codigo, pla_nombre, pla_precioBonoCon
 -- -----------------------------------------------------
 -- migracion tabla afiliado 
 -- -----------------------------------------------------
+PRINT 'migracion tabla afiliado'
 INSERT INTO moustache_spice.afiliado(afi_usuario, afi_planMedico, afi_orden)
 	(SELECT DISTINCT usu_id, pla_id, 1 FROM gd_esquema.Maestra
 	LEFT JOIN moustache_spice.usuario ON usu_numeroDocumento = Paciente_Dni
 	LEFT JOIN moustache_spice.planMedico ON pla_codigo = Plan_Med_Codigo
 	WHERE Paciente_Dni IS NOT NULL);
+	
 -- -----------------------------------------------------
 -- migracion tabla profesional
 -- -----------------------------------------------------	
+PRINT 'migracion tabla profesional'
 INSERT INTO moustache_spice.profesional(pro_usuario)
 	(SELECT DISTINCT usu_id FROM gd_esquema.Maestra
 	JOIN moustache_spice.usuario ON usu_numeroDocumento = Medico_Dni
@@ -448,45 +456,33 @@ INSERT INTO moustache_spice.profesional(pro_usuario)
 -- -----------------------------------------------------
 -- migracion tabla tipoEspecialidad
 -- -----------------------------------------------------
+PRINT 'migracion tabla tipoEspecialidad'
 INSERT INTO moustache_spice.tipoEspecialidad(tip_id, tip_nombre)
 	(SELECT DISTINCT Tipo_Especialidad_Codigo, Tipo_Especialidad_Descripcion FROM gd_esquema.Maestra WHERE Especialidad_Codigo IS NOT NULL);
 
 -- -----------------------------------------------------
 -- migracion tabla especialidad
 -- -----------------------------------------------------
+PRINT 'migracion tabla especialidad'
 INSERT INTO moustache_spice.especialidad(esp_id, esp_descripcion, esp_tipo)
 	(SELECT DISTINCT Especialidad_Codigo, Especialidad_Descripcion, Tipo_Especialidad_Codigo FROM gd_esquema.Maestra WHERE Especialidad_Codigo IS NOT NULL);
 
 -- -----------------------------------------------------
 -- migracion tabla profesional_x_especialidad
 -- -----------------------------------------------------
+PRINT 'migracion tabla profesional_x_especialidad'
 INSERT INTO moustache_spice.profesional_x_especialidad(pxe_profesional, pxe_especialidad)
 	(SELECT DISTINCT (SELECT pro_id FROM moustache_spice.vProfesional WHERE Medico_Dni = usu_numeroDocumento),
 	Especialidad_Codigo FROM gd_esquema.Maestra
 	WHERE Medico_Apellido IS NOT NULL);
 
 -- -----------------------------------------------------
--- migracion tabla turno
--- -----------------------------------------------------
-SET IDENTITY_INSERT moustache_spice.turno ON
-INSERT INTO moustache_spice.turno(tur_id, tur_afiliado, tur_profesional, tur_fechaYHoraTurno, tur_sintomas, tur_diagnostico)
-	(SELECT DISTINCT RES.*, H.Consulta_Sintomas, H.Consulta_Enfermedades
-	FROM (SELECT DISTINCT Turno_Numero, afi_id, pro_id, Turno_Fecha
-	FROM gd_esquema.Maestra
-		LEFT JOIN moustache_spice.vAfiliado A ON A.usu_numeroDocumento = Paciente_Dni
-		LEFT JOIN moustache_spice.vProfesional P ON P.usu_numeroDocumento = Medico_Dni
-	WHERE Turno_Numero IS NOT NULL) RES
-	LEFT JOIN gd_esquema.Maestra H ON RES.Turno_Numero = H.Turno_Numero
-					AND H.Consulta_Enfermedades IS NOT NULL
-					AND H.Consulta_Sintomas IS NOT NULL);
-SET IDENTITY_INSERT moustache_spice.turno OFF
-
--- -----------------------------------------------------
 -- migracion tabla bonoConsulta
 -- -----------------------------------------------------
+PRINT 'migracion tabla bonoConsulta'
 SET IDENTITY_INSERT moustache_spice.bonoConsulta ON
-INSERT INTO moustache_spice.bonoConsulta(bco_id, bco_turno, bco_fechaCompa, bco_afiliado, bco_fecha)
-	(SELECT DISTINCT Bono_Consulta_Numero, Turno_Numero, Compra_Bono_Fecha, afi_id, Bono_Consulta_Fecha_Impresion
+INSERT INTO moustache_spice.bonoConsulta(bco_id, bco_fechaCompa, bco_afiliado, bco_fecha)
+	(SELECT DISTINCT Bono_Consulta_Numero, Compra_Bono_Fecha, afi_id, Bono_Consulta_Fecha_Impresion
         FROM gd_esquema.Maestra
 			LEFT JOIN moustache_spice.vAfiliado ON usu_numeroDocumento = Paciente_Dni
         WHERE Bono_Consulta_Numero IS NOT NULL AND Compra_Bono_Fecha IS NOT NULL)
@@ -495,19 +491,35 @@ SET IDENTITY_INSERT moustache_spice.bonoConsulta OFF
 -- -----------------------------------------------------
 -- migracion tabla bonoFarmacia
 -- -----------------------------------------------------
+PRINT 'migracion tabla bonoFarmacia'
 SET IDENTITY_INSERT moustache_spice.bonoFarmacia ON
-INSERT INTO moustache_spice.bonoFarmacia(bfa_id, bfa_fechaImpresion, bfa_fechaVencimiento, bfa_afiliado)
-	(SELECT DISTINCT Bono_Farmacia_Numero, Bono_Farmacia_Fecha_Impresion, Bono_Farmacia_Fecha_Vencimiento, afi_id
+INSERT INTO moustache_spice.bonoFarmacia(bfa_id, bfa_fechaImpresion, bfa_fechaVencimiento, bfa_afiliado, bfa_habilitado)
+	(SELECT DISTINCT Bono_Farmacia_Numero, Bono_Farmacia_Fecha_Impresion, Bono_Farmacia_Fecha_Vencimiento, afi_id, moustache_spice.bonoFarmaciaHabilitado(Bono_Farmacia_Fecha_Impresion, Bono_Farmacia_Fecha_Vencimiento)
 	FROM gd_esquema.Maestra
-	LEFT JOIN moustache_spice.vAfiliado ON usu_numeroDocumento = Paciente_Dni
-	WHERE Bono_Farmacia_Numero IS NOT NULL AND moustache_spice.bonoFarmaciaHabilitado(Bono_Farmacia_Fecha_Impresion, Bono_Farmacia_Fecha_Vencimiento) = 0)
+		LEFT JOIN moustache_spice.vAfiliado ON usu_numeroDocumento = Paciente_Dni
+	WHERE Bono_Farmacia_Numero IS NOT NULL)
 SET IDENTITY_INSERT moustache_spice.bonoFarmacia OFF
+ALTER TABLE moustache_spice.bonoFarmacia ADD CONSTRAINT CK_bfa_valido CHECK (bfa_habilitado=1 OR moustache_spice.bonoFarmaciaHabilitado( bfa_fechaImpresion, bfa_fechaVencimiento)=0 )
 
-ALTER TABLE moustache_spice.bonoFarmacia ADD CONSTRAINT CK_bfa_valido CHECK ( moustache_spice.bonoFarmaciaHabilitado( bfa_fechaImpresion, bfa_fechaVencimiento) = 0 )
+-- -----------------------------------------------------
+-- migracion tabla turno
+-- -----------------------------------------------------
+PRINT 'migracion tabla turno'
+SET IDENTITY_INSERT moustache_spice.turno ON
+INSERT INTO moustache_spice.turno(tur_id, tur_bonoFarmacia, tur_bonoConsulta, tur_afiliado, tur_profesional, tur_fechaYHoraTurno, tur_sintomas, tur_diagnostico)
+	(SELECT DISTINCT Turno_Numero, MAX(Bono_Farmacia_Numero), MAX(Bono_Consulta_Numero),
+		afi_id, pro_id, Turno_Fecha, MAX(Consulta_Sintomas), MAX(Consulta_Enfermedades)
+	FROM gd_esquema.Maestra
+		LEFT JOIN moustache_spice.vAfiliado A ON A.usu_numeroDocumento = Paciente_Dni
+		LEFT JOIN moustache_spice.vProfesional P ON P.usu_numeroDocumento = Medico_Dni
+	WHERE Turno_Numero IS NOT NULL
+	GROUP BY Turno_Numero, afi_id, pro_id, Turno_Fecha);
+SET IDENTITY_INSERT moustache_spice.turno OFF
 
 -- -----------------------------------------------------
 -- migracion tabla agenda
 -- -----------------------------------------------------
+PRINT 'migracion tabla agenda'
 INSERT INTO moustache_spice.agenda(age_profesional, age_hasta, age_desde)
 	(SELECT pro_id, MAX(Turno_Fecha), DATEADD(DAY, -120, MAX(Turno_Fecha)) FROM gd_esquema.Maestra
 		LEFT JOIN moustache_spice.vProfesional ON usu_numeroDocumento = Medico_Dni 
@@ -517,19 +529,18 @@ INSERT INTO moustache_spice.agenda(age_profesional, age_hasta, age_desde)
 -- -----------------------------------------------------
 -- migracion tabla semanal
 -- -----------------------------------------------------
+PRINT 'migracion tabla semanal'
 INSERT INTO moustache_spice.semanal(sem_agenda, sem_dia, sem_hora, sem_habilitado)
 	(SELECT DISTINCT age_id, DATEPART(dw, tur_fechaYHoraTurno), CAST(tur_fechaYHoraTurno AS TIME),
 	moustache_spice.semanalHabilitado(DATEPART(dw, tur_fechaYHoraTurno), CAST(tur_fechaYHoraTurno AS TIME))
 	FROM moustache_spice.turno
 		JOIN moustache_spice.agenda ON tur_profesional = age_profesional);
-	
-	SELECT * FROM moustache_spice.vAgenda
-	
-ALTER TABLE moustache_spice.semanal ADD CONSTRAINT CK_sem_horarioValido CHECK( moustache_spice.semanalHabilitado(sem_dia, sem_hora)=1 )
+ALTER TABLE moustache_spice.semanal ADD CONSTRAINT CK_sem_horarioValido CHECK(sem_habilitado=1 OR moustache_spice.semanalHabilitado(sem_dia, sem_hora)=0 )
 
 -- -----------------------------------------------------
 -- migracion tabla medicamento
 -- -----------------------------------------------------
+PRINT 'migracion tabla medicamento'
 INSERT INTO moustache_spice.medicamento(med_nombre)
 	(SELECT DISTINCT Bono_Farmacia_Medicamento FROM gd_esquema.Maestra WHERE Bono_Farmacia_Medicamento IS NOT NULL);
 		
@@ -537,6 +548,7 @@ INSERT INTO moustache_spice.medicamento(med_nombre)
 -- migracion tabla medicamento_x_bonoFarmacia
 -- (Ya probamos que en la DB cada bono Farmacia tiene solo 1 medicamento)
 -- -----------------------------------------------------
+PRINT 'migracion tabla medicamento_x_bonoFarmacia'
 INSERT INTO moustache_spice.medicamento_x_bonoFarmacia(mxb_bonoFarmacia, mxb_medicamento)
 	(SELECT DISTINCT Bono_Farmacia_Numero, med_id
 	FROM gd_esquema.Maestra
@@ -544,10 +556,12 @@ INSERT INTO moustache_spice.medicamento_x_bonoFarmacia(mxb_bonoFarmacia, mxb_med
 	WHERE Bono_Farmacia_Numero IS NOT NULL
 	AND Bono_Farmacia_Medicamento IS NOT NULL);
 	
-ALTER TABLE moustache_spice.medicamento_x_bonoFarmacia ADD CONSTRAINT CK_mxb_cantidadValida CHECK (mxb_unidades <= 3 AND
-		(moustache_spice.cantidadMedicamentos(mxb_bonoFarmacia) <= 5))
 -- -----------------------------------------------------
--- ##TODO##
+-- ###TODO##:
+--	>> Poner este ultimo constrain (al final de todo), pero hace que la migracion tarde un huevito!
+-- ALTER TABLE moustache_spice.medicamento_x_bonoFarmacia ADD CONSTRAINT CK_mxb_cantidadValida CHECK (mxb_unidades <= 3 AND
+--		(moustache_spice.cantidadMedicamentos(mxb_bonoFarmacia) <= 5))
+
 -- >> Grupos familiares (asumismos por apellido, o dejamos vacio?) necesito migrar los planes medicos
 
 -- >> Creamos agendas para todos, con el ultimo turno, -120 dias. Esta bien? o dejamos vacio todo?
@@ -574,4 +588,5 @@ ALTER TABLE moustache_spice.medicamento_x_bonoFarmacia ADD CONSTRAINT CK_mxb_can
 
 -- >> Trigger para hacer que cuando cambie un plan medico de un padre, cambien todos los hijos
 -- Esta implementado para updates de a uno, no para masivo
+
 -- -----------------------------------------------------
