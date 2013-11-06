@@ -50,5 +50,10 @@ namespace Clinica_Frba.Clases {
         public override bool Equals(object x) {
             return (x != System.DBNull.Value && ((Usuario)x).id == id);
         }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

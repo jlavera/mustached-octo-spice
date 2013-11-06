@@ -40,7 +40,7 @@ BEGIN
 	-- 0.5 porque son cada 30 minutos (media hora) y quiero devolver en horas
   RETURN 0.5*(SELECT COUNT(1)
 			FROM moustache_spice.semanal
-			WHERE sem_agenda = @agenda)
+			WHERE sem_agenda = @agenda AND sem_habilitado=1)
 END
 GO
 
@@ -198,8 +198,7 @@ CREATE TABLE moustache_spice.semanal (
   sem_dia INT NOT NULL, -- 1: DOMINGO
   sem_hora TIME NOT NULL, --Se separan cada 30 minutos
   sem_habilitado TINYINT NOT NULL DEFAULT 1
-  PRIMARY KEY(sem_agenda, sem_dia, sem_hora),
-  CHECK ( moustache_spice.cargaHoraria(sem_agenda ) <= 48 )
+  PRIMARY KEY(sem_agenda, sem_dia, sem_hora)
 );
 
 -- -----------------------------------------------------
@@ -541,7 +540,8 @@ INSERT INTO moustache_spice.semanal(sem_agenda, sem_dia, sem_hora, sem_habilitad
 	moustache_spice.semanalHabilitado(DATEPART(dw, tur_fechaYHoraTurno), CAST(tur_fechaYHoraTurno AS TIME))
 	FROM moustache_spice.turno
 		JOIN moustache_spice.agenda ON tur_profesional = age_profesional);
-ALTER TABLE moustache_spice.semanal ADD CONSTRAINT CK_sem_horarioValido CHECK(sem_habilitado=1 OR moustache_spice.semanalHabilitado(sem_dia, sem_hora)=0 )
+UPDATE moustache_spice.semanal SET sem_habilitado=0 WHERE moustache_spice.cargaHoraria(sem_agenda ) > 48;
+ALTER TABLE moustache_spice.semanal ADD CONSTRAINT CK_sem_horarioValido CHECK(sem_habilitado=1 OR (moustache_spice.semanalHabilitado(sem_dia, sem_hora)=0 OR moustache_spice.cargaHoraria(sem_agenda ) > 48 ))
 
 -- -----------------------------------------------------
 -- migracion tabla medicamento
@@ -596,3 +596,5 @@ INSERT INTO moustache_spice.medicamento_x_bonoFarmacia(mxb_bonoFarmacia, mxb_med
 -- Esta implementado para updates de a uno, no para masivo
 
 -- -----------------------------------------------------
+
+SELECT*  FROM moustache_spice.vAfiliado
