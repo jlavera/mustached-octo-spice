@@ -2,8 +2,10 @@ IF OBJECT_ID('moustache_spice.inhabilitarRol', 'TR') IS NOT NULL
 	DROP TRIGGER moustache_spice.inhabilitarRol
 IF OBJECT_ID('moustache_spice.cambiarPlanMedico', 'TR') IS NOT NULL
 	DROP TRIGGER moustache_spice.cambiarPlanMedico
-IF OBJECT_ID('moustache_spice.loginFallido ', 'TR') IS NOT NULL
+IF OBJECT_ID('moustache_spice.loginFallido', 'TR') IS NOT NULL
 	DROP TRIGGER moustache_spice.loginFallido 
+IF OBJECT_ID('moustache_spice.cancelarTurnos ', 'TR') IS NOT NULL
+	DROP TRIGGER moustache_spice.cancelarTurnos 
 
 IF OBJECT_ID('moustache_spice.medicamento_x_bonoFarmacia', 'U') IS NOT NULL
 	DROP TABLE moustache_spice.medicamento_x_bonoFarmacia

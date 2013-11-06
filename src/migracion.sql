@@ -190,6 +190,16 @@ CREATE TABLE moustache_spice.agenda (
   PRIMARY KEY(age_id),
   CHECK ( (age_desde < age_hasta) AND (DATEDIFF(day, age_desde, age_hasta) <= 120) )
 );
+
+GO
+CREATE TRIGGER moustache_spice.cancelarTurnos ON moustache_spice.agenda FOR DELETE AS
+BEGIN
+	UPDATE moustache_spice.turno
+		SET tur_habilitado=0
+		WHERE tur_fechaYHoraTurno > 
+END
+GO
+
 -- -----------------------------------------------------
 -- creacion tabla semanal
 -- -----------------------------------------------------
@@ -597,4 +607,9 @@ INSERT INTO moustache_spice.medicamento_x_bonoFarmacia(mxb_bonoFarmacia, mxb_med
 
 -- -----------------------------------------------------
 
-SELECT*  FROM moustache_spice.vAfiliado
+
+DELETE moustache_spice.semanal WHERE sem_agenda=17; DELETE moustache_spice.agenda WHERE age_id=17
+
+SELECT * FROM moustache_spice.turno WHERE tur_profesional=2
+
+SELECT * FROM moustache_spice.semanal WHERE sem_agenda=17

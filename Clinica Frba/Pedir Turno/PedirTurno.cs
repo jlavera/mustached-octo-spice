@@ -22,7 +22,14 @@ namespace Clinica_Frba.PedirTurno {
 
         public PedirTurno(Usuario user) {
             InitializeComponent();
-            afiliado = new Afiliado(user.id);
+            try {
+                afiliado = new Afiliado(user.id);
+            } catch (NoTrajoNadaExcep ex) {
+                //Si fallo al traer afiliados, es que el usuario no es un afiliado
+                MessageBox.Show("Solo los afiliados pueden pedir turnos,\na modo de debug, se le asigno el afiliado ID: 5.");
+                afiliado = new Afiliado();
+                afiliado.id = 5;
+            }
         }
 
         private void Turno_Load(object sender, EventArgs e) {

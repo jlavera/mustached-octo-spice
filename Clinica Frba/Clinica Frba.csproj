@@ -93,6 +93,7 @@
     <Compile Include="Clases\Especialidades.cs" />
     <Compile Include="Clases\EstadoCivil.cs" />
     <Compile Include="Clases\EstadosCiviles.cs" />
+    <Compile Include="Clases\Excepciones.cs" />
     <Compile Include="Clases\FormHelper.cs">
       <SubType>Form</SubType>
     </Compile>
