@@ -26,9 +26,11 @@ namespace Clinica_Frba.PedirTurno {
                 afiliado = new Afiliado(user.id);
             } catch (NoTrajoNadaExcep ex) {
                 //Si fallo al traer afiliados, es que el usuario no es un afiliado
-                MessageBox.Show("Solo los afiliados pueden pedir turnos,\na modo de debug, se le asigno el afiliado ID: 5.");
-                afiliado = new Afiliado();
-                afiliado.id = 5;
+                MessageBox.Show("Solo los afiliados pueden pedir turnos,\na modo de debug, le vamos a dejar elejir un afiliado");
+                miniAfiliado mini = new miniAfiliado();
+                while(mini.DialogResult != DialogResult.OK)
+                    mini.ShowDialog();
+                afiliado = mini.afiliado;
             }
         }
 
@@ -135,10 +137,10 @@ namespace Clinica_Frba.PedirTurno {
             }
 
             semanales.items.Clear();
-            semanales.FillByProfId(prof.id);
-
             cmbHorario.Items.Clear();
-            cmbHorario.Items.AddRange(semanales.GetByDay(prof.id, dtpDia.Value));
+
+            semanales.FillTurnosLibres(prof.id, dtpDia.Value);
+            cmbHorario.Items.AddRange(semanales.ToList());
 
             gbDia.Enabled = false;
             gbHorario.Enabled = true;
@@ -151,17 +153,27 @@ namespace Clinica_Frba.PedirTurno {
 
         //--------------HORARIO---------
         private void bVolverHorario_Click(object sender, EventArgs e) {
+            semanales.items.Clear();
+            cmbHorario.Items.Clear();
+
             gbDia.Enabled = true;
             gbHorario.Enabled = false;
         }
         private void bFinalizar_Click(object sender, EventArgs e) {
 
+            if (cmbHorario.SelectedIndex == -1) {
+                MessageBox.Show("Debe elegir un horario", "Error");
+                return;
+            }
+
             if (MessageBox.Show("Turno con el dr. " + prof.usuario.apellido + ", " + prof.usuario.nombre + " para el día " + dtpDia.Value.DayOfWeek + " " + dtpDia.Value.Day + " del " + dtpDia.Value.Month + " a las " + cmbHorario.SelectedItem.ToString(), "Confirmar", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 //--TODO QUERY INSERT
                 if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "turno (tur_afiliado, tur_profesional, tur_especialidad, tur_fechaYHoraTurno) VALUES " +
-                    "(" + afiliado.id + ", " + prof.id + ", " + ((Especialidad)cmbEspecialidades.SelectedItem).id + ", " + 
-                    new DateTime(dtpDia.Value.Year, dtpDia.Value.Month, dtpDia.Value.Day, Convert.ToInt32(cmbHorario.Text.Split(new char[':'])[0]), Convert.ToInt32(cmbHorario.Text.Split(new char[':'])[1]), 00)) < 0)
+                    "(" + afiliado.id + ", " + prof.id + ", " + ((Especialidad)cmbEspecialidades.SelectedItem).id + ", '" +
+                    dtpDia.Value.ToString("yyy-MM-dd") + " " + ((Semanal)cmbHorario.SelectedItem).hora.ToString("HH:mm:ss") + "')") < 0)
                     MessageBox.Show("Error al agregar al turno", "Correción");
+                else
+                    DialogResult = DialogResult.OK;
         }
 
         //--Cuando apreta ENTER en una celda, selecciona el profesional

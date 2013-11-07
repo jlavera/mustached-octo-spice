@@ -191,15 +191,6 @@ CREATE TABLE moustache_spice.agenda (
   CHECK ( (age_desde < age_hasta) AND (DATEDIFF(day, age_desde, age_hasta) <= 120) )
 );
 
-GO
-CREATE TRIGGER moustache_spice.cancelarTurnos ON moustache_spice.agenda FOR DELETE AS
-BEGIN
-	UPDATE moustache_spice.turno
-		SET tur_habilitado=0
-		WHERE tur_fechaYHoraTurno > 
-END
-GO
-
 -- -----------------------------------------------------
 -- creacion tabla semanal
 -- -----------------------------------------------------
@@ -327,7 +318,18 @@ CREATE TABLE moustache_spice.turno (
 CREATE TABLE moustache_spice.turnoAudit(
 	tuA_turno INT NOT NULL FOREIGN KEY REFERENCES moustache_spice.turno(tur_id),
 	tuA_razon VARCHAR(255),
-); 
+);
+ 
+GO
+CREATE TRIGGER moustache_spice.cancelarTurnos ON moustache_spice.semanal FOR DELETE AS
+BEGIN
+	UPDATE moustache_spice.turno
+		SET tur_habilitado=0
+		WHERE DATEPART(dw, tur_fechaYHoraTurno) IN (SELECT sem_dia FROM deleted)
+		AND CAST(tur_fechaYHoraTurno AS TIME) IN (SELECT sem_hora FROM deleted)
+		AND tur_profesional IN (SELECT age_profesional FROM deleted LEFT JOIN moustache_spice.agenda ON sem_agenda = age_id)
+END
+GO
 
 -- -----------------------------------------------------
 -- creacion tabla medicamento
@@ -517,21 +519,6 @@ SET IDENTITY_INSERT moustache_spice.bonoFarmacia OFF
 ALTER TABLE moustache_spice.bonoFarmacia ADD CONSTRAINT CK_bfa_valido CHECK (bfa_habilitado=1 OR moustache_spice.bonoFarmaciaHabilitado( bfa_fechaImpresion, bfa_fechaVencimiento)=0 )
 
 -- -----------------------------------------------------
--- migracion tabla turno
--- -----------------------------------------------------
-PRINT 'migracion tabla turno'
-SET IDENTITY_INSERT moustache_spice.turno ON
-INSERT INTO moustache_spice.turno(tur_id, tur_bonoFarmacia, tur_bonoConsulta, tur_afiliado, tur_profesional, tur_fechaYHoraTurno, tur_sintomas, tur_diagnostico)
-	(SELECT DISTINCT Turno_Numero, MAX(Bono_Farmacia_Numero), MAX(Bono_Consulta_Numero),
-		afi_id, pro_id, Turno_Fecha, MAX(Consulta_Sintomas), MAX(Consulta_Enfermedades)
-	FROM gd_esquema.Maestra
-		LEFT JOIN moustache_spice.vAfiliado A ON A.usu_numeroDocumento = Paciente_Dni
-		LEFT JOIN moustache_spice.vProfesional P ON P.usu_numeroDocumento = Medico_Dni
-	WHERE Turno_Numero IS NOT NULL
-	GROUP BY Turno_Numero, afi_id, pro_id, Turno_Fecha);
-SET IDENTITY_INSERT moustache_spice.turno OFF
-
--- -----------------------------------------------------
 -- migracion tabla agenda
 -- -----------------------------------------------------
 PRINT 'migracion tabla agenda'
@@ -540,6 +527,23 @@ INSERT INTO moustache_spice.agenda(age_profesional, age_hasta, age_desde)
 		LEFT JOIN moustache_spice.vProfesional ON usu_numeroDocumento = Medico_Dni 
 		WHERE Medico_Dni IS NOT NULL AND Turno_Fecha IS NOT NULL
 	GROUP BY pro_id);
+
+-- -----------------------------------------------------
+-- migracion tabla turno
+-- -----------------------------------------------------
+PRINT 'migracion tabla turno'
+SET IDENTITY_INSERT moustache_spice.turno ON
+INSERT INTO moustache_spice.turno(tur_id, tur_bonoFarmacia, tur_bonoConsulta, tur_afiliado, tur_profesional, tur_fechaYHoraTurno, tur_sintomas, tur_diagnostico, tur_habilitado)
+	(SELECT DISTINCT Turno_Numero, MAX(Bono_Farmacia_Numero), MAX(Bono_Consulta_Numero),
+		afi_id, pro_id, Turno_Fecha, MAX(Consulta_Sintomas), MAX(Consulta_Enfermedades),
+		(CASE WHEN (CAST(Turno_Fecha AS DATE) > (SELECT TOP 1 age_desde FROM moustache_spice.agenda WHERE age_profesional = pro_id)
+				AND CAST(Turno_Fecha AS DATE)  < (SELECT TOP 1 age_hasta FROM moustache_spice.agenda WHERE age_profesional = pro_id)) THEN 1 ELSE 0 END)
+	FROM gd_esquema.Maestra
+		LEFT JOIN moustache_spice.vAfiliado A ON A.usu_numeroDocumento = Paciente_Dni
+		LEFT JOIN moustache_spice.vProfesional P ON P.usu_numeroDocumento = Medico_Dni
+	WHERE Turno_Numero IS NOT NULL
+	GROUP BY Turno_Numero, afi_id, pro_id, Turno_Fecha);
+SET IDENTITY_INSERT moustache_spice.turno OFF
 	
 -- -----------------------------------------------------
 -- migracion tabla semanal
@@ -606,10 +610,3 @@ INSERT INTO moustache_spice.medicamento_x_bonoFarmacia(mxb_bonoFarmacia, mxb_med
 -- Esta implementado para updates de a uno, no para masivo
 
 -- -----------------------------------------------------
-
-
-DELETE moustache_spice.semanal WHERE sem_agenda=17; DELETE moustache_spice.agenda WHERE age_id=17
-
-SELECT * FROM moustache_spice.turno WHERE tur_profesional=2
-
-SELECT * FROM moustache_spice.semanal WHERE sem_agenda=17

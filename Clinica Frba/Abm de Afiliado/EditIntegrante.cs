@@ -35,19 +35,7 @@ namespace Clinica_Frba.AbmAfiliados {
         }
 
         private void bGuardar_Click(object sender, EventArgs e) {
-            bool invalidez = false;
-            foreach (Control ctrl in gbDatos.Controls)
-            {
-                if ((ctrl.Visible && ctrl is TextBox && ((TextBox)ctrl).Text == "") || (ctrl is MaskedTextBox && ((MaskedTextBox)ctrl).Text == "") || (ctrl is ComboBox && ((ComboBox)ctrl).SelectedIndex == -1))
-                {
-                    invalidez = true;
-                    ctrl.BackColor = Color.RosyBrown;
-                }
-            }
-            if (invalidez)
-                MessageBox.Show("Faltan algunos campos");
-            else
-            {
+            if (FuncionesBoludas.policia(gbDatos.Controls)){
 
                 integrante = new Integrante(tbNombre.Text, tbApellido.Text, tbDireccion.Text, tbMail.Text, cmbTipoDNI.Text,
                     Convert.ToInt64(tbNumeroDni.Text), Convert.ToInt64(tbTelefono.Text), (EstadoCivil)cmbEstadoCivil.SelectedItem,

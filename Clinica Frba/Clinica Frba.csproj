@@ -106,6 +106,12 @@
     <Compile Include="Clases\GrupoFamiliar.cs" />
     <Compile Include="Clases\GruposFamiliares.cs" />
     <Compile Include="Clases\Integrante.cs" />
+    <Compile Include="Clases\miniAfiliado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clases\miniAfiliado.Designer.cs">
+      <DependentUpon>miniAfiliado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Clases\PlanesMedicos.cs" />
     <Compile Include="Clases\PlanMedico.cs" />
     <Compile Include="Clases\Profesional.cs" />
@@ -234,6 +240,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Clases\FormHelper.resx">
       <DependentUpon>FormHelper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Clases\miniAfiliado.resx">
+      <DependentUpon>miniAfiliado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

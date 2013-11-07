@@ -16,7 +16,7 @@ namespace Clinica_Frba.Clases {
         }
 
         public override string ToString() {
-            return hora.Hour + ":" + hora.Minute;
+            return (hora.Hour).ToString("00") + ":" + (hora.Minute).ToString("00");
         }
     }
 }

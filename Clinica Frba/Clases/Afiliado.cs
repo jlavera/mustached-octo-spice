@@ -59,5 +59,9 @@ namespace Clinica_Frba.Clases {
             grupoFamiliar = new GrupoFamiliar(dr);
         }
 
+        public override string ToString() {
+            return usuario.ToString();
+        }
+
     }
 }

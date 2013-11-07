@@ -52,13 +52,13 @@
             this.bSiguienteDia = new System.Windows.Forms.Button();
             this.dtpDia = new System.Windows.Forms.DateTimePicker();
             this.gbHorario = new System.Windows.Forms.GroupBox();
+            this.cmbHorario = new System.Windows.Forms.ComboBox();
             this.bFinalizar = new System.Windows.Forms.Button();
             this.bVolverHorario = new System.Windows.Forms.Button();
             this.gbEspecialidad = new System.Windows.Forms.GroupBox();
             this.cmbEspecialidades = new System.Windows.Forms.ComboBox();
             this.bVolverEsp = new System.Windows.Forms.Button();
             this.bSiguienteEsp = new System.Windows.Forms.Button();
-            this.cmbHorario = new System.Windows.Forms.ComboBox();
             this.gbProf.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProfesionales)).BeginInit();
@@ -93,7 +93,7 @@
             // 
             this.bLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.bLimpiar.Location = new System.Drawing.Point(400, -191);
+            this.bLimpiar.Location = new System.Drawing.Point(404, 117);
             this.bLimpiar.Name = "bLimpiar";
             this.bLimpiar.Size = new System.Drawing.Size(118, 29);
             this.bLimpiar.TabIndex = 15;
@@ -113,7 +113,7 @@
             // bBuscar
             // 
             this.bBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bBuscar.Location = new System.Drawing.Point(398, -148);
+            this.bBuscar.Location = new System.Drawing.Point(402, 79);
             this.bBuscar.Name = "bBuscar";
             this.bBuscar.Size = new System.Drawing.Size(120, 29);
             this.bBuscar.TabIndex = 14;
@@ -315,6 +315,15 @@
             this.gbHorario.TabStop = false;
             this.gbHorario.Text = "Seleccionar horario";
             // 
+            // cmbHorario
+            // 
+            this.cmbHorario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHorario.FormattingEnabled = true;
+            this.cmbHorario.Location = new System.Drawing.Point(19, 28);
+            this.cmbHorario.Name = "cmbHorario";
+            this.cmbHorario.Size = new System.Drawing.Size(231, 21);
+            this.cmbHorario.TabIndex = 4;
+            // 
             // bFinalizar
             // 
             this.bFinalizar.Location = new System.Drawing.Point(159, 73);
@@ -376,15 +385,6 @@
             this.bSiguienteEsp.Text = "Siguiente";
             this.bSiguienteEsp.UseVisualStyleBackColor = true;
             this.bSiguienteEsp.Click += new System.EventHandler(this.bSiguienteEsp_Click);
-            // 
-            // cmbHorario
-            // 
-            this.cmbHorario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbHorario.FormattingEnabled = true;
-            this.cmbHorario.Location = new System.Drawing.Point(19, 28);
-            this.cmbHorario.Name = "cmbHorario";
-            this.cmbHorario.Size = new System.Drawing.Size(231, 21);
-            this.cmbHorario.TabIndex = 4;
             // 
             // PedirTurno
             // 

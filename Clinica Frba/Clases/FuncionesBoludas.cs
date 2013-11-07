@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
 using System.Security.Cryptography;
+using System.Windows.Forms;
+using System.Drawing;
 
 namespace Clinica_Frba.Clases {
     static class FuncionesBoludas {
@@ -68,6 +69,18 @@ namespace Clinica_Frba.Clases {
             return hashString;
         }
 
+        public static bool policia(Control.ControlCollection ctrls){
+        bool invalidez = false;
+            foreach (Control ctrl in ctrls) {
+                if ((ctrl.Visible && ctrl is TextBox && ((TextBox)ctrl).Text == "") || (ctrl is MaskedTextBox && ((MaskedTextBox)ctrl).Text == "") || (ctrl is ComboBox && ((ComboBox)ctrl).SelectedIndex == -1)) {
+                    invalidez = true;
+                    ctrl.BackColor = Color.RosyBrown;
+                }
+            }
+            if (invalidez)
+                MessageBox.Show("Falta completar campos");
+            return !invalidez;
+        }
 
         internal static int diaCereal(string _dia)
         {

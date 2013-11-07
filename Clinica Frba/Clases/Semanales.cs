@@ -40,12 +40,24 @@ namespace Clinica_Frba.Clases {
             Fill(DB.ExecuteReader("SELECT * FROM moustache_spice.vAgenda WHERE age_profesional = " + p_id));
         }
 
+        public void FillTurnosLibres(int p_id, DateTime s_dia) {
+             Fill(DB.ExecuteReader("SELECT * FROM moustache_spice.semanal" +
+                                        " LEFT JOIN moustache_spice.agenda ON sem_agenda = age_id" +
+                                    " WHERE sem_habilitado=1 AND sem_dia=DATEPART(dw, '" + s_dia.ToString("yyyy-MM-dd") + "') AND age_profesional=" + p_id + " AND" +
+                                    " (SELECT COUNT(1) FROM moustache_spice.turno" +
+                                            " WHERE CAST(tur_fechaYHoraTurno AS DATE)='" + s_dia.ToString("yyyy-MM-dd") + "'" +
+                                              " AND CAST(tur_fechaYHoraTurno AS TIME)=sem_hora" +
+                                               " AND tur_profesional = age_profesional AND tur_habilitado=1)=0" +
+                                     " ORDER BY sem_hora DESC"));
+        }
+
         public void Add(Semanal item) {
             items.Add(item);
         }
 
         public Object[] GetByDay(int p_prof, DateTime p_day) {
-            int datOfWeek = (int)p_day.DayOfWeek;
+            //Como el 1 es domingo en la DB, tengo que hacer lo del %7
+            int datOfWeek = (int)(p_day.DayOfWeek+1)%7;
 
             Semanales temp = new Semanales();
             foreach (Semanal sem in items) {

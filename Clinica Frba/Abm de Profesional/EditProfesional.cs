@@ -113,16 +113,7 @@ namespace Clinica_Frba.AbmProfesionales{
         }
 
         private void bGuardar_Click(object sender, EventArgs e) {
-            bool invalidez = false;
-            foreach (Control ctrl in gbDatos.Controls) {
-                if ((ctrl.Visible && ctrl is TextBox && ((TextBox)ctrl).Text == "") || (ctrl is MaskedTextBox && ((MaskedTextBox)ctrl).Text == "") || (ctrl is ComboBox && ((ComboBox)ctrl).SelectedIndex == -1)) {
-                    invalidez = true;
-                    ctrl.BackColor = Color.RosyBrown;
-                }
-            }
-            if (invalidez)
-                MessageBox.Show("Falta completar campos");
-            else {
+            if (FuncionesBoludas.policia(gbDatos.Controls)) {
                 if (nueva) {
                     //--Insertar Usuario
                     profId = DB.ExecuteCardinal("SELECT IDENT_CURRENT('" + DB.schema + "profesional')")+1;

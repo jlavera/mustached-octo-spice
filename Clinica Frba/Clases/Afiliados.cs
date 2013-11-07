@@ -54,7 +54,9 @@ namespace Clinica_Frba.Clases {
         /// </summary>
         /// <returns></returns>
         public override DataTable SelectAll() {
-            return DB.ExecuteReader("SELECT * FROM "+ DB.schema + "vAfiliado");
+            return DB.ExecuteReader("SELECT *, "+
+                                    "(SELECT ((CASE WHEN 2>MAX(afi_orden) THEN 2 ELSE MAX(afi_orden) END) +1) FROM " + DB.schema + "afiliado WHERE afi_grupoFamiliar = va.afi_grupoFamiliar) AS 'grp_proximoOrden'" +
+                                    "FROM "+ DB.schema + "vAfiliado va");
         }
 
         /// <summary>
@@ -76,7 +78,7 @@ namespace Clinica_Frba.Clases {
             int p_familiares,
             int p_limit) {
 
-            string query = "SELECT TOP " + p_limit  + " *, ' ' AS grp_proximoOrden FROM " + DB.schema + "vAfiliado WHERE"; //--Proximo orden para mantener polimorfismo
+            string query = "SELECT TOP " + p_limit  + " *, '' AS grp_proximoOrden FROM " + DB.schema + "vAfiliado WHERE"; //--Proximo orden para mantener polimorfismo
             if(p_apellido!="")
                 query+=" usu_apellido LIKE '%"+p_apellido+"%' AND ";
             if (p_direccion != "")

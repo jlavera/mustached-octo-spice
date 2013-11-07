@@ -50,7 +50,7 @@ namespace Clinica_Frba.Clases {
         }
         public void DeleteSelected(DataGridView dgv, DataGridViewSelectedRowCollection p_objects)
         {
-
+            MessageBox.Show("Esto va a tardar porque pretende cancelar todos los turnos", "Warning");
             //--Eliminar de la DB
             if (p_objects.Count > 0)
             {
