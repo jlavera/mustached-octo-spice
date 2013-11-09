@@ -217,6 +217,7 @@
             // dgvProfesionales
             // 
             this.dgvProfesionales.AllowUserToAddRows = false;
+            this.dgvProfesionales.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvProfesionales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProfesionales.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
@@ -238,29 +239,34 @@
             this.id.HeaderText = "Id";
             this.id.Name = "id";
             this.id.ReadOnly = true;
+            this.id.Width = 41;
             // 
             // matricula
             // 
             this.matricula.HeaderText = "Matricula";
             this.matricula.Name = "matricula";
             this.matricula.ReadOnly = true;
+            this.matricula.Width = 75;
             // 
             // profesional
             // 
             this.profesional.HeaderText = "Profesional";
             this.profesional.Name = "profesional";
             this.profesional.ReadOnly = true;
+            this.profesional.Width = 84;
             // 
             // especialidades
             // 
             this.especialidades.HeaderText = "Especialidades";
             this.especialidades.Name = "especialidades";
             this.especialidades.ReadOnly = true;
+            this.especialidades.Width = 103;
             // 
             // Seleccionar
             // 
             this.Seleccionar.HeaderText = "Elegir";
             this.Seleccionar.Name = "Seleccionar";
+            this.Seleccionar.Width = 39;
             // 
             // gbDia
             // 

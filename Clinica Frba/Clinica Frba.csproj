@@ -84,6 +84,18 @@
     <Compile Include="Abm de Rol\EditRol.Designer.cs">
       <DependentUpon>EditRol.cs</DependentUpon>
     </Compile>
+    <Compile Include="Cancelar Atencion\CancelarAfiliado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cancelar Atencion\CancelarAfiliado.Designer.cs">
+      <DependentUpon>CancelarAfiliado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cancelar Atencion\CancelarProfesional.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cancelar Atencion\CancelarProfesional.Designer.cs">
+      <DependentUpon>CancelarProfesional.cs</DependentUpon>
+    </Compile>
     <Compile Include="Clases\Afiliado.cs" />
     <Compile Include="Clases\Afiliados.cs" />
     <Compile Include="Clases\Agenda.cs" />
@@ -124,6 +136,8 @@
     <Compile Include="Clases\TiposEspecialidades.cs" />
     <Compile Include="Clases\Transformer.cs">
     </Compile>
+    <Compile Include="Clases\Turno.cs" />
+    <Compile Include="Clases\Turnos.cs" />
     <Compile Include="Clases\Usuario.cs" />
     <Compile Include="Clases\Entidad.cs" />
     <Compile Include="Clases\Usuarios.cs" />
@@ -194,12 +208,6 @@
     <Compile Include="Registro Resultado Atencion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Cancelar Atencion\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Cancelar Atencion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Generar Receta\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -237,6 +245,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm de Rol\EditRol.resx">
       <DependentUpon>EditRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cancelar Atencion\CancelarAfiliado.resx">
+      <DependentUpon>CancelarAfiliado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cancelar Atencion\CancelarProfesional.resx">
+      <DependentUpon>CancelarProfesional.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Clases\FormHelper.resx">
       <DependentUpon>FormHelper.cs</DependentUpon>

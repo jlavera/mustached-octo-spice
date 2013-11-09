@@ -10,7 +10,7 @@ namespace Clinica_Frba.Clases {
         public int id;
         public string nombre;
         public Funcionalidades funcionalidades;
-        public Usuarios usuarios;
+        //public Usuarios usuarios;
         public bool habilitado;
 
         public Rol(DataRow dr) {

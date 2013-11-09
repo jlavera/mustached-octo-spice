@@ -242,6 +242,7 @@
             this.Cancelar_atencion.Text = "Cancelar atención (C)\r\n";
             this.Cancelar_atencion.UseVisualStyleBackColor = true;
             this.Cancelar_atencion.Visible = false;
+            this.Cancelar_atencion.Click += new System.EventHandler(this.Cancelar_atencion_Click);
             // 
             // Receta
             // 

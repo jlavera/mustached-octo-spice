@@ -35,6 +35,11 @@
             this.hasta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
+            this.dtpHasta = new System.Windows.Forms.DateTimePicker();
+            this.cbDiaHasta = new System.Windows.Forms.ComboBox();
+            this.cbDiaDesde = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cbDia = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -43,11 +48,6 @@
             this.bEliminar = new System.Windows.Forms.Button();
             this.bAgregar = new System.Windows.Forms.Button();
             this.bBuscar = new System.Windows.Forms.Button();
-            this.cbDia = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cbDiaDesde = new System.Windows.Forms.ComboBox();
-            this.cbDiaHasta = new System.Windows.Forms.ComboBox();
-            this.dtpHasta = new System.Windows.Forms.DateTimePicker();
             this.bLimpiar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAgenda)).BeginInit();
             this.gbFiltros.SuspendLayout();
@@ -118,6 +118,115 @@
             this.gbFiltros.TabIndex = 1;
             this.gbFiltros.TabStop = false;
             this.gbFiltros.Text = "Filtros";
+            // 
+            // dtpHasta
+            // 
+            this.dtpHasta.CustomFormat = "dd/mm/yyyy";
+            this.dtpHasta.Location = new System.Drawing.Point(306, 19);
+            this.dtpHasta.MaxDate = new System.DateTime(2020, 12, 31, 0, 0, 0, 0);
+            this.dtpHasta.MinDate = new System.DateTime(2012, 1, 1, 0, 0, 0, 0);
+            this.dtpHasta.Name = "dtpHasta";
+            this.dtpHasta.ShowUpDown = true;
+            this.dtpHasta.Size = new System.Drawing.Size(200, 20);
+            this.dtpHasta.TabIndex = 10;
+            this.dtpHasta.Value = new System.DateTime(2013, 10, 29, 0, 0, 0, 0);
+            // 
+            // cbDiaHasta
+            // 
+            this.cbDiaHasta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDiaHasta.FormattingEnabled = true;
+            this.cbDiaHasta.Items.AddRange(new object[] {
+            "7:00",
+            "7:30",
+            "8:00",
+            "8:30",
+            "9:00",
+            "9:30",
+            "10:00",
+            "10:30",
+            "11:00",
+            "11:30",
+            "12:00",
+            "12:30",
+            "13:00",
+            "13:30",
+            "14:00",
+            "14:30",
+            "15:00",
+            "15:30",
+            "16:00",
+            "16:30",
+            "17:00",
+            "17:30",
+            "18:00",
+            "18:30",
+            "19:00",
+            "19:30"});
+            this.cbDiaHasta.Location = new System.Drawing.Point(512, 68);
+            this.cbDiaHasta.Name = "cbDiaHasta";
+            this.cbDiaHasta.Size = new System.Drawing.Size(72, 21);
+            this.cbDiaHasta.TabIndex = 9;
+            // 
+            // cbDiaDesde
+            // 
+            this.cbDiaDesde.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDiaDesde.FormattingEnabled = true;
+            this.cbDiaDesde.Items.AddRange(new object[] {
+            "7:00",
+            "7:30",
+            "8:00",
+            "8:30",
+            "9:00",
+            "9:30",
+            "10:00",
+            "10:30",
+            "11:00",
+            "11:30",
+            "12:00",
+            "12:30",
+            "13:00",
+            "13:30",
+            "14:00",
+            "14:30",
+            "15:00",
+            "15:30",
+            "16:00",
+            "16:30",
+            "17:00",
+            "17:30",
+            "18:00",
+            "18:30",
+            "19:00",
+            "19:30"});
+            this.cbDiaDesde.Location = new System.Drawing.Point(434, 68);
+            this.cbDiaDesde.Name = "cbDiaDesde";
+            this.cbDiaDesde.Size = new System.Drawing.Size(72, 21);
+            this.cbDiaDesde.TabIndex = 8;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(277, 72);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(23, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Dia";
+            // 
+            // cbDia
+            // 
+            this.cbDia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDia.FormattingEnabled = true;
+            this.cbDia.Items.AddRange(new object[] {
+            "Lunes",
+            "Martes",
+            "Miercoles",
+            "Jueves",
+            "Viernes",
+            "Sabado"});
+            this.cbDia.Location = new System.Drawing.Point(306, 69);
+            this.cbDia.Name = "cbDia";
+            this.cbDia.Size = new System.Drawing.Size(121, 21);
+            this.cbDia.TabIndex = 6;
             // 
             // label3
             // 
@@ -197,115 +306,6 @@
             this.bBuscar.UseVisualStyleBackColor = true;
             this.bBuscar.Click += new System.EventHandler(this.bBuscar_Click);
             // 
-            // cbDia
-            // 
-            this.cbDia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDia.FormattingEnabled = true;
-            this.cbDia.Items.AddRange(new object[] {
-            "Lunes",
-            "Martes",
-            "Miercoles",
-            "Jueves",
-            "Viernes",
-            "Sabado"});
-            this.cbDia.Location = new System.Drawing.Point(306, 69);
-            this.cbDia.Name = "cbDia";
-            this.cbDia.Size = new System.Drawing.Size(121, 21);
-            this.cbDia.TabIndex = 6;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(277, 72);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(23, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Dia";
-            // 
-            // cbDiaDesde
-            // 
-            this.cbDiaDesde.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDiaDesde.FormattingEnabled = true;
-            this.cbDiaDesde.Items.AddRange(new object[] {
-            "7:00",
-            "7:30",
-            "8:00",
-            "8:30",
-            "9:00",
-            "9:30",
-            "10:00",
-            "10:30",
-            "11:00",
-            "11:30",
-            "12:00",
-            "12:30",
-            "13:00",
-            "13:30",
-            "14:00",
-            "14:30",
-            "15:00",
-            "15:30",
-            "16:00",
-            "16:30",
-            "17:00",
-            "17:30",
-            "18:00",
-            "18:30",
-            "19:00",
-            "19:30"});
-            this.cbDiaDesde.Location = new System.Drawing.Point(434, 68);
-            this.cbDiaDesde.Name = "cbDiaDesde";
-            this.cbDiaDesde.Size = new System.Drawing.Size(72, 21);
-            this.cbDiaDesde.TabIndex = 8;
-            // 
-            // cbDiaHasta
-            // 
-            this.cbDiaHasta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDiaHasta.FormattingEnabled = true;
-            this.cbDiaHasta.Items.AddRange(new object[] {
-            "7:00",
-            "7:30",
-            "8:00",
-            "8:30",
-            "9:00",
-            "9:30",
-            "10:00",
-            "10:30",
-            "11:00",
-            "11:30",
-            "12:00",
-            "12:30",
-            "13:00",
-            "13:30",
-            "14:00",
-            "14:30",
-            "15:00",
-            "15:30",
-            "16:00",
-            "16:30",
-            "17:00",
-            "17:30",
-            "18:00",
-            "18:30",
-            "19:00",
-            "19:30"});
-            this.cbDiaHasta.Location = new System.Drawing.Point(512, 68);
-            this.cbDiaHasta.Name = "cbDiaHasta";
-            this.cbDiaHasta.Size = new System.Drawing.Size(72, 21);
-            this.cbDiaHasta.TabIndex = 9;
-            // 
-            // dtpHasta
-            // 
-            this.dtpHasta.CustomFormat = "dd/mm/yyyy";
-            this.dtpHasta.Location = new System.Drawing.Point(306, 19);
-            this.dtpHasta.MaxDate = new System.DateTime(2020, 12, 31, 0, 0, 0, 0);
-            this.dtpHasta.MinDate = new System.DateTime(2012, 1, 1, 0, 0, 0, 0);
-            this.dtpHasta.Name = "dtpHasta";
-            this.dtpHasta.ShowUpDown = true;
-            this.dtpHasta.Size = new System.Drawing.Size(200, 20);
-            this.dtpHasta.TabIndex = 10;
-            this.dtpHasta.Value = new System.DateTime(2013, 10, 29, 0, 0, 0, 0);
-            // 
             // bLimpiar
             // 
             this.bLimpiar.Location = new System.Drawing.Point(475, 125);
@@ -327,7 +327,10 @@
             this.Controls.Add(this.gbFiltros);
             this.Controls.Add(this.bBuscar);
             this.Controls.Add(this.dgvAgenda);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "RegistrarAgendas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registrar Agenda";
             this.Load += new System.EventHandler(this.RegistrarAgendas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAgenda)).EndInit();

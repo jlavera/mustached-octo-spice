@@ -144,5 +144,15 @@ namespace Clinica_Frba {
             PedirTurno.PedirTurno form = new PedirTurno.PedirTurno(user);
             form.ShowDialog();
         }
+
+        private void Cancelar_atencion_Click(object sender, EventArgs e) {
+            if (rol.nombre == "Afiliado") {
+                Cancelar_Atencion.CancelarAfiliado form = new Cancelar_Atencion.CancelarAfiliado();
+                form.ShowDialog();
+            } else {
+                Cancelar_Atencion.CancelarProfesional form = new Cancelar_Atencion.CancelarProfesional();
+                form.ShowDialog();
+            }
+        }
     }
 }
