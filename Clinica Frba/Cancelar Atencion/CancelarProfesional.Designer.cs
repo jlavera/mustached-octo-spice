@@ -29,14 +29,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tbDetalle = new System.Windows.Forms.TextBox();
             this.gbSeleccion = new System.Windows.Forms.GroupBox();
-            this.bSeleccionar = new System.Windows.Forms.Button();
             this.dtpDia = new System.Windows.Forms.DateTimePicker();
+            this.bSeleccionar = new System.Windows.Forms.Button();
+            this.cbTipo = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.gbMotivo.SuspendLayout();
             this.gbSeleccion.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbMotivo
             // 
+            this.gbMotivo.Controls.Add(this.cbTipo);
+            this.gbMotivo.Controls.Add(this.label2);
             this.gbMotivo.Controls.Add(this.bVolver);
             this.gbMotivo.Controls.Add(this.bAceptar);
             this.gbMotivo.Controls.Add(this.label1);
@@ -44,14 +48,14 @@
             this.gbMotivo.Enabled = false;
             this.gbMotivo.Location = new System.Drawing.Point(12, 107);
             this.gbMotivo.Name = "gbMotivo";
-            this.gbMotivo.Size = new System.Drawing.Size(267, 246);
+            this.gbMotivo.Size = new System.Drawing.Size(267, 280);
             this.gbMotivo.TabIndex = 4;
             this.gbMotivo.TabStop = false;
             this.gbMotivo.Text = "Motivo de cancelación";
             // 
             // bVolver
             // 
-            this.bVolver.Location = new System.Drawing.Point(23, 217);
+            this.bVolver.Location = new System.Drawing.Point(19, 243);
             this.bVolver.Name = "bVolver";
             this.bVolver.Size = new System.Drawing.Size(111, 23);
             this.bVolver.TabIndex = 4;
@@ -61,7 +65,7 @@
             // 
             // bAceptar
             // 
-            this.bAceptar.Location = new System.Drawing.Point(142, 217);
+            this.bAceptar.Location = new System.Drawing.Point(138, 243);
             this.bAceptar.Name = "bAceptar";
             this.bAceptar.Size = new System.Drawing.Size(111, 23);
             this.bAceptar.TabIndex = 3;
@@ -72,7 +76,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 24);
+            this.label1.Location = new System.Drawing.Point(16, 79);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 2;
@@ -80,7 +84,7 @@
             // 
             // tbDetalle
             // 
-            this.tbDetalle.Location = new System.Drawing.Point(23, 44);
+            this.tbDetalle.Location = new System.Drawing.Point(19, 95);
             this.tbDetalle.MaxLength = 255;
             this.tbDetalle.Multiline = true;
             this.tbDetalle.Name = "tbDetalle";
@@ -98,6 +102,13 @@
             this.gbSeleccion.TabStop = false;
             this.gbSeleccion.Text = "Selección de turnos";
             // 
+            // dtpDia
+            // 
+            this.dtpDia.Location = new System.Drawing.Point(22, 24);
+            this.dtpDia.Name = "dtpDia";
+            this.dtpDia.Size = new System.Drawing.Size(227, 20);
+            this.dtpDia.TabIndex = 3;
+            // 
             // bSeleccionar
             // 
             this.bSeleccionar.Location = new System.Drawing.Point(22, 50);
@@ -108,18 +119,32 @@
             this.bSeleccionar.UseVisualStyleBackColor = true;
             this.bSeleccionar.Click += new System.EventHandler(this.bSeleccionar_Click);
             // 
-            // dtpDia
+            // cbTipo
             // 
-            this.dtpDia.Location = new System.Drawing.Point(22, 24);
-            this.dtpDia.Name = "dtpDia";
-            this.dtpDia.Size = new System.Drawing.Size(227, 20);
-            this.dtpDia.TabIndex = 3;
+            this.cbTipo.FormattingEnabled = true;
+            this.cbTipo.Items.AddRange(new object[] {
+            "Enfermedad",
+            "Licencia",
+            "Personal"});
+            this.cbTipo.Location = new System.Drawing.Point(19, 42);
+            this.cbTipo.Name = "cbTipo";
+            this.cbTipo.Size = new System.Drawing.Size(230, 21);
+            this.cbTipo.TabIndex = 8;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(19, 26);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(107, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Tipo de cancelacion:";
             // 
             // CancelarProfesional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(297, 371);
+            this.ClientSize = new System.Drawing.Size(297, 402);
             this.Controls.Add(this.gbMotivo);
             this.Controls.Add(this.gbSeleccion);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -144,5 +169,7 @@
         private System.Windows.Forms.GroupBox gbSeleccion;
         private System.Windows.Forms.Button bSeleccionar;
         private System.Windows.Forms.DateTimePicker dtpDia;
+        private System.Windows.Forms.ComboBox cbTipo;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -43,16 +43,14 @@ namespace Clinica_Frba.Cancelar_Atencion {
         }
 
         private void bAceptar_Click(object sender, EventArgs e) {
-            if(FuncionesBoludas.policia(gbMotivo.Controls)){
                 if (FuncionesBoludas.policia(gbMotivo.Controls)) {
                     String query;
                     query = "UPDATE " + DB.schema + "turno SET tur_habilitado=0 WHERE  CAST(tur_fechaYHoraTurno AS DATE)='" + dtpDia.Value.ToString("yyyy-MM-dd") + "' AND tur_profesional='" + profesional.id + "'; " +
-                            "INSERT INTO moustache_spice.turnoAudit(tuA_razon, tuA_turno) (SELECT '" + tbDetalle.Text + "', tur_id FROM moustache_spice.turno WHERE  CAST(tur_fechaYHoraTurno AS DATE)='" + dtpDia.Value.ToString("yyyy-MM-dd") + "' AND tur_profesional='" + profesional.id + "');";
+                            "INSERT INTO moustache_spice.turnoAudit(tuA_razon, tuA_tipo, tuA_turno) (SELECT '" + tbDetalle.Text + "', '" + cbTipo.Text + "', tur_id FROM moustache_spice.turno WHERE  CAST(tur_fechaYHoraTurno AS DATE)='" + dtpDia.Value.ToString("yyyy-MM-dd") + "' AND tur_profesional='" + profesional.id + "');";
                     if (DB.ExecuteNonQuery(query) == -1)
                         MessageBox.Show("Error en la baja del dia");
                     DialogResult = DialogResult.OK;
                 }
-            }
             //--TODO UPDATES ciclando por cada dia seleccionado (por eso el month calendar, podés seleccionar períodos)
         }
     }

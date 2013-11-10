@@ -72,7 +72,9 @@ namespace Clinica_Frba.Clases {
         public static bool policia(Control.ControlCollection ctrls){
         bool invalidez = false;
             foreach (Control ctrl in ctrls) {
-                if ((ctrl.Visible && ctrl is TextBox && ((TextBox)ctrl).Text == "") || (ctrl is MaskedTextBox && ((MaskedTextBox)ctrl).Text == "") || (ctrl is ComboBox && ((ComboBox)ctrl).SelectedIndex == -1)) {
+                if ((ctrl.Visible && ctrl is TextBox && ((TextBox)ctrl).Text == "") ||
+                    (ctrl is MaskedTextBox && ((MaskedTextBox)ctrl).Text == "") ||
+                    (ctrl is ComboBox && ((ComboBox)ctrl).Text == "")) {
                     invalidez = true;
                     ctrl.BackColor = Color.RosyBrown;
                 }

@@ -106,7 +106,7 @@ namespace Clinica_Frba.AbmAfiliados {
                 tbNombre.Text = nombre;
                 tbApellido.Text = apellido;
                 tbDireccion.Text = direccion;
-                cmbTipoDNI.SelectedItem = tipoDocumento;
+                cmbTipoDNI.Text = tipoDocumento;
                 tbNumeroDni.Text = numeroDocumento.ToString();
                 tbTelefono.Text = telefono.ToString();
                 tbMail.Text = mail;

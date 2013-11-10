@@ -318,6 +318,7 @@ CREATE TABLE moustache_spice.turno (
 CREATE TABLE moustache_spice.turnoAudit(
 	tuA_turno INT NOT NULL FOREIGN KEY REFERENCES moustache_spice.turno(tur_id),
 	tuA_razon VARCHAR(255),
+	tuA_tipo VARCHAR(255)
 );
  
 GO

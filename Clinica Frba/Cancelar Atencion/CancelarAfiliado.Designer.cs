@@ -31,6 +31,8 @@
             this.bAceptar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tbDetalle = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cbTipo = new System.Windows.Forms.ComboBox();
             this.gbSeleccion.SuspendLayout();
             this.gbMotivo.SuspendLayout();
             this.SuspendLayout();
@@ -66,6 +68,8 @@
             // 
             // gbMotivo
             // 
+            this.gbMotivo.Controls.Add(this.cbTipo);
+            this.gbMotivo.Controls.Add(this.label2);
             this.gbMotivo.Controls.Add(this.bVolver);
             this.gbMotivo.Controls.Add(this.bAceptar);
             this.gbMotivo.Controls.Add(this.label1);
@@ -101,7 +105,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 24);
+            this.label1.Location = new System.Drawing.Point(20, 61);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 2;
@@ -109,12 +113,33 @@
             // 
             // tbDetalle
             // 
-            this.tbDetalle.Location = new System.Drawing.Point(23, 40);
+            this.tbDetalle.Location = new System.Drawing.Point(23, 77);
             this.tbDetalle.MaxLength = 255;
             this.tbDetalle.Multiline = true;
             this.tbDetalle.Name = "tbDetalle";
-            this.tbDetalle.Size = new System.Drawing.Size(230, 170);
+            this.tbDetalle.Size = new System.Drawing.Size(230, 133);
             this.tbDetalle.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(20, 24);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(107, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Tipo de cancelacion:";
+            // 
+            // cbTipo
+            // 
+            this.cbTipo.FormattingEnabled = true;
+            this.cbTipo.Items.AddRange(new object[] {
+            "Enfermedad",
+            "Licencia",
+            "Personal"});
+            this.cbTipo.Location = new System.Drawing.Point(23, 41);
+            this.cbTipo.Name = "cbTipo";
+            this.cbTipo.Size = new System.Drawing.Size(230, 21);
+            this.cbTipo.TabIndex = 6;
             // 
             // CancelarAfiliado
             // 
@@ -146,5 +171,7 @@
         private System.Windows.Forms.TextBox tbDetalle;
         private System.Windows.Forms.Button bAceptar;
         private System.Windows.Forms.Button bVolver;
+        private System.Windows.Forms.ComboBox cbTipo;
+        private System.Windows.Forms.Label label2;
     }
 }

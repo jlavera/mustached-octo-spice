@@ -46,7 +46,7 @@ namespace Clinica_Frba.Cancelar_Atencion {
             if (FuncionesBoludas.policia(gbMotivo.Controls)) {
                 String query;
                 query = "UPDATE " + DB.schema + "turno SET tur_habilitado=0 WHERE tur_id=" + ((Turno)lbTurnos.SelectedItem).id +
-                        "; INSERT INTO " + DB.schema + "turnoAudit(tuA_razon, tuA_turno) VALUES('" + tbDetalle.Text + "', " + ((Turno)lbTurnos.SelectedItem).id + ")";
+                        "; INSERT INTO " + DB.schema + "turnoAudit(tuA_razon, tuA_tipo, tuA_turno) VALUES('" + tbDetalle.Text + "', '" + cbTipo.Text + "', " + ((Turno)lbTurnos.SelectedItem).id + ")";
                 if (DB.ExecuteNonQuery(query) == -1)
                     MessageBox.Show("Error en la baja del turno");
                 DialogResult = DialogResult.OK;
