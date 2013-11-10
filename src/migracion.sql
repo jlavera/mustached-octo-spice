@@ -408,9 +408,10 @@ INSERT moustache_spice.rol_x_funcionalidad(rxf_funcionalidad, rxf_rol)
 			(SELECT rol_id FROM moustache_spice.rol WHERE rol_nombre='Administrativo')
 	FROM moustache_spice.funcionalidad);
 	
-INSERT moustache_spice.rol_x_funcionalidad(rxf_funcionalidad, rxf_rol) VALUES
-	((SELECT TOP 1 fun_id FROM moustache_spice.funcionalidad WHERE fun_nombre='Turnos'),
-	 (SELECT TOP 1 rol_id FROM moustache_spice.rol			 WHERE rol_nombre='Afiliado'));
+INSERT moustache_spice.rol_x_funcionalidad(rxf_funcionalidad, rxf_rol)
+	(SELECT fun_id,
+		    (SELECT rol_id FROM moustache_spice.rol WHERE rol_nombre='Afiliado')
+	FROM moustache_spice.funcionalidad WHERE fun_nombre='Turnos' OR fun_nombre='Cancelar_atencion');
 
 INSERT moustache_spice.usuario(usu_apellido, usu_contrasegna, usu_direccion, usu_fechaNacimiento, usu_habilitado, usu_intentosFallidos, usu_mail, usu_nombre, usu_nombreUsuario, usu_telefono, usu_numeroDocumento) VALUES
 	('admin', '52d77462b24987175c8d7dab901a5967e927ffc8d0b6e4a234e07a4aec5e3724', 'Peru 1066', '1/1/2050', 1, 0, 'admin@admin.a', 'admin', 'admin', 12344321, 0);

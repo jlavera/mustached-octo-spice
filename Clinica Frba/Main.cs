@@ -147,10 +147,10 @@ namespace Clinica_Frba {
 
         private void Cancelar_atencion_Click(object sender, EventArgs e) {
             if (rol.nombre == "Afiliado") {
-                Cancelar_Atencion.CancelarAfiliado form = new Cancelar_Atencion.CancelarAfiliado();
+                Cancelar_Atencion.CancelarAfiliado form = new Cancelar_Atencion.CancelarAfiliado(user);
                 form.ShowDialog();
             } else {
-                Cancelar_Atencion.CancelarProfesional form = new Cancelar_Atencion.CancelarProfesional();
+                Cancelar_Atencion.CancelarProfesional form = new Cancelar_Atencion.CancelarProfesional(user);
                 form.ShowDialog();
             }
         }

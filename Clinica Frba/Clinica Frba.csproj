@@ -100,6 +100,12 @@
     <Compile Include="Clases\Afiliados.cs" />
     <Compile Include="Clases\Agenda.cs" />
     <Compile Include="Clases\Agendas.cs" />
+    <Compile Include="Clases\miniProfesional.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clases\miniProfesional.Designer.cs">
+      <DependentUpon>miniProfesional.cs</DependentUpon>
+    </Compile>
     <Compile Include="Clases\DB.cs" />
     <Compile Include="Clases\Especialidad.cs" />
     <Compile Include="Clases\Especialidades.cs" />
@@ -160,6 +166,12 @@
     <Compile Include="Registrar Agenda\EditAgenda.Designer.cs">
       <DependentUpon>EditAgenda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Registro de LLegada\RegistrarLlegada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registro de LLegada\RegistrarLlegada.Designer.cs">
+      <DependentUpon>RegistrarLlegada.cs</DependentUpon>
+    </Compile>
     <Compile Include="Registro de Usuario\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,12 +207,6 @@
     </Compile>
     <Compile Include="Pedir Turno\PedirTurno.Designer.cs">
       <DependentUpon>PedirTurno.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Registro de LLegada\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Registro de LLegada\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Registro Resultado Atencion\Form1.cs">
       <SubType>Form</SubType>
@@ -252,6 +258,9 @@
     <EmbeddedResource Include="Cancelar Atencion\CancelarProfesional.resx">
       <DependentUpon>CancelarProfesional.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Clases\miniProfesional.resx">
+      <DependentUpon>miniProfesional.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Clases\FormHelper.resx">
       <DependentUpon>FormHelper.cs</DependentUpon>
     </EmbeddedResource>
@@ -277,6 +286,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Registrar Agenda\RegistrarAgenda.resx">
       <DependentUpon>RegistrarAgenda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registro de LLegada\RegistrarLlegada.resx">
+      <DependentUpon>RegistrarLlegada.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

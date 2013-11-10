@@ -28,6 +28,23 @@ namespace Clinica_Frba.Clases {
             especialidades = new Especialidades(id);
         }
 
+        public Profesional(int p_id) {
+            DataTable dt = DB.ExecuteReader("SELECT * FROM " + DB.schema + "vProfesional WHERE pro_usuario = " + p_id);
+
+            if (dt.Rows.Count == 0)
+                throw new NoTrajoNadaExcep();
+            DataRow dr = dt.Rows[0];
+
+            //FIXME como en Afiliado, haca tendria que estar la llamada a Profesional() de arriba
+            id = Convert.ToInt32(dr["pro_id"]);
+            matricula = (dr["pro_matricula"] == DBNull.Value) ? -1 : Convert.ToInt32(dr["pro_matricula"]);
+            usuarioId = Convert.ToInt32(dr["pro_usuario"]);
+            habilitado = Convert.ToBoolean(dr["pro_habilitado"]);
+
+            usuario = new Usuario(dr);
+            especialidades = new Especialidades(id);
+        }
+
         public override string ToString()
         {
             return usuario.ToString();

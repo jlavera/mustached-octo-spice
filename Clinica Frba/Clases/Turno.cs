@@ -27,13 +27,23 @@ namespace Clinica_Frba.Clases {
             profesional = new Profesional(dr);
             especialidad = new Especialidad(dr);
             turno = Convert.ToDateTime(dr["tur_fechaYHoraTurno"]);
-            llegada = Convert.ToDateTime(dr["tur_fechaYHoraLlegada"]);
-            atencion = Convert.ToDateTime(dr["tur_fechaYHoraAtencion"]);
-            sintomas = dr["tur_sintomas"].ToString();
-            diagnostico = dr["tur_diagnostico"].ToString();
+            if (dr["tur_fechaYHoraLlegada"] != DBNull.Value)
+                llegada = Convert.ToDateTime(dr["tur_fechaYHoraLlegada"]);
+            if(dr["tur_fechaYHoraLlegada"] != DBNull.Value)
+                atencion = Convert.ToDateTime(dr["tur_fechaYHoraLlegada"]);
+            sintomas = (dr["tur_sintomas"] != DBNull.Value) ? dr["tur_sintomas"].ToString() : "";
+            diagnostico = (dr["tur_diagnostico"] != DBNull.Value) ? dr["tur_diagnostico"].ToString() : "";
             //bonoFarmacia = new BonoFarmacia(dr);
             habilitado = Convert.ToBoolean(dr["tur_habilitado"]);
 
+        }
+
+        public Turno(Afiliado _afiliado, DataRow dr) {
+            //Turno pequeño pra la cancelacion
+            id = Convert.ToInt32(dr["tur_id"]); 
+            profesional = new Profesional((int)dr["pro_usuario"]);
+            afiliado = _afiliado;
+            turno = Convert.ToDateTime(dr["tur_fechaYHoraTurno"]);
         }
 
         public override string ToString() {

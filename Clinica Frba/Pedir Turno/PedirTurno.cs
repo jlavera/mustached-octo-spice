@@ -20,13 +20,13 @@ namespace Clinica_Frba.PedirTurno {
 
         Especialidades esps = new Especialidades();
 
-        public PedirTurno(Usuario user) {
+        public PedirTurno(Usuario _usuario) {
             InitializeComponent();
             try {
-                afiliado = new Afiliado(user.id);
+                afiliado = new Afiliado(_usuario.id);
             } catch (NoTrajoNadaExcep ex) {
                 //Si fallo al traer afiliados, es que el usuario no es un afiliado
-                MessageBox.Show("Solo los afiliados pueden pedir turnos,\na modo de debug, le vamos a dejar elejir un afiliado");
+                MessageBox.Show("Este usuario no tiene un afiliado asociado,\na modo de debug, le vamos a dejar elejir un afiliado");
                 miniAfiliado mini = new miniAfiliado();
                 while(mini.DialogResult != DialogResult.OK)
                     mini.ShowDialog();

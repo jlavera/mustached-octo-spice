@@ -6,14 +6,19 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Clinica_Frba.Clases;
 
-namespace Clinica_Frba.NewFolder5
+namespace Clinica_Frba.RegistrarLlegada 
 {
-    public partial class Form1 : Form
+    public partial class RegistrarLlegada : Form
     {
-        public Form1()
+        public RegistrarLlegada()
         {
             InitializeComponent();
+        }
+
+        private void RegistrarLlegada_Load(object sender, EventArgs e) {
+
         }
     }
 }

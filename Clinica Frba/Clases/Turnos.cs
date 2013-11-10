@@ -36,5 +36,15 @@ namespace Clinica_Frba.Clases {
 
         #endregion
         //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
+
+        public void FillForAfi(Afiliado _afi) {
+            DataTable dt = DB.ExecuteReader("SELECT * FROM " + DB.schema + "turno " +
+                    "JOIN " +DB.schema + "vProfesional pro ON pro_id = tur_profesional " +
+                "WHERE tur_afiliado=" + _afi.id + " AND DATEDIFF(DAY, tur_fechaYHoraTurno, '" + FuncionesBoludas.GetDateTime().ToString("yyyy-MM-dd") + "')<-1 AND tur_fechaYHoraLlegada IS NULL AND tur_fechaYHoraAtencion IS NULL AND tur_habilitado=1");
+            //Tengo que hacerlo a mano porqu quiero los turnos chiquitos, no los grandes
+            foreach (DataRow dr in dt.Rows) {
+                items.Add(new Turno(_afi, dr));
+            }
+        }
     }
 }

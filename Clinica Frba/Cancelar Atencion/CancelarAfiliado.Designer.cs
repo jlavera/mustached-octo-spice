@@ -27,11 +27,10 @@
             this.gbSeleccion = new System.Windows.Forms.GroupBox();
             this.bSeleccionar = new System.Windows.Forms.Button();
             this.gbMotivo = new System.Windows.Forms.GroupBox();
-            this.cmbMotivo = new System.Windows.Forms.ComboBox();
-            this.tbDetalle = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.bAceptar = new System.Windows.Forms.Button();
             this.bVolver = new System.Windows.Forms.Button();
+            this.bAceptar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbDetalle = new System.Windows.Forms.TextBox();
             this.gbSeleccion.SuspendLayout();
             this.gbMotivo.SuspendLayout();
             this.SuspendLayout();
@@ -71,7 +70,6 @@
             this.gbMotivo.Controls.Add(this.bAceptar);
             this.gbMotivo.Controls.Add(this.label1);
             this.gbMotivo.Controls.Add(this.tbDetalle);
-            this.gbMotivo.Controls.Add(this.cmbMotivo);
             this.gbMotivo.Enabled = false;
             this.gbMotivo.Location = new System.Drawing.Point(263, 12);
             this.gbMotivo.Name = "gbMotivo";
@@ -80,31 +78,15 @@
             this.gbMotivo.TabStop = false;
             this.gbMotivo.Text = "Motivo de cancelación";
             // 
-            // cmbMotivo
+            // bVolver
             // 
-            this.cmbMotivo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbMotivo.FormattingEnabled = true;
-            this.cmbMotivo.Location = new System.Drawing.Point(23, 24);
-            this.cmbMotivo.Name = "cmbMotivo";
-            this.cmbMotivo.Size = new System.Drawing.Size(230, 21);
-            this.cmbMotivo.TabIndex = 0;
-            // 
-            // tbDetalle
-            // 
-            this.tbDetalle.Location = new System.Drawing.Point(23, 68);
-            this.tbDetalle.Multiline = true;
-            this.tbDetalle.Name = "tbDetalle";
-            this.tbDetalle.Size = new System.Drawing.Size(230, 142);
-            this.tbDetalle.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 52);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Detalle:";
+            this.bVolver.Location = new System.Drawing.Point(23, 217);
+            this.bVolver.Name = "bVolver";
+            this.bVolver.Size = new System.Drawing.Size(111, 23);
+            this.bVolver.TabIndex = 4;
+            this.bVolver.Text = "Volver";
+            this.bVolver.UseVisualStyleBackColor = true;
+            this.bVolver.Click += new System.EventHandler(this.bVolver_Click);
             // 
             // bAceptar
             // 
@@ -116,15 +98,23 @@
             this.bAceptar.UseVisualStyleBackColor = true;
             this.bAceptar.Click += new System.EventHandler(this.bAceptar_Click);
             // 
-            // bVolver
+            // label1
             // 
-            this.bVolver.Location = new System.Drawing.Point(23, 217);
-            this.bVolver.Name = "bVolver";
-            this.bVolver.Size = new System.Drawing.Size(111, 23);
-            this.bVolver.TabIndex = 4;
-            this.bVolver.Text = "Volver";
-            this.bVolver.UseVisualStyleBackColor = true;
-            this.bVolver.Click += new System.EventHandler(this.bVolver_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(20, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Detalle:";
+            // 
+            // tbDetalle
+            // 
+            this.tbDetalle.Location = new System.Drawing.Point(23, 40);
+            this.tbDetalle.MaxLength = 255;
+            this.tbDetalle.Multiline = true;
+            this.tbDetalle.Name = "tbDetalle";
+            this.tbDetalle.Size = new System.Drawing.Size(230, 170);
+            this.tbDetalle.TabIndex = 1;
             // 
             // CancelarAfiliado
             // 
@@ -154,7 +144,6 @@
         private System.Windows.Forms.GroupBox gbMotivo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbDetalle;
-        private System.Windows.Forms.ComboBox cmbMotivo;
         private System.Windows.Forms.Button bAceptar;
         private System.Windows.Forms.Button bVolver;
     }

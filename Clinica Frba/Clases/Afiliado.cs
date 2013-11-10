@@ -45,6 +45,8 @@ namespace Clinica_Frba.Clases {
                 throw new NoTrajoNadaExcep();
             DataRow dr = dt.Rows[0];
 
+
+            //FIXME tendira que llamar a el Afiliado() de arriba
             id = Convert.ToInt32(dr["afi_id"]);
             orden = (dr["afi_orden"] == System.DBNull.Value) ? -1 : Convert.ToInt32(dr["afi_orden"]);
             usuarioId = Convert.ToInt32(dr["afi_usuario"]);

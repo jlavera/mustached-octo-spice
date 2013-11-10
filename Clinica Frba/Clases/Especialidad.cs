@@ -20,9 +20,14 @@ namespace Clinica_Frba.Clases {
         }
 
         public Especialidad(DataRow dr) {
-            id = Convert.ToInt32(dr["esp_id"]);
-            nombre = dr["esp_descripcion"].ToString();
-            tipo = new TipoEspecialidad(Convert.ToInt32(dr["esp_tipo"]));
+            if (dr["esp_id"] != DBNull.Value) {
+                id = Convert.ToInt32(dr["esp_id"]);
+                nombre = dr["esp_descripcion"].ToString();
+                tipo = new TipoEspecialidad(Convert.ToInt32(dr["esp_tipo"]));
+            } else {
+                id = -1;
+                nombre = "No tiene";
+            }
         }
 
         public override string ToString() {
