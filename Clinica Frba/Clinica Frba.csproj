@@ -116,12 +116,6 @@
     <Compile Include="Clases\EstadoCivil.cs" />
     <Compile Include="Clases\EstadosCiviles.cs" />
     <Compile Include="Clases\Excepciones.cs" />
-    <Compile Include="Clases\FormHelper.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Clases\FormHelper.Designer.cs">
-      <DependentUpon>FormHelper.cs</DependentUpon>
-    </Compile>
     <Compile Include="Clases\Funcionalidad.cs" />
     <Compile Include="Clases\Funcionalidades.cs" />
     <Compile Include="Clases\FuncionesBoludas.cs" />
@@ -270,9 +264,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Clases\miniProfesional.resx">
       <DependentUpon>miniProfesional.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Clases\FormHelper.resx">
-      <DependentUpon>FormHelper.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Clases\miniAfiliado.resx">
       <DependentUpon>miniAfiliado.cs</DependentUpon>

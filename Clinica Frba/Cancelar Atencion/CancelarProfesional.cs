@@ -55,7 +55,7 @@ namespace Clinica_Frba.Cancelar_Atencion {
                      dateTime += TimeSpan.FromDays(1)) {
                     queryAux += "CAST(tur_fechaYHoraTurno AS DATE)='" + dateTime.ToString("yyyy-MM-dd") + "' OR ";
                 }
-                queryAux = queryAux.Substring(0, queryAux.Length - 3) + ") ";
+                queryAux = queryAux.Substring(0, queryAux.Length - 3) + ") ";//FIXME aca tira error por el string index
 
                 queryDelete += queryAux + "AND tur_profesional='" + profesional.id + "'; ";
                 queryAudit += queryAux + "AND tur_profesional='" + profesional.id + "'); ";

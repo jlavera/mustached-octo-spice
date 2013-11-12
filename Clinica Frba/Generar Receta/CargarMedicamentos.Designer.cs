@@ -136,7 +136,10 @@
             this.Controls.Add(this.tbFiltro);
             this.Controls.Add(this.bFiltrar);
             this.Controls.Add(this.lbMedicamento);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "CargarMedicamentos";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Medicamentos";
             this.Load += new System.EventHandler(this.Medicamentos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nCantidad)).EndInit();

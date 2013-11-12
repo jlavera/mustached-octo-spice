@@ -66,11 +66,12 @@ namespace Clinica_Frba.RegistrarLlegada {
                 prof = profs[dgvProfesionales.Rows[e.RowIndex].Cells["id"].Value.ToString()];
             }
 
-            gbAfiliado.Enabled = true;
-            gbTurno.Enabled = false;
+            gbTurno.Enabled = true;
+            gbProf.Enabled = false;
 
             //--TODO llenar LB con los turnos del día del profesional
-           
+            turnos.FillForProf(prof);
+            lbTurnos.Items.AddRange(turnos.ToList());
             
         }
 

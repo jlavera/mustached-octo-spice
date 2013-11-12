@@ -48,6 +48,17 @@ namespace Clinica_Frba.Clases {
         }
 
         public void FillForProf(Profesional _prof) {
+            DataTable dt = DB.ExecuteReader("SELECT * FROM " + DB.schema + "turno t " +
+                " WHERE tur_profesional = " + _prof.id + " " +
+                "AND tur_fechaYHoraLlegada IS NULL " +
+                "AND DATEDIFF(MINUTE, GETDATE(), t.tur_fechaYHoraTurno) > -100 " + // FIXME LOL NO
+                "AND CAST(GETDATE() as DATE) = CAST(t.tur_fechaYHoraTurno as DATE) " +
+                "ORDER BY tur_fechaYHoraTurno DESC");
+            
+            //Tengo que hacerlo a mano porqu quiero los turnos chiquitos, no los grandes
+            foreach (DataRow dr in dt.Rows) {
+                items.Add(new Turno(dr));
+            }
         }
     }
 }

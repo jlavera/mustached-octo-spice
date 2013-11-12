@@ -48,15 +48,15 @@
             this.especialidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.gbAfiliado = new System.Windows.Forms.GroupBox();
-            this.bSiguienteAfi = new System.Windows.Forms.Button();
-            this.tbAfiliado = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.gbTurno = new System.Windows.Forms.GroupBox();
-            this.lbTurnos = new System.Windows.Forms.ListBox();
-            this.bSiguienteTurno = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.bVolverTurno = new System.Windows.Forms.Button();
             this.bVolvereAfi = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbAfiliado = new System.Windows.Forms.TextBox();
+            this.bSiguienteAfi = new System.Windows.Forms.Button();
+            this.gbTurno = new System.Windows.Forms.GroupBox();
+            this.bVolverTurno = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.bSiguienteTurno = new System.Windows.Forms.Button();
+            this.lbTurnos = new System.Windows.Forms.ListBox();
             this.gbBono = new System.Windows.Forms.GroupBox();
             this.bVolverBono = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -277,88 +277,13 @@
             this.gbAfiliado.Controls.Add(this.label2);
             this.gbAfiliado.Controls.Add(this.tbAfiliado);
             this.gbAfiliado.Controls.Add(this.bSiguienteAfi);
+            this.gbAfiliado.Enabled = false;
             this.gbAfiliado.Location = new System.Drawing.Point(838, 12);
             this.gbAfiliado.Name = "gbAfiliado";
             this.gbAfiliado.Size = new System.Drawing.Size(262, 142);
             this.gbAfiliado.TabIndex = 2;
             this.gbAfiliado.TabStop = false;
             this.gbAfiliado.Text = "Afiliado";
-            // 
-            // bSiguienteAfi
-            // 
-            this.bSiguienteAfi.Location = new System.Drawing.Point(153, 92);
-            this.bSiguienteAfi.Name = "bSiguienteAfi";
-            this.bSiguienteAfi.Size = new System.Drawing.Size(87, 23);
-            this.bSiguienteAfi.TabIndex = 0;
-            this.bSiguienteAfi.Text = "Siguiente";
-            this.bSiguienteAfi.UseVisualStyleBackColor = true;
-            this.bSiguienteAfi.Click += new System.EventHandler(this.bSiguienteAfi_Click);
-            // 
-            // tbAfiliado
-            // 
-            this.tbAfiliado.Location = new System.Drawing.Point(46, 52);
-            this.tbAfiliado.Name = "tbAfiliado";
-            this.tbAfiliado.Size = new System.Drawing.Size(124, 20);
-            this.tbAfiliado.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 28);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Número de afiliado:";
-            // 
-            // gbTurno
-            // 
-            this.gbTurno.Controls.Add(this.bVolverTurno);
-            this.gbTurno.Controls.Add(this.label5);
-            this.gbTurno.Controls.Add(this.bSiguienteTurno);
-            this.gbTurno.Controls.Add(this.lbTurnos);
-            this.gbTurno.Location = new System.Drawing.Point(570, 12);
-            this.gbTurno.Name = "gbTurno";
-            this.gbTurno.Size = new System.Drawing.Size(262, 344);
-            this.gbTurno.TabIndex = 3;
-            this.gbTurno.TabStop = false;
-            this.gbTurno.Text = "Seleccionar turno";
-            // 
-            // lbTurnos
-            // 
-            this.lbTurnos.FormattingEnabled = true;
-            this.lbTurnos.Location = new System.Drawing.Point(30, 34);
-            this.lbTurnos.Name = "lbTurnos";
-            this.lbTurnos.Size = new System.Drawing.Size(209, 277);
-            this.lbTurnos.TabIndex = 0;
-            // 
-            // bSiguienteTurno
-            // 
-            this.bSiguienteTurno.Location = new System.Drawing.Point(152, 315);
-            this.bSiguienteTurno.Name = "bSiguienteTurno";
-            this.bSiguienteTurno.Size = new System.Drawing.Size(87, 23);
-            this.bSiguienteTurno.TabIndex = 3;
-            this.bSiguienteTurno.Text = "Siguiente";
-            this.bSiguienteTurno.UseVisualStyleBackColor = true;
-            this.bSiguienteTurno.Click += new System.EventHandler(this.bSiguienteTurno_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(17, 16);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(114, 13);
-            this.label5.TabIndex = 53;
-            this.label5.Text = "Turnos del profesional:";
-            // 
-            // bVolverTurno
-            // 
-            this.bVolverTurno.Location = new System.Drawing.Point(30, 315);
-            this.bVolverTurno.Name = "bVolverTurno";
-            this.bVolverTurno.Size = new System.Drawing.Size(87, 23);
-            this.bVolverTurno.TabIndex = 54;
-            this.bVolverTurno.Text = "Volver";
-            this.bVolverTurno.UseVisualStyleBackColor = true;
-            this.bVolverTurno.Click += new System.EventHandler(this.bVolverTurno_Click);
             // 
             // bVolvereAfi
             // 
@@ -370,12 +295,90 @@
             this.bVolvereAfi.UseVisualStyleBackColor = true;
             this.bVolvereAfi.Click += new System.EventHandler(this.bVolvereAfi_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(19, 28);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Número de afiliado:";
+            // 
+            // tbAfiliado
+            // 
+            this.tbAfiliado.Location = new System.Drawing.Point(46, 52);
+            this.tbAfiliado.Name = "tbAfiliado";
+            this.tbAfiliado.Size = new System.Drawing.Size(124, 20);
+            this.tbAfiliado.TabIndex = 1;
+            // 
+            // bSiguienteAfi
+            // 
+            this.bSiguienteAfi.Location = new System.Drawing.Point(153, 92);
+            this.bSiguienteAfi.Name = "bSiguienteAfi";
+            this.bSiguienteAfi.Size = new System.Drawing.Size(87, 23);
+            this.bSiguienteAfi.TabIndex = 0;
+            this.bSiguienteAfi.Text = "Siguiente";
+            this.bSiguienteAfi.UseVisualStyleBackColor = true;
+            this.bSiguienteAfi.Click += new System.EventHandler(this.bSiguienteAfi_Click);
+            // 
+            // gbTurno
+            // 
+            this.gbTurno.Controls.Add(this.bVolverTurno);
+            this.gbTurno.Controls.Add(this.label5);
+            this.gbTurno.Controls.Add(this.bSiguienteTurno);
+            this.gbTurno.Controls.Add(this.lbTurnos);
+            this.gbTurno.Enabled = false;
+            this.gbTurno.Location = new System.Drawing.Point(570, 12);
+            this.gbTurno.Name = "gbTurno";
+            this.gbTurno.Size = new System.Drawing.Size(262, 344);
+            this.gbTurno.TabIndex = 3;
+            this.gbTurno.TabStop = false;
+            this.gbTurno.Text = "Seleccionar turno";
+            // 
+            // bVolverTurno
+            // 
+            this.bVolverTurno.Location = new System.Drawing.Point(30, 315);
+            this.bVolverTurno.Name = "bVolverTurno";
+            this.bVolverTurno.Size = new System.Drawing.Size(87, 23);
+            this.bVolverTurno.TabIndex = 54;
+            this.bVolverTurno.Text = "Volver";
+            this.bVolverTurno.UseVisualStyleBackColor = true;
+            this.bVolverTurno.Click += new System.EventHandler(this.bVolverTurno_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(17, 16);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(114, 13);
+            this.label5.TabIndex = 53;
+            this.label5.Text = "Turnos del profesional:";
+            // 
+            // bSiguienteTurno
+            // 
+            this.bSiguienteTurno.Location = new System.Drawing.Point(152, 315);
+            this.bSiguienteTurno.Name = "bSiguienteTurno";
+            this.bSiguienteTurno.Size = new System.Drawing.Size(87, 23);
+            this.bSiguienteTurno.TabIndex = 3;
+            this.bSiguienteTurno.Text = "Siguiente";
+            this.bSiguienteTurno.UseVisualStyleBackColor = true;
+            this.bSiguienteTurno.Click += new System.EventHandler(this.bSiguienteTurno_Click);
+            // 
+            // lbTurnos
+            // 
+            this.lbTurnos.FormattingEnabled = true;
+            this.lbTurnos.Location = new System.Drawing.Point(30, 34);
+            this.lbTurnos.Name = "lbTurnos";
+            this.lbTurnos.Size = new System.Drawing.Size(209, 277);
+            this.lbTurnos.TabIndex = 0;
+            // 
             // gbBono
             // 
             this.gbBono.Controls.Add(this.bVolverBono);
             this.gbBono.Controls.Add(this.label6);
             this.gbBono.Controls.Add(this.tbBono);
             this.gbBono.Controls.Add(this.bSiguienteBono);
+            this.gbBono.Enabled = false;
             this.gbBono.Location = new System.Drawing.Point(838, 211);
             this.gbBono.Name = "gbBono";
             this.gbBono.Size = new System.Drawing.Size(262, 145);
@@ -427,7 +430,10 @@
             this.Controls.Add(this.gbTurno);
             this.Controls.Add(this.gbAfiliado);
             this.Controls.Add(this.gbProf);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "RegistrarLlegada";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registrar Llegada";
             this.Load += new System.EventHandler(this.RegistrarLlegada_Load);
             this.gbProf.ResumeLayout(false);

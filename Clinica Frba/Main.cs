@@ -164,5 +164,10 @@ namespace Clinica_Frba {
                 System.Diagnostics.Process.Start(@"..\..\Recetas\receta" + form.GetHashCode() + ".html");
             }
         }
+
+        private void Registro_de_Llegada_Click(object sender, EventArgs e) {
+            RegistrarLlegada.RegistrarLlegada form = new Clinica_Frba.RegistrarLlegada.RegistrarLlegada();
+            form.ShowDialog();
+        }
     }
 }

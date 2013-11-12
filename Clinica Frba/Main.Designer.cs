@@ -222,6 +222,7 @@
             this.Registro_de_Llegada.Text = "Registro de llegada (L)";
             this.Registro_de_Llegada.UseVisualStyleBackColor = true;
             this.Registro_de_Llegada.Visible = false;
+            this.Registro_de_Llegada.Click += new System.EventHandler(this.Registro_de_Llegada_Click);
             // 
             // Registro_de_Resultado
             // 
