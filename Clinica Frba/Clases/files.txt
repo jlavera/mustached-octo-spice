@@ -11,3 +11,4 @@ Especialidades.cs;Especialidad;Especialidades;especialidad
 TiposEspecialidades.cs;TipoEspecialidad;TiposEspecialidades;tipoEspecialidad
 Semanales.cs;Semanal;Semanales;semanal
 Turnos.cs;Turno;Turnos;turno
+Medicamentos.cs;Medicamento;Medicamentos;medicamento

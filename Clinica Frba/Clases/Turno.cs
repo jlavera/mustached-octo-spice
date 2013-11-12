@@ -18,6 +18,7 @@ namespace Clinica_Frba.Clases {
         public string sintomas;
         public string diagnostico;
         //public BonoFarmacia bonoFarmacia;
+        //public BonoConsulta bonoConsulta;
         public bool habilitado;
 
         public Turno(DataRow dr) {

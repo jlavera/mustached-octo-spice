@@ -30,10 +30,6 @@ namespace Clinica_Frba.Cancelar_Atencion {
 
         private void bSeleccionar_Click(object sender, EventArgs e) {
             
-            //--Tenés selectionStart donde arranca la selección y selectionEnd (oh sorpresa!), donde termina
-            //---http://stackoverflow.com/a/1847758 ahí tenés como ciclarlo
-            //--Comentá el código ¬¬
-            
             if (monthCalendar.SelectionEnd < FuncionesBoludas.GetDateTime().AddDays(-1))
                 MessageBox.Show("La cancelación deberá realizarse con un día de antelación.");
             else {
@@ -48,27 +44,26 @@ namespace Clinica_Frba.Cancelar_Atencion {
         }
 
         private void bAceptar_Click(object sender, EventArgs e) {
-                if (FuncionesBoludas.policia(gbMotivo.Controls)) {
-                    String queryDelete, queryAudit, queryAux = "";
+            if (FuncionesBoludas.policia(gbMotivo.Controls)) {
+                String queryDelete, queryAudit, queryAux = "";
 
-                    queryDelete = "UPDATE " + DB.schema + "turno SET tur_habilitado=0 WHERE (";
-                    queryAudit = "INSERT INTO moustache_spice.turnoAudit(tuA_razon, tuA_tipo, tuA_turno) (SELECT '" + tbDetalle.Text + "', '" + cbTipo.Text + "', tur_id FROM moustache_spice.turno WHERE (";
-                    
-                    for (DateTime dateTime=monthCalendar.SelectionStart;
-                         dateTime < monthCalendar.SelectionEnd; 
-                         dateTime += TimeSpan.FromDays(1))
-                    {
-                        queryAux += "CAST(tur_fechaYHoraTurno AS DATE)='" + dateTime.ToString("yyyy-MM-dd") + "' OR ";
-                    }
-                    queryAux = queryAux.Substring(0, queryAux.Length - 3) + ") ";
+                queryDelete = "UPDATE " + DB.schema + "turno SET tur_habilitado=0 WHERE (";
+                queryAudit = "INSERT INTO moustache_spice.turnoAudit(tuA_razon, tuA_tipo, tuA_turno) (SELECT '" + tbDetalle.Text + "', '" + cbTipo.Text + "', tur_id FROM moustache_spice.turno WHERE (";
 
-                    queryDelete += queryAux + "AND tur_profesional='" + profesional.id + "'; ";
-                    queryAudit += queryAux + "AND tur_profesional='" + profesional.id + "'); ";
-
-                    if (DB.ExecuteNonQuery(queryDelete + queryAudit) == -1)
-                        MessageBox.Show("Error en la baja del dia");
-                    DialogResult = DialogResult.OK;
+                for (DateTime dateTime = monthCalendar.SelectionStart;
+                     dateTime < monthCalendar.SelectionEnd;
+                     dateTime += TimeSpan.FromDays(1)) {
+                    queryAux += "CAST(tur_fechaYHoraTurno AS DATE)='" + dateTime.ToString("yyyy-MM-dd") + "' OR ";
                 }
+                queryAux = queryAux.Substring(0, queryAux.Length - 3) + ") ";
+
+                queryDelete += queryAux + "AND tur_profesional='" + profesional.id + "'; ";
+                queryAudit += queryAux + "AND tur_profesional='" + profesional.id + "'); ";
+
+                if (DB.ExecuteNonQuery(queryDelete + queryAudit) == -1)
+                    MessageBox.Show("Error en la baja del dia");
+                DialogResult = DialogResult.OK;
+            }
         }
     }
 }

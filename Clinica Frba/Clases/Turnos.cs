@@ -46,5 +46,8 @@ namespace Clinica_Frba.Clases {
                 items.Add(new Turno(_afi, dr));
             }
         }
+
+        public void FillForProf(Profesional _prof) {
+        }
     }
 }
