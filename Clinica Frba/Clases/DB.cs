@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace Clinica_Frba.Clases {
     static class DB {
@@ -29,8 +30,8 @@ namespace Clinica_Frba.Clases {
                 da.Fill(dt);
                 da.Dispose();
 
-            } catch {
-                throw;
+            } catch (Exception ex) {
+                FuncionesBoludas.errorParser(ex.Message);
             } finally {
 
                 sqlCon.Close();
@@ -48,7 +49,7 @@ namespace Clinica_Frba.Clases {
 
             }
             SqlDataReader reader = null;
-            int temp;
+            int temp=-1;
 
             try {
                 sqlCon.Open();
@@ -59,8 +60,8 @@ namespace Clinica_Frba.Clases {
                 //--Es convert porque hay veces que trae Decimal y el getInt no entiende nada :)
                 temp = Convert.ToInt32(reader[0]);
 
-            } catch {
-                throw;
+            } catch (Exception ex) {
+                FuncionesBoludas.errorParser(ex.Message);
             } finally {
 
                 sqlCon.Close();
@@ -74,15 +75,14 @@ namespace Clinica_Frba.Clases {
         /// <param name="command">Comando</param>
         /// <returns></returns>
         static public int ExecuteNonQuery(string command) {
-            int temp;
+            int temp=-1;
 
             try {
                 sqlCon.Open();
-
                 temp = (new SqlCommand(command, sqlCon)).ExecuteNonQuery();
 
-            } catch {
-                throw;
+            } catch (Exception ex) {
+                FuncionesBoludas.errorParser(ex.Message);
             } finally {
                 sqlCon.Close();
             }

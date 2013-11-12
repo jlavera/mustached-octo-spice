@@ -5,6 +5,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace Clinica_Frba.Clases {
     static class FuncionesBoludas {
@@ -106,5 +107,26 @@ namespace Clinica_Frba.Clases {
             return -1;
         }
 
+
+        internal static void errorParser(string p) {
+            String[] errores = Regex.Split(p, "\r\n"); //separar los errores
+            string mensaje = "";
+
+            foreach (String error in errores) {
+                if (error.IndexOf("INSERT") > -1)
+                    mensaje += "Error en la insercion: ";
+                if (error.IndexOf("CHECK") > -1)
+                    mensaje += "Existe una restriccion que no permite esta accion.";
+                 
+
+                if (p.IndexOf("FOREIGN KEY") > -1) //Si el error dice FK
+                    mensaje += "Claves foraneas no validas.";
+                if (p.IndexOf("PRIMARY KEY") > -1) //Si el error dice FK
+                    mensaje += "Violacion de la clave primaria.";
+                
+                mensaje += "\r\n";
+            }
+            MessageBox.Show(mensaje, "ERROR");
+        }
     }
 }

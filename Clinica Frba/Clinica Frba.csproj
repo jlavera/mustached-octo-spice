@@ -100,6 +100,10 @@
     <Compile Include="Clases\Afiliados.cs" />
     <Compile Include="Clases\Agenda.cs" />
     <Compile Include="Clases\Agendas.cs" />
+    <Compile Include="Clases\BonoFarmacia.cs" />
+    <Compile Include="Clases\BonosFarmacia.cs" />
+    <Compile Include="Clases\Medicamentos.cs" />
+    <Compile Include="Clases\Medicamento.cs" />
     <Compile Include="Clases\miniProfesional.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +151,12 @@
     <Compile Include="Clases\Usuario.cs" />
     <Compile Include="Clases\Entidad.cs" />
     <Compile Include="Clases\Usuarios.cs" />
+    <Compile Include="Generar Receta\CargarMedicamentos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Generar Receta\CargarMedicamentos.Designer.cs">
+      <DependentUpon>CargarMedicamentos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,11 +224,11 @@
     <Compile Include="Registro Resultado Atencion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Generar Receta\Form1.cs">
+    <Compile Include="Generar Receta\GenerarReceta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Generar Receta\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Generar Receta\GenerarReceta.Designer.cs">
+      <DependentUpon>GenerarReceta.cs</DependentUpon>
     </Compile>
     <Compile Include="Listados Estadisticos\Form1.cs">
       <SubType>Form</SubType>
@@ -266,6 +276,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Clases\miniAfiliado.resx">
       <DependentUpon>miniAfiliado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Receta\GenerarReceta.resx">
+      <DependentUpon>GenerarReceta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Receta\CargarMedicamentos.resx">
+      <DependentUpon>CargarMedicamentos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

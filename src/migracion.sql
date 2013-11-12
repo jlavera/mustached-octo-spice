@@ -344,14 +344,21 @@ CREATE TABLE moustache_spice.medicamento (
 
 -- -----------------------------------------------------
 -- creacion tabla medicamento_x_bonoFarmacia
+-- Froma dificil de decir "Receta"
 -- -----------------------------------------------------
 CREATE TABLE moustache_spice.medicamento_x_bonoFarmacia (
   mxb_medicamento INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.medicamento(med_id),
   mxb_bonoFarmacia INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.bonoFarmacia(bfa_id),
   mxb_unidades INT NOT NULL DEFAULT 1,
+  mxb_prescripcion DATE NULL,
   PRIMARY KEY (mxb_medicamento, mxb_bonoFarmacia)
 );
-
+GO
+CREATE TRIGGER moustache_spice.consumirBono ON moustache_spice.medicamento_x_bonoFarmacia AFTER INSERT AS
+BEGIN
+	UPDATE moustache_spice.bonoFarmacia SET bfa_habilitado=0 WHERE bfa_id IN (SELECT DISTINCT mxb_bonoFarmacia FROM inserted)
+END
+GO
 
 -- -----------------------------------------------------
 -- CREATE vistas

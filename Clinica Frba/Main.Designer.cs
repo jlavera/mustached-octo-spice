@@ -253,6 +253,7 @@
             this.Receta.Text = "Receta (X)";
             this.Receta.UseVisualStyleBackColor = true;
             this.Receta.Visible = false;
+            this.Receta.Click += new System.EventHandler(this.Receta_Click);
             // 
             // Estadisticas
             // 

@@ -154,5 +154,15 @@ namespace Clinica_Frba {
                 form.ShowDialog();
             }
         }
+
+        private void Receta_Click(object sender, EventArgs e) {
+            GenerarReceta.GenerarReceta form = new GenerarReceta.GenerarReceta();
+            form.ShowDialog();
+
+            if (form.DialogResult == DialogResult.OK) {
+                System.IO.File.WriteAllText(@"..\..\Recetas\receta" + form.GetHashCode() + ".html", form.reporte);
+                System.Diagnostics.Process.Start(@"..\..\Recetas\receta" + form.GetHashCode() + ".html");
+            }
+        }
     }
 }
