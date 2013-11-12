@@ -525,7 +525,7 @@ INSERT INTO moustache_spice.bonoFarmacia(bfa_id, bfa_fechaImpresion, bfa_fechaVe
 		LEFT JOIN moustache_spice.vAfiliado ON usu_numeroDocumento = Paciente_Dni
 	WHERE Bono_Farmacia_Numero IS NOT NULL)
 SET IDENTITY_INSERT moustache_spice.bonoFarmacia OFF
-ALTER TABLE moustache_spice.bonoFarmacia ADD CONSTRAINT CK_bfa_valido CHECK (bfa_habilitado=1 OR moustache_spice.bonoFarmaciaHabilitado( bfa_fechaImpresion, bfa_fechaVencimiento)=0 )
+ALTER TABLE moustache_spice.bonoFarmacia ADD CONSTRAINT CK_bfa_valido CHECK (bfa_habilitado=0 OR moustache_spice.bonoFarmaciaHabilitado( bfa_fechaImpresion, bfa_fechaVencimiento)=1 )
 
 -- -----------------------------------------------------
 -- migracion tabla agenda
