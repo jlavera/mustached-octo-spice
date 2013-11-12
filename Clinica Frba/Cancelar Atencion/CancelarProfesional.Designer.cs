@@ -31,9 +31,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tbDetalle = new System.Windows.Forms.TextBox();
             this.gbSeleccion = new System.Windows.Forms.GroupBox();
-            this.dtpDia = new System.Windows.Forms.DateTimePicker();
-            this.bSeleccionar = new System.Windows.Forms.Button();
             this.monthCalendar = new System.Windows.Forms.MonthCalendar();
+            this.bSeleccionar = new System.Windows.Forms.Button();
             this.gbMotivo.SuspendLayout();
             this.gbSeleccion.SuspendLayout();
             this.SuspendLayout();
@@ -116,7 +115,6 @@
             // gbSeleccion
             // 
             this.gbSeleccion.Controls.Add(this.monthCalendar);
-            this.gbSeleccion.Controls.Add(this.dtpDia);
             this.gbSeleccion.Controls.Add(this.bSeleccionar);
             this.gbSeleccion.Location = new System.Drawing.Point(12, 12);
             this.gbSeleccion.Name = "gbSeleccion";
@@ -125,28 +123,21 @@
             this.gbSeleccion.TabStop = false;
             this.gbSeleccion.Text = "Selección de turnos";
             // 
-            // dtpDia
+            // monthCalendar
             // 
-            this.dtpDia.Location = new System.Drawing.Point(22, 24);
-            this.dtpDia.Name = "dtpDia";
-            this.dtpDia.Size = new System.Drawing.Size(227, 20);
-            this.dtpDia.TabIndex = 3;
+            this.monthCalendar.Location = new System.Drawing.Point(22, 25);
+            this.monthCalendar.Name = "monthCalendar";
+            this.monthCalendar.TabIndex = 4;
             // 
             // bSeleccionar
             // 
-            this.bSeleccionar.Location = new System.Drawing.Point(19, 208);
+            this.bSeleccionar.Location = new System.Drawing.Point(22, 199);
             this.bSeleccionar.Name = "bSeleccionar";
             this.bSeleccionar.Size = new System.Drawing.Size(227, 23);
             this.bSeleccionar.TabIndex = 2;
             this.bSeleccionar.Text = "Seleccionar dias";
             this.bSeleccionar.UseVisualStyleBackColor = true;
             this.bSeleccionar.Click += new System.EventHandler(this.bSeleccionar_Click);
-            // 
-            // monthCalendar
-            // 
-            this.monthCalendar.Location = new System.Drawing.Point(19, 47);
-            this.monthCalendar.Name = "monthCalendar";
-            this.monthCalendar.TabIndex = 4;
             // 
             // CancelarProfesional
             // 
@@ -176,7 +167,6 @@
         private System.Windows.Forms.TextBox tbDetalle;
         private System.Windows.Forms.GroupBox gbSeleccion;
         private System.Windows.Forms.Button bSeleccionar;
-        private System.Windows.Forms.DateTimePicker dtpDia;
         private System.Windows.Forms.ComboBox cbTipo;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.MonthCalendar monthCalendar;

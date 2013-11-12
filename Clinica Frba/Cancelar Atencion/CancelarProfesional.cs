@@ -35,7 +35,6 @@ namespace Clinica_Frba.Cancelar_Atencion {
             //--Comentá el código ¬¬
             
             if (monthCalendar.SelectionEnd < FuncionesBoludas.GetDateTime().AddDays(-1))
-            //if (dtpDia.Value.Ticks < FuncionesBoludas.GetDateTime().AddDays(-1).Ticks)
                 MessageBox.Show("La cancelación deberá realizarse con un día de antelación.");
             else {
                 gbSeleccion.Enabled = false;
@@ -50,14 +49,26 @@ namespace Clinica_Frba.Cancelar_Atencion {
 
         private void bAceptar_Click(object sender, EventArgs e) {
                 if (FuncionesBoludas.policia(gbMotivo.Controls)) {
-                    String query;
-                    query = "UPDATE " + DB.schema + "turno SET tur_habilitado=0 WHERE  CAST(tur_fechaYHoraTurno AS DATE)='" + dtpDia.Value.ToString("yyyy-MM-dd") + "' AND tur_profesional='" + profesional.id + "'; " +
-                            "INSERT INTO moustache_spice.turnoAudit(tuA_razon, tuA_tipo, tuA_turno) (SELECT '" + tbDetalle.Text + "', '" + cbTipo.Text + "', tur_id FROM moustache_spice.turno WHERE  CAST(tur_fechaYHoraTurno AS DATE)='" + dtpDia.Value.ToString("yyyy-MM-dd") + "' AND tur_profesional='" + profesional.id + "');";
-                    if (DB.ExecuteNonQuery(query) == -1)
+                    String queryDelete, queryAudit, queryAux = "";
+
+                    queryDelete = "UPDATE " + DB.schema + "turno SET tur_habilitado=0 WHERE (";
+                    queryAudit = "INSERT INTO moustache_spice.turnoAudit(tuA_razon, tuA_tipo, tuA_turno) (SELECT '" + tbDetalle.Text + "', '" + cbTipo.Text + "', tur_id FROM moustache_spice.turno WHERE (";
+                    
+                    for (DateTime dateTime=monthCalendar.SelectionStart;
+                         dateTime < monthCalendar.SelectionEnd; 
+                         dateTime += TimeSpan.FromDays(1))
+                    {
+                        queryAux += "CAST(tur_fechaYHoraTurno AS DATE)='" + dateTime.ToString("yyyy-MM-dd") + "' OR ";
+                    }
+                    queryAux = queryAux.Substring(0, queryAux.Length - 3) + ") ";
+
+                    queryDelete += queryAux + "AND tur_profesional='" + profesional.id + "'; ";
+                    queryAudit += queryAux + "AND tur_profesional='" + profesional.id + "'); ";
+
+                    if (DB.ExecuteNonQuery(queryDelete + queryAudit) == -1)
                         MessageBox.Show("Error en la baja del dia");
                     DialogResult = DialogResult.OK;
                 }
-            //--TODO UPDATES ciclando por cada dia seleccionado (por eso el month calendar, podés seleccionar períodos)
         }
     }
 }
