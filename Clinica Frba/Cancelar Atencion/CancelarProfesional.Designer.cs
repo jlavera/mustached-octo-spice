@@ -24,6 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.gbMotivo = new System.Windows.Forms.GroupBox();
+            this.cbTipo = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.bVolver = new System.Windows.Forms.Button();
             this.bAceptar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -31,8 +33,7 @@
             this.gbSeleccion = new System.Windows.Forms.GroupBox();
             this.dtpDia = new System.Windows.Forms.DateTimePicker();
             this.bSeleccionar = new System.Windows.Forms.Button();
-            this.cbTipo = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.monthCalendar = new System.Windows.Forms.MonthCalendar();
             this.gbMotivo.SuspendLayout();
             this.gbSeleccion.SuspendLayout();
             this.SuspendLayout();
@@ -46,12 +47,33 @@
             this.gbMotivo.Controls.Add(this.label1);
             this.gbMotivo.Controls.Add(this.tbDetalle);
             this.gbMotivo.Enabled = false;
-            this.gbMotivo.Location = new System.Drawing.Point(12, 107);
+            this.gbMotivo.Location = new System.Drawing.Point(12, 255);
             this.gbMotivo.Name = "gbMotivo";
             this.gbMotivo.Size = new System.Drawing.Size(267, 280);
             this.gbMotivo.TabIndex = 4;
             this.gbMotivo.TabStop = false;
             this.gbMotivo.Text = "Motivo de cancelación";
+            // 
+            // cbTipo
+            // 
+            this.cbTipo.FormattingEnabled = true;
+            this.cbTipo.Items.AddRange(new object[] {
+            "Enfermedad",
+            "Licencia",
+            "Personal"});
+            this.cbTipo.Location = new System.Drawing.Point(19, 42);
+            this.cbTipo.Name = "cbTipo";
+            this.cbTipo.Size = new System.Drawing.Size(230, 21);
+            this.cbTipo.TabIndex = 8;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(19, 26);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(107, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Tipo de cancelacion:";
             // 
             // bVolver
             // 
@@ -93,11 +115,12 @@
             // 
             // gbSeleccion
             // 
+            this.gbSeleccion.Controls.Add(this.monthCalendar);
             this.gbSeleccion.Controls.Add(this.dtpDia);
             this.gbSeleccion.Controls.Add(this.bSeleccionar);
             this.gbSeleccion.Location = new System.Drawing.Point(12, 12);
             this.gbSeleccion.Name = "gbSeleccion";
-            this.gbSeleccion.Size = new System.Drawing.Size(267, 89);
+            this.gbSeleccion.Size = new System.Drawing.Size(267, 237);
             this.gbSeleccion.TabIndex = 3;
             this.gbSeleccion.TabStop = false;
             this.gbSeleccion.Text = "Selección de turnos";
@@ -111,7 +134,7 @@
             // 
             // bSeleccionar
             // 
-            this.bSeleccionar.Location = new System.Drawing.Point(22, 50);
+            this.bSeleccionar.Location = new System.Drawing.Point(19, 208);
             this.bSeleccionar.Name = "bSeleccionar";
             this.bSeleccionar.Size = new System.Drawing.Size(227, 23);
             this.bSeleccionar.TabIndex = 2;
@@ -119,32 +142,17 @@
             this.bSeleccionar.UseVisualStyleBackColor = true;
             this.bSeleccionar.Click += new System.EventHandler(this.bSeleccionar_Click);
             // 
-            // cbTipo
+            // monthCalendar
             // 
-            this.cbTipo.FormattingEnabled = true;
-            this.cbTipo.Items.AddRange(new object[] {
-            "Enfermedad",
-            "Licencia",
-            "Personal"});
-            this.cbTipo.Location = new System.Drawing.Point(19, 42);
-            this.cbTipo.Name = "cbTipo";
-            this.cbTipo.Size = new System.Drawing.Size(230, 21);
-            this.cbTipo.TabIndex = 8;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 26);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Tipo de cancelacion:";
+            this.monthCalendar.Location = new System.Drawing.Point(19, 47);
+            this.monthCalendar.Name = "monthCalendar";
+            this.monthCalendar.TabIndex = 4;
             // 
             // CancelarProfesional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(297, 402);
+            this.ClientSize = new System.Drawing.Size(297, 547);
             this.Controls.Add(this.gbMotivo);
             this.Controls.Add(this.gbSeleccion);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -171,5 +179,6 @@
         private System.Windows.Forms.DateTimePicker dtpDia;
         private System.Windows.Forms.ComboBox cbTipo;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.MonthCalendar monthCalendar;
     }
 }

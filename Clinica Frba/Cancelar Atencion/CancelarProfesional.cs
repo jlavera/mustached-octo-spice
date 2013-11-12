@@ -29,7 +29,13 @@ namespace Clinica_Frba.Cancelar_Atencion {
         }
 
         private void bSeleccionar_Click(object sender, EventArgs e) {
-            if (dtpDia.Value.Ticks < FuncionesBoludas.GetDateTime().AddDays(-1).Ticks)
+            
+            //--Tenés selectionStart donde arranca la selección y selectionEnd (oh sorpresa!), donde termina
+            //---http://stackoverflow.com/a/1847758 ahí tenés como ciclarlo
+            //--Comentá el código ¬¬
+            
+            if (monthCalendar.SelectionEnd < FuncionesBoludas.GetDateTime().AddDays(-1))
+            //if (dtpDia.Value.Ticks < FuncionesBoludas.GetDateTime().AddDays(-1).Ticks)
                 MessageBox.Show("La cancelación deberá realizarse con un día de antelación.");
             else {
                 gbSeleccion.Enabled = false;
