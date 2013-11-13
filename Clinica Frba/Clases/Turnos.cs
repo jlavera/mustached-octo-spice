@@ -60,5 +60,28 @@ namespace Clinica_Frba.Clases {
                 items.Add(new Turno(dr));
             }
         }
+
+        public void FillRegistrarAtencion(Profesional _prof) {
+
+            DataTable dt = DB.ExecuteReader("POTATO");
+
+            //Tengo que hacerlo a mano porqu quiero los turnos chiquitos, no los grandes
+            foreach (DataRow dr in dt.Rows) {
+                items.Add(new Turno(dr));
+            }
+
+            /*SELECT *
+
+            FROM moustache_spice.turno
+
+            WHERE
+	            tur_profesional = 17
+	            AND tur_habilitado = 1
+	            AND tur_fechaYHoraAtencion IS NULL
+	            AND tur_fechaYHoraLlegada IS NOT NULL
+	            AND tur_fechaYHoraTurno > GETDATE()
+             */
+
+        }
     }
 }

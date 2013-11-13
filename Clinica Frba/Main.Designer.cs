@@ -233,6 +233,7 @@
             this.Registro_de_Resultado.Text = "Registro de Resultado (R)";
             this.Registro_de_Resultado.UseVisualStyleBackColor = true;
             this.Registro_de_Resultado.Visible = false;
+            this.Registro_de_Resultado.Click += new System.EventHandler(this.Registro_de_Resultado_Click);
             // 
             // Cancelar_atencion
             // 

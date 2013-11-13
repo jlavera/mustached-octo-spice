@@ -169,5 +169,10 @@ namespace Clinica_Frba {
             RegistrarLlegada.RegistrarLlegada form = new Clinica_Frba.RegistrarLlegada.RegistrarLlegada();
             form.ShowDialog();
         }
+
+        private void Registro_de_Resultado_Click(object sender, EventArgs e) {
+            RegistroResultado.RegistrarResultado form = new Clinica_Frba.RegistroResultado.RegistrarResultado();
+            form.ShowDialog();
+        }
     }
 }
