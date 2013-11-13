@@ -29,7 +29,7 @@ namespace Clinica_Frba.Clases {
         }
 
         public Profesional(int p_id) {
-            DataTable dt = DB.ExecuteReader("SELECT * FROM " + DB.schema + "vProfesional WHERE pro_usuario = " + p_id);
+            DataTable dt = DB.ExecuteReader("SELECT * FROM " + DB.schema + "vProfesional WHERE pro_id = " + p_id);
 
             if (dt.Rows.Count == 0)
                 throw new NoTrajoNadaExcep();

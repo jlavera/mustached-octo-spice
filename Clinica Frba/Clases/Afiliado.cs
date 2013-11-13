@@ -21,7 +21,8 @@ namespace Clinica_Frba.Clases {
         public EstadoCivil estadoCivil;
         public GrupoFamiliar grupoFamiliar;
 
-        public Afiliado() { } //Afiliado de mentiritas :D
+        public Afiliado() {
+        } //Afiliado de mentiritas :D
 
         public Afiliado(DataRow dr) {
             id = Convert.ToInt32(dr["afi_id"]);
@@ -38,8 +39,8 @@ namespace Clinica_Frba.Clases {
             grupoFamiliar = new GrupoFamiliar(dr);
         }
 
-        public Afiliado(int p_id) {
-            DataTable dt = DB.ExecuteReader("SELECT * FROM "+DB.schema + "vAfiliado WHERE afi_usuario = " + p_id);
+        public Afiliado(int _id) {
+            DataTable dt = DB.ExecuteReader("SELECT * FROM "+DB.schema + "vAfiliado WHERE afi_id = " + _id);
 
             if(dt.Rows.Count==0)
                 throw new NoTrajoNadaExcep();

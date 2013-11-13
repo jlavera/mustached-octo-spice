@@ -281,6 +281,7 @@ CREATE TABLE moustache_spice.bonoConsulta (
   bco_fechaCompa DATE NOT NULL,
   bco_comprador INT FOREIGN KEY REFERENCES moustache_spice.afiliado(afi_id),
   bco_afiliado INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.afiliado(afi_id),
+  bco_habilitado TINYINT NOT NULL DEFAULT 1, --Funciona de las veces de si esta o no consumido
   PRIMARY KEY (bco_id)
 );
 
@@ -314,6 +315,14 @@ CREATE TABLE moustache_spice.turno (
   tur_habilitado TINYINT NOT NULL DEFAULT 1,-- Sería cuando se cancela un turno
   PRIMARY KEY (tur_id)
 );
+GO
+CREATE TRIGGER moustache_spice.retribuirBono ON moustache_spice.turno AFTER UPDATE AS
+BEGIN
+	UPDATE moustache_spice.bonoConsulta
+		SET bco_habilitado=1
+		WHERE bco_id IN (SELECT tur_bonoConsulta FROM inserted WHERE tur_habilitado=0)
+END
+Go
 
 CREATE TABLE moustache_spice.turnoAudit(
 	tuA_turno INT NOT NULL FOREIGN KEY REFERENCES moustache_spice.turno(tur_id),

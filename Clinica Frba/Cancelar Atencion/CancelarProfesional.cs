@@ -16,11 +16,12 @@ namespace Clinica_Frba.Cancelar_Atencion {
 
         public CancelarProfesional(Usuario _usuario) {
             InitializeComponent();
-            try {
-                profesional = new Profesional(_usuario.id);
-            } catch (NoTrajoNadaExcep ex) {
+            int tmp = DB.ExecuteCardinal("SELECT TOP 1 pro_id FROM "+DB.schema+"vProfesional WHERE usu_id="+_usuario.id);
+            if (tmp != -1) {
+                profesional = new Profesional(tmp);
+            } else {
                 //Si fallo al traer afiliados, es que el usuario no es un afiliado
-                MessageBox.Show("Este usuario no tiene un profesional asociado,\na modo de debug, le vamos a dejar elejir un profesional");
+                MessageBox.Show("A modo de debug, le vamos a dejar elejir un profesional");
                 miniProfesional mini = new miniProfesional();
                 while (mini.DialogResult != DialogResult.OK)
                     mini.ShowDialog();

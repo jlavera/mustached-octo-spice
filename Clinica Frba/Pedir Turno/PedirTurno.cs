@@ -22,13 +22,14 @@ namespace Clinica_Frba.PedirTurno {
 
         public PedirTurno(Usuario _usuario) {
             InitializeComponent();
-            try {
-                afiliado = new Afiliado(_usuario.id);
-            } catch (NoTrajoNadaExcep ex) {
+            int tmp = DB.ExecuteCardinal("SELECT TOP 1 afi_id FROM "+DB.schema+"vAfiliados WHERE usu_id="+_usuario.id);
+            if (tmp != -1) {
+                afiliado = new Afiliado(tmp);
+            } else {
                 //Si fallo al traer afiliados, es que el usuario no es un afiliado
                 MessageBox.Show("Este usuario no tiene un afiliado asociado,\na modo de debug, le vamos a dejar elejir un afiliado");
                 miniAfiliado mini = new miniAfiliado();
-                while(mini.DialogResult != DialogResult.OK)
+                while (mini.DialogResult != DialogResult.OK)
                     mini.ShowDialog();
                 afiliado = mini.afiliado;
             }

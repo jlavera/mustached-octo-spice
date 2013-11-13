@@ -113,6 +113,8 @@ namespace Clinica_Frba.Clases {
             string mensaje = "";
 
             foreach (String error in errores) {
+                if (error.IndexOf("Invalid attempt to read when no data is present.") > -1)
+                    mensaje += "No se encontraron datos\n";
                 if (error.IndexOf("INSERT") > -1)
                     mensaje += "Error en la insercion: ";
                 if (error.IndexOf("CHECK") > -1)
