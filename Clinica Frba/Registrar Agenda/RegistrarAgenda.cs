@@ -74,22 +74,12 @@ namespace Clinica_Frba.RegistrarAgendas {
                 FillDgv();
         }
 
-        private void bLimpiar_Click(object sender, EventArgs e)
-        {
+        private void bLimpiar_Click(object sender, EventArgs e) {
             //Limpiar las cosa para buscar
-                        dtpDesde.Value = dtpDesde.MinDate;
+            dtpDesde.Value = dtpDesde.MinDate;
             dtpHasta.Value = dtpDesde.MaxDate;
-            foreach (Control ctrl in gbFiltros.Controls)
-            {
-                if (ctrl is TextBox)
-                    ((TextBox)ctrl).Text = "";
-                if (ctrl is ComboBox)
-                    ((ComboBox)ctrl).SelectedIndex = -1;
-                if (ctrl is MaskedTextBox)
-                    ((MaskedTextBox)ctrl).Text = "";
-                if (ctrl is ListBox)
-                    ((ListBox)ctrl).ClearSelected();
-            }
+
+            FuncionesBoludas.limpiarControles(gbFiltros.Controls);
         }
     }
 }

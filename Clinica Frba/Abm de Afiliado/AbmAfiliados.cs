@@ -58,7 +58,7 @@ namespace Clinica_Frba.AbmAfiliados {
 
             //--Abrir ventana para editar afiliado
             if (dgvAfiliados.Columns[e.ColumnIndex].HeaderText == "Seleccionar") {
-                EditAfiliado formEdit = new EditAfiliado(afiliados[dgvAfiliados.Rows[e.RowIndex].Cells[0].Value.ToString()]);
+                EditAfiliado formEdit = new EditAfiliado(afiliados[dgvAfiliados.Rows[e.RowIndex].Cells["id"].Value.ToString()]);
                 formEdit.ShowDialog();
 
                 //--Si el diálogo tiene resultado OK, volver a llenar dgv
@@ -79,26 +79,28 @@ namespace Clinica_Frba.AbmAfiliados {
                 tbApellido.Text,
                 tbDireccion.Text,
                 cmbTipoDNI.Text,
-                Convert.ToInt64((tbNumeroDni.Text == "")? "-1" : tbNumeroDni.Text),
+                Convert.ToInt64((tbNumeroDni.Text == "") ? "-1" : tbNumeroDni.Text),
                 Convert.ToInt64((tbTelefono.Text == "") ? "-1" : tbTelefono.Text),
                 tbMail.Text,
                 tbNombreUsuario.Text,
                 cmbSexo.Text,
-                lbGrupoFamiliar.SelectedItems, 
+                lbGrupoFamiliar.SelectedItems,
                 lbEstadoCivil.SelectedItems,
                 lbPlanMedico.SelectedItems,
                 Convert.ToInt32((tbOrden.Text == "") ? "-1" : tbOrden.Text),
                 Convert.ToInt32((tbFamiliaresACargo.Text == "") ? "-1" : tbFamiliaresACargo.Text),
                 Convert.ToInt32(nLimit.Value));
+
             //--Llena dgv
             foreach (Afiliado afiliado in afiliados.items) {
-                dgvAfiliados.Rows.Add(afiliado.grupoFamiliar.grupo.ToString("D5") + "-" + afiliado.orden.ToString("D2"),
+                dgvAfiliados.Rows.Add(afiliado.grupoFamiliar.grupo.ToString("D6") + "-" + afiliado.orden.ToString("D2"),
                     afiliado.usuario.nombre, afiliado.usuario.apellido,
                     (afiliado.usuario.tipoDocumento == "") ? "Faltar cargar" : afiliado.usuario.tipoDocumento, afiliado.usuario.numeroDocumento,
                     afiliado.usuario.direccion, afiliado.usuario.telefono, afiliado.usuario.mail, afiliado.usuario.fechaNacimiento,
                     (afiliado.usuario.sexo == "") ? "Faltar cargar" : afiliado.usuario.sexo, afiliado.usuario.nombreUsuario,
                     (afiliado.estadoCivil.nombre == "") ? "Falta cargar" : afiliado.estadoCivil.ToString(),
-                    (afiliado.familiaresACargo == -1) ? "Falta cargar" : afiliado.familiaresACargo.ToString(), afiliado.planMedico.nombre);
+                    (afiliado.familiaresACargo == -1) ? "Falta cargar" : afiliado.familiaresACargo.ToString(), afiliado.planMedico.nombre,
+                    "Editar", afiliado.id);
             }
         }
 
@@ -110,19 +112,8 @@ namespace Clinica_Frba.AbmAfiliados {
                 afiliados.DeleteSelected(dgvAfiliados);
         }
 
-        private void bLimpiar_Click(object sender, EventArgs e)
-        {
-            //Limpiar las cosa para buscar
-            foreach (Control ctrl in gbFiltros.Controls) {
-                if (ctrl is TextBox)
-                    ((TextBox)ctrl).Text = "";
-                if (ctrl is ComboBox)
-                    ((ComboBox)ctrl).SelectedIndex = -1;
-                if (ctrl is MaskedTextBox)
-                    ((MaskedTextBox)ctrl).Text = "";
-                if (ctrl is ListBox)
-                    ((ListBox)ctrl).ClearSelected();
-            }
+        private void bLimpiar_Click(object sender, EventArgs e) {
+            FuncionesBoludas.limpiarControles(gbFiltros.Controls);
         }
 
         //--Hotkeys para las funcionalidades

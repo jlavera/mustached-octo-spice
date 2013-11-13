@@ -75,17 +75,7 @@ namespace Clinica_Frba.RegistrarLlegada {
         }
 
         private void bLimpiar_Click(object sender, EventArgs e) {
-            //Limpiar las cosa para buscar
-            foreach (Control ctrl in gbProf.Controls) {
-                if (ctrl is TextBox)
-                    ((TextBox)ctrl).Text = "";
-                if (ctrl is ComboBox)
-                    ((ComboBox)ctrl).SelectedIndex = -1;
-                if (ctrl is MaskedTextBox)
-                    ((MaskedTextBox)ctrl).Text = "";
-                if (ctrl is ListBox)
-                    ((ListBox)ctrl).ClearSelected();
-            }
+            FuncionesBoludas.limpiarControles(gbProf.Controls);
         }
 
         private void bBuscar_Click(object sender, EventArgs e) {

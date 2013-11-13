@@ -43,6 +43,7 @@
             this.bBuscar = new System.Windows.Forms.Button();
             this.bAgregar = new System.Windows.Forms.Button();
             this.bEliminar = new System.Windows.Forms.Button();
+            this.bLimpiar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoles)).BeginInit();
             this.gbFiltros.SuspendLayout();
             this.SuspendLayout();
@@ -160,7 +161,7 @@
             // 
             // bBuscar
             // 
-            this.bBuscar.Location = new System.Drawing.Point(502, 206);
+            this.bBuscar.Location = new System.Drawing.Point(533, 206);
             this.bBuscar.Name = "bBuscar";
             this.bBuscar.Size = new System.Drawing.Size(125, 29);
             this.bBuscar.TabIndex = 0;
@@ -188,11 +189,24 @@
             this.bEliminar.UseVisualStyleBackColor = true;
             this.bEliminar.Click += new System.EventHandler(this.bEliminar_Click);
             // 
+            // bLimpiar
+            // 
+            this.bLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.bLimpiar.Location = new System.Drawing.Point(434, 206);
+            this.bLimpiar.Name = "bLimpiar";
+            this.bLimpiar.Size = new System.Drawing.Size(93, 29);
+            this.bLimpiar.TabIndex = 14;
+            this.bLimpiar.Text = "Limpiar (L)";
+            this.bLimpiar.UseVisualStyleBackColor = true;
+            this.bLimpiar.Click += new System.EventHandler(this.bLimpiar_Click);
+            // 
             // AbmRoles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(675, 590);
+            this.Controls.Add(this.bLimpiar);
             this.Controls.Add(this.bEliminar);
             this.Controls.Add(this.bAgregar);
             this.Controls.Add(this.bBuscar);
@@ -229,5 +243,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Funcionalidades;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Habilitado;
         private System.Windows.Forms.DataGridViewButtonColumn Column1;
+        private System.Windows.Forms.Button bLimpiar;
     }
 }

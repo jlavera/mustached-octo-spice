@@ -308,6 +308,7 @@
             // 
             // bLimpiar
             // 
+            this.bLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.bLimpiar.Location = new System.Drawing.Point(475, 125);
             this.bLimpiar.Name = "bLimpiar";
             this.bLimpiar.Size = new System.Drawing.Size(75, 23);

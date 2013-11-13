@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using Clinica_Frba.Clases;
 
 namespace Clinica_Frba.AbmProfesionales {
-    public partial class AbmProfesionales: Form {
+    public partial class AbmProfesionales : Form {
         Profesionales profs = new Profesionales();
         Especialidades esps = new Especialidades();
 
@@ -54,7 +54,7 @@ namespace Clinica_Frba.AbmProfesionales {
 
             //--Llena dgv
             foreach (Profesional prof in profs.items) {
-                dgvProfesionales.Rows.Add(prof.id, (prof.matricula == -1)? "Falta cargar": prof.matricula.ToString(),
+                dgvProfesionales.Rows.Add(prof.id, (prof.matricula == -1) ? "Falta cargar" : prof.matricula.ToString(),
                     prof.usuario.nombre, prof.usuario.apellido,
                     (prof.usuario.tipoDocumento == "") ? "Faltar cargar" : prof.usuario.tipoDocumento, prof.usuario.numeroDocumento,
                     prof.usuario.direccion, prof.usuario.telefono, prof.usuario.mail, prof.usuario.fechaNacimiento,
@@ -63,7 +63,7 @@ namespace Clinica_Frba.AbmProfesionales {
             }
 
         }
-        
+
         //--Click en el botón de agregar
         private void bAgregar_Click(object sender, EventArgs e) {
 
@@ -114,20 +114,8 @@ namespace Clinica_Frba.AbmProfesionales {
             }
         }
 
-        private void bLimpiar_Click(object sender, EventArgs e)
-        {
-            //Limpiar las cosa para buscar
-            foreach (Control ctrl in gbFiltros.Controls)
-            {
-                if (ctrl is TextBox)
-                    ((TextBox)ctrl).Text = "";
-                if (ctrl is ComboBox)
-                    ((ComboBox)ctrl).SelectedIndex = -1;
-                if (ctrl is MaskedTextBox)
-                    ((MaskedTextBox)ctrl).Text = "";
-                if (ctrl is ListBox)
-                    ((ListBox)ctrl).ClearSelected();
-            }
+        private void bLimpiar_Click(object sender, EventArgs e) {
+            FuncionesBoludas.limpiarControles(gbFiltros.Controls);
         }
 
         //--Hotkeys para las funcionalidades

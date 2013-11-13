@@ -130,5 +130,19 @@ namespace Clinica_Frba.Clases {
             }
             MessageBox.Show(mensaje, "ERROR");
         }
+
+        static public void limpiarControles(Control.ControlCollection controls){
+            //Limpiar las cosa para buscar
+            foreach (Control ctrl in controls) {
+                if (ctrl is TextBox)
+                    ((TextBox)ctrl).Text = "";
+                if (ctrl is ComboBox)
+                    ((ComboBox)ctrl).SelectedIndex = -1;
+                if (ctrl is MaskedTextBox)
+                    ((MaskedTextBox)ctrl).Text = "";
+                if (ctrl is ListBox)
+                    ((ListBox)ctrl).ClearSelected();
+            }
+        }
     }
 }

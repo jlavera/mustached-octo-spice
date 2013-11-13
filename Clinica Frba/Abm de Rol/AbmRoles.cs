@@ -105,5 +105,10 @@ namespace Clinica_Frba.AbmRoles {
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+        private void bLimpiar_Click(object sender, EventArgs e) {
+
+            FuncionesBoludas.limpiarControles(gbFiltros.Controls);
+        }
+
     }
 }

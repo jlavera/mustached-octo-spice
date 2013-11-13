@@ -41,7 +41,7 @@ namespace Clinica_Frba.Clases {
             get {
                 foreach (Afiliado item in items) {  
                     //Tengo que sacarle los ultimos 3 porque trae el ID con el orden
-                    if (item.id == Convert.ToInt32(id.Substring(0, id.Length-3))) {
+                    if (item.id == Convert.ToInt32(id)) {
                         return item;
                     }
                 }

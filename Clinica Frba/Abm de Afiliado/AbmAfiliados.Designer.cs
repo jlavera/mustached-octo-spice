@@ -63,7 +63,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lbGrupoFamiliar = new System.Windows.Forms.ListBox();
             this.dgvAfiliados = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bLimpiar = new System.Windows.Forms.Button();
+            this.numeroAfiliado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tipoDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -78,7 +79,7 @@
             this.familiaresACargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.planMedico = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.bLimpiar = new System.Windows.Forms.Button();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAfiliados)).BeginInit();
@@ -449,7 +450,7 @@
             this.dgvAfiliados.AllowUserToAddRows = false;
             this.dgvAfiliados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAfiliados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Id,
+            this.numeroAfiliado,
             this.Nombre,
             this.Apellido,
             this.tipoDocumento,
@@ -463,7 +464,8 @@
             this.estadoCivil,
             this.familiaresACargo,
             this.planMedico,
-            this.seleccionar});
+            this.seleccionar,
+            this.id});
             this.dgvAfiliados.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvAfiliados.Location = new System.Drawing.Point(0, 221);
             this.dgvAfiliados.Name = "dgvAfiliados";
@@ -471,11 +473,23 @@
             this.dgvAfiliados.TabIndex = 4;
             this.dgvAfiliados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAfiliados_CellContentClick);
             // 
-            // Id
+            // bLimpiar
             // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
+            this.bLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.bLimpiar.Location = new System.Drawing.Point(859, 186);
+            this.bLimpiar.Name = "bLimpiar";
+            this.bLimpiar.Size = new System.Drawing.Size(93, 29);
+            this.bLimpiar.TabIndex = 1;
+            this.bLimpiar.Text = "Limpiar (L)";
+            this.bLimpiar.UseVisualStyleBackColor = true;
+            this.bLimpiar.Click += new System.EventHandler(this.bLimpiar_Click);
+            // 
+            // numeroAfiliado
+            // 
+            this.numeroAfiliado.HeaderText = "Nro. de afiliado";
+            this.numeroAfiliado.Name = "numeroAfiliado";
+            this.numeroAfiliado.ReadOnly = true;
             // 
             // Nombre
             // 
@@ -560,17 +574,11 @@
             this.seleccionar.HeaderText = "Seleccionar";
             this.seleccionar.Name = "seleccionar";
             // 
-            // bLimpiar
+            // id
             // 
-            this.bLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.bLimpiar.Location = new System.Drawing.Point(859, 186);
-            this.bLimpiar.Name = "bLimpiar";
-            this.bLimpiar.Size = new System.Drawing.Size(93, 29);
-            this.bLimpiar.TabIndex = 1;
-            this.bLimpiar.Text = "Limpiar (L)";
-            this.bLimpiar.UseVisualStyleBackColor = true;
-            this.bLimpiar.Click += new System.EventHandler(this.bLimpiar_Click);
+            this.id.HeaderText = "Id";
+            this.id.Name = "id";
+            this.id.Visible = false;
             // 
             // AbmAfiliados
             // 
@@ -626,7 +634,17 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.ListBox lbEstadoCivil;
+        private System.Windows.Forms.ListBox lbPlanMedico;
+        private System.Windows.Forms.MaskedTextBox tbTelefono;
+        private System.Windows.Forms.MaskedTextBox tbNumeroDni;
+        private System.Windows.Forms.TextBox tbMail;
+        private System.Windows.Forms.MaskedTextBox tbOrden;
+        private System.Windows.Forms.MaskedTextBox tbFamiliaresACargo;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.NumericUpDown nLimit;
+        private System.Windows.Forms.Button bLimpiar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn numeroAfiliado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;
         private System.Windows.Forms.DataGridViewTextBoxColumn tipoDocumento;
@@ -641,15 +659,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn familiaresACargo;
         private System.Windows.Forms.DataGridViewTextBoxColumn planMedico;
         private System.Windows.Forms.DataGridViewButtonColumn seleccionar;
-        private System.Windows.Forms.ListBox lbEstadoCivil;
-        private System.Windows.Forms.ListBox lbPlanMedico;
-        private System.Windows.Forms.MaskedTextBox tbTelefono;
-        private System.Windows.Forms.MaskedTextBox tbNumeroDni;
-        private System.Windows.Forms.TextBox tbMail;
-        private System.Windows.Forms.MaskedTextBox tbOrden;
-        private System.Windows.Forms.MaskedTextBox tbFamiliaresACargo;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.NumericUpDown nLimit;
-        private System.Windows.Forms.Button bLimpiar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
     }
 }
