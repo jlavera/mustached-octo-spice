@@ -53,7 +53,7 @@ namespace Clinica_Frba.Clases {
         /// <param name="p_text"></param>
         public void FillByName(string p_text) {
             Fill(DB.ExecuteReader("SELECT DISTINCT afi_grupoFamiliar, afi_id, usu_apellido, usu_nombre, " +
-                "'' AS 'grp_proximoOrden'" +
+                "(SELECT ((CASE WHEN 2>MAX(afi_orden) THEN 2 ELSE MAX(afi_orden) END) +1) FROM " + DB.schema + "afiliado WHERE afi_grupoFamiliar = va.afi_grupoFamiliar) AS 'grp_proximoOrden'" +
                 "FROM " + DB.schema + "vAfiliado va WHERE afi_orden = 1 AND (usu_apellido LIKE '%" + p_text + "%' OR usu_nombre LIKE '%" + p_text + "%')"));
         }
 

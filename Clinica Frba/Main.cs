@@ -174,5 +174,10 @@ namespace Clinica_Frba {
             RegistroResultado.RegistrarResultado form = new Clinica_Frba.RegistroResultado.RegistrarResultado(user);
             form.ShowDialog();
         }
+
+        private void Estadisticas_Click(object sender, EventArgs e) {
+            Listados_Estadisticos.ListadosEstadisticos form = new Clinica_Frba.Listados_Estadisticos.ListadosEstadisticos();
+            form.ShowDialog();
+        }
     }
 }

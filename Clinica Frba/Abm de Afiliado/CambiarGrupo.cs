@@ -27,9 +27,6 @@ namespace Clinica_Frba.AbmAfiliados {
 
         private void CambiarGrupo_Load(object sender, EventArgs e){
 
-            //--Mostrar grupo actuali y cargar todos en cmb
-            tbActual.Text = actual.titular;
-
             grupos.FillWithAll();
             cmbGrupos.Items.AddRange(grupos.ToList());
         }
@@ -67,7 +64,7 @@ namespace Clinica_Frba.AbmAfiliados {
             else
             {
                 nuevo = (GrupoFamiliar)cmbGrupos.SelectedItem;
-                DB.ExecuteNonQuery("UPDATE " + DB.schema + "afiliado SET afi_grupoFamiliar2 = " + ((GrupoFamiliar)cmbGrupos.SelectedItem).grupo + ", afi_orden = " + ((GrupoFamiliar)cmbGrupos.SelectedItem).proximoOrden + " WHERE afi_id = " + afiliadoId);
+                DB.ExecuteNonQuery("UPDATE " + DB.schema + "afiliado SET afi_grupoFamiliar2 = " + ((GrupoFamiliar)cmbGrupos.SelectedItem).grupo + ", afi_orden = " + ((GrupoFamiliar)cmbGrupos.SelectedItem).proximoOrden + ", afi_planMedico = (SELECT TOP 1 afi_planMedico FROM " + DB.schema + "afiliado WHERE afi_id = " + ((GrupoFamiliar)cmbGrupos.SelectedItem).grupo + ") WHERE afi_id = " + afiliadoId);
             }
 
             DialogResult = DialogResult.OK;

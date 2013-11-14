@@ -153,6 +153,12 @@
     <Compile Include="Generar Receta\CargarMedicamentos.Designer.cs">
       <DependentUpon>CargarMedicamentos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Listados Estadisticos\ListadosEstadisticos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados Estadisticos\ListadosEstadisticos.Designer.cs">
+      <DependentUpon>ListadosEstadisticos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,12 +183,6 @@
     </Compile>
     <Compile Include="Registro de LLegada\RegistrarLlegada.Designer.cs">
       <DependentUpon>RegistrarLlegada.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Registro de Usuario\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Registro de Usuario\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm de Afiliado\AbmAfiliados.cs">
       <SubType>Form</SubType>
@@ -219,12 +219,6 @@
     </Compile>
     <Compile Include="Generar Receta\GenerarReceta.Designer.cs">
       <DependentUpon>GenerarReceta.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Listados Estadisticos\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Listados Estadisticos\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -270,6 +264,9 @@
     <EmbeddedResource Include="Generar Receta\CargarMedicamentos.resx">
       <DependentUpon>CargarMedicamentos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados Estadisticos\ListadosEstadisticos.resx">
+      <DependentUpon>ListadosEstadisticos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -293,6 +290,9 @@
     <EmbeddedResource Include="Registro de LLegada\RegistrarLlegada.resx">
       <DependentUpon>RegistrarLlegada.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados Estadisticos\Ver.resx">
+      <DependentUpon>Ver.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Registro Resultado Atencion\RegistrarResultado.resx">
       <DependentUpon>RegistrarResultado.cs</DependentUpon>
     </EmbeddedResource>
@@ -311,6 +311,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Listados Estadisticos\Ver.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados Estadisticos\Ver.Designer.cs">
+      <DependentUpon>Ver.cs</DependentUpon>
+    </Compile>
     <Compile Include="Registro Resultado Atencion\RegistrarResultado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -322,6 +328,9 @@
     <Content Include="Cosas\fecha.txt" />
     <Content Include="Restricciones.txt" />
     <Content Include="ToDo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Registro de Usuario\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

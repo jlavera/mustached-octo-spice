@@ -266,6 +266,7 @@
             this.Estadisticas.Text = "Estadísticas (E)";
             this.Estadisticas.UseVisualStyleBackColor = true;
             this.Estadisticas.Visible = false;
+            this.Estadisticas.Click += new System.EventHandler(this.Estadisticas_Click);
             // 
             // Main
             // 

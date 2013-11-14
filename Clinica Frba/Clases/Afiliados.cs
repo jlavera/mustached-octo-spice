@@ -138,7 +138,8 @@ namespace Clinica_Frba.Clases {
                 string query = "UPDATE " + DB.schema + tabla + " SET afi_habilitado=0 WHERE";
 
                 foreach (DataGridViewRow afiliado in p_objects){
-                    query += " afi_grupoFamiliar2=" + afiliado.Cells["id"].Value.ToString().Substring(0, afiliado.Cells["id"].Value.ToString().Length - 3) + " AND afi_orden= " + afiliado.Cells["id"].Value.ToString().Substring(afiliado.Cells["id"].Value.ToString().Length - 2) + " OR";
+                    query += " afi_id = " + afiliado.Cells["id"].Value.ToString() + " OR";
+                    //query += " afi_grupoFamiliar2=" + afiliado.Cells["id"].Value.ToString().Substring(0, afiliado.Cells["id"].Value.ToString().Length - 3) + " AND afi_orden= " + afiliado.Cells["id"].Value.ToString().Substring(afiliado.Cells["id"].Value.ToString().Length - 2) + " OR";
                 }
                 //Para sacar el ultimo or
                 query = query.Substring(0, query.Length - 3);

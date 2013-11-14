@@ -128,7 +128,7 @@ namespace Clinica_Frba.AbmAfiliados {
 
                 //--Traer los integrantes del grupo
                 foreach (DataRow dr in DB.ExecuteReader(
-                    "SELECT * FROM moustache_spice.vAfiliado va WHERE va.afi_grupoFamiliar = " + grupoFamiliar.grupo + " AND va.afi_orden > 1").Rows) {
+                    "SELECT * FROM moustache_spice.vAfiliado va WHERE va.afi_grupoFamiliar = " + grupoFamiliar.grupo).Rows) {
 
                     //--Crea el integrante que trajo y lo agrega al listbox
                     Integrante integrante = new Integrante(dr);

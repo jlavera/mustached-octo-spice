@@ -316,8 +316,8 @@
             this.cmbTipoDNI.FormattingEnabled = true;
             this.cmbTipoDNI.Items.AddRange(new object[] {
             "DNI",
-            "LE",
-            "LC"});
+            "LE ",
+            "LC "});
             this.cmbTipoDNI.Location = new System.Drawing.Point(227, 47);
             this.cmbTipoDNI.Name = "cmbTipoDNI";
             this.cmbTipoDNI.Size = new System.Drawing.Size(61, 21);

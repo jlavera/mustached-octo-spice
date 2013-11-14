@@ -245,8 +245,8 @@
             this.cmbTipoDNI.FormattingEnabled = true;
             this.cmbTipoDNI.Items.AddRange(new object[] {
             "DNI",
-            "LE",
-            "LC"});
+            "LE ",
+            "LC "});
             this.cmbTipoDNI.Location = new System.Drawing.Point(250, 47);
             this.cmbTipoDNI.Name = "cmbTipoDNI";
             this.cmbTipoDNI.Size = new System.Drawing.Size(61, 21);
@@ -329,7 +329,7 @@
             this.MaximizeBox = false;
             this.Name = "EditIntegrante";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "EditIntegrante";
+            this.Text = "Editción de integrante";
             this.Load += new System.EventHandler(this.EditIntegrante_Load);
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();

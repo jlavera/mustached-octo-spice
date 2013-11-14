@@ -39,7 +39,7 @@ namespace Clinica_Frba.Clases {
             mail = (string)dr["usu_mail"];
             sexo = (dr["usu_sexo"] == System.DBNull.Value) ? "" : dr["usu_sexo"].ToString();
             fechaNacimiento = (DateTime)dr["usu_fechaNacimiento"];
-            contrasegna = (string)dr["usu_contrasegna"];
+            contrasegna = (dr["usu_contrasegna"] == DBNull.Value)? "" : dr["usu_contrasegna"].ToString();
 
             //--Marcar que NO falta grabar en DB
             faltaGrabar = false;
