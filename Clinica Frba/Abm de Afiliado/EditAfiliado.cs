@@ -164,8 +164,8 @@ namespace Clinica_Frba.AbmAfiliados {
                 string query;
                 //--Grabar o editar al titular
                 if (nueva) {
-                    query = "INSERT INTO moustache_spice.usuario(usu_nombre, usu_apellido, usu_direccion, usu_tipoDocumento, usu_numeroDocumento, usu_telefono, usu_mail, usu_sexo, usu_nombreUsuario, usu_fechaNacimiento" + ((tbContrasegna.Text == "****") ? "" : ", usu_contrasegna") + ") VALUES " +
-                            "('" + tbNombre.Text + "', '" + tbApellido.Text + "', '" + tbDireccion.Text + "', '" + cmbTipoDNI.Text + "', " + tbNumeroDni.Text + ", " + tbTelefono.Text + ", '" + tbMail.Text + "', '" + ((cmbSexo.SelectedText == "Masculino") ? "M" : "F") + "', '" + tbNombreUsuario.Text + "', '" + dtpFechaNacimiento.Value.ToString("yyyy-MM-dd") + "'" + ((tbContrasegna.Text == "****") ? "" : ", '" + FuncionesBoludas.getHashSha256(tbContrasegna.Text) + "'") + "); ";
+                    query = "INSERT INTO moustache_spice.usuario(usu_nombre, usu_apellido, usu_direccion, usu_tipoDocumento, usu_numeroDocumento, usu_telefono, usu_mail, usu_sexo, usu_nombreUsuario, usu_fechaNacimiento" + ((tbContrasegna.Text == "****") ? "" : ", usu_contrasegna") + ", afi_familiaresACargo) VALUES " +
+                            "('" + tbNombre.Text + "', '" + tbApellido.Text + "', '" + tbDireccion.Text + "', '" + cmbTipoDNI.Text + "', " + tbNumeroDni.Text + ", " + tbTelefono.Text + ", '" + tbMail.Text + "', '" + ((cmbSexo.SelectedText == "Masculino") ? "M" : "F") + "', '" + tbNombreUsuario.Text + "', '" + dtpFechaNacimiento.Value.ToString("yyyy-MM-dd") + "'" + ((tbContrasegna.Text == "****") ? "" : ", '" + FuncionesBoludas.getHashSha256(tbContrasegna.Text) + "'") + ", " + nFamiliares.Value + "); ";
                     query += "INSERT INTO moustache_spice.afiliado(afi_estadoCivil, afi_familiaresACargo, afi_usuario, afi_orden, afi_planMedico) VALUES (" +
                             ((EstadoCivil)cmbEstadoCivil.SelectedItem).id + ", " + lbIntegrantes.Items.Count + ", SCOPE_Identity(), 1, " + ((PlanMedico)cmbPlanMedico.SelectedItem).id + "); ";
 
@@ -181,8 +181,8 @@ namespace Clinica_Frba.AbmAfiliados {
                             ", usu_sexo='" + ((cmbSexo.SelectedText == "Masculino") ? "M" : "F") + "' " +
                             "WHERE usu_id=" + usuarioID + "; ";
                     query += "UPDATE moustache_spice.afiliado SET afi_estadoCivil=" + ((EstadoCivil)cmbEstadoCivil.SelectedItem).id +
-                             ", afi_familiaresACargo=" + ((orden == 1) ? lbIntegrantes.Items.Count : 0) +
                              ", afi_planMedico=" + ((PlanMedico)cmbPlanMedico.SelectedItem).id +
+                             ", afi_familiaresACargo=" + nFamiliares.Value +
                              " WHERE afi_id=" + afiliadoID + "; ";
 
                 }
@@ -195,8 +195,8 @@ namespace Clinica_Frba.AbmAfiliados {
                         //--Grabarlo
                         query += "INSERT INTO moustache_spice.usuario(usu_nombre, usu_apellido, usu_direccion, usu_tipoDocumento, usu_numeroDocumento, usu_telefono, usu_mail, usu_sexo, usu_nombreUsuario, usu_fechaNacimiento, usu_contrasegna) VALUES " +
                                 "('" + inte.nombre + "', '" + inte.apellido + "', '" + inte.direccion + "', '" + inte.tipoDocumento + "', " + inte.numeroDocumento + ", " + inte.telefono + ", '" + inte.mail + "', '" + inte.sexo + "', '" + inte.nombreUsuario + "', '" + inte.fechaNacimiento + "', '" + FuncionesBoludas.getHashSha256(inte.contrasegna) + "'); ";
-                        query += "INSERT INTO moustache_spice.afiliado(afi_estadoCivil, afi_familiaresACargo, afi_usuario, afi_orden, afi_planMedico, afi_grupoFamiliar2) VALUES (" +
-                            inte.estadoCivil.id + ", 0, SCOPE_Identity(), " + ((inte.esConyuge) ? 2 : ordenInsertado) + ", " + ((PlanMedico)cmbPlanMedico.SelectedItem).id + ", " + afiliadoID + "); ";
+                        query += "INSERT INTO moustache_spice.afiliado(afi_estadoCivil, afi_usuario, afi_orden, afi_planMedico, afi_grupoFamiliar2, afi_familiaresACargo) VALUES (" +
+                            inte.estadoCivil.id + ", SCOPE_Identity(), " + ((inte.esConyuge) ? 2 : ordenInsertado) + ", " + ((PlanMedico)cmbPlanMedico.SelectedItem).id + ", " + afiliadoID + ", " + inte.familiares  + "); ";
                     }
                 }
                 if (tbRazon.Visible)

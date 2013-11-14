@@ -134,14 +134,14 @@ namespace Clinica_Frba.RegistrarLlegada {
         private void bSiguienteBono_Click(object sender, EventArgs e) {
             try {
                 BonoConsulta bono = new BonoConsulta(Convert.ToInt32(tbBono.Text));
-                if (Convert.ToInt32(tbAfiliado.Text) != bono.afiliado.id) {
+                if (Convert.ToInt32(tbAfiliado.Text) != bono.comprador.grupoFamiliar.grupo) { //Que pertenezca al grupo del que lo comrpo
                     MessageBox.Show("El bono no coresponde al afiliado");
                     return;
                 }
 
                 //Si llego aca coincide todo, y va todo bien.
                 DB.ExecuteNonQuery("UPDATE " + DB.schema + "turno SET tur_fechaYHoraLlegada='" + FuncionesBoludas.GetDateTime() + "', tur_bonoConsulta=" + bono.id + " WHERE tur_id=" + ((Turno)lbTurnos.SelectedItem).id +
-                                   "; UPDATE "+DB.schema + "bonoConsulta SET bco_habilitado=0 WHERE bco_id=" + bono.id);
+                                   "; UPDATE "+DB.schema + "bonoConsulta SET bco_habilitado=0, bco_afiliado=" + tbAfiliado.Text + " WHERE bco_id=" + bono.id); //Caundo se consume, poner por quien
                 DialogResult = DialogResult.OK;
 
             } catch (NoTrajoNadaExcep ex) {

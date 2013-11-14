@@ -11,7 +11,8 @@ IF OBJECT_ID('moustache_spice.consumirBono', 'TR') IS NOT NULL
 IF OBJECT_ID('moustache_spice.retribuirBono', 'TR') IS NOT NULL
 	DROP TRIGGER moustache_spice.retribuirBono
 	
-
+IF OBJECT_ID('moustache_spice.pagos', 'U') IS NOT NULL
+	DROP TABLE moustache_spice.pagos
 IF OBJECT_ID('moustache_spice.medicamento_x_bonoFarmacia', 'U') IS NOT NULL
 	DROP TABLE moustache_spice.medicamento_x_bonoFarmacia
 IF OBJECT_ID('moustache_spice.medicamento', 'U') IS NOT NULL

@@ -252,6 +252,18 @@ BEGIN
 	UPDATE moustache_spice.afiliado
 		SET afi_planMedico=(select TOP 1 afi_planMedico from inserted)
 	WHERE afi_grupoFamiliar2 IN (SELECT afi_id FROM inserted)
+	
+	
+	--Recordar que los bonos solo pueden ser utilizados para el plan que tenía asignado el 
+	--afiliado en el momento que realizó la compra, es decir, que si luego cambia de plan, sea 
+	--por uno más alto o uno más bajo, dichos bonos no podrán ser utilizado por él
+	UPDATE moustache_spice.bonoConsulta
+		SET bco_habilitado=0
+	WHERE bco_comprador IN (SELECT afi_id FROM inserted)
+	
+	UPDATE moustache_spice.bonoFarmacia
+		SET bfa_habilitado=0
+	WHERE bfa_afiliado IN (SELECT afi_id FROM inserted)
 END
 GO
 
@@ -277,10 +289,10 @@ CREATE TABLE moustache_spice.afiliadoAudit (
 -- -----------------------------------------------------
 CREATE TABLE moustache_spice.bonoConsulta (
   bco_id INT NOT NULL Identity,
-  bco_fecha DATE NOT NULL,
+  bco_fecha DATE NULL,
   bco_fechaCompa DATE NOT NULL,
-  bco_comprador INT FOREIGN KEY REFERENCES moustache_spice.afiliado(afi_id),
-  bco_afiliado INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.afiliado(afi_id),
+  bco_comprador INT NOT NULL FOREIGN KEY REFERENCES moustache_spice.afiliado(afi_id),
+  bco_afiliado INT NULL FOREIGN KEY REFERENCES  moustache_spice.afiliado(afi_id),
   bco_habilitado TINYINT NOT NULL DEFAULT 1, --Funciona de las veces de si esta o no consumido
   PRIMARY KEY (bco_id)
 );
@@ -292,7 +304,8 @@ CREATE TABLE moustache_spice.bonoFarmacia (
   bfa_id INT NOT NULL Identity,
   bfa_fechaImpresion DATE NOT NULL,
   bfa_fechaVencimiento DATE NOT NULL,
-  bfa_afiliado INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.afiliado(afi_id),
+  bfa_comprador INT NOT NULL FOREIGN KEY REFERENCES moustache_spice.afiliado(afi_id),
+  bfa_afiliado INT NULL FOREIGN KEY REFERENCES  moustache_spice.afiliado(afi_id),
   bfa_habilitado TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (bfa_id)
 );
@@ -349,7 +362,6 @@ CREATE TABLE moustache_spice.medicamento (
   PRIMARY KEY(med_id)
 );
 
-
 -- -----------------------------------------------------
 -- creacion tabla medicamento_x_bonoFarmacia
 -- Froma dificil de decir "Receta"
@@ -367,6 +379,18 @@ BEGIN
 	UPDATE moustache_spice.bonoFarmacia SET bfa_habilitado=0 WHERE bfa_id IN (SELECT DISTINCT mxb_bonoFarmacia FROM inserted)
 END
 GO
+
+-- -----------------------------------------------------
+-- creacion tabla pagos
+-- -----------------------------------------------------
+CREATE TABLE moustache_spice.pagos (
+  pag_id INT NOT NULL Identity,
+  pag_afiliado INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.afiliado(afi_id),
+  pag_cantidadBonosFarmacia INT NOT NULL DEFAULT 0,
+  pag_cantidadBonosConsulta INT NOT NULL DEFAULT 0,
+  pag_fechaCompra DATETIME NOT NULL,
+  PRIMARY KEY(pag_id)
+);
 
 -- -----------------------------------------------------
 -- CREATE vistas
@@ -515,8 +539,8 @@ INSERT INTO moustache_spice.profesional_x_especialidad(pxe_profesional, pxe_espe
 -- -----------------------------------------------------
 PRINT 'migracion tabla bonoConsulta'
 SET IDENTITY_INSERT moustache_spice.bonoConsulta ON
-INSERT INTO moustache_spice.bonoConsulta(bco_id, bco_fechaCompa, bco_afiliado, bco_fecha)
-	(SELECT DISTINCT Bono_Consulta_Numero, Compra_Bono_Fecha, afi_id, Bono_Consulta_Fecha_Impresion
+INSERT INTO moustache_spice.bonoConsulta(bco_id, bco_fechaCompa, bco_comprador, bco_afiliado, bco_fecha)
+	(SELECT DISTINCT Bono_Consulta_Numero, Compra_Bono_Fecha, afi_id, afi_id, Bono_Consulta_Fecha_Impresion
         FROM gd_esquema.Maestra
 			LEFT JOIN moustache_spice.vAfiliado ON usu_numeroDocumento = Paciente_Dni
         WHERE Bono_Consulta_Numero IS NOT NULL AND Compra_Bono_Fecha IS NOT NULL)
@@ -527,8 +551,8 @@ SET IDENTITY_INSERT moustache_spice.bonoConsulta OFF
 -- -----------------------------------------------------
 PRINT 'migracion tabla bonoFarmacia'
 SET IDENTITY_INSERT moustache_spice.bonoFarmacia ON
-INSERT INTO moustache_spice.bonoFarmacia(bfa_id, bfa_fechaImpresion, bfa_fechaVencimiento, bfa_afiliado, bfa_habilitado)
-	(SELECT DISTINCT Bono_Farmacia_Numero, Bono_Farmacia_Fecha_Impresion, Bono_Farmacia_Fecha_Vencimiento, afi_id, moustache_spice.bonoFarmaciaHabilitado(Bono_Farmacia_Fecha_Impresion, Bono_Farmacia_Fecha_Vencimiento)
+INSERT INTO moustache_spice.bonoFarmacia(bfa_id, bfa_fechaImpresion, bfa_fechaVencimiento, bfa_afiliado, bfa_comprador, bfa_habilitado)
+	(SELECT DISTINCT Bono_Farmacia_Numero, Bono_Farmacia_Fecha_Impresion, Bono_Farmacia_Fecha_Vencimiento, afi_id, afi_id, moustache_spice.bonoFarmaciaHabilitado(Bono_Farmacia_Fecha_Impresion, Bono_Farmacia_Fecha_Vencimiento)
 	FROM gd_esquema.Maestra
 		LEFT JOIN moustache_spice.vAfiliado ON usu_numeroDocumento = Paciente_Dni
 	WHERE Bono_Farmacia_Numero IS NOT NULL)

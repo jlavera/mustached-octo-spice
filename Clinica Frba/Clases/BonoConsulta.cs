@@ -31,9 +31,9 @@ namespace Clinica_Frba.Clases {
 
             //FIXME tendira que llamar a el BonoFarmacia() de arriba
             id = (int)dr["bco_id"];
-            afiliado = new Afiliado(dr);
-            if(dr["bco_comprador"] != DBNull.Value)
-                comprador = new Afiliado((int)dr["bco_comprador"]);
+            comprador = new Afiliado(dr);
+            if(dr["bco_afiliado"] != DBNull.Value)
+                afiliado = new Afiliado((int)dr["bco_afiliado"]);
             fecha = (DateTime)dr["bco_fecha"];
             fechaCompa = (DateTime)dr["bco_fechaCompa"];
         }

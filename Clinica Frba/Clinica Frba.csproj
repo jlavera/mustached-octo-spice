@@ -202,11 +202,11 @@
     <Compile Include="Registrar Agenda\RegistrarAgenda.Designer.cs">
       <DependentUpon>RegistrarAgenda.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra de Bono\Form1.cs">
+    <Compile Include="Compra de Bono\ComprarBonos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compra de Bono\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Compra de Bono\ComprarBonos.Designer.cs">
+      <DependentUpon>ComprarBonos.cs</DependentUpon>
     </Compile>
     <Compile Include="Pedir Turno\PedirTurno.cs">
       <SubType>Form</SubType>
@@ -257,6 +257,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Clases\miniAfiliado.resx">
       <DependentUpon>miniAfiliado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra de Bono\ComprarBonos.resx">
+      <DependentUpon>ComprarBonos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Generar Receta\GenerarReceta.resx">
       <DependentUpon>GenerarReceta.cs</DependentUpon>

@@ -123,7 +123,6 @@
             this.gbDatos.Size = new System.Drawing.Size(504, 342);
             this.gbDatos.TabIndex = 7;
             this.gbDatos.TabStop = false;
-            this.gbDatos.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // label5
             // 
