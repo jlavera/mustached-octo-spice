@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Clinica_Frba.Clases;
 
-namespace Clinica_Frba.GenerarReceta
+namespace Clinica_Frba.Generar_Receta
 {
     public partial class GenerarReceta : Form
     {
@@ -23,10 +23,6 @@ namespace Clinica_Frba.GenerarReceta
         public GenerarReceta(BonoFarmacia bono){
             tbBono.Text = Convert.ToString(bono.id);
             tbBono.Enabled = false;
-        }
-
-        private void GenerarReceta_Load(object sender, EventArgs e) {
-
         }
 
         private void bAgregar_Click(object sender, EventArgs e) {
@@ -88,6 +84,10 @@ namespace Clinica_Frba.GenerarReceta
                 }
             } else
                 MessageBox.Show("Faltan cargar datos");
+        }
+
+        private void GenerarReceta_Load(object sender, EventArgs e) {
+
         }
     }
 }

@@ -310,7 +310,6 @@ CREATE TABLE moustache_spice.turno (
   tur_fechaYHoraAtencion DATETIME NULL,
   tur_sintomas TEXT NULL,
   tur_diagnostico TEXT NULL,
-  tur_bonoFarmacia INT NULL FOREIGN KEY REFERENCES moustache_spice.bonoFarmacia(bfa_id),
   tur_bonoConsulta INT NULL FOREIGN KEY REFERENCES moustache_spice.bonoConsulta(bco_id),
   tur_habilitado TINYINT NOT NULL DEFAULT 1,-- Sería cuando se cancela un turno
   PRIMARY KEY (tur_id)
@@ -551,9 +550,12 @@ INSERT INTO moustache_spice.agenda(age_profesional, age_hasta, age_desde)
 -- -----------------------------------------------------
 PRINT 'migracion tabla turno'
 SET IDENTITY_INSERT moustache_spice.turno ON
-INSERT INTO moustache_spice.turno(tur_id, tur_bonoFarmacia, tur_bonoConsulta, tur_afiliado, tur_profesional, tur_fechaYHoraTurno, tur_sintomas, tur_diagnostico, tur_habilitado)
-	(SELECT DISTINCT Turno_Numero, MAX(Bono_Farmacia_Numero), MAX(Bono_Consulta_Numero),
-		afi_id, pro_id, Turno_Fecha, MAX(Consulta_Sintomas), MAX(Consulta_Enfermedades),
+INSERT INTO moustache_spice.turno(tur_id, tur_bonoConsulta, tur_afiliado, tur_profesional, tur_fechaYHoraTurno, tur_fechaYHoraAtencion, tur_fechaYHoraLlegada, tur_sintomas, tur_diagnostico, tur_habilitado)
+	(SELECT DISTINCT Turno_Numero, MAX(Bono_Consulta_Numero),
+		afi_id, pro_id, Turno_Fecha, 
+		(CASE WHEN MAX(Consulta_Sintomas) IS NOT NULL THEN Turno_Fecha ELSE NULL END),
+		(CASE WHEN MAX(Consulta_Sintomas) IS NOT NULL THEN Turno_Fecha ELSE NULL END),
+		MAX(Consulta_Sintomas), MAX(Consulta_Enfermedades),
 		(CASE WHEN (CAST(Turno_Fecha AS DATE) > (SELECT TOP 1 age_desde FROM moustache_spice.agenda WHERE age_profesional = pro_id)
 				AND CAST(Turno_Fecha AS DATE)  < (SELECT TOP 1 age_hasta FROM moustache_spice.agenda WHERE age_profesional = pro_id)) THEN 1 ELSE 0 END)
 	FROM gd_esquema.Maestra

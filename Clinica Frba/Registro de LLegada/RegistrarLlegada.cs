@@ -69,7 +69,7 @@ namespace Clinica_Frba.RegistrarLlegada {
                 gbProf.Enabled = false;
 
                 //--TODO llenar LB con los turnos del día del profesional
-                turnos.FillForProf(prof);
+                turnos.FillForProf(prof, false);
                 lbTurnos.Items.AddRange(turnos.ToList());
             }
         }

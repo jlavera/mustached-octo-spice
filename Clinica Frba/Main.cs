@@ -156,7 +156,7 @@ namespace Clinica_Frba {
         }
 
         private void Receta_Click(object sender, EventArgs e) {
-            GenerarReceta.GenerarReceta form = new GenerarReceta.GenerarReceta();
+            Generar_Receta.GenerarReceta form = new Generar_Receta.GenerarReceta();
             form.ShowDialog();
 
             if (form.DialogResult == DialogResult.OK) {
@@ -171,7 +171,7 @@ namespace Clinica_Frba {
         }
 
         private void Registro_de_Resultado_Click(object sender, EventArgs e) {
-            RegistroResultado.RegistrarResultado form = new Clinica_Frba.RegistroResultado.RegistrarResultado();
+            RegistroResultado.RegistrarResultado form = new Clinica_Frba.RegistroResultado.RegistrarResultado(user);
             form.ShowDialog();
         }
     }

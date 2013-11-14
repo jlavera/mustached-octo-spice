@@ -48,46 +48,18 @@ namespace Clinica_Frba.Clases {
             }
         }
 
-        public void FillForProf(Profesional _prof) {
-            DataTable dt = DB.ExecuteReader("SELECT * FROM " + DB.schema + "turno" +
+        public void FillForProf(Profesional _prof, Boolean llego) {
+            //El discriminador es para saber si tiene que tomar los turnos que llegaron, o lo que todavia no
+
+            Fill(DB.ExecuteReader("SELECT * FROM " + DB.schema + "turno" +
                 " JOIN "+DB.schema+"vProfesional ON tur_profesional = pro_id" +
                 " JOIN " + DB.schema + "vAfiliado ON tur_afiliado = afi_id" +
                 " WHERE tur_profesional = " + _prof.id + " " + //Que sea del profesional que atendiste
-                "AND tur_fechaYHoraLlegada IS NULL " + //Que no haya llegado ya
+                (!llego ? "AND tur_fechaYHoraLlegada IS NULL " : "AND tur_fechaYHoraLlegada IS NOT NULL ") +
                 "AND CAST(tur_fechaYHoraTurno as DATE) = '" + FuncionesBoludas.GetDateTime().ToString("yyyy-MM-dd") +"' " + //Que sea de ese dia
                 "AND CAST(tur_fechaYHoraTurno as TIME) > '" + FuncionesBoludas.GetDateTime().ToString("HH:mm") + "' " + //Pero que sea mas tarde
                 "AND tur_habilitado=1 " +
-                "ORDER BY tur_fechaYHoraTurno DESC"); //Ordenados
-            
-            //Tengo que hacerlo a mano porqu quiero los turnos chiquitos, no los grandes
-            foreach (DataRow dr in dt.Rows) {
-                items.Add(new Turno(dr));
-            }
-        }
-
-        
-
-        public void FillRegistrarAtencion(Profesional _prof) {
-
-            DataTable dt = DB.ExecuteReader("POTATO");
-
-            //Tengo que hacerlo a mano porqu quiero los turnos chiquitos, no los grandes
-            foreach (DataRow dr in dt.Rows) {
-                items.Add(new Turno(dr));
-            }
-
-            /*SELECT *
-
-            FROM moustache_spice.turno
-
-            WHERE
-	            tur_profesional = 17
-	            AND tur_habilitado = 1
-	            AND tur_fechaYHoraAtencion IS NULL
-	            AND tur_fechaYHoraLlegada IS NOT NULL
-	            AND tur_fechaYHoraTurno > GETDATE()
-             */
-
+                "ORDER BY tur_fechaYHoraTurno DESC")); //Ordenados
         }
     }
 }

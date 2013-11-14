@@ -12,15 +12,26 @@ namespace Clinica_Frba.RegistroResultado {
     public partial class RegistrarResultado : Form {
 
         Turnos turnos = new Turnos();
-        Profesional prof;
+        Profesional profesional;
 
-        public RegistrarResultado() {
+        public RegistrarResultado(Usuario _usuario) {
             InitializeComponent();
-            //--TODO creo que debería llegar un profesional por parámetro
+            int tmp = DB.ExecuteCardinal("SELECT TOP 1 pro_id FROM " + DB.schema + "vProfesional WHERE usu_id=" + _usuario.id);
+            if (tmp != -1) {
+                profesional = new Profesional(tmp);
+            } else {
+                //Si fallo al traer afiliados, es que el usuario no es un afiliado
+                MessageBox.Show("A modo de debug, le vamos a dejar elejir un profesional");
+                miniProfesional mini = new miniProfesional();
+                while (mini.DialogResult != DialogResult.OK)
+                    mini.ShowDialog();
+                profesional = mini.profesional;
+            }
         }
 
         private void RegistrarResultado_Load(object sender, EventArgs e) {
-            turnos.FillRegistrarAtencion(prof);
+            turnos.FillForProf(profesional, true);
+            lbTurnos.Items.AddRange(turnos.ToList());
 
         }
 
@@ -46,19 +57,14 @@ namespace Clinica_Frba.RegistroResultado {
 
         }
 
-        private void button2_Click(object sender, EventArgs e) {
-            //--TODO esto podría abrir la ventana para crear una receta y/o dar para elegir una ya creada, como mais te guste
-        }
-
         private void bFinalizar_Click(object sender, EventArgs e) {
             if (rbSi.Checked) {
-                //--UPDATE de que SI se realizo
-                //--acordate la receta
-            } else {
-                //--UPDATE de que NO se realizo
+                DB.ExecuteNonQuery("UPDATE " + DB.schema + "turno SET tur_fechaYHoraAtencion='" + FuncionesBoludas.GetDateTime().ToString() + "', "+
+                                                                     "tur_sintomas='" + tbSintomas.Text + "', " +
+                                                                     "tur_diagnostico='" + tbDiagnostico.Text + "' " + 
+                                                                     "WHERE tur_id=" + ((Turno)lbTurnos.SelectedItem).id);
             }
+            DialogResult = DialogResult.OK;
         }
-
-
     }
 }

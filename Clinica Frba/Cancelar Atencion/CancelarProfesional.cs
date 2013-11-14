@@ -66,5 +66,9 @@ namespace Clinica_Frba.Cancelar_Atencion {
                 DialogResult = DialogResult.OK;
             }
         }
+
+        private void CancelarProfesional_Load(object sender, EventArgs e) {
+
+        }
     }
 }
