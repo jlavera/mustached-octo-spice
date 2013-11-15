@@ -19,7 +19,7 @@ namespace Clinica_Frba.Listados_Estadisticos {
 
         private void openView(string tipo) {
 
-            Ver form = new Ver((rbPrimer.Checked) ? 1 : 2, tipo);
+            Ver form = new Ver((rbPrimer.Checked) ? 1 : 7, Convert.ToInt32(numericUpDown1.Value), tipo);
             form.ShowDialog();
         }
     }

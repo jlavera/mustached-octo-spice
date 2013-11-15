@@ -34,11 +34,16 @@
             this.b2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.b1 = new System.Windows.Forms.Button();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.numericUpDown1);
             this.groupBox1.Controls.Add(this.rbSegundo);
             this.groupBox1.Controls.Add(this.rbPrimer);
             this.groupBox1.Controls.Add(this.label3);
@@ -59,7 +64,7 @@
             // rbSegundo
             // 
             this.rbSegundo.AutoSize = true;
-            this.rbSegundo.Location = new System.Drawing.Point(340, 31);
+            this.rbSegundo.Location = new System.Drawing.Point(297, 31);
             this.rbSegundo.Name = "rbSegundo";
             this.rbSegundo.Size = new System.Drawing.Size(113, 17);
             this.rbSegundo.TabIndex = 10;
@@ -155,6 +160,38 @@
             this.b1.UseVisualStyleBackColor = true;
             this.b1.Click += new System.EventHandler(this.b_Click);
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(498, 31);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            2901,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1901,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.numericUpDown1.Size = new System.Drawing.Size(56, 20);
+            this.numericUpDown1.TabIndex = 11;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            2013,
+            0,
+            0,
+            0});
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(461, 33);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Año:";
+            // 
             // ListadosEstadisticos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -168,6 +205,7 @@
             this.Text = "ListadosEstadisticos";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -185,5 +223,7 @@
         private System.Windows.Forms.Button b2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button b1;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label5;
     }
 }

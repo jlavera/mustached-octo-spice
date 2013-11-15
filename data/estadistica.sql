@@ -58,7 +58,7 @@ SELECT DATENAME(month,  DateAdd( month , T.Mes , 0 ) - 1) 'Mes',
 	   (SELECT COUNT(bfa_id)+COUNT(bco_id) FROM moustache_spice.afiliado
 			LEFT JOIN moustache_spice.bonoConsulta ON bco_comprador=afi_id AND bco_afiliado!=afi_id AND DATEPART(MONTH, bco_fechaCompa)=T.Mes AND DATEPART(YEAR, bco_fechaCompa)=2013
 			LEFT JOIN moustache_spice.bonoFarmacia ON bfa_comprador=afi_id AND bfa_afiliado!=afi_id AND DATEPART(MONTH, bfa_fechaImpresion)=T.mes AND DATEPART(YEAR, bfa_fechaImpresion)=2013
-		WHERE afi_id=X.afi_id) 'Cantidad de bonos no cobrados por el'
+		WHERE afi_id=X.afi_id) 'Cantidad de bonos no cobrados por el mismo'
 FROM (SELECT TOP 10 afi_id, usu_apellido + ', ' + usu_nombre 'Afiliado' FROM moustache_spice.vAfiliado
 			LEFT JOIN moustache_spice.bonoConsulta ON bco_comprador=afi_id AND bco_afiliado!=afi_id AND DATEPART(MONTH, bco_fechaCompa)>=7 AND DATEPART(MONTH, bco_fechaCompa)<=12 AND DATEPART(YEAR, bco_fechaCompa)=2013
 			LEFT JOIN moustache_spice.bonoFarmacia ON bfa_comprador=afi_id AND bfa_afiliado!=afi_id AND DATEPART(MONTH, bfa_fechaImpresion)>=7 AND DATEPART(MONTH, bfa_fechaImpresion)<=12 AND DATEPART(YEAR, bfa_fechaImpresion)=2013
