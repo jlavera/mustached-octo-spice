@@ -5,6 +5,7 @@ GO
 -- CREATE funciones
 -- -----------------------------------------------------
 
+-- Concatenar las funcionalidades de un rol para mostrar en el DataGridView de ABM Roles
 CREATE FUNCTION moustache_spice.concatenarFuncionalidad(@rolID int) RETURNS varchar(500) AS
 BEGIN
   declare @resultado varchar(500)
@@ -17,6 +18,7 @@ BEGIN
 END
 GO
 
+-- Concatenar las especialidades de un profesional para mostrar en el DataGridView de ABM Profesionales
 CREATE FUNCTION moustache_spice.concatenarEspecialidades(@proID int) RETURNS varchar(500) AS
 BEGIN
   declare @resultado varchar(500)
@@ -29,21 +31,24 @@ BEGIN
 END
 GO
 
+-- Funcion para obtener la cantidad de medicamentos que se usa como check de que sea menor que 5
 CREATE FUNCTION moustache_spice.cantidadMedicamentos(@bonoFarmacia int) RETURNS int AS
 BEGIN
   RETURN (SELECT COUNT(*) FROM moustache_spice.medicamento_x_bonoFarmacia WHERE mxb_bonoFarmacia = @bonoFarmacia)
 END
 GO
 
+-- Funcion para obtener la carga horaria que se usa como check de que un profesional no este disponible mas de 48 horas semanales
 CREATE FUNCTION moustache_spice.cargaHoraria(@agenda int) RETURNS int AS
 BEGIN
-	-- 0.5 porque son cada 30 minutos (media hora) y quiero devolver en horas
+	-- 0.5 porque son cada 30 minutos (media hora) y quiero devolverlo en horas
   RETURN 0.5*(SELECT COUNT(1)
 			FROM moustache_spice.semanal
 			WHERE sem_agenda = @agenda AND sem_habilitado=1)
 END
 GO
 
+-- Funcion que se usa en el check para validar los horarios de atencion de la clinica
 CREATE FUNCTION moustache_spice.semanalHabilitado(@dia INT, @hora TIME) RETURNS int AS
 BEGIN
 	IF (((@dia  BETWEEN 2 AND 6 AND
@@ -56,6 +61,7 @@ BEGIN
 END
 GO
 
+-- Funcion que se usa en el check de bonoFarmacias para deshabilitar los que esten mal
 CREATE FUNCTION moustache_spice.bonoFarmaciaHabilitado(@impresion DATE, @vencimiento DATE) RETURNS int AS
 BEGIN
 	IF (@impresion <= @vencimiento AND DATEDIFF(DAY, @impresion , @vencimiento ) <= 60)
@@ -63,12 +69,12 @@ BEGIN
 	RETURN 0
 END
 GO
+
 -- -----------------------------------------------------
 -- creacion tabla usuario
 -- -----------------------------------------------------
 CREATE TABLE moustache_spice.usuario (
   usu_id INT NOT NULL Identity,
-  
   usu_nombre VARCHAR(45) NOT NULL,
   usu_apellido VARCHAR(45) NOT NULL,
   usu_tipoDocumento char(3) NULL,-- 'DNI/LE/LC' *FALTA*
@@ -78,13 +84,14 @@ CREATE TABLE moustache_spice.usuario (
   usu_mail VARCHAR(45) NOT NULL,
   usu_fechaNacimiento DATE NOT NULL,
   usu_sexo char(1) NULL,-- 'M/F' *FALTA*
-  
   usu_nombreUsuario VARCHAR(45) UNIQUE,
   usu_contrasegna VARCHAR(100), -- SHA256
   usu_intentosFallidos INT NOT NULL DEFAULT 0,
   usu_habilitado TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (usu_id)
 );
+
+--Trigger para deshabilitar los logins con mas de 3 intentos fallidos
 GO
 CREATE TRIGGER moustache_spice.loginFallido ON moustache_spice.usuario AFTER UPDATE AS
 BEGIN
@@ -101,16 +108,19 @@ CREATE TABLE moustache_spice.rol (
   rol_habilitado TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (rol_id)
 );
-GO
+
 -- "Se le debe quitar el rol inhabilitado a todos aquellos usuarios que lo posean."
--- Esto no implica recuperar las asignaciones que existían en un pasado
+-- "Esto no implica recuperar las asignaciones que existían en un pasado"
+GO
 CREATE TRIGGER moustache_spice.inhabilitarRol ON moustache_spice.rol AFTER UPDATE AS
 BEGIN
 	DELETE FROM moustache_spice.rol_x_usuario WHERE EXISTS (SELECT rol_id FROM inserted WHERE rol_habilitado=0 AND rol_id = rxu_rol)
 END
 GO
+
 -- -----------------------------------------------------
 -- creacion tabla rol_x_usuario
+-- Relacion NxN que no se puede hacer en un modelo relacional
 -- -----------------------------------------------------
 CREATE TABLE moustache_spice.rol_x_usuario (
   rxu_rol INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.rol(rol_id),
@@ -129,6 +139,7 @@ CREATE TABLE moustache_spice.funcionalidad (
 
 -- -----------------------------------------------------
 -- creacion tabla rol_x_funcionalidad
+-- Relacion NxN que no se puede hacer en un modelo relacional
 -- -----------------------------------------------------
 CREATE TABLE moustache_spice.rol_x_funcionalidad (
   rxf_rol INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.rol(rol_id),
@@ -169,6 +180,7 @@ CREATE TABLE moustache_spice.especialidad (
 
 -- -----------------------------------------------------
 -- creacion tabla profesional
+-- EL nombre, apellido y informacion esta en la tabla de usuario
 -- -----------------------------------------------------
 CREATE TABLE moustache_spice.profesional (
   pro_id INT NOT NULL Identity,
@@ -181,6 +193,7 @@ CREATE TABLE moustache_spice.profesional (
 
 -- -----------------------------------------------------
 -- creacion tabla agenda
+-- Una agenda es un periodo de tiempo, dentro de la cual valen las entradas de la tabla mas abajo "Semanal"
 -- -----------------------------------------------------
 CREATE TABLE moustache_spice.agenda (
   age_id INT NOT NULL Identity,
@@ -193,6 +206,7 @@ CREATE TABLE moustache_spice.agenda (
 
 -- -----------------------------------------------------
 -- creacion tabla semanal
+-- Dia de la semana y hora en la que atiende. Hay una entrada por cada turno de 30 minutos que esta disponible
 -- -----------------------------------------------------
 CREATE TABLE moustache_spice.semanal (
   sem_agenda INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.agenda(age_id),
@@ -204,6 +218,7 @@ CREATE TABLE moustache_spice.semanal (
 
 -- -----------------------------------------------------
 -- creacion tabla profesional_x_especialidad
+-- Relacion NxN que no se puede hacer en un modelo relacional
 -- -----------------------------------------------------
 CREATE TABLE moustache_spice.profesional_x_especialidad (
   pxe_profesional INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.profesional(pro_id),
@@ -244,8 +259,10 @@ CREATE TABLE moustache_spice.afiliado (
   afi_familiaresACargo INT NULL,
   afi_habilitado TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (afi_id),
-  --UNIQUE (afi_grupoFamiliar, afi_orden)
+  --UNIQUE (afi_grupoFamiliar, afi_orden) Deveria, pero al tener ordenes en NULL por la migracion, no se puede poner UNIQUE
 );
+
+--Trigger para cambiar los planes medicos de todos los afiliados que esten en el mismo grupo, y deshabilitar todos los turnos que este tenga
 GO
 CREATE TRIGGER moustache_spice.cambiarPlanMedico ON moustache_spice.afiliado AFTER UPDATE AS
 BEGIN
@@ -254,9 +271,9 @@ BEGIN
 	WHERE afi_grupoFamiliar2 IN (SELECT afi_id FROM inserted)
 	
 	
-	--Recordar que los bonos solo pueden ser utilizados para el plan que tenía asignado el 
+	--"Recordar que los bonos solo pueden ser utilizados para el plan que tenía asignado el 
 	--afiliado en el momento que realizó la compra, es decir, que si luego cambia de plan, sea 
-	--por uno más alto o uno más bajo, dichos bonos no podrán ser utilizado por él
+	--por uno más alto o uno más bajo, dichos bonos no podrán ser utilizado por él"
 	UPDATE moustache_spice.bonoConsulta
 		SET bco_habilitado=0
 	WHERE bco_comprador IN (SELECT afi_id FROM inserted)
@@ -269,6 +286,7 @@ GO
 
 -- -----------------------------------------------------
 -- creacion tabla planMedicoAudit
+-- Se guarda el plan medico viejo del grupo familiar, junto ocn la razon
 -- -----------------------------------------------------
 CREATE TABLE moustache_spice.planMedicoAudit(
   grA_afiliado INT NOT NULL FOREIGN KEY REFERENCES moustache_spice.afiliado(afi_id),
@@ -284,6 +302,7 @@ CREATE TABLE moustache_spice.afiliadoAudit (
   afA_usuario INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.usuario(usu_id),
   afA_fecha DATETIME NOT NULL,
 );
+
 -- -----------------------------------------------------
 -- creacion tabla bonoConsulta
 -- -----------------------------------------------------
@@ -327,6 +346,8 @@ CREATE TABLE moustache_spice.turno (
   tur_habilitado TINYINT NOT NULL DEFAULT 1,-- Sería cuando se cancela un turno
   PRIMARY KEY (tur_id)
 );
+
+--Si se cancela el turno, se tiene que re-habilitar el bonoConsulta. El bonoFarmacia todavia no fue ni consumido (porque se tiene que cancelar ocn un dia de antelacion)
 GO
 CREATE TRIGGER moustache_spice.retribuirBono ON moustache_spice.turno AFTER UPDATE AS
 BEGIN
@@ -336,12 +357,18 @@ BEGIN
 END
 Go
 
+-- -----------------------------------------------------
+-- creacion tabla turnoAudit
+-- Razones por la cancelacion, y un tipo que se cargue (Tanto del profesional como el afiliado)
+-- -----------------------------------------------------
 CREATE TABLE moustache_spice.turnoAudit(
 	tuA_turno INT NOT NULL FOREIGN KEY REFERENCES moustache_spice.turno(tur_id),
 	tuA_razon VARCHAR(255),
 	tuA_tipo VARCHAR(255)
 );
  
+ -- Si el profesional cancela un semanal, se deshabilitan todos los turnos.
+ -- Alguien tiene que mirar los inhabilitado y avisar al afiliado
 GO
 CREATE TRIGGER moustache_spice.cancelarTurnos ON moustache_spice.semanal FOR DELETE AS
 BEGIN
@@ -355,6 +382,7 @@ GO
 
 -- -----------------------------------------------------
 -- creacion tabla medicamento
+-- Todos los posibles medicamentos
 -- -----------------------------------------------------
 CREATE TABLE moustache_spice.medicamento (
   med_id INT NOT NULL Identity,
@@ -364,7 +392,8 @@ CREATE TABLE moustache_spice.medicamento (
 
 -- -----------------------------------------------------
 -- creacion tabla medicamento_x_bonoFarmacia
--- Froma dificil de decir "Receta"
+-- Relacion NxN que no se puede hacer en un modelo relacional
+-- Sirve de las veces de "Receta"
 -- -----------------------------------------------------
 CREATE TABLE moustache_spice.medicamento_x_bonoFarmacia (
   mxb_medicamento INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.medicamento(med_id),
@@ -373,6 +402,8 @@ CREATE TABLE moustache_spice.medicamento_x_bonoFarmacia (
   mxb_prescripcion DATE NULL,
   PRIMARY KEY (mxb_medicamento, mxb_bonoFarmacia)
 );
+
+-- Si se crea una receta, el bono se da por consumido
 GO
 CREATE TRIGGER moustache_spice.consumirBono ON moustache_spice.medicamento_x_bonoFarmacia AFTER INSERT AS
 BEGIN
@@ -394,6 +425,7 @@ CREATE TABLE moustache_spice.pagos (
 
 -- -----------------------------------------------------
 -- CREATE vistas
+-- Todas estas sirven para mejorar un poco la performance, pero mas que nada para que el codigo en C# quede mas limpio
 -- -----------------------------------------------------
 GO
 CREATE VIEW moustache_spice.vProfesional AS
@@ -404,7 +436,7 @@ CREATE VIEW moustache_spice.vProfesional AS
 GO
 
 CREATE VIEW moustache_spice.vAfiliado AS
-		SELECT *, ISNULL(afi_grupoFamiliar2, afi_id) AS 'afi_grupoFamiliar'
+		SELECT *, ISNULL(afi_grupoFamiliar2, afi_id) AS 'afi_grupoFamiliar' --Forma medio fea, pero caundo migramos Afiliados no tenemos una buena forma de saber en que ID se ingregan
 		FROM moustache_spice.afiliado
 			LEFT JOIN moustache_spice.usuario ON usu_id = afi_usuario
 			LEFT JOIN moustache_spice.planMedico ON afi_planMedico = pla_id
@@ -423,6 +455,7 @@ GO
 -- INSERTs a mano
 -- -----------------------------------------------------
 PRINT 'INSERT a mano'
+-- Se sabe que las funcionalidades no cambian.
 INSERT moustache_spice.funcionalidad (fun_nombre) VALUES ('Abm_Rol')
 														,('Abm_Usuario')
 														,('Abm_Afiliado')
@@ -453,9 +486,10 @@ INSERT moustache_spice.rol_x_funcionalidad(rxf_funcionalidad, rxf_rol)
 		    (SELECT rol_id FROM moustache_spice.rol WHERE rol_nombre='Afiliado')
 	FROM moustache_spice.funcionalidad WHERE fun_nombre='Turnos' OR fun_nombre='Cancelar_atencion');
 
+-- Usuario que se nos impone
 INSERT moustache_spice.usuario(usu_apellido, usu_contrasegna, usu_direccion, usu_fechaNacimiento, usu_habilitado, usu_intentosFallidos, usu_mail, usu_nombre, usu_nombreUsuario, usu_telefono, usu_numeroDocumento) VALUES
 	('admin', '52d77462b24987175c8d7dab901a5967e927ffc8d0b6e4a234e07a4aec5e3724', 'Peru 1066', '1/1/2050', 1, 0, 'admin@admin.a', 'admin', 'admin', 12344321, 0);
-
+--Le damos todas las funcionalidades
 INSERT moustache_spice.rol_x_usuario(rxu_usuario, rxu_rol)
 	(SELECT (SELECT TOP 1 usu_id FROM moustache_spice.usuario WHERE usu_nombreUsuario = 'admin'), rol_id FROM moustache_spice.rol)
 
@@ -469,6 +503,7 @@ INSERT moustache_spice.estadoCivil(est_estado) VALUES ('Soltero/a')
 -- migracion tabla usuario
 -- -----------------------------------------------------
 PRINT 'migracion tabla usuario'
+--Tanto afiliados como profesionales son usuarios, por eso el UNION
 INSERT INTO moustache_spice.usuario(usu_numeroDocumento, usu_nombre, usu_apellido, usu_direccion, usu_telefono, usu_mail, usu_fechaNacimiento, usu_nombreUsuario)
         ((SELECT DISTINCT Paciente_Dni, Paciente_Nombre, Paciente_Apellido,
                Paciente_Direccion, Paciente_Telefono,
@@ -488,6 +523,7 @@ INSERT INTO moustache_spice.usuario(usu_numeroDocumento, usu_nombre, usu_apellid
 -- migracion tabla planMedico
 -- -----------------------------------------------------
 PRINT 'migracion tabla planMedico'
+--Levantar todos los planes medicos posibles, manteniendo el codigo legacy
 INSERT INTO moustache_spice.planMedico(pla_codigo, pla_nombre, pla_precioBonoConsulta, pla_precioBonoFarmacia)
 		(SELECT DISTINCT Plan_Med_Codigo, Plan_Med_Descripcion, Plan_Med_Precio_Bono_Consulta, Plan_Med_Precio_Bono_Farmacia
 		FROM gd_esquema.Maestra WHERE Plan_Med_Codigo IS NOT NULL);
@@ -515,6 +551,7 @@ INSERT INTO moustache_spice.profesional(pro_usuario)
 -- migracion tabla tipoEspecialidad
 -- -----------------------------------------------------
 PRINT 'migracion tabla tipoEspecialidad'
+--Levantar todos los tipos de especialidad posibles, manteniendo el codigo legacy
 INSERT INTO moustache_spice.tipoEspecialidad(tip_id, tip_nombre)
 	(SELECT DISTINCT Tipo_Especialidad_Codigo, Tipo_Especialidad_Descripcion FROM gd_esquema.Maestra WHERE Especialidad_Codigo IS NOT NULL);
 
@@ -522,6 +559,7 @@ INSERT INTO moustache_spice.tipoEspecialidad(tip_id, tip_nombre)
 -- migracion tabla especialidad
 -- -----------------------------------------------------
 PRINT 'migracion tabla especialidad'
+--Levantar todos las especialidades posibles, manteniendo el codigo legacy
 INSERT INTO moustache_spice.especialidad(esp_id, esp_descripcion, esp_tipo)
 	(SELECT DISTINCT Especialidad_Codigo, Especialidad_Descripcion, Tipo_Especialidad_Codigo FROM gd_esquema.Maestra WHERE Especialidad_Codigo IS NOT NULL);
 
@@ -557,12 +595,15 @@ INSERT INTO moustache_spice.bonoFarmacia(bfa_id, bfa_fechaImpresion, bfa_fechaVe
 		LEFT JOIN moustache_spice.vAfiliado ON usu_numeroDocumento = Paciente_Dni
 	WHERE Bono_Farmacia_Numero IS NOT NULL)
 SET IDENTITY_INSERT moustache_spice.bonoFarmacia OFF
+--El constraint lo agregamos despues porque alentaba mucho la migracion
+--La idea es que si no esta habilitado, nisiquiera revisa si es valido. Solo lo hace cuando el bono esta habilitado
 ALTER TABLE moustache_spice.bonoFarmacia ADD CONSTRAINT CK_bfa_valido CHECK (bfa_habilitado=0 OR moustache_spice.bonoFarmaciaHabilitado( bfa_fechaImpresion, bfa_fechaVencimiento)=1 )
 
 -- -----------------------------------------------------
 -- migracion tabla agenda
 -- -----------------------------------------------------
 PRINT 'migracion tabla agenda'
+--Creamos agendas para todos mas que naada a modo de debug, bien podriamos asumir no migrarlas y que la primera vez que un profesional ingrese al sistema, la cargue desde 0
 INSERT INTO moustache_spice.agenda(age_profesional, age_hasta, age_desde)
 	(SELECT pro_id, MAX(Turno_Fecha), DATEADD(DAY, -120, MAX(Turno_Fecha)) FROM gd_esquema.Maestra
 		LEFT JOIN moustache_spice.vProfesional ON usu_numeroDocumento = Medico_Dni 
@@ -573,6 +614,8 @@ INSERT INTO moustache_spice.agenda(age_profesional, age_hasta, age_desde)
 -- migracion tabla turno
 -- -----------------------------------------------------
 PRINT 'migracion tabla turno'
+--Aca hacemos algo medio feo con GROUP BY, el problema es que la misma fila aparece repetida con aveces NULL y aveces el sintoma, para "compactar" los nulls
+--pero no perder cuales tiene sintomas, abusamos de la implementacion de MS SQL 2008 y su manejo de NULLs
 SET IDENTITY_INSERT moustache_spice.turno ON
 INSERT INTO moustache_spice.turno(tur_id, tur_bonoConsulta, tur_afiliado, tur_profesional, tur_fechaYHoraTurno, tur_fechaYHoraAtencion, tur_fechaYHoraLlegada, tur_sintomas, tur_diagnostico, tur_habilitado)
 	(SELECT DISTINCT Turno_Numero, MAX(Bono_Consulta_Numero),
@@ -593,6 +636,7 @@ SET IDENTITY_INSERT moustache_spice.turno OFF
 -- migracion tabla semanal
 -- -----------------------------------------------------
 PRINT 'migracion tabla semanal'
+-- Como con Agenda, lo inferimos mas que nada para poder testear, pero es una inferencia nuestra.
 INSERT INTO moustache_spice.semanal(sem_agenda, sem_dia, sem_hora, sem_habilitado)
 	(SELECT DISTINCT age_id, DATEPART(dw, tur_fechaYHoraTurno), CAST(tur_fechaYHoraTurno AS TIME),
 	moustache_spice.semanalHabilitado(DATEPART(dw, tur_fechaYHoraTurno), CAST(tur_fechaYHoraTurno AS TIME))
@@ -620,37 +664,7 @@ INSERT INTO moustache_spice.medicamento_x_bonoFarmacia(mxb_bonoFarmacia, mxb_med
 	WHERE Bono_Farmacia_Numero IS NOT NULL
 	AND Bono_Farmacia_Medicamento IS NOT NULL);
 	
--- -----------------------------------------------------
--- ###TODO##:
---	>> Poner este ultimo constrain (al final de todo), pero hace que la migracion tarde un huevito!
--- ALTER TABLE moustache_spice.medicamento_x_bonoFarmacia ADD CONSTRAINT CK_mxb_cantidadValida CHECK (mxb_unidades <= 3 AND
---		(moustache_spice.cantidadMedicamentos(mxb_bonoFarmacia) <= 5))
-
--- >> Grupos familiares (asumismos por apellido, o dejamos vacio?) necesito migrar los planes medicos
-
--- >> Creamos agendas para todos, con el ultimo turno, -120 dias. Esta bien? o dejamos vacio todo?
-
--- >> Los turnos van de Domingo a Jueves, el enunciado dice:
---		"7:00 hasta las 20.00 para los días hábiles y desde las 10:00 hasta las 15:00 para los días sábados"
---	 SELECT TOP 3 Turno_Fecha FROM gd_esquema.Maestra WHERE DATEPART(dw, Turno_Fecha) BETWEEN 2 AND 5
-
--- >> Msg 3701, Level 11, State 5, Procedure migrarMedicamento, Line 22
---	  Cannot drop the table 'tmp', because it does not exist or you do not have permission.
-
--- >> En los bons, las compras y las impresiones son identicas
---		SELECT Compra_Bono_Fecha, Bono_Consulta_Fecha_Impresion
---		  FROM gd_esquema.Maestra
---		  WHERE Compra_Bono_Fecha != Bono_Consulta_Fecha_Impresion
-
--- >> Porque tira count 2, si esta puesto NOT NULL?
---		SELECT Bono_Farmacia_Numero, COUNT(Bono_Farmacia_Medicamento)
---			FROM gd_esquema.Maestra
---			WHERE Bono_Farmacia_Numero IS NOT NULL
---			  AND Bono_Farmacia_Medicamento IS NOT NULL
---			GROUP BY Bono_Farmacia_Numero
---			HAVING COUNT(Bono_Farmacia_Medicamento) > 1
-
--- >> Trigger para hacer que cuando cambie un plan medico de un padre, cambien todos los hijos
--- Esta implementado para updates de a uno, no para masivo
-
--- -----------------------------------------------------
+	
+--Este constrain aruina toda la performance, porque son MUCHISIMAS recetas, si bien esta constrain esta en la aplicacion, y en la migracion jamas se cumple, nos vemos obligados a ponerla 
+ALTER TABLE moustache_spice.medicamento_x_bonoFarmacia ADD CONSTRAINT CK_mxb_cantidadValida CHECK (mxb_unidades <= 3 AND
+	(moustache_spice.cantidadMedicamentos(mxb_bonoFarmacia) <= 5))
