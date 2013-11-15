@@ -50,11 +50,16 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbNombre = new System.Windows.Forms.TextBox();
             this.bGuardar = new System.Windows.Forms.Button();
+            this.nFamiliares = new System.Windows.Forms.NumericUpDown();
+            this.label16 = new System.Windows.Forms.Label();
             this.gbDatos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nFamiliares)).BeginInit();
             this.SuspendLayout();
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.nFamiliares);
+            this.gbDatos.Controls.Add(this.label16);
             this.gbDatos.Controls.Add(this.label2);
             this.gbDatos.Controls.Add(this.tbContrasegna);
             this.gbDatos.Controls.Add(this.tbNumeroDni);
@@ -319,6 +324,22 @@
             this.bGuardar.UseVisualStyleBackColor = true;
             this.bGuardar.Click += new System.EventHandler(this.bGuardar_Click);
             // 
+            // nFamiliares
+            // 
+            this.nFamiliares.Location = new System.Drawing.Point(146, 264);
+            this.nFamiliares.Name = "nFamiliares";
+            this.nFamiliares.Size = new System.Drawing.Size(40, 20);
+            this.nFamiliares.TabIndex = 82;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(127, 248);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(95, 13);
+            this.label16.TabIndex = 81;
+            this.label16.Text = "Familiares a cargo:";
+            // 
             // EditIntegrante
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -333,6 +354,7 @@
             this.Load += new System.EventHandler(this.EditIntegrante_Load);
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nFamiliares)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -366,5 +388,7 @@
         private System.Windows.Forms.MaskedTextBox tbTelefono;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbContrasegna;
+        private System.Windows.Forms.NumericUpDown nFamiliares;
+        private System.Windows.Forms.Label label16;
     }
 }

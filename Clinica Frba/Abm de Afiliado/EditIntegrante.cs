@@ -39,7 +39,7 @@ namespace Clinica_Frba.AbmAfiliados {
 
                 integrante = new Integrante(tbNombre.Text, tbApellido.Text, tbDireccion.Text, tbMail.Text, cmbTipoDNI.Text,
                     Convert.ToInt64(tbNumeroDni.Text), Convert.ToInt64(tbTelefono.Text), (EstadoCivil)cmbEstadoCivil.SelectedItem,
-                    (cmbSexo.SelectedText == "Masculino") ? "M" : "F", tbNombreUsuario.Text, cbConyuge.Checked, dtpFechaNacimiento.Value, tbContrasegna.Text);
+                    (cmbSexo.SelectedText == "Masculino") ? "M" : "F", tbNombreUsuario.Text, cbConyuge.Checked, dtpFechaNacimiento.Value, tbContrasegna.Text, (int)nFamiliares.Value);
                 DialogResult = DialogResult.OK;
             }
         }

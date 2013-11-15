@@ -20,6 +20,7 @@ namespace Clinica_Frba.Clases {
         public string nombreUsuario;
         public bool esConyuge;
         public DateTime fechaNacimiento;
+        public int familiares;
 
         public bool faltaGrabar;
 
@@ -40,29 +41,17 @@ namespace Clinica_Frba.Clases {
             sexo = (dr["usu_sexo"] == System.DBNull.Value) ? "" : dr["usu_sexo"].ToString();
             fechaNacimiento = (DateTime)dr["usu_fechaNacimiento"];
             contrasegna = (dr["usu_contrasegna"] == DBNull.Value)? "" : dr["usu_contrasegna"].ToString();
+            familiares = (dr["afi_familiaresACargo"] == DBNull.Value) ? -1 : (int)dr["afi_familiaresACargo"];
 
             //--Marcar que NO falta grabar en DB
             faltaGrabar = false;
         }
 
-        /// <summary>
         /// Crea un integrante a partir de sus atributos
-        /// </summary>
-        /// <param name="p_nombre"></param>
-        /// <param name="p_apellido"></param>
-        /// <param name="p_direccion"></param>
-        /// <param name="p_mail"></param>
-        /// <param name="p_tipoDocumento"></param>
-        /// <param name="p_numeroDocumento"></param>
-        /// <param name="p_telefono"></param>
-        /// <param name="p_estado"></param>
-        /// <param name="p_sexo"></param>
-        /// <param name="p_nombreUsuario"></param>
-        /// <param name="p_esConyuge"></param>
         public Integrante(string p_nombre, string p_apellido, string p_direccion,
             string p_mail, string p_tipoDocumento, long p_numeroDocumento,
             long p_telefono, EstadoCivil p_estado, string p_sexo,
-            string p_nombreUsuario, bool p_esConyuge, DateTime p_fechaNacimiento, string p_contrasegna) {
+            string p_nombreUsuario, bool p_esConyuge, DateTime p_fechaNacimiento, string p_contrasegna, int p_familiares) {
 
             nombre = p_nombre;
             apellido = p_apellido;
@@ -77,6 +66,7 @@ namespace Clinica_Frba.Clases {
             fechaNacimiento = p_fechaNacimiento;
             esConyuge = p_esConyuge;
             contrasegna = p_contrasegna;
+            familiares = p_familiares;
 
             //--Marcar que falta grabar en DB
             faltaGrabar = true;

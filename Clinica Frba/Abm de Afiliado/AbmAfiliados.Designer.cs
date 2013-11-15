@@ -35,7 +35,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.nLimit = new System.Windows.Forms.NumericUpDown();
             this.tbOrden = new System.Windows.Forms.MaskedTextBox();
-            this.tbFamiliaresACargo = new System.Windows.Forms.MaskedTextBox();
             this.tbNumeroDni = new System.Windows.Forms.MaskedTextBox();
             this.tbTelefono = new System.Windows.Forms.MaskedTextBox();
             this.lbPlanMedico = new System.Windows.Forms.ListBox();
@@ -63,7 +62,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lbGrupoFamiliar = new System.Windows.Forms.ListBox();
             this.dgvAfiliados = new System.Windows.Forms.DataGridView();
-            this.bLimpiar = new System.Windows.Forms.Button();
             this.numeroAfiliado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,6 +78,8 @@
             this.planMedico = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bLimpiar = new System.Windows.Forms.Button();
+            this.tbFamiliaresACargo = new System.Windows.Forms.MaskedTextBox();
             this.gbFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAfiliados)).BeginInit();
@@ -200,15 +200,6 @@
             this.tbOrden.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tbOrden.Size = new System.Drawing.Size(54, 20);
             this.tbOrden.TabIndex = 12;
-            // 
-            // tbFamiliaresACargo
-            // 
-            this.tbFamiliaresACargo.Location = new System.Drawing.Point(1031, 83);
-            this.tbFamiliaresACargo.Mask = "00";
-            this.tbFamiliaresACargo.Name = "tbFamiliaresACargo";
-            this.tbFamiliaresACargo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.tbFamiliaresACargo.Size = new System.Drawing.Size(54, 20);
-            this.tbFamiliaresACargo.TabIndex = 13;
             // 
             // tbNumeroDni
             // 
@@ -473,18 +464,6 @@
             this.dgvAfiliados.TabIndex = 4;
             this.dgvAfiliados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAfiliados_CellContentClick);
             // 
-            // bLimpiar
-            // 
-            this.bLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.bLimpiar.Location = new System.Drawing.Point(859, 186);
-            this.bLimpiar.Name = "bLimpiar";
-            this.bLimpiar.Size = new System.Drawing.Size(93, 29);
-            this.bLimpiar.TabIndex = 1;
-            this.bLimpiar.Text = "Limpiar (L)";
-            this.bLimpiar.UseVisualStyleBackColor = true;
-            this.bLimpiar.Click += new System.EventHandler(this.bLimpiar_Click);
-            // 
             // numeroAfiliado
             // 
             this.numeroAfiliado.HeaderText = "Nro. de afiliado";
@@ -580,6 +559,27 @@
             this.id.Name = "id";
             this.id.Visible = false;
             // 
+            // bLimpiar
+            // 
+            this.bLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.bLimpiar.Location = new System.Drawing.Point(859, 186);
+            this.bLimpiar.Name = "bLimpiar";
+            this.bLimpiar.Size = new System.Drawing.Size(93, 29);
+            this.bLimpiar.TabIndex = 1;
+            this.bLimpiar.Text = "Limpiar (L)";
+            this.bLimpiar.UseVisualStyleBackColor = true;
+            this.bLimpiar.Click += new System.EventHandler(this.bLimpiar_Click);
+            // 
+            // tbFamiliaresACargo
+            // 
+            this.tbFamiliaresACargo.Location = new System.Drawing.Point(1031, 83);
+            this.tbFamiliaresACargo.Mask = "00";
+            this.tbFamiliaresACargo.Name = "tbFamiliaresACargo";
+            this.tbFamiliaresACargo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tbFamiliaresACargo.Size = new System.Drawing.Size(54, 20);
+            this.tbFamiliaresACargo.TabIndex = 13;
+            // 
             // AbmAfiliados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -640,7 +640,6 @@
         private System.Windows.Forms.MaskedTextBox tbNumeroDni;
         private System.Windows.Forms.TextBox tbMail;
         private System.Windows.Forms.MaskedTextBox tbOrden;
-        private System.Windows.Forms.MaskedTextBox tbFamiliaresACargo;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.NumericUpDown nLimit;
         private System.Windows.Forms.Button bLimpiar;
@@ -660,5 +659,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn planMedico;
         private System.Windows.Forms.DataGridViewButtonColumn seleccionar;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.MaskedTextBox tbFamiliaresACargo;
     }
 }

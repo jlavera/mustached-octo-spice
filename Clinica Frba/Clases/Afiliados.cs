@@ -164,5 +164,9 @@ namespace Clinica_Frba.Clases {
             }
         }
 
+
+        internal void FillForGrupo(int _grupoFamiliar) {
+            Fill(DB.ExecuteReader("SELECT * FROM " + DB.schema + "vAfiliado WHERE afi_grupoFamiliar=" + _grupoFamiliar));
+        }
     }
 }

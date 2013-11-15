@@ -35,12 +35,7 @@ namespace Clinica_Frba.RegistroResultado {
 
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e) {
-
-        }
-
         private void bSiguiente_Click(object sender, EventArgs e) {
-
             //--Cachear el turno seleccionado
             gbTurno.Enabled = false;
             gbFecha.Enabled = true;

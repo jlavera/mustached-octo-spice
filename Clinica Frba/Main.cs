@@ -156,7 +156,7 @@ namespace Clinica_Frba {
         }
 
         private void Receta_Click(object sender, EventArgs e) {
-            Generar_Receta.GenerarReceta form = new Generar_Receta.GenerarReceta();
+            Generar_Receta.GenerarReceta form = new Generar_Receta.GenerarReceta(user);
             form.ShowDialog();
 
             if (form.DialogResult == DialogResult.OK) {
@@ -177,6 +177,11 @@ namespace Clinica_Frba {
 
         private void Estadisticas_Click(object sender, EventArgs e) {
             Listados_Estadisticos.ListadosEstadisticos form = new Clinica_Frba.Listados_Estadisticos.ListadosEstadisticos();
+            form.ShowDialog();
+        }
+
+        private void Bonos_Click(object sender, EventArgs e) {
+            Comprar_Bono.ComprarBono form = new Comprar_Bono.ComprarBono(user, rol);
             form.ShowDialog();
         }
     }

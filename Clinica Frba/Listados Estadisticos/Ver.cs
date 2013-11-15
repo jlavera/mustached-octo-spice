@@ -66,14 +66,14 @@ namespace Clinica_Frba.Listados_Estadisticos {
             int alto;
             int ancho;
 
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < res.Rows.Count; i++) {
                 brush = new SolidBrush(colors[i]);
 
                 alto = 50;
                 ancho = 50;
 
 
-                formGraphics.FillRectangle(brush, new Rectangle(i * (ancho + padding), panel1.Height - padding - Convert.ToInt32(res.Rows[i][1]) * coef, ancho, alto));
+                formGraphics.FillRectangle(brush, new Rectangle(i * (ancho + padding), panel1.Height - padding - Convert.ToInt32(res.Rows[i][0]) * coef, ancho, alto));
                 //formGraphics.DrawString("Op-" + (i+1).ToString(), Font, brush,
             }
             formGraphics.Dispose(); 

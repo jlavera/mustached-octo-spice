@@ -9,6 +9,7 @@ namespace Clinica_Frba.Clases {
 
         public int id;
         public Afiliado afiliado;
+        public Afiliado comprador;
         public DateTime fechaImpresion;
         public DateTime fechaVencimiento;
 
@@ -19,16 +20,16 @@ namespace Clinica_Frba.Clases {
             fechaVencimiento = (DateTime)dr["bfa_fechaVencimiento"];
         }
 
-        public BonoFarmacia(int _id, Afiliado _afiliado, DateTime _fechaImpresion, DateTime _fechaVencimiento) {
+        public BonoFarmacia(int _id, Afiliado _comprador, DateTime _fechaImpresion, DateTime _fechaVencimiento) {
             id = _id;
-            afiliado = _afiliado;
+            comprador = _comprador;
             fechaImpresion = _fechaImpresion;
             fechaVencimiento = _fechaVencimiento;
         }
 
         public BonoFarmacia(int _id) {
             //El habilitado funciona a su vez de consumido o no consumido
-            DataTable dt = DB.ExecuteReader("SELECT * FROM " + DB.schema + "bonoFarmacia JOIN " + DB.schema + "vAfiliado ON afi_id=bfa_afiliado WHERE bfa_habilitado=1 AND bfa_id=" + _id);
+            DataTable dt = DB.ExecuteReader("SELECT * FROM " + DB.schema + "bonoFarmacia JOIN " + DB.schema + "vAfiliado ON afi_id=bfa_comprador WHERE bfa_habilitado=1 AND bfa_id=" + _id);
 
             if (dt.Rows.Count == 0) //Como es PK y FK tiene que existir, y solo 1
                 throw new NoTrajoNadaExcep();
@@ -36,7 +37,7 @@ namespace Clinica_Frba.Clases {
 
             //FIXME tendira que llamar a el BonoFarmacia() de arriba
             id = (int)dr["bfa_id"];
-            afiliado = new Afiliado(dr);
+            comprador = new Afiliado(dr);
             fechaImpresion = (DateTime)dr["bfa_fechaImpresion"];
             fechaVencimiento = (DateTime)dr["bfa_fechaVencimiento"];
         }

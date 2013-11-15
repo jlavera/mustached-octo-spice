@@ -44,7 +44,7 @@
             this.tbBono.Location = new System.Drawing.Point(103, 19);
             this.tbBono.Mask = "0000000";
             this.tbBono.Name = "tbBono";
-            this.tbBono.Size = new System.Drawing.Size(129, 20);
+            this.tbBono.Size = new System.Drawing.Size(93, 20);
             this.tbBono.TabIndex = 0;
             // 
             // label1

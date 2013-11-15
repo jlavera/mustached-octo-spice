@@ -198,9 +198,10 @@
             this.Bonos.Name = "Bonos";
             this.Bonos.Size = new System.Drawing.Size(156, 27);
             this.Bonos.TabIndex = 1;
-            this.Bonos.Text = "Bonos (B)";
+            this.Bonos.Text = "Comprar Bonos (B)";
             this.Bonos.UseVisualStyleBackColor = true;
             this.Bonos.Visible = false;
+            this.Bonos.Click += new System.EventHandler(this.Bonos_Click);
             // 
             // Turnos
             // 
