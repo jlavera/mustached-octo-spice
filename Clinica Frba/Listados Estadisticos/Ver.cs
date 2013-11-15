@@ -14,7 +14,7 @@ namespace Clinica_Frba.Listados_Estadisticos {
         private int semestre;
         private string tipo;
         private DataTable res;
-        private int maximo = int.MaxValue;
+        private int maximo = int.MinValue;
 
         public Ver(int _sem, string _tipo) {
             InitializeComponent();
@@ -27,7 +27,8 @@ namespace Clinica_Frba.Listados_Estadisticos {
             //--Ejecutar query según el listado que pidió
             switch (tipo) {
                 case "b1":
-                    res = DB.ExecuteReader("SELECT 1, 2, 4,9 ,40"); // <--- POTATO
+                    //--test
+                    res = DB.ExecuteReader("SELECT pla_nombre, count(1) FROM moustache_spice.afiliado JOIN moustache_spice.planMedico on pla_id = afi_planMedico group by pla_nombre");
                     foreach (DataRow dr in res.Rows) {
                         if (Convert.ToInt32(dr[1]) > maximo)
                             maximo = Convert.ToInt32(dr[1]);
