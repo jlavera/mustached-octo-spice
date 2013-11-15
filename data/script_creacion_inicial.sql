@@ -492,8 +492,8 @@ INSERT moustache_spice.rol_x_funcionalidad(rxf_funcionalidad, rxf_rol)
 	FROM moustache_spice.funcionalidad WHERE fun_nombre='Turnos' OR fun_nombre='Cancelar_atencion');
 
 -- Usuario que se nos impone
-INSERT moustache_spice.usuario(usu_apellido, usu_contrasegna, usu_direccion, usu_fechaNacimiento, usu_habilitado, usu_intentosFallidos, usu_mail, usu_nombre, usu_nombreUsuario, usu_telefono, usu_numeroDocumento) VALUES
-	('admin', '52d77462b24987175c8d7dab901a5967e927ffc8d0b6e4a234e07a4aec5e3724', 'Peru 1066', '1/1/2050', 1, 0, 'admin@admin.a', 'admin', 'admin', 12344321, 0);
+INSERT moustache_spice.usuario(usu_contrasegna, usu_habilitado, usu_intentosFallidos, usu_nombre, usu_nombreUsuario) VALUES
+	('52d77462b24987175c8d7dab901a5967e927ffc8d0b6e4a234e07a4aec5e3724', 1, 0, 'admin', 'Administrador General');
 --Le damos todas las funcionalidades
 INSERT moustache_spice.rol_x_usuario(rxu_usuario, rxu_rol)
 	(SELECT (SELECT TOP 1 usu_id FROM moustache_spice.usuario WHERE usu_nombreUsuario = 'admin'), rol_id FROM moustache_spice.rol)

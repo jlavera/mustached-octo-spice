@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace Clinica_Frba.Clases {
     static class DB {
 
-        static private string strCon = "Data Source=JOA-VM\\SQLSERVER2008;Initial Catalog=GD2C2013;Persist Security Info=True;User ID=gd;Password=gd2013";
+        static private string strCon = "Data Source=localhost\\SQLSERVER2008;Initial Catalog=GD2C2013;Persist Security Info=True;User ID=gd;Password=gd2013";
         static private SqlConnection sqlCon = new SqlConnection(strCon);
         static public string schema = "moustache_spice.";
 
