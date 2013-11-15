@@ -1,4 +1,4 @@
-> Curso: 		K30##
+> Curso: 		K3171
 > Nombre de grupo:	Moustached Spice
 > Nombre del schema:	Moustache_spice
 > Nombre y legajo de los integrantes:
