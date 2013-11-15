@@ -75,14 +75,14 @@ GO
 -- -----------------------------------------------------
 CREATE TABLE moustache_spice.usuario (
   usu_id INT NOT NULL Identity,
-  usu_nombre VARCHAR(45) NOT NULL,
-  usu_apellido VARCHAR(45) NOT NULL,
+  usu_nombre VARCHAR(45) NULL,
+  usu_apellido VARCHAR(45) NULL,
   usu_tipoDocumento char(3) NULL,-- 'DNI/LE/LC' *FALTA*
-  usu_numeroDocumento NUMERIC(18, 0) NOT NULL,
-  usu_direccion VARCHAR(100) NOT NULL,
-  usu_telefono NUMERIC(18, 0) NOT NULL,
-  usu_mail VARCHAR(45) NOT NULL,
-  usu_fechaNacimiento DATE NOT NULL,
+  usu_numeroDocumento NUMERIC(18, 0) NULL,
+  usu_direccion VARCHAR(100) NULL,
+  usu_telefono NUMERIC(18, 0) NULL,
+  usu_mail VARCHAR(45) NULL,
+  usu_fechaNacimiento DATE NULL,
   usu_sexo char(1) NULL,-- 'M/F' *FALTA*
   usu_nombreUsuario VARCHAR(45) UNIQUE,
   usu_contrasegna VARCHAR(100), -- SHA256
@@ -191,6 +191,14 @@ CREATE TABLE moustache_spice.profesional (
   -- UNIQUE(matricula)
 );
 
+--Trigger para que si se baja un profesional, borrar la agenda, y esto trigerea a borrar todos los turnos que tenga
+GO
+CREATE TRIGGER moustache_spice.bajarProfesional ON moustache_spice.profesional AFTER UPDATE AS
+BEGIN
+	DELETE moustache_spice.semanal WHERE sem_agenda IN (SELECT age_id FROM moustache_spice.agenda WHERE age_profesional IN (SELECT pro_id FROM inserted WHERE pro_habilitado=0))
+END
+GO
+
 -- -----------------------------------------------------
 -- creacion tabla agenda
 -- Una agenda es un periodo de tiempo, dentro de la cual valen las entradas de la tabla mas abajo "Semanal"
@@ -237,16 +245,6 @@ CREATE TABLE moustache_spice.estadoCivil(
 );
 
 -- -----------------------------------------------------
--- creacion tabla grupoFamiliarAudit
--- -----------------------------------------------------
-CREATE TABLE moustache_spice.grupoFamiliarAudit (
-  grA_grupo_familia numeric(18, 0) NOT NULL,
-  grA_plan_medico numeric(18, 0) NOT NULL,
-  grA_fecha datetime NOT NULL,
-  grA_razon varchar(255) NOT NULL,   
-);
-
--- -----------------------------------------------------
 -- creacion tabla afiliado
 -- -----------------------------------------------------
 CREATE TABLE moustache_spice.afiliado (
@@ -262,10 +260,25 @@ CREATE TABLE moustache_spice.afiliado (
   --UNIQUE (afi_grupoFamiliar, afi_orden) Deveria, pero al tener ordenes en NULL por la migracion, no se puede poner UNIQUE
 );
 
+-- -----------------------------------------------------
+-- creacion tabla afiliadoAudit
+-- -----------------------------------------------------
+CREATE TABLE moustache_spice.afiliadoAudit (
+  afA_usuario INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.usuario(usu_id),
+  afA_fecha DATETIME NOT NULL,
+);
+
 --Trigger para cambiar los planes medicos de todos los afiliados que esten en el mismo grupo, y deshabilitar todos los turnos que este tenga
+-- y
+--Trigger para guardar la baja de afiliado y cancelar los turnos que tenga
 GO
-CREATE TRIGGER moustache_spice.cambiarPlanMedico ON moustache_spice.afiliado AFTER UPDATE AS
+CREATE TRIGGER moustache_spice.modificarAfiliado ON moustache_spice.afiliado AFTER UPDATE AS
 BEGIN
+	INSERT INTO moustache_spice.afiliadoAudit(afA_fecha, afA_usuario) (SELECT GETDATE(), afi_id FROM inserted WHERE afi_habilitado=0)
+	INSERT INTO moustache_spice.turnoAudit(tuA_razon, tuA_tipo, tuA_turno) (SELECT 'Baja de Afiliado', 'Sistema', tur_id FROM moustache_spice.turno WHERE tur_afiliado IN (SELECT afi_id FROM inserted WHERE afi_habilitado=0))
+	UPDATE moustache_spice.turno SET tur_habilitado=0 WHERE tur_afiliado IN (SELECT afi_id FROM inserted WHERE afi_habilitado=0)
+
+
 	UPDATE moustache_spice.afiliado
 		SET afi_planMedico=(select TOP 1 afi_planMedico from inserted)
 	WHERE afi_grupoFamiliar2 IN (SELECT afi_id FROM inserted)
@@ -293,14 +306,6 @@ CREATE TABLE moustache_spice.planMedicoAudit(
   grA_plan_medicoViejo INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.planMedico(pla_id),
   grA_fecha DATETIME NOT NULL DEFAULT GETDATE(),
   grA_razon VARCHAR(255) NOT NULL,
-);
-
--- -----------------------------------------------------
--- creacion tabla afiliadoAudit
--- -----------------------------------------------------
-CREATE TABLE moustache_spice.afiliadoAudit (
-  afA_usuario INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.usuario(usu_id),
-  afA_fecha DATETIME NOT NULL,
 );
 
 -- -----------------------------------------------------
@@ -663,8 +668,12 @@ INSERT INTO moustache_spice.medicamento_x_bonoFarmacia(mxb_bonoFarmacia, mxb_med
 		LEFT JOIN moustache_spice.medicamento ON med_nombre = Bono_Farmacia_Medicamento
 	WHERE Bono_Farmacia_Numero IS NOT NULL
 	AND Bono_Farmacia_Medicamento IS NOT NULL);
-	
-	
---Este constrain aruina toda la performance, porque son MUCHISIMAS recetas, si bien esta constrain esta en la aplicacion, y en la migracion jamas se cumple, nos vemos obligados a ponerla 
-ALTER TABLE moustache_spice.medicamento_x_bonoFarmacia ADD CONSTRAINT CK_mxb_cantidadValida CHECK (mxb_unidades <= 3 AND
-	(moustache_spice.cantidadMedicamentos(mxb_bonoFarmacia) <= 5))
+
+GO
+CREATE TRIGGER moustache_spice.checkearMedicamentos ON moustache_spice.medicamento_x_bonoFarmacia INSTEAD OF INSERT AS
+BEGIN
+	INSERT INTO moustache_spice.medicamento_x_bonoFarmacia(mxb_medicamento,mxb_bonoFarmacia,mxb_unidades,mxb_prescripcion) (SELECT * FROM inserted WHERE
+																					(mxb_unidades <= 3 AND
+																					moustache_spice.cantidadMedicamentos(mxb_bonoFarmacia) <= 5))
+END
+GO

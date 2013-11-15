@@ -1,7 +1,7 @@
 IF OBJECT_ID('moustache_spice.inhabilitarRol', 'TR') IS NOT NULL
 	DROP TRIGGER moustache_spice.inhabilitarRol
-IF OBJECT_ID('moustache_spice.cambiarPlanMedico', 'TR') IS NOT NULL
-	DROP TRIGGER moustache_spice.cambiarPlanMedico
+IF OBJECT_ID('moustache_spice.modificarAfiliado', 'TR') IS NOT NULL
+	DROP TRIGGER moustache_spice.modificarAfiliado
 IF OBJECT_ID('moustache_spice.loginFallido', 'TR') IS NOT NULL
 	DROP TRIGGER moustache_spice.loginFallido 
 IF OBJECT_ID('moustache_spice.cancelarTurnos', 'TR') IS NOT NULL
@@ -10,6 +10,10 @@ IF OBJECT_ID('moustache_spice.consumirBono', 'TR') IS NOT NULL
 	DROP TRIGGER moustache_spice.consumirBono 	
 IF OBJECT_ID('moustache_spice.retribuirBono', 'TR') IS NOT NULL
 	DROP TRIGGER moustache_spice.retribuirBono
+IF OBJECT_ID('moustache_spice.bajarProfesional', 'TR') IS NOT NULL
+	DROP TRIGGER moustache_spice.bajarProfesional
+IF OBJECT_ID('moustache_spice.checkearMedicamentos', 'TR') IS NOT NULL
+	DROP TRIGGER moustache_spice.checkearMedicamentos
 	
 IF OBJECT_ID('moustache_spice.pagos', 'U') IS NOT NULL
 	DROP TABLE moustache_spice.pagos
@@ -31,8 +35,6 @@ IF OBJECT_ID('moustache_spice.afiliadoAudit', 'U') IS NOT NULL
 	DROP TABLE moustache_spice.afiliadoAudit
 IF OBJECT_ID('moustache_spice.afiliado', 'U') IS NOT NULL
 	DROP TABLE moustache_spice.afiliado
-IF OBJECT_ID('moustache_spice.grupoFamiliarAudit', 'U') IS NOT NULL
-	DROP TABLE moustache_spice.grupoFamiliarAudit
 IF OBJECT_ID('moustache_spice.grupoFamiliar', 'U') IS NOT NULL
 	DROP TABLE moustache_spice.grupoFamiliar
 IF OBJECT_ID('moustache_spice.estadoCivil', 'U') IS NOT NULL
