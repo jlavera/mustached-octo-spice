@@ -21,6 +21,7 @@ namespace Clinica_Frba {
 
         private void Form1_Load(object sender, EventArgs e) {
 
+            bool visible = false ;
             LogIn login = new LogIn();
             login.ShowDialog();
 
@@ -39,6 +40,15 @@ namespace Clinica_Frba {
                 else
                     flp2.Controls[func.nombre].Visible = true;
             }
+
+            foreach (Control ctrl in flp1.Controls) {
+                if (ctrl.Visible) {
+                    visible = true;
+                    break;
+                }
+            }
+            if (!visible)
+                groupBox1.Visible = false;
         }
 
         private void Abm_Roles_Click(object sender, EventArgs e) {

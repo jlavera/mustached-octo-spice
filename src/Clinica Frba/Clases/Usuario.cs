@@ -29,14 +29,14 @@ namespace Clinica_Frba.Clases {
             nombreUsuario = (string)dr["usu_nombreUsuario"];
             contrasegna = (dr["usu_contrasegna"] == System.DBNull.Value)? "" : (string)dr["usu_contrasegna"];
             intentosFallidos = (int)dr["usu_intentosFallidos"];
-            nombre = (string)dr["usu_nombre"];
-            apellido = (string)dr["usu_apellido"];
+            nombre = (dr["usu_nombre"] == System.DBNull.Value) ? "" : (string)dr["usu_nombre"];
+            apellido = (dr["usu_apellido"] == System.DBNull.Value) ? "" : (string)dr["usu_apellido"];
             tipoDocumento = (dr["usu_tipoDocumento"] == System.DBNull.Value)? "":Convert.ToString(dr["usu_tipoDocumento"]);
-            numeroDocumento = (decimal)dr["usu_numeroDocumento"];
-            direccion = (string)dr["usu_direccion"];
-            telefono = (decimal)dr["usu_telefono"];
-            mail = (string)dr["usu_mail"];
-            fechaNacimiento = (DateTime)dr["usu_fechaNacimiento"];
+            numeroDocumento = (dr["usu_numeroDocumento"] == System.DBNull.Value) ? -1 : (decimal)dr["usu_numeroDocumento"];
+            direccion = (dr["usu_direccion"] == System.DBNull.Value) ? "" : (string)dr["usu_direccion"];
+            telefono = (dr["usu_telefono"] == System.DBNull.Value) ? -1 : (decimal)dr["usu_telefono"];
+            mail = (dr["usu_mail"] == System.DBNull.Value) ? "" : (string)dr["usu_mail"];
+            fechaNacimiento = (dr["usu_fechaNacimiento"] == System.DBNull.Value) ? DateTime.MinValue : (DateTime)dr["usu_fechaNacimiento"];
             sexo = (dr["usu_sexo"] == System.DBNull.Value)? "":dr["usu_sexo"].ToString();
             habilitado = (bool)Convert.ToBoolean(dr["usu_habilitado"]);
 

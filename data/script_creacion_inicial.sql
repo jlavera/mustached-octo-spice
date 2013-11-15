@@ -264,7 +264,7 @@ CREATE TABLE moustache_spice.afiliado (
 -- creacion tabla afiliadoAudit
 -- -----------------------------------------------------
 CREATE TABLE moustache_spice.afiliadoAudit (
-  afA_usuario INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.usuario(usu_id),
+  afA_afiliado INT NOT NULL FOREIGN KEY REFERENCES  moustache_spice.afiliado(afi_id),
   afA_fecha DATETIME NOT NULL,
 );
 
@@ -274,7 +274,7 @@ CREATE TABLE moustache_spice.afiliadoAudit (
 GO
 CREATE TRIGGER moustache_spice.modificarAfiliado ON moustache_spice.afiliado AFTER UPDATE AS
 BEGIN
-	INSERT INTO moustache_spice.afiliadoAudit(afA_fecha, afA_usuario) (SELECT GETDATE(), afi_id FROM inserted WHERE afi_habilitado=0)
+	INSERT INTO moustache_spice.afiliadoAudit(afA_fecha, afA_afiliado) (SELECT GETDATE(), afi_id FROM inserted WHERE afi_habilitado=0)
 	INSERT INTO moustache_spice.turnoAudit(tuA_razon, tuA_tipo, tuA_turno) (SELECT 'Baja de Afiliado', 'Sistema', tur_id FROM moustache_spice.turno WHERE tur_afiliado IN (SELECT afi_id FROM inserted WHERE afi_habilitado=0))
 	UPDATE moustache_spice.turno SET tur_habilitado=0 WHERE tur_afiliado IN (SELECT afi_id FROM inserted WHERE afi_habilitado=0)
 
@@ -489,11 +489,21 @@ INSERT moustache_spice.rol_x_funcionalidad(rxf_funcionalidad, rxf_rol)
 INSERT moustache_spice.rol_x_funcionalidad(rxf_funcionalidad, rxf_rol)
 	(SELECT fun_id,
 		    (SELECT rol_id FROM moustache_spice.rol WHERE rol_nombre='Afiliado')
-	FROM moustache_spice.funcionalidad WHERE fun_nombre='Turnos' OR fun_nombre='Cancelar_atencion');
+	FROM moustache_spice.funcionalidad WHERE fun_nombre='Turnos'
+											 OR fun_nombre='Cancelar_atencion'
+											 OR fun_nombre='Bonos'
+											 OR fun_nombre='Receta');
+
+INSERT moustache_spice.rol_x_funcionalidad(rxf_funcionalidad, rxf_rol)
+	(SELECT fun_id,
+		    (SELECT rol_id FROM moustache_spice.rol WHERE rol_nombre='Profesional')
+	FROM moustache_spice.funcionalidad WHERE fun_nombre='Agendas'
+											 OR fun_nombre='Registro_de_Resultado'
+											 OR fun_nombre='Cancelar_atencion');
 
 -- Usuario que se nos impone
 INSERT moustache_spice.usuario(usu_contrasegna, usu_habilitado, usu_intentosFallidos, usu_nombre, usu_nombreUsuario) VALUES
-	('52d77462b24987175c8d7dab901a5967e927ffc8d0b6e4a234e07a4aec5e3724', 1, 0, 'admin', 'Administrador General');
+	('52d77462b24987175c8d7dab901a5967e927ffc8d0b6e4a234e07a4aec5e3724', 1, 0, 'Administrador General', 'admin');
 --Le damos todas las funcionalidades
 INSERT moustache_spice.rol_x_usuario(rxu_usuario, rxu_rol)
 	(SELECT (SELECT TOP 1 usu_id FROM moustache_spice.usuario WHERE usu_nombreUsuario = 'admin'), rol_id FROM moustache_spice.rol)

@@ -53,17 +53,14 @@ namespace Clinica_Frba {
         }
 
         private void bEntrar_Click(object sender, EventArgs e) {
-
+            if (lbRoles.SelectedItems.Count < 1) {
+                MessageBox.Show("Seleccione un rol");
+                return;
+            }
             rol = (Rol)lbRoles.SelectedItem;
             user = userTemp;
 
             DialogResult = DialogResult.OK;
-        }
-
-        private void LogIn_Load(object sender, EventArgs e) {
-            //MessageBox.Show(DateTime.Now.ToString());
-            //FuncionesBoludas.SetDateTime(DateTime.Now);
-            //MessageBox.Show(FuncionesBoludas.GetDateTime().ToString());
         }
 
     }
