@@ -7,3 +7,5 @@
 
 > Email del integrante responsable del grupo:
 	jlavera92@gmail.com
+
+![Moustaches!] (https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-ash4/1422386_10151957615548965_236176532_n.jpg)
