@@ -88,7 +88,7 @@ namespace Clinica_Frba.PedirTurno {
                 DateTime aux = DateTime.Now; //--los igualo así no los agrega al filtro
                 agendas.FillWithFilter(prof, aux, aux, -1, "", "");
 
-                dtpDia.MinDate = agendas[0].desde;
+                dtpDia.MinDate = FuncionesBoludas.GetDateTime();
                 dtpDia.MaxDate = agendas[0].hasta;
 
             }

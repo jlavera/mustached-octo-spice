@@ -66,6 +66,10 @@ namespace Clinica_Frba.Registrar_Agenda {
         }
 
         private void bGuardar_Click(object sender, EventArgs e) {
+            if ((lbDia2.SelectedItems.Count + lbDia3.SelectedItems.Count + lbDia4.SelectedItems.Count + lbDia5.SelectedItems.Count + lbDia6.SelectedItems.Count + lbDia7.SelectedItems.Count) >= 4) {
+                MessageBox.Show("No puede trabajar tantas horas");
+                return;
+            }
             if (cbProfesional.SelectedIndex == -1)
                 MessageBox.Show("No se selecciono un profesional");
             else if (dtpHasta.Value.Ticks < dtpDesde.Value.Ticks)
