@@ -13,18 +13,21 @@ namespace Clinica_Frba.Cancelar_Atencion {
 
         Turnos turnos = new Turnos();
         Afiliado afiliado;
+        public bool cerrar = false;
 
         public CancelarAfiliado(Usuario _usuario) {
             InitializeComponent();
-            int tmp = DB.ExecuteCardinal("SELECT TOP 1 afi_id FROM " + DB.schema + "vAfiliados WHERE usu_id=" + _usuario.id);
+            int tmp = DB.ExecuteCardinal("SELECT TOP 1 afi_id FROM " + DB.schema + "vAfiliado WHERE usu_id=" + _usuario.id);
             if (tmp != -1) {
                 afiliado = new Afiliado(tmp);
             } else {
                 //Si fallo al traer afiliados, es que el usuario no es un afiliado
                 MessageBox.Show("A modo de debug, le vamos a dejar elejir un afiliado");
                 miniAfiliado mini = new miniAfiliado();
-                while (mini.DialogResult != DialogResult.OK)
-                    mini.ShowDialog();
+
+                if (mini.ShowDialog() != DialogResult.OK)
+                    cerrar = true;
+
                 afiliado = mini.afiliado;
             }
         }

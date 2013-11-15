@@ -142,22 +142,26 @@ namespace Clinica_Frba {
 
         private void Turnos_Click(object sender, EventArgs e) {
             PedirTurno.PedirTurno form = new PedirTurno.PedirTurno(user);
-            form.ShowDialog();
+            if (!form.cerrar)
+                form.ShowDialog();
         }
 
         private void Cancelar_atencion_Click(object sender, EventArgs e) {
             if (rol.nombre == "Afiliado") {
                 Cancelar_Atencion.CancelarAfiliado form = new Cancelar_Atencion.CancelarAfiliado(user);
-                form.ShowDialog();
+                if (!form.cerrar) 
+                    form.ShowDialog();
             } else {
                 Cancelar_Atencion.CancelarProfesional form = new Cancelar_Atencion.CancelarProfesional(user);
-                form.ShowDialog();
+                if (!form.cerrar)
+                    form.ShowDialog();
             }
         }
 
         private void Receta_Click(object sender, EventArgs e) {
             Generar_Receta.GenerarReceta form = new Generar_Receta.GenerarReceta(user);
-            form.ShowDialog();
+            if (!form.cerrar) 
+                form.ShowDialog();
 
             if (form.DialogResult == DialogResult.OK) {
                 System.IO.File.WriteAllText(@"..\..\Recetas\receta" + form.GetHashCode() + ".html", form.reporte);
@@ -172,7 +176,8 @@ namespace Clinica_Frba {
 
         private void Registro_de_Resultado_Click(object sender, EventArgs e) {
             RegistroResultado.RegistrarResultado form = new Clinica_Frba.RegistroResultado.RegistrarResultado(user);
-            form.ShowDialog();
+            if (!form.cerrar)
+                form.ShowDialog();
         }
 
         private void Estadisticas_Click(object sender, EventArgs e) {
@@ -182,7 +187,8 @@ namespace Clinica_Frba {
 
         private void Bonos_Click(object sender, EventArgs e) {
             Comprar_Bono.ComprarBono form = new Comprar_Bono.ComprarBono(user, rol);
-            form.ShowDialog();
+            if (!form.cerrar)
+                form.ShowDialog();
         }
     }
 }

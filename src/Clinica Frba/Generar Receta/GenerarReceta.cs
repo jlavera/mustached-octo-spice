@@ -18,6 +18,8 @@ namespace Clinica_Frba.Generar_Receta
         private Afiliados afiliados = new Afiliados();
         private Afiliado afiliado;
 
+        public bool cerrar = false;
+
         public GenerarReceta(Usuario _usuario)
         {
             InitializeComponent();
@@ -28,8 +30,8 @@ namespace Clinica_Frba.Generar_Receta
                 //Si fallo al traer afiliados, es que el usuario no es un afiliado
                 MessageBox.Show("Este usuario no tiene un afiliado asociado,\na modo de debug, le vamos a dejar elejir un afiliado");
                 miniAfiliado mini = new miniAfiliado();
-                while (mini.DialogResult != DialogResult.OK)
-                    mini.ShowDialog();
+                if (mini.ShowDialog() != DialogResult.OK)
+                    cerrar = true;
                 afiliado = mini.afiliado;
             }
         }

@@ -13,6 +13,7 @@ namespace Clinica_Frba.Cancelar_Atencion {
 
         Turnos turnos = new Turnos();
         Profesional profesional;
+        public bool cerrar = false;
 
         public CancelarProfesional(Usuario _usuario) {
             InitializeComponent();
@@ -23,8 +24,10 @@ namespace Clinica_Frba.Cancelar_Atencion {
                 //Si fallo al traer afiliados, es que el usuario no es un afiliado
                 MessageBox.Show("A modo de debug, le vamos a dejar elejir un profesional");
                 miniProfesional mini = new miniProfesional();
-                while (mini.DialogResult != DialogResult.OK)
-                    mini.ShowDialog();
+
+                if (mini.ShowDialog() != DialogResult.OK)
+                    cerrar = true;
+
                 profesional = mini.profesional;
             }
         }
