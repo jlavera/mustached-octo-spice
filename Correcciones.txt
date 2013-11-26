@@ -11,19 +11,17 @@ Done! con un tinyint que dice de quien fue
 
 [!]	La agenda debe realcionarse con el turno
 
-[~]	Si no van a tener un entidad receta, el bono farmacia debe relacionarse con la atencion médica y brindar la posiblidad de 	utilizar mas de uno para los casos en donde tenga que adjuntar mas de 5 medicamentos.
-	Sino como se sabe en que atencion o que receta se utlizó
+[~]	Si no van a tener un entidad receta, el bono farmacia debe relacionarse con la atencion mï¿½dica y brindar la posiblidad de utilizar mas de uno para los casos en donde tenga que adjuntar mas de 5 medicamentos.	Sino como se sabe en que atencion o que receta se utlizï¿½
 Dice que es una receta por bono farmacia, si tiene mas de 5 es OTRO bono diferente
 
 [ ]	Agenda modelado mas o menos, o gurdan todos los horarios fecha por fecha, o arman un estructura muy siumilar a la de uds en donde tenga en primera instacia el 	rango de fechas y luego de ella, otra estructa con el dia de la semana perooooo con un desde - hasta en horario en funcion de la agenda 
 
 MIGRACION
 
-[~]	Pagos, que sería la entidad compra esta vacia, 0 registros
+[~]	Pagos, que serï¿½a la entidad compra esta vacia, 0 registros
 No se puede migrar, sin inventar
 
-APLICACION.
+APLICACION
 
-[~]	No entrgaron set de usuarios para probar la aplicacion, se intentó con admin w23e como pide el enunciado, se emitio un 	cartel blanco y luego otro mensaje  de pass 	invalida.
-	Por ende, sin usuarios no se probo la aplicacion. Mas alla que si se probaba la aplicacion era para darles un feedback 	mas completo, dado que deben realizar 	modificaciones en el modelo.
+[~]	No entrgaron set de usuarios para probar la aplicacion, se intentï¿½ con admin w23e como pide el enunciado, se emitio un 	cartel blanco y luego otro mensaje  e pass  nvalida.P or ende, sin usuarios no se probo la aplicacion. Mas alla que si se probaba la aplicacion era para darles un feedback 	mas completo, dado que deben realizar 	modificaciones en el modelo.
 Ya arregle lo de la aplicacion, tengo que hacer mas usuarios (que jamas piden)
