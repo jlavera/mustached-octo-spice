@@ -10,7 +10,7 @@ namespace Clinica_Frba.Clases {
 
         static private string strCon = "Data Source=localhost\\SQLSERVER2008;Initial Catalog=GD2C2013;Persist Security Info=True;User ID=gd;Password=gd2013";
         static private SqlConnection sqlCon = new SqlConnection(strCon);
-        static public string schema = "moustache_spice.";
+        static public string schema = "mustached_spice.";
 
         /// <summary>
         /// Ejecuta comando y lo devuelve en un datatable
@@ -61,7 +61,9 @@ namespace Clinica_Frba.Clases {
                 temp = Convert.ToInt32(reader[0]);
 
             } catch (Exception ex) {
-                FuncionesBoludas.errorParser(ex.Message);
+                //FuncionesBoludas.errorParser(ex.Message);
+                //Aca varios tiran errores porque no encuentran nada, asi que lo dejamos pasar y devolvemos -1
+                return temp;
             } finally {
 
                 sqlCon.Close();

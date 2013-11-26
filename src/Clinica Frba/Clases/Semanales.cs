@@ -37,14 +37,14 @@ namespace Clinica_Frba.Clases {
         //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
 
         public void FillByProfId(int p_id) {
-            Fill(DB.ExecuteReader("SELECT * FROM moustache_spice.vAgenda WHERE age_profesional = " + p_id));
+            Fill(DB.ExecuteReader("SELECT * FROM " + DB.schema + "vAgenda WHERE age_profesional = " + p_id));
         }
 
         public void FillTurnosLibres(int p_id, DateTime s_dia) {
-             Fill(DB.ExecuteReader("SELECT * FROM moustache_spice.semanal" +
-                                        " LEFT JOIN moustache_spice.agenda ON sem_agenda = age_id" +
+             Fill(DB.ExecuteReader("SELECT * FROM " + DB.schema + "semanal" +
+                                        " LEFT JOIN " + DB.schema + "agenda ON sem_agenda = age_id" +
                                     " WHERE sem_habilitado=1 AND sem_dia=DATEPART(dw, '" + s_dia.ToString("yyyy-MM-dd") + "') AND age_profesional=" + p_id + " AND" +
-                                    " (SELECT COUNT(1) FROM moustache_spice.turno" +
+                                    " (SELECT COUNT(1) FROM " + DB.schema + "turno" +
                                             " WHERE CAST(tur_fechaYHoraTurno AS DATE)='" + s_dia.ToString("yyyy-MM-dd") + "'" +
                                               " AND CAST(tur_fechaYHoraTurno AS TIME)=sem_hora" +
                                                " AND tur_profesional = age_profesional AND tur_habilitado=1)=0" +

@@ -128,7 +128,7 @@ namespace Clinica_Frba.AbmAfiliados {
 
                 //--Traer los integrantes del grupo
                 foreach (DataRow dr in DB.ExecuteReader(
-                    "SELECT * FROM moustache_spice.vAfiliado va WHERE va.afi_grupoFamiliar = " + grupoFamiliar.grupo).Rows) {
+                    "SELECT * FROM " + DB.schema + "vAfiliado va WHERE va.afi_grupoFamiliar = " + grupoFamiliar.grupo).Rows) {
 
                     //--Crea el integrante que trajo y lo agrega al listbox
                     Integrante integrante = new Integrante(dr);
@@ -164,23 +164,23 @@ namespace Clinica_Frba.AbmAfiliados {
                 string query;
                 //--Grabar o editar al titular
                 if (nueva) {
-                    query = "INSERT INTO moustache_spice.usuario(usu_nombre, usu_apellido, usu_direccion, usu_tipoDocumento, usu_numeroDocumento, usu_telefono, usu_mail, usu_sexo, usu_nombreUsuario, usu_fechaNacimiento" + ((tbContrasegna.Text == "****") ? "" : ", usu_contrasegna") + ", afi_familiaresACargo) VALUES " +
-                            "('" + tbNombre.Text + "', '" + tbApellido.Text + "', '" + tbDireccion.Text + "', '" + cmbTipoDNI.Text + "', " + tbNumeroDni.Text + ", " + tbTelefono.Text + ", '" + tbMail.Text + "', '" + ((cmbSexo.SelectedText == "Masculino") ? "M" : "F") + "', '" + tbNombreUsuario.Text + "', '" + dtpFechaNacimiento.Value.ToString("yyyy-MM-dd") + "'" + ((tbContrasegna.Text == "****") ? "" : ", '" + FuncionesBoludas.getHashSha256(tbContrasegna.Text) + "'") + ", " + nFamiliares.Value + "); ";
-                    query += "INSERT INTO moustache_spice.afiliado(afi_estadoCivil, afi_familiaresACargo, afi_usuario, afi_orden, afi_planMedico) VALUES (" +
-                            ((EstadoCivil)cmbEstadoCivil.SelectedItem).id + ", " + lbIntegrantes.Items.Count + ", SCOPE_Identity(), 1, " + ((PlanMedico)cmbPlanMedico.SelectedItem).id + "); ";
+                    query = "INSERT INTO " + DB.schema + "usuario(usu_nombre, usu_apellido, usu_direccion, usu_tipoDocumento, usu_numeroDocumento, usu_telefono, usu_mail, usu_sexo, usu_nombreUsuario, usu_fechaNacimiento" + ((tbContrasegna.Text == "****") ? "" : ", usu_contrasegna") + ") VALUES " +
+                            "('" + tbNombre.Text + "', '" + tbApellido.Text + "', '" + tbDireccion.Text + "', '" + cmbTipoDNI.Text + "', " + tbNumeroDni.Text + ", " + tbTelefono.Text + ", '" + tbMail.Text + "', '" + ((cmbSexo.SelectedText == "Masculino") ? "M" : "F") + "', '" + tbNombreUsuario.Text + "', '" + dtpFechaNacimiento.Value.ToString("yyyy-MM-dd") + "'" + ((tbContrasegna.Text == "****") ? "" : ", '" + FuncionesBoludas.getHashSha256(tbContrasegna.Text) + "'") + "); ";
+                    query += "INSERT INTO " + DB.schema + "afiliado(afi_estadoCivil, afi_familiaresACargo, afi_usuario, afi_orden, afi_planMedico) VALUES (" +
+                            ((EstadoCivil)cmbEstadoCivil.SelectedItem).id + ", " + nFamiliares.Value + ", SCOPE_Identity(), 1, " + ((PlanMedico)cmbPlanMedico.SelectedItem).id + "); ";
 
                     //Donde vas a insertar el padre
                     afiliadoID = DB.ExecuteCardinal("SELECT IDENT_CURRENT('" + DB.schema + "afiliado')");
                 } else {
 
-                    query = "UPDATE moustache_spice.usuario SET usu_direccion='" + tbDireccion.Text + "'" +
+                    query = "UPDATE " + DB.schema + "usuario SET usu_direccion='" + tbDireccion.Text + "'" +
                             ", usu_telefono=" + tbTelefono.Text +
                             ", usu_mail='" + tbMail.Text + "' " +
                             ", usu_tipoDocumento='" + cmbTipoDNI.Text + "' " +
                             ((tbContrasegna.Text == "****") ? "" : (", usu_contrasegna='" + FuncionesBoludas.getHashSha256(tbContrasegna.Text) + "' ")) +
                             ", usu_sexo='" + ((cmbSexo.SelectedText == "Masculino") ? "M" : "F") + "' " +
                             "WHERE usu_id=" + usuarioID + "; ";
-                    query += "UPDATE moustache_spice.afiliado SET afi_estadoCivil=" + ((EstadoCivil)cmbEstadoCivil.SelectedItem).id +
+                    query += "UPDATE " + DB.schema + "afiliado SET afi_estadoCivil=" + ((EstadoCivil)cmbEstadoCivil.SelectedItem).id +
                              ", afi_planMedico=" + ((PlanMedico)cmbPlanMedico.SelectedItem).id +
                              ", afi_familiaresACargo=" + nFamiliares.Value +
                              " WHERE afi_id=" + afiliadoID + "; ";
@@ -193,9 +193,9 @@ namespace Clinica_Frba.AbmAfiliados {
                     ordenInsertado++;
                     if (inte.faltaGrabar) {
                         //--Grabarlo
-                        query += "INSERT INTO moustache_spice.usuario(usu_nombre, usu_apellido, usu_direccion, usu_tipoDocumento, usu_numeroDocumento, usu_telefono, usu_mail, usu_sexo, usu_nombreUsuario, usu_fechaNacimiento, usu_contrasegna) VALUES " +
+                        query += "INSERT INTO " + DB.schema + "usuario(usu_nombre, usu_apellido, usu_direccion, usu_tipoDocumento, usu_numeroDocumento, usu_telefono, usu_mail, usu_sexo, usu_nombreUsuario, usu_fechaNacimiento, usu_contrasegna) VALUES " +
                                 "('" + inte.nombre + "', '" + inte.apellido + "', '" + inte.direccion + "', '" + inte.tipoDocumento + "', " + inte.numeroDocumento + ", " + inte.telefono + ", '" + inte.mail + "', '" + inte.sexo + "', '" + inte.nombreUsuario + "', '" + inte.fechaNacimiento + "', '" + FuncionesBoludas.getHashSha256(inte.contrasegna) + "'); ";
-                        query += "INSERT INTO moustache_spice.afiliado(afi_estadoCivil, afi_usuario, afi_orden, afi_planMedico, afi_grupoFamiliar2, afi_familiaresACargo) VALUES (" +
+                        query += "INSERT INTO " + DB.schema + "afiliado(afi_estadoCivil, afi_usuario, afi_orden, afi_planMedico, afi_grupoFamiliar2, afi_familiaresACargo) VALUES (" +
                             inte.estadoCivil.id + ", SCOPE_Identity(), " + ((inte.esConyuge) ? 2 : ordenInsertado) + ", " + ((PlanMedico)cmbPlanMedico.SelectedItem).id + ", " + afiliadoID + ", " + inte.familiares  + "); ";
                     }
                 }
@@ -218,7 +218,7 @@ namespace Clinica_Frba.AbmAfiliados {
                 if (!formCamb.nueva) {
                     //--Traer los integrantes del grupo
                     foreach (DataRow dr in DB.ExecuteReader(
-                        "SELECT * FROM moustache_spice.vAfiliado va WHERE va.afi_grupoFamiliar = " + grupoFamiliar.grupo + " ORDER BY va.afi_grupoFamiliar ASC").Rows) {
+                        "SELECT * FROM " + DB.schema + "vAfiliado va WHERE va.afi_grupoFamiliar = " + grupoFamiliar.grupo + " ORDER BY va.afi_grupoFamiliar ASC").Rows) {
 
                         //--Crea el integrante que trajo y lo agrega al listbox
                         Integrante integrante = new Integrante(dr);

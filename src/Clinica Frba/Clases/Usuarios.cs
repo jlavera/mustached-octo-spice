@@ -41,7 +41,7 @@ namespace Clinica_Frba.Clases {
        public Usuarios(int _id)
             : base("usuario") {
             //Como esta el triger que borra si se deshabilitan, ni me gasto en hacer un  where
-                Fill(DB.ExecuteReader("SELECT DISTINCT * FROM moustache_spice.usuario LEFT JOIN moustache_spice.rol_x_usuario ON rxu_usuario = usu_id WHERE rxu_rol=" + _id));
+                Fill(DB.ExecuteReader("SELECT DISTINCT * FROM " + DB.schema + "usuario LEFT JOIN " + DB.schema + "rol_x_usuario ON rxu_usuario = usu_id WHERE rxu_rol=" + _id));
         }
 
         /// <summary>

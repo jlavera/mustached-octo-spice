@@ -39,7 +39,7 @@ namespace Clinica_Frba.Clases {
 
         public Funcionalidades(int p_id)
             : base("funcionalidad") {
-            Fill(DB.ExecuteReader("SELECT fun_id, fun_nombre FROM moustache_spice.rol_x_funcionalidad rxf JOIN moustache_spice.funcionalidad f ON f.fun_id = rxf.rxf_funcionalidad WHERE rxf.rxf_rol = " + p_id));
+            Fill(DB.ExecuteReader("SELECT fun_id, fun_nombre FROM " + DB.schema + "rol_x_funcionalidad rxf JOIN " + DB.schema + "funcionalidad f ON f.fun_id = rxf.rxf_funcionalidad WHERE rxf.rxf_rol = " + p_id));
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Clinica_Frba.Clases {
         /// </summary>
         /// <param name="p_rolId"></param>
         public void FillByRol(int p_rolId) {
-            Fill(DB.ExecuteReader("SELECT fun_id, fun_nombre FROM moustache_spice.rol_x_funcionalidad JOIN moustache_spice.funcionalidad ON fun_id = rxf_funcionalidad WHERE rxf_rol = " + p_rolId));
+            Fill(DB.ExecuteReader("SELECT fun_id, fun_nombre FROM " + DB.schema + "rol_x_funcionalidad JOIN " + DB.schema + "funcionalidad ON fun_id = rxf_funcionalidad WHERE rxf_rol = " + p_rolId));
         }
 
     }

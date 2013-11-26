@@ -142,7 +142,7 @@ namespace Clinica_Frba.AbmProfesionales{
                     "UPDATE " + DB.schema + "profesional SET " +
                             "pro_matricula=" + tbMatricula.Text +
                             " WHERE pro_id=" + profId + "; " +
-                    "UPDATE moustache_spice.usuario SET usu_direccion='" + tbDireccion.Text + "'" +
+                    "UPDATE " + DB.schema + "usuario SET usu_direccion='" + tbDireccion.Text + "'" +
                             ", usu_telefono=" + tbTelefono.Text +
                             ", usu_mail='" + tbMail.Text + "' " +
                             ", usu_tipoDocumento='" + cmbTipoDNI.Text + "' " +

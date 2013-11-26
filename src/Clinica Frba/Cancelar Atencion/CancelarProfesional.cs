@@ -52,7 +52,7 @@ namespace Clinica_Frba.Cancelar_Atencion {
                 String queryDelete, queryAudit, queryAux = "";
 
                 queryDelete = "UPDATE " + DB.schema + "turno SET tur_habilitado=0 WHERE (";
-                queryAudit = "INSERT INTO moustache_spice.turnoAudit(tuA_razon, tuA_tipo, tuA_turno) (SELECT '" + tbDetalle.Text + "', '" + cbTipo.Text + "', tur_id FROM moustache_spice.turno WHERE (";
+                queryAudit = "INSERT INTO " + DB.schema + "cancelacion(tuA_razon, tuA_tipo, tuA_turno, tua_cancelante) (SELECT '" + tbDetalle.Text + "', '" + cbTipo.Text + "', tur_id FROM " + DB.schema + "turno, 1 WHERE (";
 
                 for (DateTime dateTime = monthCalendar.SelectionStart;
                      dateTime < monthCalendar.SelectionEnd;

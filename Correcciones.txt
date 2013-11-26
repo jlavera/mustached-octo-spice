@@ -1,0 +1,29 @@
+MODELO
+
+[~]	NO existe la entidad consulta/Atencion, refloja ese concepto dentro entidad turno, cuando en si son 2 conceptos bien diferentes y que deben estar relacionados, no 	todos los turnos se vuelven atenciones medicas.
+Un turno fecha y hora de atencion es un turno (98% seguro)
+
+[X]	No existe la entidad Compra tanto para realcionar bonos consulta farmacia, tiene entidad pagos pero ella no se realciona 	con los bonos.
+Guacala, pero ya estan las dos NxN y la aplicacion las crea
+
+[X]	TurnoAudit, debe llamarse cancelacion, la misma si debe tener PK, y ademas de ello existen 2 tipo bien distintos de cancelaciones.
+Done! con un tinyint que dice de quien fue
+
+[!]	La agenda debe realcionarse con el turno
+
+[~]	Si no van a tener un entidad receta, el bono farmacia debe relacionarse con la atencion médica y brindar la posiblidad de 	utilizar mas de uno para los casos en donde tenga que adjuntar mas de 5 medicamentos.
+	Sino como se sabe en que atencion o que receta se utlizó
+Dice que es una receta por bono farmacia, si tiene mas de 5 es OTRO bono diferente
+
+[ ]	Agenda modelado mas o menos, o gurdan todos los horarios fecha por fecha, o arman un estructura muy siumilar a la de uds en donde tenga en primera instacia el 	rango de fechas y luego de ella, otra estructa con el dia de la semana perooooo con un desde - hasta en horario en funcion de la agenda 
+
+MIGRACION
+
+[~]	Pagos, que sería la entidad compra esta vacia, 0 registros
+No se puede migrar, sin inventar
+
+APLICACION.
+
+[~]	No entrgaron set de usuarios para probar la aplicacion, se intentó con admin w23e como pide el enunciado, se emitio un 	cartel blanco y luego otro mensaje  de pass 	invalida.
+	Por ende, sin usuarios no se probo la aplicacion. Mas alla que si se probaba la aplicacion era para darles un feedback 	mas completo, dado que deben realizar 	modificaciones en el modelo.
+Ya arregle lo de la aplicacion, tengo que hacer mas usuarios (que jamas piden)

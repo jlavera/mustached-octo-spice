@@ -113,22 +113,25 @@ namespace Clinica_Frba.Clases {
             string mensaje = "";
 
             foreach (String error in errores) {
+
                 if (error.IndexOf("Invalid attempt to read when no data is present.") > -1)
                     mensaje += "No se encontraron datos\n";
                 if (error.IndexOf("INSERT") > -1)
                     mensaje += "Error en la insercion: ";
                 if (error.IndexOf("CHECK") > -1)
                     mensaje += "Existe una restriccion que no permite esta accion.";
-                 
 
-                if (p.IndexOf("FOREIGN KEY") > -1) //Si el error dice FK
+
+                if (error.IndexOf("FOREIGN KEY") > -1) //Si el error dice FK
                     mensaje += "Claves foraneas no validas.";
-                if (p.IndexOf("PRIMARY KEY") > -1) //Si el error dice FK
+                if (error.IndexOf("PRIMARY KEY") > -1) //Si el error dice PK
                     mensaje += "Violacion de la clave primaria.";
+                if (error.IndexOf("UNIQUE KEY") > -1) //Si el error dice FK
+                    mensaje += "Clave unica repetida (DNI o Nombre de Usuario talvez?)";
                 
                 mensaje += "\r\n";
             }
-            MessageBox.Show(mensaje, "ERROR");
+            MessageBox.Show(mensaje + "\n\n\n" + p, "ERROR");
         }
 
         static public void limpiarControles(Control.ControlCollection controls){
