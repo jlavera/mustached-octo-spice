@@ -422,7 +422,7 @@ GO
 -- -----------------------------------------------------
 CREATE TABLE mustached_spice.pago (
   pag_id INT NOT NULL Identity,
-  pag_precio INT NOT NULL, --Precio desnormalizado
+  pag_monto INT NOT NULL, --Precio desnormalizado (por eso le pongo monto, y no precio)
   pag_afiliado INT NOT NULL FOREIGN KEY REFERENCES  mustached_spice.afiliado(afi_id),
   pag_fechaCompra DATETIME NOT NULL,
   PRIMARY KEY(pag_id)
