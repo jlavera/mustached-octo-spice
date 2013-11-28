@@ -49,23 +49,23 @@ namespace Clinica_Frba.Comprar_Bono
 
 
             if (nFarmacia.Value >= 1)
-                query += "INSERT INTO " + DB.schema + "bonoFarmacia(bfa_fechaImpresion, bfa_fechaVencimiento, bfa_comprador, bfa_compra) VALUES ";
+                query += "INSERT INTO " + DB.schema + "bonoFarmacia(bfa_fechaImpresion, bfa_fechaVencimiento, bfa_compra) VALUES ";
             //Cargar los N bonso Famracia
             for(int i=0; i<nFarmacia.Value; i++)
                 query += "('"+ FuncionesBoludas.GetDateTime() + "', '" +
                               FuncionesBoludas.GetDateTime().AddDays(60) + "', " +
-                              afiliado.id + ", " + idCompra + "), ";
+                              idCompra + "), ";
             query = query.Substring(0, query.Length-2); //Sacar la ultima coma
             idFarmacia = DB.ExecuteCardinal(query + "; SELECT @@IDENTITY");
 
 
             //Lo mismo, con Consulta
             if (nConsulta.Value >= 1)
-                query = "INSERT INTO " + DB.schema + "bonoConsulta(bco_fechaCompa, bco_comprador, bco_compra) VALUES ";
+                query = "INSERT INTO " + DB.schema + "bonoConsulta(bco_fechaCompa, bco_compra) VALUES ";
             //Cargar los N bonso Famracia
             for (int i = 0; i < nConsulta.Value; i++)
                 query += "('" + FuncionesBoludas.GetDateTime() + "', " +
-                              afiliado.id + ", " + idCompra + "), ";
+                              idCompra + "), ";
             query = query.Substring(0, query.Length - 2); //Sacar la ultima coma
             idConsulta = DB.ExecuteCardinal(query + "; SELECT @@IDENTITY");
 

@@ -68,7 +68,9 @@ namespace Clinica_Frba.Generar_Receta
 
                 bono = new BonoFarmacia(Convert.ToInt32(tbBono.Text));
                 //Si el comprador del bono, tiene el mismo grupo familiar que el que esta logeado
-                if (DB.ExecuteCardinal("SELECT COUNT(1) FROM " + DB.schema + "bonoFarmacia JOIN " + DB.schema + "vAfiliado ON bfa_comprador=afi_id" +
+                if (DB.ExecuteCardinal("SELECT COUNT(1) FROM " + DB.schema + "bonoFarmacia " +
+                                                        "JOIN " + DB.schema + "compra ON cmp_id=bfa_compra" +
+                                                        "JOIN " + DB.schema + "vAfiliado ON afi_id=cmp_afiliado" +
                                             " WHERE bfa_id=" + tbBono.Text + " AND afi_grupoFamiliar=(SELECT afi_grupoFamiliar FROM "+DB.schema+"vAfiliado WHERE afi_id=" + afiliado.id + ");") < 0) {
                     MessageBox.Show("Este bono no pertenece al grupo familiar de '" + afiliado.ToString() + "'");
                     return;

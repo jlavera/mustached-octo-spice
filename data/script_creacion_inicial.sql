@@ -289,11 +289,11 @@ BEGIN
 	--por uno más alto o uno más bajo, dichos bonos no podrán ser utilizado por él"
 	UPDATE mustached_spice.bonoConsulta
 		SET bco_habilitado=0
-	WHERE bco_comprador IN (SELECT afi_id FROM inserted)
+	WHERE bco_compra IN (SELECT cmp_id FROM inserted JOIN mustached_spice.compra ON cmp_afiliado = inserted.afi_id WHERE inserted.afi_planMedico != (SELECT afi_planMedico FROM deleted WHERE deleted.afi_id=inserted.afi_id)
 	
 	UPDATE mustached_spice.bonoFarmacia
 		SET bfa_habilitado=0
-	WHERE bfa_afiliado IN (SELECT afi_id FROM inserted)
+	WHERE bfa_compra IN (SELECT cmp_id FROM inserted JOIN mustached_spice.compra ON cmp_afiliado = inserted.afi_id WHERE inserted.afi_planMedico != (SELECT afi_planMedico FROM deleted WHERE deleted.afi_id=inserted.afi_id)
 END
 GO
 
@@ -326,7 +326,6 @@ CREATE TABLE mustached_spice.bonoConsulta (
   bco_id INT NOT NULL Identity,
   bco_fecha DATE NULL,
   bco_fechaCompa DATE NOT NULL,
-  bco_comprador INT NOT NULL FOREIGN KEY REFERENCES mustached_spice.afiliado(afi_id),
   bco_afiliado INT NULL FOREIGN KEY REFERENCES  mustached_spice.afiliado(afi_id),
   bco_compra INT NOT NULL FOREIGN KEY REFERENCES  mustached_spice.compra(cmp_id),
   bco_habilitado TINYINT NOT NULL DEFAULT 1, --Funciona de las veces de si esta o no consumido
@@ -367,7 +366,6 @@ CREATE TABLE mustached_spice.bonoFarmacia (
   bfa_id INT NOT NULL Identity,
   bfa_fechaImpresion DATE NOT NULL,
   bfa_fechaVencimiento DATE NOT NULL,
-  bfa_comprador INT NOT NULL FOREIGN KEY REFERENCES mustached_spice.afiliado(afi_id),
   bfa_afiliado INT NULL FOREIGN KEY REFERENCES  mustached_spice.afiliado(afi_id),
   bfa_turno INT NULL FOREIGN KEY REFERENCES  mustached_spice.turno(tur_id),
   bfa_compra INT NOT NULL FOREIGN KEY REFERENCES  mustached_spice.compra(cmp_id),
@@ -607,8 +605,8 @@ INSERT INTO mustached_spice.compra(cmp_afiliado, cmp_fechaCompra, cmp_monto)
 -- -----------------------------------------------------
 PRINT 'migracion tabla bonoConsulta'
 SET IDENTITY_INSERT mustached_spice.bonoConsulta ON
-INSERT INTO mustached_spice.bonoConsulta(bco_id, bco_fechaCompa, bco_comprador, bco_afiliado, bco_fecha, bco_compra)
-	(SELECT DISTINCT Bono_Consulta_Numero, Compra_Bono_Fecha, afi_id, afi_id, Bono_Consulta_Fecha_Impresion,
+INSERT INTO mustached_spice.bonoConsulta(bco_id, bco_fechaCompa, bco_afiliado, bco_fecha, bco_compra)
+	(SELECT DISTINCT Bono_Consulta_Numero, Compra_Bono_Fecha, afi_id, Bono_Consulta_Fecha_Impresion,
 					 (SELECT TOP 1 cmp_id FROM mustached_spice.compra WHERE cmp_fechaCompra = Compra_Bono_Fecha AND cmp_afiliado = afi_id)
         FROM gd_esquema.Maestra
 			LEFT JOIN mustached_spice.vAfiliado ON usu_numeroDocumento = Paciente_Dni
@@ -653,9 +651,9 @@ SET IDENTITY_INSERT mustached_spice.turno OFF
 -- -----------------------------------------------------
 PRINT 'migracion tabla bonoFarmacia'
 SET IDENTITY_INSERT mustached_spice.bonoFarmacia ON
-INSERT INTO mustached_spice.bonoFarmacia(bfa_id, bfa_fechaImpresion, bfa_turno, bfa_fechaVencimiento, bfa_afiliado, bfa_comprador, bfa_habilitado, bfa_compra)
+INSERT INTO mustached_spice.bonoFarmacia(bfa_id, bfa_fechaImpresion, bfa_turno, bfa_fechaVencimiento, bfa_afiliado, bfa_habilitado, bfa_compra)
 	(SELECT DISTINCT Bono_Farmacia_Numero, Bono_Farmacia_Fecha_Impresion, Turno_Numero,
-					 Bono_Farmacia_Fecha_Vencimiento, afi_id, afi_id, mustached_spice.bonoFarmaciaHabilitado(Bono_Farmacia_Fecha_Impresion, Bono_Farmacia_Fecha_Vencimiento),
+					 Bono_Farmacia_Fecha_Vencimiento, afi_id, mustached_spice.bonoFarmaciaHabilitado(Bono_Farmacia_Fecha_Impresion, Bono_Farmacia_Fecha_Vencimiento),
 					 (SELECT TOP 1 cmp_id FROM mustached_spice.compra WHERE cmp_fechaCompra = Compra_Bono_Fecha AND cmp_afiliado = afi_id)
 	FROM gd_esquema.Maestra
 		LEFT JOIN mustached_spice.vAfiliado ON usu_numeroDocumento = Paciente_Dni

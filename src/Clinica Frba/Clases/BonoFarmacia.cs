@@ -29,7 +29,9 @@ namespace Clinica_Frba.Clases {
 
         public BonoFarmacia(int _id) {
             //El habilitado funciona a su vez de consumido o no consumido
-            DataTable dt = DB.ExecuteReader("SELECT * FROM " + DB.schema + "bonoFarmacia JOIN " + DB.schema + "vAfiliado ON afi_id=bfa_comprador WHERE bfa_habilitado=1 AND bfa_id=" + _id);
+            DataTable dt = DB.ExecuteReader("SELECT * FROM " + DB.schema + "bonoFarmacia "+
+                                                     "JOIN " + DB.schema + "compra ON cmp_id=bfa_compra " +
+                                                     "JOIN " + DB.schema + "vAfiliado ON afi_id=cmp_afiliado WHERE bfa_habilitado=1 AND bfa_id=" + _id);
 
             if (dt.Rows.Count == 0) //Como es PK y FK tiene que existir, y solo 1
                 throw new NoTrajoNadaExcep();
