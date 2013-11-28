@@ -326,6 +326,7 @@ CREATE TABLE mustached_spice.bonoConsulta (
 -- -----------------------------------------------------
 CREATE TABLE mustached_spice.bonoFarmacia (
   bfa_id INT NOT NULL Identity,
+  bfa_turno INT NOT NULL FOREIGN KEY REFERENCES mustached_spice.turno(tur_id),
   bfa_fechaImpresion DATE NOT NULL,
   bfa_fechaVencimiento DATE NOT NULL,
   bfa_comprador INT NOT NULL FOREIGN KEY REFERENCES mustached_spice.afiliado(afi_id),

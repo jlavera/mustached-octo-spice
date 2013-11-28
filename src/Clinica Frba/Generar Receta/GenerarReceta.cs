@@ -8,10 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using Clinica_Frba.Clases;
 
-namespace Clinica_Frba.Generar_Receta
-{
-    public partial class GenerarReceta : Form
-    {
+namespace Clinica_Frba.Generar_Receta {
+    public partial class GenerarReceta : Form {
         public String reporte;
         public BonoFarmacia bono;
 
@@ -20,8 +18,7 @@ namespace Clinica_Frba.Generar_Receta
 
         public bool cerrar = false;
 
-        public GenerarReceta(Usuario _usuario)
-        {
+        public GenerarReceta(Usuario _usuario) {
             InitializeComponent();
             int tmp = DB.ExecuteCardinal("SELECT TOP 1 afi_id FROM " + DB.schema + "vAfiliado WHERE usu_id=" + _usuario.id);
             if (tmp != -1) {
@@ -35,8 +32,8 @@ namespace Clinica_Frba.Generar_Receta
                 afiliado = mini.afiliado;
             }
         }
-        
-        public GenerarReceta(BonoFarmacia bono){
+
+        public GenerarReceta(BonoFarmacia bono) {
             tbBono.Text = Convert.ToString(bono.id);
             tbBono.Enabled = false;
         }
@@ -57,19 +54,19 @@ namespace Clinica_Frba.Generar_Receta
         }
 
         private void bQuitar_Click(object sender, EventArgs e) {
-            if(lbMedicamentos.SelectedIndex != -1)
+            if (lbMedicamentos.SelectedIndex != -1)
                 lbMedicamentos.Items.Remove(lbMedicamentos.SelectedItem);
             if (lbMedicamentos.Items.Count < 5) //"Anti" validacion
-               bAgregar.Enabled = true;
+                bAgregar.Enabled = true;
         }
 
         private void bGrabar_Click(object sender, EventArgs e) {
-            if (tbBono.Text != "" && lbMedicamentos.Items.Count >= 1 ) {
+            if (tbBono.Text != "" && lbMedicamentos.Items.Count >= 1) {
 
                 bono = new BonoFarmacia(Convert.ToInt32(tbBono.Text));
                 //Si el comprador del bono, tiene el mismo grupo familiar que el que esta logeado
                 if (DB.ExecuteCardinal("SELECT COUNT(1) FROM " + DB.schema + "bonoFarmacia JOIN " + DB.schema + "vAfiliado ON bfa_comprador=afi_id" +
-                                            " WHERE bfa_id=" + tbBono.Text + " AND afi_grupoFamiliar=(SELECT afi_grupoFamiliar FROM "+DB.schema+"vAfiliado WHERE afi_id=" + afiliado.id + ");") < 0) {
+                                            " WHERE bfa_id=" + tbBono.Text + " AND afi_grupoFamiliar=(SELECT afi_grupoFamiliar FROM " + DB.schema + "vAfiliado WHERE afi_id=" + afiliado.id + ");") < 0) {
                     MessageBox.Show("Este bono no pertenece al grupo familiar de '" + afiliado.ToString() + "'");
                     return;
                 }
