@@ -289,11 +289,11 @@ BEGIN
 	--por uno más alto o uno más bajo, dichos bonos no podrán ser utilizado por él"
 	UPDATE mustached_spice.bonoConsulta
 		SET bco_habilitado=0
-	WHERE bco_comprador IN (SELECT afi_id FROM inserted)
+	WHERE bco_compra IN (SELECT cmp_id FROM inserted JOIN mustached_spice.compra ON cmp_afiliado = inserted.afi_id WHERE inserted.afi_planMedico != (SELECT afi_planMedico FROM deleted WHERE deleted.afi_id=inserted.afi_id)
 	
 	UPDATE mustached_spice.bonoFarmacia
 		SET bfa_habilitado=0
-	WHERE bfa_afiliado IN (SELECT afi_id FROM inserted)
+	WHERE bfa_compra IN (SELECT cmp_id FROM inserted JOIN mustached_spice.compra ON cmp_afiliado = inserted.afi_id WHERE inserted.afi_planMedico != (SELECT afi_planMedico FROM deleted WHERE deleted.afi_id=inserted.afi_id)
 END
 GO
 
@@ -309,30 +309,27 @@ CREATE TABLE mustached_spice.planMedicoAudit(
 );
 
 -- -----------------------------------------------------
+-- creacion tabla compra
+-- -----------------------------------------------------
+CREATE TABLE mustached_spice.compra (
+  cmp_id INT NOT NULL Identity,
+  cmp_monto INT NOT NULL, --Monto desnormalizado
+  cmp_afiliado INT NOT NULL FOREIGN KEY REFERENCES  mustached_spice.afiliado(afi_id),
+  cmp_fechaCompra DATETIME NOT NULL,
+  PRIMARY KEY(cmp_id)
+);
+
+-- -----------------------------------------------------
 -- creacion tabla bonoConsulta
 -- -----------------------------------------------------
 CREATE TABLE mustached_spice.bonoConsulta (
   bco_id INT NOT NULL Identity,
   bco_fecha DATE NULL,
   bco_fechaCompa DATE NOT NULL,
-  bco_comprador INT NOT NULL FOREIGN KEY REFERENCES mustached_spice.afiliado(afi_id),
   bco_afiliado INT NULL FOREIGN KEY REFERENCES  mustached_spice.afiliado(afi_id),
+  bco_compra INT NOT NULL FOREIGN KEY REFERENCES  mustached_spice.compra(cmp_id),
   bco_habilitado TINYINT NOT NULL DEFAULT 1, --Funciona de las veces de si esta o no consumido
   PRIMARY KEY (bco_id)
-);
-
--- -----------------------------------------------------
--- creacion tabla bonoFarmacia
--- -----------------------------------------------------
-CREATE TABLE mustached_spice.bonoFarmacia (
-  bfa_id INT NOT NULL Identity,
-  bfa_turno INT NOT NULL FOREIGN KEY REFERENCES mustached_spice.turno(tur_id),
-  bfa_fechaImpresion DATE NOT NULL,
-  bfa_fechaVencimiento DATE NOT NULL,
-  bfa_comprador INT NOT NULL FOREIGN KEY REFERENCES mustached_spice.afiliado(afi_id),
-  bfa_afiliado INT NULL FOREIGN KEY REFERENCES  mustached_spice.afiliado(afi_id),
-  bfa_habilitado TINYINT NOT NULL DEFAULT 1,
-  PRIMARY KEY (bfa_id)
 );
 
 -- -----------------------------------------------------
@@ -352,7 +349,6 @@ CREATE TABLE mustached_spice.turno (
   tur_habilitado TINYINT NOT NULL DEFAULT 1,-- Sería cuando se cancela un turno
   PRIMARY KEY (tur_id)
 );
-
 --Si se cancela el turno, se tiene que re-habilitar el bonoConsulta. El bonoFarmacia todavia no fue ni consumido (porque se tiene que cancelar ocn un dia de antelacion)
 GO
 CREATE TRIGGER mustached_spice.retribuirBono ON mustached_spice.turno AFTER UPDATE AS
@@ -362,6 +358,20 @@ BEGIN
 		WHERE bco_id IN (SELECT tur_bonoConsulta FROM inserted WHERE tur_habilitado=0)
 END
 Go
+
+-- -----------------------------------------------------
+-- creacion tabla bonoFarmacia
+-- -----------------------------------------------------
+CREATE TABLE mustached_spice.bonoFarmacia (
+  bfa_id INT NOT NULL Identity,
+  bfa_fechaImpresion DATE NOT NULL,
+  bfa_fechaVencimiento DATE NOT NULL,
+  bfa_afiliado INT NULL FOREIGN KEY REFERENCES  mustached_spice.afiliado(afi_id),
+  bfa_turno INT NULL FOREIGN KEY REFERENCES  mustached_spice.turno(tur_id),
+  bfa_compra INT NOT NULL FOREIGN KEY REFERENCES  mustached_spice.compra(cmp_id),
+  bfa_habilitado TINYINT NOT NULL DEFAULT 1,
+  PRIMARY KEY (bfa_id)
+);
 
 -- -----------------------------------------------------
 -- creacion tabla cancelacion
@@ -417,36 +427,6 @@ BEGIN
 	UPDATE mustached_spice.bonoFarmacia SET bfa_habilitado=0 WHERE bfa_id IN (SELECT DISTINCT mxb_bonoFarmacia FROM inserted)
 END
 GO
-
--- -----------------------------------------------------
--- creacion tabla pago
--- -----------------------------------------------------
-CREATE TABLE mustached_spice.pago (
-  pag_id INT NOT NULL Identity,
-  pag_monto INT NOT NULL, --Precio desnormalizado (por eso le pongo monto, y no precio)
-  pag_afiliado INT NOT NULL FOREIGN KEY REFERENCES  mustached_spice.afiliado(afi_id),
-  pag_fechaCompra DATETIME NOT NULL,
-  PRIMARY KEY(pag_id)
-);
-
--- -----------------------------------------------------
--- creacion tabla bonoFarmacia_x_pago
--- -----------------------------------------------------
-CREATE TABLE mustached_spice.bonoFarmacia_x_pago (
-  fxp_bonoFarmacia INT NOT NULL FOREIGN KEY REFERENCES  mustached_spice.bonoFarmacia(bfa_id),
-  fxp_pago INT NOT NULL FOREIGN KEY REFERENCES  mustached_spice.pago(pag_id),
-  PRIMARY KEY(fxp_bonoFarmacia, fxp_pago)
-);
-
--- -----------------------------------------------------
--- creacion tabla bonoConsulta_x_pago
--- -----------------------------------------------------
-CREATE TABLE mustached_spice.bonoConsulta_x_pago (
-  cxp_bonoConsulta INT NOT NULL FOREIGN KEY REFERENCES  mustached_spice.bonoConsulta(bco_id),
-  cxp_pago INT NOT NULL FOREIGN KEY REFERENCES  mustached_spice.pago(pag_id),
-  PRIMARY KEY(cxp_bonoConsulta, cxp_pago)
-);
-
 
 -- -----------------------------------------------------
 -- CREATE vistas
@@ -608,31 +588,30 @@ INSERT INTO mustached_spice.profesional_x_especialidad(pxe_profesional, pxe_espe
 	WHERE Medico_Apellido IS NOT NULL);
 
 -- -----------------------------------------------------
+-- migracion tabla compra
+-- -----------------------------------------------------
+PRINT 'migracion tabla compra'
+INSERT INTO mustached_spice.compra(cmp_afiliado, cmp_fechaCompra, cmp_monto)
+	(SELECT DISTINCT(SELECT afi_id FROM mustached_spice.vAfiliado WHERE usu_numeroDocumento = Paciente_Dni),
+					 Compra_Bono_Fecha,
+					SUM(CASE WHEN Bono_Consulta_Numero IS NOT NULL THEN Plan_Med_Precio_Bono_Consulta
+							 WHEN Bono_Farmacia_Numero IS NOT NULL THEN Plan_Med_Precio_Bono_Farmacia END)
+	FROM gd_esquema.Maestra
+	WHERE Compra_Bono_Fecha IS NOT NULL
+	GROUP BY Paciente_Dni, Compra_Bono_Fecha )
+
+-- -----------------------------------------------------
 -- migracion tabla bonoConsulta
 -- -----------------------------------------------------
 PRINT 'migracion tabla bonoConsulta'
 SET IDENTITY_INSERT mustached_spice.bonoConsulta ON
-INSERT INTO mustached_spice.bonoConsulta(bco_id, bco_fechaCompa, bco_comprador, bco_afiliado, bco_fecha)
-	(SELECT DISTINCT Bono_Consulta_Numero, Compra_Bono_Fecha, afi_id, afi_id, Bono_Consulta_Fecha_Impresion
+INSERT INTO mustached_spice.bonoConsulta(bco_id, bco_fechaCompa, bco_afiliado, bco_fecha, bco_compra)
+	(SELECT DISTINCT Bono_Consulta_Numero, Compra_Bono_Fecha, afi_id, Bono_Consulta_Fecha_Impresion,
+					 (SELECT TOP 1 cmp_id FROM mustached_spice.compra WHERE cmp_fechaCompra = Compra_Bono_Fecha AND cmp_afiliado = afi_id)
         FROM gd_esquema.Maestra
 			LEFT JOIN mustached_spice.vAfiliado ON usu_numeroDocumento = Paciente_Dni
         WHERE Bono_Consulta_Numero IS NOT NULL AND Compra_Bono_Fecha IS NOT NULL)
 SET IDENTITY_INSERT mustached_spice.bonoConsulta OFF
-       
--- -----------------------------------------------------
--- migracion tabla bonoFarmacia
--- -----------------------------------------------------
-PRINT 'migracion tabla bonoFarmacia'
-SET IDENTITY_INSERT mustached_spice.bonoFarmacia ON
-INSERT INTO mustached_spice.bonoFarmacia(bfa_id, bfa_fechaImpresion, bfa_fechaVencimiento, bfa_afiliado, bfa_comprador, bfa_habilitado)
-	(SELECT DISTINCT Bono_Farmacia_Numero, Bono_Farmacia_Fecha_Impresion, Bono_Farmacia_Fecha_Vencimiento, afi_id, afi_id, mustached_spice.bonoFarmaciaHabilitado(Bono_Farmacia_Fecha_Impresion, Bono_Farmacia_Fecha_Vencimiento)
-	FROM gd_esquema.Maestra
-		LEFT JOIN mustached_spice.vAfiliado ON usu_numeroDocumento = Paciente_Dni
-	WHERE Bono_Farmacia_Numero IS NOT NULL)
-SET IDENTITY_INSERT mustached_spice.bonoFarmacia OFF
---El constraint lo agregamos despues porque alentaba mucho la migracion
---La idea es que si no esta habilitado, nisiquiera revisa si es valido. Solo lo hace cuando el bono esta habilitado
-ALTER TABLE mustached_spice.bonoFarmacia ADD CONSTRAINT CK_bfa_valido CHECK (bfa_habilitado=0 OR mustached_spice.bonoFarmaciaHabilitado( bfa_fechaImpresion, bfa_fechaVencimiento)=1 )
 
 -- -----------------------------------------------------
 -- migracion tabla agenda
@@ -666,7 +645,25 @@ INSERT INTO mustached_spice.turno(tur_id, tur_bonoConsulta, tur_afiliado, tur_pr
 	WHERE Turno_Numero IS NOT NULL
 	GROUP BY Turno_Numero, afi_id, pro_id, Turno_Fecha);
 SET IDENTITY_INSERT mustached_spice.turno OFF
-	
+
+-- -----------------------------------------------------
+-- migracion tabla bonoFarmacia
+-- -----------------------------------------------------
+PRINT 'migracion tabla bonoFarmacia'
+SET IDENTITY_INSERT mustached_spice.bonoFarmacia ON
+INSERT INTO mustached_spice.bonoFarmacia(bfa_id, bfa_fechaImpresion, bfa_turno, bfa_fechaVencimiento, bfa_afiliado, bfa_habilitado, bfa_compra)
+	(SELECT DISTINCT Bono_Farmacia_Numero, Bono_Farmacia_Fecha_Impresion, Turno_Numero,
+					 Bono_Farmacia_Fecha_Vencimiento, afi_id, mustached_spice.bonoFarmaciaHabilitado(Bono_Farmacia_Fecha_Impresion, Bono_Farmacia_Fecha_Vencimiento),
+					 (SELECT TOP 1 cmp_id FROM mustached_spice.compra WHERE cmp_fechaCompra = Compra_Bono_Fecha AND cmp_afiliado = afi_id)
+	FROM gd_esquema.Maestra
+		LEFT JOIN mustached_spice.vAfiliado ON usu_numeroDocumento = Paciente_Dni
+	WHERE Bono_Farmacia_Numero IS NOT NULL AND Compra_Bono_Fecha IS NOT NULL)
+SET IDENTITY_INSERT mustached_spice.bonoFarmacia OFF
+
+--El constraint lo agregamos despues porque alentaba mucho la migracion
+--La idea es que si no esta habilitado, nisiquiera revisa si es valido. Solo lo hace cuando el bono esta habilitado
+ALTER TABLE mustached_spice.bonoFarmacia ADD CONSTRAINT CK_bfa_valido CHECK (bfa_habilitado=0 OR mustached_spice.bonoFarmaciaHabilitado( bfa_fechaImpresion, bfa_fechaVencimiento)=1 )
+
 -- -----------------------------------------------------
 -- migracion tabla semanal
 -- -----------------------------------------------------

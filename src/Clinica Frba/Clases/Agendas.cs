@@ -20,6 +20,8 @@ namespace Clinica_Frba.Clases {
         }
 
         private void Fill(DataTable dt) {
+            if (dt.Rows.Count < 1)
+                throw new Exception("No hay agendas para este profesional");
             foreach (DataRow dr in dt.Rows) {
                 items.Add(new Agenda(dr));
             }
@@ -98,7 +100,11 @@ namespace Clinica_Frba.Clases {
                     query += "sem_hora < '" + _dia_hasta + "' AND ";
             }
             query = query.Substring(0, query.Length - 5);
-            Fill(DB.ExecuteReader(query));
+            try {
+                Fill(DB.ExecuteReader(query));
+            } catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
             
         }
 

@@ -15,24 +15,20 @@ IF OBJECT_ID('mustached_spice.bajarProfesional', 'TR') IS NOT NULL
 IF OBJECT_ID('mustached_spice.checkearMedicamentos', 'TR') IS NOT NULL
 	DROP TRIGGER mustached_spice.checkearMedicamentos
 
-IF OBJECT_ID('mustached_spice.bonoConsulta_x_pago', 'U') IS NOT NULL
-	DROP TABLE mustached_spice.bonoConsulta_x_pago
-IF OBJECT_ID('mustached_spice.bonoFarmacia_x_pago', 'U') IS NOT NULL
-	DROP TABLE mustached_spice.bonoFarmacia_x_pago	
-IF OBJECT_ID('mustached_spice.pago', 'U') IS NOT NULL
-	DROP TABLE mustached_spice.pago
 IF OBJECT_ID('mustached_spice.medicamento_x_bonoFarmacia', 'U') IS NOT NULL
 	DROP TABLE mustached_spice.medicamento_x_bonoFarmacia
 IF OBJECT_ID('mustached_spice.medicamento', 'U') IS NOT NULL
 	DROP TABLE mustached_spice.medicamento
 IF OBJECT_ID('mustached_spice.cancelacion', 'U') IS NOT NULL
 	DROP TABLE mustached_spice.cancelacion
+IF OBJECT_ID('mustached_spice.bonoFarmacia', 'U') IS NOT NULL
+	DROP TABLE mustached_spice.bonoFarmacia
 IF OBJECT_ID('mustached_spice.turno', 'U') IS NOT NULL
 	DROP TABLE mustached_spice.turno
 IF OBJECT_ID('mustached_spice.bonoConsulta', 'U') IS NOT NULL
 	DROP TABLE mustached_spice.bonoConsulta
-IF OBJECT_ID('mustached_spice.bonoFarmacia', 'U') IS NOT NULL
-	DROP TABLE mustached_spice.bonoFarmacia
+IF OBJECT_ID('mustached_spice.compra', 'U') IS NOT NULL
+	DROP TABLE mustached_spice.compra
 IF OBJECT_ID('mustached_spice.planMedicoAudit', 'U') IS NOT NULL
 	DROP TABLE mustached_spice.planMedicoAudit
 IF OBJECT_ID('mustached_spice.afiliadoAudit', 'U') IS NOT NULL

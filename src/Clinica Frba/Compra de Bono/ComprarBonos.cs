@@ -40,7 +40,7 @@ namespace Clinica_Frba.Comprar_Bono
 
         private void bComprar_Click(object sender, EventArgs e) {
             string query = "";
-            int idPago=0;
+            int idCompra=0;
             int idFarmacia; //@@IDENTITY da el ultimo ID insertado, para saber cuales fueron, restas nFarmacia
             int idConsulta;
 
@@ -49,46 +49,37 @@ namespace Clinica_Frba.Comprar_Bono
 
 
             if (nFarmacia.Value >= 1)
-                query += "INSERT INTO " + DB.schema + "bonoFarmacia(bfa_fechaImpresion, bfa_fechaVencimiento, bfa_comprador) VALUES ";
+                query += "INSERT INTO " + DB.schema + "bonoFarmacia(bfa_fechaImpresion, bfa_fechaVencimiento, bfa_compra) VALUES ";
             //Cargar los N bonso Famracia
             for(int i=0; i<nFarmacia.Value; i++)
                 query += "('"+ FuncionesBoludas.GetDateTime() + "', '" +
                               FuncionesBoludas.GetDateTime().AddDays(60) + "', " +
-                              afiliado.id + "), ";
+                              idCompra + "), ";
             query = query.Substring(0, query.Length-2); //Sacar la ultima coma
             idFarmacia = DB.ExecuteCardinal(query + "; SELECT @@IDENTITY");
 
 
             //Lo mismo, con Consulta
             if (nConsulta.Value >= 1)
-                query = "INSERT INTO " + DB.schema + "bonoConsulta(bco_fechaCompa, bco_comprador) VALUES ";
+                query = "INSERT INTO " + DB.schema + "bonoConsulta(bco_fechaCompa, bco_compra) VALUES ";
             //Cargar los N bonso Famracia
             for (int i = 0; i < nConsulta.Value; i++)
                 query += "('" + FuncionesBoludas.GetDateTime() + "', " +
-                              afiliado.id + "), ";
+                              idCompra + "), ";
             query = query.Substring(0, query.Length - 2); //Sacar la ultima coma
             idConsulta = DB.ExecuteCardinal(query + "; SELECT @@IDENTITY");
 
-            //Cargar las relaciones
-            query = "INSERT INTO " + DB.schema + "bonoFarmacia_x_pago(fxp_bonoFarmacia, fxp_pago) VALUES ";
+            //Arma el mensaje
             string mensaje = "Se compraron los bonos Farmacia: \n\t";
-            for (int i = 0; i < nFarmacia.Value; i++) {
+            for (int i = 0; i < nFarmacia.Value; i++)
                 mensaje += (idFarmacia - i).ToString() + ", ";
-                query += "(" + (idFarmacia - i).ToString() + ", " + idPago + "), ";
-            }
 
-            query = query.Substring(0, query.Length -2 ); //Sacar la ultima coma
-            query += "; INSERT INTO " + DB.schema + "bonoConsulta_x_pago(cxp_bonoConsulta, cxp_pago) VALUES ";
 
             mensaje += "\nSe compraron los bonos Consulta: \n\t";
-            for (int i = 0; i < nConsulta.Value; i++) {
+            for (int i = 0; i < nConsulta.Value; i++)
                 mensaje += (idConsulta - i).ToString() + ", ";
-                query += "(" + (idConsulta - i).ToString() + ", " + idPago + "), ";
-            }
-            query = query.Substring(0, query.Length - 2); //Sacar la ultima coma
-            DB.ExecuteNonQuery(query);
 
-            MessageBox.Show(mensaje);
+            MessageBox.Show("ID de compra: " + idCompra +  "\n" + mensaje);
 
             DialogResult = DialogResult.OK;
         }

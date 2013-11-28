@@ -134,7 +134,8 @@ namespace Clinica_Frba.RegistrarLlegada {
         private void bSiguienteBono_Click(object sender, EventArgs e) {
             try {
                 BonoConsulta bono = new BonoConsulta(Convert.ToInt32(tbBono.Text));
-                if (Convert.ToInt32(tbAfiliado.Text) != bono.comprador.grupoFamiliar.grupo) { //Que pertenezca al grupo del que lo comrpo
+                Afiliado afiliado = new Afiliado(Convert.ToInt32(tbAfiliado.Text));
+                if (afiliado.grupoFamiliar.grupo != bono.comprador.grupoFamiliar.grupo) { //Que pertenezca al grupo del que lo comrpo
                     MessageBox.Show("El bono no coresponde al afiliado");
                     return;
                 }

@@ -69,6 +69,7 @@
             this.tbUsuario.Name = "tbUsuario";
             this.tbUsuario.Size = new System.Drawing.Size(121, 20);
             this.tbUsuario.TabIndex = 0;
+            this.tbUsuario.Text = "admin";
             // 
             // tbPassword
             // 
@@ -77,6 +78,7 @@
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(142, 20);
             this.tbPassword.TabIndex = 1;
+            this.tbPassword.Text = "w23e";
             // 
             // lbRoles
             // 
