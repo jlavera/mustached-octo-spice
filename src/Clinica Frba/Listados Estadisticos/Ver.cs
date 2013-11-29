@@ -50,7 +50,11 @@ namespace Clinica_Frba.Listados_Estadisticos {
                      * Una vez que sabe que especailidades son, hace el producto cartesiano con una tabla de 6 meses par aque por cada especialidad en el TOP5
                      * Por cada uno de los meses, en un subquery busca cuantas cencelaciones hubieron en ese mes en particular
                     */
-                    query = "SELECT DATENAME(month,  DateAdd( month , T.Mes , 0 ) - 1) 'Mes', X.esp_descripcion 'Especialidad', (SELECT COUNT(1) FROM " + DB.schema + "cancelacion JOIN " + DB.schema + "turno ON tur_id = tuA_turno WHERE tur_especialidad=x.esp_id AND DATEPART(MONTH, tur_fechaYHoraTurno) = t.Mes AND DATEPART(YEAR, tur_fechaYHoraTurno)=" + agno + ") 'Cantidad de Cancelaciones' FROM (SELECT TOP 5 esp_descripcion, esp_id FROM " + DB.schema + "cancelacion JOIN " + DB.schema + "turno ON tur_id = tuA_turno JOIN " + DB.schema + "especialidad ON tur_especialidad = esp_id WHERE DATEPART(MONTH, tur_fechaYHoraTurno)>="+mesInicial+" AND DATEPART(MONTH, tur_fechaYHoraTurno)<="+(mesInicial + 5) +" AND DATEPART(YEAR, tur_fechaYHoraTurno)=" + agno + " GROUP BY esp_descripcion, esp_id ORDER BY COUNT(esp_descripcion) DESC) X, (SELECT " + meses[0] + " 'Mes' UNION SELECT " + meses[1] + " UNION SELECT " + meses[2] + " UNION SELECT " + meses[3] + " UNION SELECT " + meses[4] + " UNION SELECT " + meses[5] + ") T";
+                    query = "SELECT DATENAME(month,  DateAdd( month , T.Mes , 0 ) - 1) 'Mes', "+
+                                "X.esp_descripcion 'Especialidad', " +
+                                "(SELECT COUNT(1) FROM " + DB.schema + "cancelacion JOIN " + DB.schema + "turno ON tur_id = tuA_turno WHERE tur_especialidad=x.esp_id AND DATEPART(MONTH, tur_fechaYHoraTurno) = t.Mes AND DATEPART(YEAR, tur_fechaYHoraTurno)=" + agno + ") 'Cantidad de Cancelaciones' " +
+                            "FROM " + DB.schema + "estEspecialidades(" + agno + ", " + meses[0] + ") X, " +
+                            "(SELECT " + meses[0] + " 'Mes' UNION SELECT " + meses[1] + " UNION SELECT " + meses[2] + " UNION SELECT " + meses[3] + " UNION SELECT " + meses[4] + " UNION SELECT " + meses[5] + ") T";
                     
                     res = DB.ExecuteReader(query);
                     break;
@@ -65,7 +69,11 @@ namespace Clinica_Frba.Listados_Estadisticos {
                      * Despues de le hace un producto cartesiano con los meses
                      * y con un subselect se calcula la cantidad de bonos vencidos por mes
                     */
-                    query = "SELECT DATENAME(month,  DateAdd( month , T.Mes , 0 ) - 1) 'Mes', X.Afiliado 'Afiliado', (SELECT COUNT(1) FROM " + DB.schema + "bonoFarmacia JOIN " + DB.schema + "compra ON cmp_id=bfa_compra WHERE bfa_habilitado=1 AND bfa_fechaVencimiento<'" + FuncionesBoludas.GetDateTime() + "' AND cmp_afiliado=X.afi_id AND DATEPART(MONTH, bfa_fechaImpresion)=T.Mes AND DATEPART(YEAR, bfa_fechaImpresion)=" + agno + ") 'Cantidad bonos vencidos' FROM (SELECT TOP 5 afi_id, usu_apellido + ', ' + usu_nombre 'Afiliado' FROM " + DB.schema + "bonoFarmacia JOIN " + DB.schema + "vAfiliado ON cmp_afiliado=afi_id WHERE bfa_habilitado=1 AND bfa_fechaVencimiento<'" + FuncionesBoludas.GetDateTime() + "' AND cmp_afiliado=afi_id  AND DATEPART(MONTH, bfa_fechaImpresion)>="+mesInicial+" AND DATEPART(MONTH, bfa_fechaImpresion)<="+(mesInicial + 5) +" AND DATEPART(YEAR, bfa_fechaImpresion)=" + agno + " GROUP BY afi_id, usu_apellido + ', ' + usu_nombre ORDER BY  COUNT(1) DESC) X , (SELECT " + meses[0] + " 'Mes' UNION SELECT " + meses[1] + " UNION SELECT " + meses[2] + " UNION SELECT " + meses[3] + " UNION SELECT " + meses[4] + " UNION SELECT " + meses[5] + ") T";
+                    query = "SELECT DATENAME(month,  DateAdd( month , T.Mes , 0 ) - 1) 'Mes', " +
+                                "X.Afiliado 'Afiliado', "+
+                                "(SELECT COUNT(1) FROM " + DB.schema + "bonoFarmacia JOIN " + DB.schema + "compra ON cmp_id=bfa_compra WHERE bfa_habilitado=1 AND bfa_fechaVencimiento<'" + FuncionesBoludas.GetDateTime() + "' AND cmp_afiliado=X.afi_id AND DATEPART(MONTH, bfa_fechaImpresion)=T.Mes AND DATEPART(YEAR, bfa_fechaImpresion)=" + agno + ") 'Cantidad bonos vencidos' " +
+                                "FROM " + DB.schema + "estVencidos(" + agno + ", " + meses[0] + ", '" + FuncionesBoludas.GetDateTime() + "') X , " +
+                                "(SELECT " + meses[0] + " 'Mes' UNION SELECT " + meses[1] + " UNION SELECT " + meses[2] + " UNION SELECT " + meses[3] + " UNION SELECT " + meses[4] + " UNION SELECT " + meses[5] + ") T";
 
                     res = DB.ExecuteReader(query);
                     break;
@@ -78,7 +86,11 @@ namespace Clinica_Frba.Listados_Estadisticos {
                      * Top 5 de las especialidades de médicos con más bonos de farmacia recetados. 
                      * Misma estrategia, dentro del FORM esta el query para elejir el TOP 5, y despues por producto cartesiano se desglosa cada uno, mostrando la cantidad con un subselect
                     */
-                    query = "SELECT DATENAME(month,  DateAdd( month , T.Mes , 0 ) - 1) 'Mes', X.esp_descripcion 'Especialidad', (SELECT COUNT(1) FROM " + DB.schema + "turno WHERE tur_especialidad=X.esp_id AND DATEPART(MONTH, tur_fechaYHoraTurno)=T.Mes AND DATEPART(YEAR, tur_fechaYHoraTurno)=" + agno + ") 'Cantidad de bonos farmacia recetados' FROM (SELECT TOP 5 esp_id, esp_descripcion FROM " + DB.schema + "turno JOIN " + DB.schema + "especialidad ON esp_id=tur_especialidad WHERE tur_bonoConsulta IS NOT NULL AND DATEPART(MONTH, tur_fechaYHoraTurno)>=" + mesInicial + " AND DATEPART(MONTH, tur_fechaYHoraTurno)<="+(mesInicial + 5) +" AND DATEPART(YEAR, tur_fechaYHoraTurno)=" + agno + " GROUP BY esp_descripcion, esp_id ORDER BY COUNT(1) DESC) X, (SELECT " + meses[0] + " 'Mes' UNION SELECT " + meses[1] + " UNION SELECT " + meses[2] + " UNION SELECT " + meses[3] + " UNION SELECT " + meses[4] + " UNION SELECT " + meses[5] + ") T";
+                    query = "SELECT DATENAME(month,  DateAdd( month , T.Mes , 0 ) - 1) 'Mes', " +
+                                "X.esp_descripcion 'Especialidad', " +
+                                "(SELECT COUNT(1) FROM " + DB.schema + "turno WHERE tur_especialidad=X.esp_id AND DATEPART(MONTH, tur_fechaYHoraTurno)=T.Mes AND DATEPART(YEAR, tur_fechaYHoraTurno)=" + agno + ") 'Cantidad de bonos farmacia recetados' "+
+                                "FROM " + DB.schema + "estRecetados(" + agno + ", " + meses[0] + ")  X, " +
+                                "(SELECT " + meses[0] + " 'Mes' UNION SELECT " + meses[1] + " UNION SELECT " + meses[2] + " UNION SELECT " + meses[3] + " UNION SELECT " + meses[4] + " UNION SELECT " + meses[5] + ") T";
 
                     res = DB.ExecuteReader(query);
                     break;
@@ -91,11 +103,27 @@ namespace Clinica_Frba.Listados_Estadisticos {
                      * Top 10 de los afiliados que utilizaron bonos que ellos mismo no compraron.
                      * Me repito
                     */
-                    query = "SELECT DATENAME(month,  DateAdd( month , T.Mes , 0 ) - 1) 'Mes', X.Afiliado 'Afiliado', (SELECT COUNT(bfa_id)+COUNT(bco_id) FROM " + DB.schema + "afiliado LEFT JOIN " + DB.schema + "compra ON cmp_id=bco_compra LEFT JOIN " + DB.schema + "bonoConsulta ON cmp_afiliado=afi_id AND bco_afiliado!=afi_id AND DATEPART(MONTH, bco_fechaCompa)=T.Mes AND DATEPART(YEAR, bco_fechaCompa)=" + agno + "JOIN " + DB.schema + "compra ON cmp_id=bfa_compra LEFT JOIN " + DB.schema + "bonoFarmacia ON cmp_afiliado=afi_id AND bfa_afiliado!=afi_id AND DATEPART(MONTH, bfa_fechaImpresion)=T.mes AND DATEPART(YEAR, bfa_fechaImpresion)=" + agno + " WHERE afi_id=X.afi_id) 'Cantidad de bonos no cobrados por el' FROM (SELECT TOP 10 afi_id, usu_apellido + ', ' + usu_nombre 'Afiliado' FROM " + DB.schema + "vAfiliado LEFT JOIN " + DB.schema + "bonoConsulta ON cmp_afiliado=afi_id AND bco_afiliado!=afi_id AND DATEPART(MONTH, bco_fechaCompa)>="+mesInicial+" AND DATEPART(MONTH, bco_fechaCompa)<="+(mesInicial + 5) +" AND DATEPART(YEAR, bco_fechaCompa)=" + agno + " LEFT JOIN " + DB.schema + "bonoFarmacia ON bfa_comprador=afi_id AND bfa_afiliado!=afi_id AND DATEPART(MONTH, bfa_fechaImpresion)>="+mesInicial+" AND DATEPART(MONTH, bfa_fechaImpresion)<="+(mesInicial + 5) +" AND DATEPART(YEAR, bfa_fechaImpresion)=" + agno + " GROUP BY afi_id, usu_apellido + ', ' + usu_nombre ORDER BY COUNT(bfa_id)+COUNT(bco_id) DESC) X, (SELECT " + meses[0] + " 'Mes' UNION SELECT " + meses[1] + " UNION SELECT " + meses[2] + " UNION SELECT " + meses[3] + " UNION SELECT " + meses[4] + " UNION SELECT " + meses[5] + ") T";
-
+                    query = "SELECT DATENAME(month,  DateAdd( month , T.Mes , 0 ) - 1) 'Mes', " +
+                                    "X.Afiliado 'Afiliado', " +
+		                                "(SELECT COUNT(bfa_id)+COUNT(bco_id) " +
+                                        "FROM " + DB.schema + "afiliado " +
+                                            "JOIN " + DB.schema + "bonoConsulta ON bco_afiliado=afi_id AND " +
+                                                                                 "bco_afiliado!=(SELECT cmp_afiliado FROM " + DB.schema + "compra WHERE cmp_id=bco_compra) AND " +
+											                                     "DATEPART(MONTH, bco_fechaCompa)=T.Mes AND " +
+                                                                                 "DATEPART(YEAR, bco_fechaCompa)=" + agno + " " +
+                                            "LEFT JOIN " + DB.schema + "bonoFarmacia ON bfa_afiliado=afi_id AND " +
+                                                                                      "bfa_afiliado!=(SELECT cmp_afiliado FROM " + DB.schema + "compra WHERE cmp_id=bfa_compra) AND " +
+													                                  "DATEPART(MONTH, bfa_fechaImpresion)=T.mes AND " +
+                                                                                      "DATEPART(YEAR, bfa_fechaImpresion)=" + agno + " " +
+			                                "WHERE afi_id=X.afi_id) 'Cantidad de bonos no cobrados por el' " +
+                                    "FROM " + DB.schema + "estNoEsTuyo(" + agno + ", " + meses[0] + ") X, " +
+                                    "(SELECT " + meses[0] + " 'Mes' UNION SELECT " + meses[1] + " UNION SELECT " + meses[2] + " UNION SELECT " + meses[3] + " UNION SELECT " + meses[4] + " UNION SELECT " + meses[5] + ") T";
                     res = DB.ExecuteReader(query);
                     break;
+                default:
+                    return;
             }
+
 
             foreach (DataRow dr in res.Rows)
                 dataGridView.Rows.Add(dr[0], dr[1], dr[2]);

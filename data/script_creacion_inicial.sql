@@ -5,6 +5,75 @@ GO
 -- CREATE funciones
 -- -----------------------------------------------------
 
+-- Estadisticas
+CREATE FUNCTION mustached_spice.estEspecialidades (@anio INT, @mesInicial INT)
+RETURNS TABLE
+AS
+RETURN
+    SELECT TOP 5 ISNULL(esp_descripcion, 'Sin Especialidad') esp_descripcion, esp_id
+	FROM mustached_spice.cancelacion
+		JOIN mustached_spice.turno ON tur_id = tuA_turno
+		LEFT JOIN mustached_spice.especialidad ON tur_especialidad = esp_id
+	WHERE DATEPART(MONTH, tur_fechaYHoraTurno)>=3 AND
+		  DATEPART(MONTH, tur_fechaYHoraTurno)<=8 AND
+		  DATEPART(YEAR, tur_fechaYHoraTurno)=2013
+	GROUP BY esp_descripcion, esp_id
+	ORDER BY COUNT(esp_descripcion) DESC
+GO
+
+CREATE FUNCTION mustached_spice.estVencidos(@anio INT, @mesInicial INT, @hoy DATE)
+RETURNS TABLE
+AS
+RETURN
+	SELECT TOP 5 afi_id, usu_apellido + ', ' + usu_nombre 'Afiliado'
+	FROM mustached_spice.bonoFarmacia
+		JOIN mustached_spice.compra ON bfa_compra=cmp_id
+		JOIN mustached_spice.vAfiliado ON cmp_afiliado=afi_id
+	WHERE bfa_habilitado=1 AND bfa_fechaVencimiento<@hoy AND
+		  cmp_afiliado=afi_id AND
+		  DATEPART(MONTH, bfa_fechaImpresion)>=@mesInicial AND
+		  DATEPART(MONTH, bfa_fechaImpresion)<=(@mesInicial+5) AND
+		  DATEPART(YEAR, bfa_fechaImpresion)=@anio
+	GROUP BY afi_id, usu_apellido + ', ' + usu_nombre
+	ORDER BY COUNT(1) DESC
+GO
+
+CREATE FUNCTION mustached_spice.estRecetados(@anio INT, @mesInicial INT)
+RETURNS TABLE
+AS
+RETURN
+	SELECT TOP 5 esp_id, ISNULL(esp_descripcion, 'Sin Especialidad') esp_descripcion
+	FROM mustached_spice.turno
+		LEFT JOIN mustached_spice.especialidad ON esp_id=tur_especialidad
+	WHERE tur_bonoConsulta IS NOT NULL AND
+		  DATEPART(MONTH, tur_fechaYHoraTurno)>=@mesInicial AND
+		  DATEPART(MONTH, tur_fechaYHoraTurno)<=(@mesInicial+5) AND
+		  DATEPART(YEAR, tur_fechaYHoraTurno)=@anio
+	GROUP BY esp_descripcion, esp_id
+	ORDER BY COUNT(1) DESC
+GO
+
+CREATE FUNCTION mustached_spice.estNoEsTuyo(@anio INT, @mesInicial INT)
+RETURNS TABLE
+AS
+RETURN
+	SELECT TOP 10 afi_id, usu_apellido + ', ' + usu_nombre 'Afiliado'
+			  FROM mustached_spice.vAfiliado
+					LEFT JOIN mustached_spice.bonoConsulta ON bco_afiliado=afi_id AND
+															  bco_afiliado!=(SELECT cmp_afiliado FROM mustached_spice.compra WHERE cmp_id=bco_compra) AND
+															  DATEPART(MONTH, bco_fechaCompa)>=1 AND
+															  DATEPART(MONTH, bco_fechaCompa)<=6 AND
+															  DATEPART(YEAR, bco_fechaCompa)=2013
+					LEFT JOIN mustached_spice.bonoFarmacia ON bfa_afiliado=afi_id AND
+															  bfa_afiliado!=(SELECT cmp_afiliado FROM mustached_spice.compra WHERE cmp_id=bfa_compra) AND
+															  DATEPART(MONTH, bfa_fechaImpresion)>=1 AND
+															  DATEPART(MONTH, bfa_fechaImpresion)<=6 AND
+															  DATEPART(YEAR, bfa_fechaImpresion)=2013
+					GROUP BY afi_id, usu_apellido + ', ' + usu_nombre
+					ORDER BY COUNT(bfa_id)+COUNT(bco_id) DESC
+GO
+
+
 -- Concatenar las funcionalidades de un rol para mostrar en el DataGridView de ABM Roles
 CREATE FUNCTION mustached_spice.concatenarFuncionalidad(@rolID int) RETURNS varchar(500) AS
 BEGIN
@@ -272,7 +341,7 @@ CREATE TABLE mustached_spice.afiliadoAudit (
 -- y
 --Trigger para guardar la baja de afiliado y cancelar los turnos que tenga
 GO
-CREATE TRIGGER mustached_spice.modificarAfiliado ON mustached_spice.afiliado AFTER UPDATE AS
+ALTER TRIGGER mustached_spice.modificarAfiliado ON mustached_spice.afiliado AFTER UPDATE AS
 BEGIN
 	INSERT INTO mustached_spice.afiliadoAudit(afA_fecha, afA_afiliado) (SELECT GETDATE(), afi_id FROM inserted WHERE afi_habilitado=0)
 	INSERT INTO mustached_spice.cancelacion(tuA_razon, tuA_tipo, tuA_turno) (SELECT 'Baja de Afiliado', 'Sistema', tur_id FROM mustached_spice.turno WHERE tur_afiliado IN (SELECT afi_id FROM inserted WHERE afi_habilitado=0))
@@ -289,11 +358,12 @@ BEGIN
 	--por uno más alto o uno más bajo, dichos bonos no podrán ser utilizado por él"
 	UPDATE mustached_spice.bonoConsulta
 		SET bco_habilitado=0
-	WHERE bco_compra IN (SELECT cmp_id FROM inserted JOIN mustached_spice.compra ON cmp_afiliado = inserted.afi_id WHERE inserted.afi_planMedico != (SELECT afi_planMedico FROM deleted WHERE deleted.afi_id=inserted.afi_id)
+	WHERE bco_compra IN (SELECT cmp_id FROM inserted i JOIN mustached_spice.compra ON cmp_afiliado = i.afi_id WHERE i.afi_planMedico != (SELECT d.afi_planMedico FROM deleted d WHERE d.afi_id=i.afi_id))
+	
 	
 	UPDATE mustached_spice.bonoFarmacia
 		SET bfa_habilitado=0
-	WHERE bfa_compra IN (SELECT cmp_id FROM inserted JOIN mustached_spice.compra ON cmp_afiliado = inserted.afi_id WHERE inserted.afi_planMedico != (SELECT afi_planMedico FROM deleted WHERE deleted.afi_id=inserted.afi_id)
+	WHERE bfa_compra IN (SELECT cmp_id FROM inserted i JOIN mustached_spice.compra ON cmp_afiliado = i.afi_id WHERE i.afi_planMedico != (SELECT d.afi_planMedico FROM deleted d WHERE d.afi_id=i.afi_id))
 END
 GO
 

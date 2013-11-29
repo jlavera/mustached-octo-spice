@@ -64,6 +64,16 @@ IF OBJECT_ID('mustached_spice.rol', 'U') IS NOT NULL
 IF OBJECT_ID('mustached_spice.usuario', 'U') IS NOT NULL
 	DROP TABLE mustached_spice.usuario
 
+
+IF OBJECT_ID('mustached_spice.estEspecialidades') IS NOT NULL
+	DROP FUNCTION mustached_spice.estEspecialidades
+IF OBJECT_ID('mustached_spice.estVencidos') IS NOT NULL
+	DROP FUNCTION mustached_spice.estVencidos
+IF OBJECT_ID('mustached_spice.estRecetados') IS NOT NULL
+	DROP FUNCTION mustached_spice.estRecetados
+IF OBJECT_ID('mustached_spice.estNoEsTuyo') IS NOT NULL
+	DROP FUNCTION mustached_spice.estNoEsTuyo
+	
 IF OBJECT_ID('mustached_spice.cargaHoraria') IS NOT NULL
 	DROP FUNCTION mustached_spice.cargaHoraria
 IF OBJECT_ID('mustached_spice.cantidadMedicamentos') IS NOT NULL
