@@ -45,7 +45,7 @@ namespace Clinica_Frba.Comprar_Bono
             int idConsulta;
 
             if ((nFarmacia.Value + nConsulta.Value) >= 1)
-                idPago = DB.ExecuteCardinal("INSERT INTO " + DB.schema + "pago(pag_monto, pag_afiliado, pag_fechaCompra) VALUES (" + tbPrecio.Text + ", " + afiliado.id + ", '" + FuncionesBoludas.GetDateTime().ToString() + "')" + "; SELECT @@IDENTITY");
+                idCompra = DB.ExecuteCardinal("INSERT INTO " + DB.schema + "pago(pag_monto, pag_afiliado, pag_fechaCompra) VALUES (" + tbPrecio.Text + ", " + afiliado.id + ", '" + FuncionesBoludas.GetDateTime().ToString() + "')" + "; SELECT @@IDENTITY");
 
 
             if (nFarmacia.Value >= 1)

@@ -104,6 +104,7 @@
     <Compile Include="Clases\BonosFarmacia.cs" />
     <Compile Include="Clases\BonoConsulta.cs" />
     <Compile Include="Clases\BonosConsulta.cs" />
+    <Compile Include="Clases\Compra.cs" />
     <Compile Include="Clases\Medicamentos.cs" />
     <Compile Include="Clases\Medicamento.cs" />
     <Compile Include="Clases\miniProfesional.cs">

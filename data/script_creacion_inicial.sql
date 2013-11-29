@@ -325,7 +325,7 @@ CREATE TABLE mustached_spice.compra (
 CREATE TABLE mustached_spice.bonoConsulta (
   bco_id INT NOT NULL Identity,
   bco_fecha DATE NULL,
-  bco_fechaCompa DATE NOT NULL,
+  bco_fechaCompra DATE NOT NULL,
   bco_afiliado INT NULL FOREIGN KEY REFERENCES  mustached_spice.afiliado(afi_id),
   bco_compra INT NOT NULL FOREIGN KEY REFERENCES  mustached_spice.compra(cmp_id),
   bco_habilitado TINYINT NOT NULL DEFAULT 1, --Funciona de las veces de si esta o no consumido
@@ -605,7 +605,7 @@ INSERT INTO mustached_spice.compra(cmp_afiliado, cmp_fechaCompra, cmp_monto)
 -- -----------------------------------------------------
 PRINT 'migracion tabla bonoConsulta'
 SET IDENTITY_INSERT mustached_spice.bonoConsulta ON
-INSERT INTO mustached_spice.bonoConsulta(bco_id, bco_fechaCompa, bco_afiliado, bco_fecha, bco_compra)
+INSERT INTO mustached_spice.bonoConsulta(bco_id, bco_fechaCompra, bco_afiliado, bco_fecha, bco_compra)
 	(SELECT DISTINCT Bono_Consulta_Numero, Compra_Bono_Fecha, afi_id, Bono_Consulta_Fecha_Impresion,
 					 (SELECT TOP 1 cmp_id FROM mustached_spice.compra WHERE cmp_fechaCompra = Compra_Bono_Fecha AND cmp_afiliado = afi_id)
         FROM gd_esquema.Maestra

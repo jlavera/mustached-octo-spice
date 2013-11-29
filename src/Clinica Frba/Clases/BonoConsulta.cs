@@ -9,16 +9,16 @@ namespace Clinica_Frba.Clases {
 
         public int id;
         public Afiliado afiliado;
-        public Afiliado comprador;
         public DateTime fecha;
-        public DateTime fechaCompa;
+        public DateTime fechaCompra;
+        public Compra compra;
 
         public BonoConsulta(DataRow dr) {
             id = (int)dr["bco_id"];
             afiliado = new Afiliado(dr);
-            comprador = new Afiliado((int)dr["cmp_afiliado"]);
             fecha = (DateTime)dr["bco_fecha"];
-            fechaCompa = (DateTime)dr["bco_fechaCompa"];
+            fechaCompra = (DateTime)dr["bco_fechaCompa"];
+            compra = new Compra((int)dr["bfa_compra"]);
         }
 
         public BonoConsulta(int _id) {
@@ -31,14 +31,14 @@ namespace Clinica_Frba.Clases {
                 throw new NoTrajoNadaExcep();
             DataRow dr = dt.Rows[0];
 
-            //TODO tendira que llamar a el BonoFarmacia() de arriba
             id = (int)dr["bco_id"];
-            comprador = new Afiliado(dr);
             if(dr["bco_afiliado"] != DBNull.Value)
                 afiliado = new Afiliado((int)dr["bco_afiliado"]);
             if (dr["bco_fecha"] != DBNull.Value) 
                 fecha = (DateTime)dr["bco_fecha"];
-            fechaCompa = (DateTime)dr["bco_fechaCompa"];
+            fechaCompra = (DateTime)dr["bco_fechaCompa"];
+            if (dr["bco_compra"] != DBNull.Value)
+                compra = new Compra((int)dr["bfa_compra"]);
         }
 
         public override string ToString() {

@@ -9,20 +9,22 @@ namespace Clinica_Frba.Clases {
 
         public int id;
         public Afiliado afiliado;
-        public Afiliado comprador;
+        public int turno;
         public DateTime fechaImpresion;
         public DateTime fechaVencimiento;
+        public Compra compra;
 
         public BonoFarmacia (DataRow dr) {
             id = (int)dr["bfa_id"];
-            afiliado = new Afiliado((int)dr["bfa_afiliado"]);
+            turno = (dr["bfa_turno"] == DBNull.Value) ? -1 : (int)dr["bfa_turno"];
+            afiliado = (dr["bfa_afiliado"] == DBNull.Value) ? null : new Afiliado((int)dr["bfa_afiliado"]);
             fechaImpresion = (DateTime)dr["[bfa_fechaImpresion]"];
             fechaVencimiento = (DateTime)dr["bfa_fechaVencimiento"];
+            compra = new Compra((int)dr["bfa_compra"]);
         }
 
-        public BonoFarmacia(int _id, Afiliado _comprador, DateTime _fechaImpresion, DateTime _fechaVencimiento) {
+        public BonoFarmacia(int _id, DateTime _fechaImpresion, DateTime _fechaVencimiento) {
             id = _id;
-            comprador = _comprador;
             fechaImpresion = _fechaImpresion;
             fechaVencimiento = _fechaVencimiento;
         }
@@ -37,11 +39,12 @@ namespace Clinica_Frba.Clases {
                 throw new NoTrajoNadaExcep();
             DataRow dr = dt.Rows[0];
 
-            //FIXME tendira que llamar a el BonoFarmacia() de arriba
             id = (int)dr["bfa_id"];
-            comprador = new Afiliado(dr);
+            turno = (dr["bfa_turno"] == DBNull.Value) ? -1 : (int)dr["bfa_turno"];
+            afiliado = (dr["bfa_afiliado"] == DBNull.Value) ? null : new Afiliado((int)dr["bfa_afiliado"]);
             fechaImpresion = (DateTime)dr["bfa_fechaImpresion"];
             fechaVencimiento = (DateTime)dr["bfa_fechaVencimiento"];
+            compra = new Compra(dr);
         }
 
         public override string ToString() {

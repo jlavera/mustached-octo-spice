@@ -61,5 +61,22 @@ namespace Clinica_Frba.Clases {
                 "AND tur_habilitado=1 " +
                 "ORDER BY tur_fechaYHoraTurno DESC")); //Ordenados
         }
+
+
+        public void FillForProf2(Profesional _prof, Boolean llego, Boolean atendio) {
+            //El discriminador es para saber si tiene que tomar los turnos que llegaron, o lo que todavia no
+            //--Y para saber si fue atendido o no
+
+            Fill(DB.ExecuteReader("SELECT * FROM " + DB.schema + "turno" +
+                " JOIN " + DB.schema + "vProfesional ON tur_profesional = pro_id" +
+                " JOIN " + DB.schema + "vAfiliado ON tur_afiliado = afi_id" +
+                " WHERE tur_profesional = " + _prof.id + " " + //Que sea del profesional que atendiste
+                (!llego ? "AND tur_fechaYHoraLlegada IS NULL " : "AND tur_fechaYHoraLlegada IS NOT NULL ") +
+                (!atendio ? "AND tur_fechaYHoraAtencion IS NULL " : "AND tur_fechaYHoraAtencion IS NOT NULL ") +
+                "AND CAST(tur_fechaYHoraTurno as DATE) = '" + FuncionesBoludas.GetDateTime().ToString("yyyy-MM-dd") + "' " + //Que sea de ese dia
+                "AND CAST(tur_fechaYHoraTurno as TIME) < '" + FuncionesBoludas.GetDateTime().ToString("HH:mm") + "' " + //Pero que sea mas temprano
+                "AND tur_habilitado=1 " +
+                "ORDER BY tur_fechaYHoraTurno DESC")); //Ordenados
+        }
     }
 }
