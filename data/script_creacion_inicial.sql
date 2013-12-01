@@ -328,7 +328,6 @@ CREATE TABLE mustached_spice.compra (
 CREATE TABLE mustached_spice.bonoConsulta (
   bco_id INT NOT NULL Identity,
   bco_fecha DATE NULL,
-  bco_fechaCompra DATE NOT NULL,
   bco_afiliado INT NULL FOREIGN KEY REFERENCES  mustached_spice.afiliado(afi_id),
   bco_compra INT NOT NULL FOREIGN KEY REFERENCES  mustached_spice.compra(cmp_id),
   bco_habilitado TINYINT NOT NULL DEFAULT 1, --Funciona de las veces de si esta o no consumido
@@ -631,8 +630,8 @@ INSERT INTO mustached_spice.compra(cmp_afiliado, cmp_fechaCompra, cmp_monto)
 -- -----------------------------------------------------
 PRINT 'migracion tabla bonoConsulta'
 SET IDENTITY_INSERT mustached_spice.bonoConsulta ON
-INSERT INTO mustached_spice.bonoConsulta(bco_id, bco_fechaCompra, bco_afiliado, bco_fecha, bco_compra)
-	(SELECT DISTINCT Bono_Consulta_Numero, Compra_Bono_Fecha, afi_id, Bono_Consulta_Fecha_Impresion,
+INSERT INTO mustached_spice.bonoConsulta(bco_id, bco_afiliado, bco_fecha, bco_compra)
+	(SELECT DISTINCT Bono_Consulta_Numero, afi_id, Bono_Consulta_Fecha_Impresion,
 					 (SELECT TOP 1 cmp_id FROM mustached_spice.compra WHERE cmp_fechaCompra = Compra_Bono_Fecha AND cmp_afiliado = afi_id)
         FROM gd_esquema.Maestra
 			LEFT JOIN mustached_spice.vAfiliado ON usu_numeroDocumento = Paciente_Dni
@@ -804,16 +803,18 @@ AS
 RETURN
 	SELECT TOP 10 afi_id, usu_apellido + ', ' + usu_nombre 'Afiliado'
 			  FROM mustached_spice.vAfiliado
-					LEFT JOIN mustached_spice.bonoConsulta ON bco_afiliado=afi_id AND
-															  bco_afiliado!=(SELECT cmp_afiliado FROM mustached_spice.compra WHERE cmp_id=bco_compra) AND
-															  DATEPART(MONTH, bco_fechaCompra)>=1 AND
-															  DATEPART(MONTH, bco_fechaCompra)<=6 AND
-															  DATEPART(YEAR, bco_fechaCompra)=2013
-					LEFT JOIN mustached_spice.bonoFarmacia ON bfa_afiliado=afi_id AND
-															  bfa_afiliado!=(SELECT cmp_afiliado FROM mustached_spice.compra WHERE cmp_id=bfa_compra) AND
-															  DATEPART(MONTH, bfa_fechaImpresion)>=1 AND
-															  DATEPART(MONTH, bfa_fechaImpresion)<=6 AND
-															  DATEPART(YEAR, bfa_fechaImpresion)=2013
+					JOIN mustached_spice.bonoConsulta ON bco_afiliado=afi_id
+						JOIN mustached_spice.compra cbc ON cbc.cmp_id = bco_compra
+					JOIN mustached_spice.bonoFarmacia ON bfa_afiliado=afi_id
+						JOIN mustached_spice.compra cfa ON cfa.cmp_id = bfa_compra 
+					WHERE bco_afiliado!=cbc.cmp_afiliado OR
+							bfa_afiliado != cfa.cmp_afiliado AND
+						  (DATEPART(MONTH, cbc.cmp_fechaCompra)>=@mesInicial OR
+							DATEPART(MONTH, cfa.cmp_fechaCompra)>=@mesInicial) AND
+						  (DATEPART(MONTH, cbc.cmp_fechaCompra)<=(@mesInicial+5) OR
+							DATEPART(MONTH, cfa.cmp_fechaCompra)<=(@mesInicial+5)) AND
+						  (DATEPART(YEAR, cbc.cmp_fechaCompra)=@anio OR
+							DATEPART(YEAR, cfa.cmp_fechaCompra)=@anio)
 					GROUP BY afi_id, usu_apellido + ', ' + usu_nombre
 					ORDER BY COUNT(bfa_id)+COUNT(bco_id) DESC
 GO

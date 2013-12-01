@@ -9,6 +9,7 @@ namespace Clinica_Frba.Clases {
 
         public int id;
         public Afiliado afiliado;
+        public Afiliado comprador;
         public DateTime fecha;
         public DateTime fechaCompra;
         public Compra compra;
@@ -34,6 +35,8 @@ namespace Clinica_Frba.Clases {
             id = (int)dr["bco_id"];
             if(dr["bco_afiliado"] != DBNull.Value)
                 afiliado = new Afiliado((int)dr["bco_afiliado"]);
+            if (dr["cmp_afiliado"] != DBNull.Value)
+                comprador = new Afiliado((int)dr["cmp_afiliado"]);
             if (dr["bco_fecha"] != DBNull.Value)
                 fecha = (DateTime)dr["bco_fecha"];
             if (dr["bco_compra"] != DBNull.Value)

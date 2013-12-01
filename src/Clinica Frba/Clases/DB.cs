@@ -61,7 +61,7 @@ namespace Clinica_Frba.Clases {
                 temp = Convert.ToInt32(reader[0]);
 
             } catch (Exception ex) {
-                //FuncionesBoludas.errorParser(ex.Message);
+                FuncionesBoludas.errorParser(ex.Message);
                 //Aca varios tiran errores porque no encuentran nada, asi que lo dejamos pasar y devolvemos -1
                 return temp;
             } finally {
