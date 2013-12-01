@@ -141,8 +141,10 @@ namespace Clinica_Frba.RegistrarLlegada {
                 }
 
                 //Si llego aca coincide todo, y va todo bien.
-                DB.ExecuteNonQuery("UPDATE " + DB.schema + "turno SET tur_fechaYHoraLlegada='" + FuncionesBoludas.GetDateTime() + "', tur_bonoConsulta=" + bono.id + " WHERE tur_id=" + ((Turno)lbTurnos.SelectedItem).id +
-                                   "; UPDATE "+DB.schema + "bonoConsulta SET bco_habilitado=0, bco_afiliado=" + tbAfiliado.Text + " WHERE bco_id=" + bono.id); //Caundo se consume, poner por quien
+                DB.ExecuteNonQuery("SET IDENTITY_INSERT " + DB.schema + "atencion ON; " +
+                                    "INSERT INTO " + DB.schema + "atencion(ate_bonoConsulta, ate_fechaYHoraLlegada, ate_turno) VALUES (" + bono.id + ", '" + FuncionesBoludas.GetDateTime() + "', " + ((Turno)lbTurnos.SelectedItem).id  + "); " +
+                                    "SET IDENTITY_INSERT " + DB.schema + "atencion OFF; " +
+                                  "UPDATE "+DB.schema + "bonoConsulta SET bco_habilitado=0, bco_afiliado=" + tbAfiliado.Text + " WHERE bco_id=" + bono.id); //Caundo se consume, poner por quien
                 DialogResult = DialogResult.OK;
 
             } catch (NoTrajoNadaExcep ex) {

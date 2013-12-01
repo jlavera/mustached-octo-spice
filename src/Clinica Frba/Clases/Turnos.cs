@@ -55,7 +55,8 @@ namespace Clinica_Frba.Clases {
                 " JOIN "+DB.schema+"vProfesional ON tur_profesional = pro_id" +
                 " JOIN " + DB.schema + "vAfiliado ON tur_afiliado = afi_id" +
                 " WHERE tur_profesional = " + _prof.id + " " + //Que sea del profesional que atendiste
-                (!llego ? "AND tur_fechaYHoraLlegada IS NULL " : "AND tur_fechaYHoraLlegada IS NOT NULL ") +
+                    "AND (SELECT COUNT(1) FROM " + DB.schema + "atencion WHERE ate_turno = tur_id) " +
+                (!llego ? "=0 " : "=1 ") +
                 "AND CAST(tur_fechaYHoraTurno as DATE) = '" + FuncionesBoludas.GetDateTime().ToString("yyyy-MM-dd") +"' " + //Que sea de ese dia
                 "AND CAST(tur_fechaYHoraTurno as TIME) > '" + FuncionesBoludas.GetDateTime().ToString("HH:mm") + "' " + //Pero que sea mas tarde
                 "AND tur_habilitado=1 " +

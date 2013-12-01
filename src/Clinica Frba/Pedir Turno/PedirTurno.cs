@@ -141,15 +141,15 @@ namespace Clinica_Frba.PedirTurno {
             gbHorario.Enabled = false;
         }
         private void bFinalizar_Click(object sender, EventArgs e) {
-
-            if (DB.ExecuteCardinal("SELECT COUNT(1) FROM " + DB.schema + "semanal " +
+            int agenda = DB.ExecuteCardinal("SELECT TOP 1 age_id FROM " + DB.schema + "semanal " +
                                        "JOIN " + DB.schema + "agenda ON age_id = sem_agenda " +
                                        "WHERE age_profesional= " + prof.id + " AND " +
                                         "sem_dia=" + (int)(dtpDia.Value.DayOfWeek + 1) % 7 + " AND " +
                                         "age_desde<='" + dtpDia.Value.ToString("yyy-MM-dd") + "' AND " +
                                         "age_hasta>='" + dtpDia.Value.ToString("yyy-MM-dd") + "' AND " +
                                         "sem_desde<='" + dtpHora.Value.ToString("HH:mm:ss") + "' AND " +
-                                        "sem_hasta>='" + dtpHora.Value.ToString("HH:mm:ss") + "'") == 0) {
+                                        "sem_hasta>='" + dtpHora.Value.ToString("HH:mm:ss") + "'");
+            if (agenda == -1) {
                 MessageBox.Show("No atiende a esta hora");
                 return;
             };
@@ -160,9 +160,9 @@ namespace Clinica_Frba.PedirTurno {
             };
             if (MessageBox.Show("Turno con el dr. " + prof.usuario.apellido + ", " + prof.usuario.nombre + " para el día " + dtpDia.Value.DayOfWeek + " " + dtpDia.Value.Day + " del " + dtpDia.Value.Month + " a las " + dtpHora.Value.ToString("HH:mm:ss"), "Confirmar", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 //--TODO QUERY INSERT
-                if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "turno (tur_afiliado, tur_profesional, tur_especialidad, tur_fechaYHoraTurno) VALUES " +
+                if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "turno (tur_afiliado, tur_profesional, tur_especialidad, tur_fechaYHoraTurno, tur_agenda) VALUES " +
                     "(" + afiliado.id + ", " + prof.id + ", " + ((Especialidad)cmbEspecialidades.SelectedItem).id + ", '" +
-                    dtpDia.Value.ToString("yyy-MM-dd") + " " + dtpHora.Value.ToString("HH:mm:ss") + "')") < 0)
+                    dtpDia.Value.ToString("yyy-MM-dd") + " " + dtpHora.Value.ToString("HH:mm:ss") + "', " + agenda + ")") < 0)
                     MessageBox.Show("Error al agregar al turno", "Correción");
                 else
                     DialogResult = DialogResult.OK;

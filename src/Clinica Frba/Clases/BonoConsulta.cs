@@ -34,11 +34,10 @@ namespace Clinica_Frba.Clases {
             id = (int)dr["bco_id"];
             if(dr["bco_afiliado"] != DBNull.Value)
                 afiliado = new Afiliado((int)dr["bco_afiliado"]);
-            if (dr["bco_fecha"] != DBNull.Value) 
+            if (dr["bco_fecha"] != DBNull.Value)
                 fecha = (DateTime)dr["bco_fecha"];
-            fechaCompra = (DateTime)dr["bco_fechaCompa"];
             if (dr["bco_compra"] != DBNull.Value)
-                compra = new Compra((int)dr["bfa_compra"]);
+                compra = new Compra((int)dr["bco_compra"]);
         }
 
         public override string ToString() {

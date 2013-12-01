@@ -55,10 +55,10 @@ namespace Clinica_Frba.RegistroResultado {
 
         private void bFinalizar_Click(object sender, EventArgs e) {
             if (rbSi.Checked) {
-                DB.ExecuteNonQuery("UPDATE " + DB.schema + "turno SET tur_fechaYHoraAtencion='" + FuncionesBoludas.GetDateTime().ToString() + "', "+
-                                                                     "tur_sintomas='" + tbSintomas.Text + "', " +
-                                                                     "tur_diagnostico='" + tbDiagnostico.Text + "' " + 
-                                                                     "WHERE tur_id=" + ((Turno)lbTurnos.SelectedItem).id);
+                DB.ExecuteNonQuery("UPDATE " + DB.schema + "atencion SET ate_fechaYHoraAtencion='" + FuncionesBoludas.GetDateTime().ToString() + "', "+
+                                                                     "ate_sintomas='" + tbSintomas.Text + "', " +
+                                                                     "ate_diagnostico='" + tbDiagnostico.Text + "' " + 
+                                                                     "WHERE ate_turno=" + ((Turno)lbTurnos.SelectedItem).id);
             }
             DialogResult = DialogResult.OK;
         }

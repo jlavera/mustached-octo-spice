@@ -52,19 +52,19 @@ namespace Clinica_Frba.Cancelar_Atencion {
                 String queryDelete, queryAudit, queryAux = "";
 
                 queryDelete = "UPDATE " + DB.schema + "turno SET tur_habilitado=0 WHERE (";
-                queryAudit = "INSERT INTO " + DB.schema + "cancelacion(tuA_razon, tuA_tipo, tuA_turno, tua_cancelante) (SELECT '" + tbDetalle.Text + "', '" + cbTipo.Text + "', tur_id FROM " + DB.schema + "turno, 1 WHERE (";
+                queryAudit = "INSERT INTO " + DB.schema + "cancelacion(tuA_razon, tuA_tipo, tuA_turno, tua_cancelante) (SELECT '" + tbDetalle.Text + "', '" + cbTipo.Text + "', tur_id, 1 FROM " + DB.schema + "turno WHERE tur_habilitado=1 AND (";
 
                 for (DateTime dateTime = monthCalendar.SelectionStart;
                      dateTime < monthCalendar.SelectionEnd;
                      dateTime += TimeSpan.FromDays(1)) {
                     queryAux += "CAST(tur_fechaYHoraTurno AS DATE)='" + dateTime.ToString("yyyy-MM-dd") + "' OR ";
                 }
-                queryAux = queryAux.Substring(0, queryAux.Length - 3) + ") ";//FIXME aca tira error por el string index
+                queryAux = queryAux.Substring(0, queryAux.Length - 3) + ") ";
 
                 queryDelete += queryAux + "AND tur_profesional='" + profesional.id + "'; ";
                 queryAudit += queryAux + "AND tur_profesional='" + profesional.id + "'); ";
 
-                if (DB.ExecuteNonQuery(queryDelete + queryAudit) == -1)
+                if (DB.ExecuteNonQuery(queryAudit + queryDelete) == -1)
                     MessageBox.Show("Error en la baja del dia");
                 DialogResult = DialogResult.OK;
             }
