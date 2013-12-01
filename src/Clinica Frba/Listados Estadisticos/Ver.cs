@@ -103,6 +103,7 @@ namespace Clinica_Frba.Listados_Estadisticos {
                      * Top 10 de los afiliados que utilizaron bonos que ellos mismo no compraron.
                      * Me repito
                     */
+                    //FIXME
                     query = "SELECT DATENAME(month,  DateAdd( month , T.Mes , 0 ) - 1) 'Mes', " +
                                     "X.Afiliado 'Afiliado', " +
 		                                "(SELECT COUNT(bfa_id)+COUNT(bco_id) " +

@@ -758,9 +758,9 @@ RETURN
 	FROM mustached_spice.cancelacion
 		JOIN mustached_spice.turno ON tur_id = tuA_turno
 		LEFT JOIN mustached_spice.especialidad ON tur_especialidad = esp_id
-	WHERE DATEPART(MONTH, tur_fechaYHoraTurno)>=3 AND
-		  DATEPART(MONTH, tur_fechaYHoraTurno)<=8 AND
-		  DATEPART(YEAR, tur_fechaYHoraTurno)=2013
+	WHERE DATEPART(MONTH, tur_fechaYHoraTurno)>=@mesInicial AND
+		  DATEPART(MONTH, tur_fechaYHoraTurno)<=(@mesInicial+5) AND
+		  DATEPART(YEAR, tur_fechaYHoraTurno)=@anio
 	GROUP BY esp_descripcion, esp_id
 	ORDER BY COUNT(esp_descripcion) DESC
 GO
