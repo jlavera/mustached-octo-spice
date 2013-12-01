@@ -147,5 +147,27 @@ namespace Clinica_Frba.Clases {
                     ((ListBox)ctrl).ClearSelected();
             }
         }
+
+        internal static string intToDate(int dia) {
+            switch (dia) {
+                case 2:
+                    return "Lunes";
+                case 3:
+                    return "Martes";
+                case 4:
+                    return "Miercoles";
+                case 5:
+                    return "Jueves";
+                case 6:
+                    return "Viernes";
+                case 7:
+                    return "Sabado";
+                case 1:
+                    return "Domingo";
+                default:
+                    return "Sin dia";
+
+            }
+        }
     }
 }

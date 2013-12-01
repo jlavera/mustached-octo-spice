@@ -16,7 +16,6 @@ namespace Clinica_Frba.PedirTurno {
         Afiliado afiliado;
 
         Agendas agendas = new Agendas();
-        Semanales semanales = new Semanales();
 
         Especialidades esps = new Especialidades();
 
@@ -127,13 +126,6 @@ namespace Clinica_Frba.PedirTurno {
                 MessageBox.Show("Los domingos no hay atención", "Error");
                 return;
             }
-
-            semanales.items.Clear();
-            cmbHorario.Items.Clear();
-
-            semanales.FillTurnosLibres(prof.id, dtpDia.Value);
-            cmbHorario.Items.AddRange(semanales.ToList());
-
             gbDia.Enabled = false;
             gbHorario.Enabled = true;
 
@@ -145,24 +137,32 @@ namespace Clinica_Frba.PedirTurno {
 
         //--------------HORARIO---------
         private void bVolverHorario_Click(object sender, EventArgs e) {
-            semanales.items.Clear();
-            cmbHorario.Items.Clear();
-
             gbDia.Enabled = true;
             gbHorario.Enabled = false;
         }
         private void bFinalizar_Click(object sender, EventArgs e) {
 
-            if (cmbHorario.SelectedIndex == -1) {
-                MessageBox.Show("Debe elegir un horario", "Error");
+            if (DB.ExecuteCardinal("SELECT COUNT(1) FROM " + DB.schema + "semanal " +
+                                       "JOIN " + DB.schema + "agenda ON age_id = sem_agenda " +
+                                       "WHERE age_profesional= " + prof.id + " AND " +
+                                        "sem_dia=" + (int)(dtpDia.Value.DayOfWeek + 1) % 7 + " AND " +
+                                        "age_desde<='" + dtpDia.Value.ToString("yyy-MM-dd") + "' AND " +
+                                        "age_hasta>='" + dtpDia.Value.ToString("yyy-MM-dd") + "' AND " +
+                                        "sem_desde<='" + dtpHora.Value.ToString("HH:mm:ss") + "' AND " +
+                                        "sem_hasta>='" + dtpHora.Value.ToString("HH:mm:ss") + "'") == 0) {
+                MessageBox.Show("No atiende a esta hora");
                 return;
-            }
-
-            if (MessageBox.Show("Turno con el dr. " + prof.usuario.apellido + ", " + prof.usuario.nombre + " para el día " + dtpDia.Value.DayOfWeek + " " + dtpDia.Value.Day + " del " + dtpDia.Value.Month + " a las " + cmbHorario.SelectedItem.ToString(), "Confirmar", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            };
+            if (DB.ExecuteCardinal("SELECT COUNT(1) FROM " + DB.schema + "turno " +
+                           "WHERE tur_fechaYHoraTurno= '" + dtpDia.Value.ToString("yyy-MM-dd") + " " + dtpHora.Value.ToString("HH:mm:ss") + "'") > 0){
+                MessageBox.Show("Esa hora esta ocupada");
+                return;
+            };
+            if (MessageBox.Show("Turno con el dr. " + prof.usuario.apellido + ", " + prof.usuario.nombre + " para el día " + dtpDia.Value.DayOfWeek + " " + dtpDia.Value.Day + " del " + dtpDia.Value.Month + " a las " + dtpHora.Value.ToString("HH:mm:ss"), "Confirmar", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 //--TODO QUERY INSERT
                 if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "turno (tur_afiliado, tur_profesional, tur_especialidad, tur_fechaYHoraTurno) VALUES " +
                     "(" + afiliado.id + ", " + prof.id + ", " + ((Especialidad)cmbEspecialidades.SelectedItem).id + ", '" +
-                    dtpDia.Value.ToString("yyy-MM-dd") + " " + ((Semanal)cmbHorario.SelectedItem).hora.ToString("HH:mm:ss") + "')") < 0)
+                    dtpDia.Value.ToString("yyy-MM-dd") + " " + dtpHora.Value.ToString("HH:mm:ss") + "')") < 0)
                     MessageBox.Show("Error al agregar al turno", "Correción");
                 else
                     DialogResult = DialogResult.OK;

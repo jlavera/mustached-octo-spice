@@ -5,75 +5,6 @@ GO
 -- CREATE funciones
 -- -----------------------------------------------------
 
--- Estadisticas
-CREATE FUNCTION mustached_spice.estEspecialidades (@anio INT, @mesInicial INT)
-RETURNS TABLE
-AS
-RETURN
-    SELECT TOP 5 ISNULL(esp_descripcion, 'Sin Especialidad') esp_descripcion, esp_id
-	FROM mustached_spice.cancelacion
-		JOIN mustached_spice.turno ON tur_id = tuA_turno
-		LEFT JOIN mustached_spice.especialidad ON tur_especialidad = esp_id
-	WHERE DATEPART(MONTH, tur_fechaYHoraTurno)>=3 AND
-		  DATEPART(MONTH, tur_fechaYHoraTurno)<=8 AND
-		  DATEPART(YEAR, tur_fechaYHoraTurno)=2013
-	GROUP BY esp_descripcion, esp_id
-	ORDER BY COUNT(esp_descripcion) DESC
-GO
-
-CREATE FUNCTION mustached_spice.estVencidos(@anio INT, @mesInicial INT, @hoy DATE)
-RETURNS TABLE
-AS
-RETURN
-	SELECT TOP 5 afi_id, usu_apellido + ', ' + usu_nombre 'Afiliado'
-	FROM mustached_spice.bonoFarmacia
-		JOIN mustached_spice.compra ON bfa_compra=cmp_id
-		JOIN mustached_spice.vAfiliado ON cmp_afiliado=afi_id
-	WHERE bfa_habilitado=1 AND bfa_fechaVencimiento<@hoy AND
-		  cmp_afiliado=afi_id AND
-		  DATEPART(MONTH, bfa_fechaImpresion)>=@mesInicial AND
-		  DATEPART(MONTH, bfa_fechaImpresion)<=(@mesInicial+5) AND
-		  DATEPART(YEAR, bfa_fechaImpresion)=@anio
-	GROUP BY afi_id, usu_apellido + ', ' + usu_nombre
-	ORDER BY COUNT(1) DESC
-GO
-
-CREATE FUNCTION mustached_spice.estRecetados(@anio INT, @mesInicial INT)
-RETURNS TABLE
-AS
-RETURN
-	SELECT TOP 5 esp_id, ISNULL(esp_descripcion, 'Sin Especialidad') esp_descripcion
-	FROM mustached_spice.turno
-		LEFT JOIN mustached_spice.especialidad ON esp_id=tur_especialidad
-	WHERE tur_bonoConsulta IS NOT NULL AND
-		  DATEPART(MONTH, tur_fechaYHoraTurno)>=@mesInicial AND
-		  DATEPART(MONTH, tur_fechaYHoraTurno)<=(@mesInicial+5) AND
-		  DATEPART(YEAR, tur_fechaYHoraTurno)=@anio
-	GROUP BY esp_descripcion, esp_id
-	ORDER BY COUNT(1) DESC
-GO
-
-CREATE FUNCTION mustached_spice.estNoEsTuyo(@anio INT, @mesInicial INT)
-RETURNS TABLE
-AS
-RETURN
-	SELECT TOP 10 afi_id, usu_apellido + ', ' + usu_nombre 'Afiliado'
-			  FROM mustached_spice.vAfiliado
-					LEFT JOIN mustached_spice.bonoConsulta ON bco_afiliado=afi_id AND
-															  bco_afiliado!=(SELECT cmp_afiliado FROM mustached_spice.compra WHERE cmp_id=bco_compra) AND
-															  DATEPART(MONTH, bco_fechaCompa)>=1 AND
-															  DATEPART(MONTH, bco_fechaCompa)<=6 AND
-															  DATEPART(YEAR, bco_fechaCompa)=2013
-					LEFT JOIN mustached_spice.bonoFarmacia ON bfa_afiliado=afi_id AND
-															  bfa_afiliado!=(SELECT cmp_afiliado FROM mustached_spice.compra WHERE cmp_id=bfa_compra) AND
-															  DATEPART(MONTH, bfa_fechaImpresion)>=1 AND
-															  DATEPART(MONTH, bfa_fechaImpresion)<=6 AND
-															  DATEPART(YEAR, bfa_fechaImpresion)=2013
-					GROUP BY afi_id, usu_apellido + ', ' + usu_nombre
-					ORDER BY COUNT(bfa_id)+COUNT(bco_id) DESC
-GO
-
-
 -- Concatenar las funcionalidades de un rol para mostrar en el DataGridView de ABM Roles
 CREATE FUNCTION mustached_spice.concatenarFuncionalidad(@rolID int) RETURNS varchar(500) AS
 BEGIN
@@ -110,8 +41,7 @@ GO
 -- Funcion para obtener la carga horaria que se usa como check de que un profesional no este disponible mas de 48 horas semanales
 CREATE FUNCTION mustached_spice.cargaHoraria(@agenda int) RETURNS int AS
 BEGIN
-	-- 0.5 porque son cada 30 minutos (media hora) y quiero devolverlo en horas
-  RETURN 0.5*(SELECT COUNT(1)
+  RETURN (SELECT SUM(DATEDIFF(MINUTE, sem_hasta, sem_desde)) 
 			FROM mustached_spice.semanal
 			WHERE sem_agenda = @agenda AND sem_habilitado=1)
 END
@@ -277,6 +207,7 @@ CREATE TABLE mustached_spice.agenda (
   age_profesional INT NOT NULL FOREIGN KEY REFERENCES  mustached_spice.profesional(pro_id),
   age_desde DATE NOT NULL,
   age_hasta DATE NOT NULL,
+  age_habilitado TINYINT NOT NULL DEFAULT 1, --La tengo qpue poner porque los turnos son bajas logicas,  que tiene FKs
   PRIMARY KEY(age_id),
   CHECK ( (age_desde < age_hasta) AND (DATEDIFF(day, age_desde, age_hasta) <= 120) )
 );
@@ -288,10 +219,13 @@ CREATE TABLE mustached_spice.agenda (
 CREATE TABLE mustached_spice.semanal (
   sem_agenda INT NOT NULL FOREIGN KEY REFERENCES  mustached_spice.agenda(age_id),
   sem_dia INT NOT NULL, -- 1: DOMINGO
-  sem_hora TIME NOT NULL, --Se separan cada 30 minutos
-  sem_habilitado TINYINT NOT NULL DEFAULT 1
-  PRIMARY KEY(sem_agenda, sem_dia, sem_hora)
+  sem_desde TIME NOT NULL,
+  sem_hasta TIME NOT NULL,
+  sem_habilitado TINYINT NOT NULL DEFAULT 1,
+  PRIMARY KEY(sem_agenda, sem_dia, sem_desde, sem_hasta),
+  CHECK ( (sem_desde < sem_hasta) )
 );
+GO
 
 -- -----------------------------------------------------
 -- creacion tabla profesional_x_especialidad
@@ -341,7 +275,7 @@ CREATE TABLE mustached_spice.afiliadoAudit (
 -- y
 --Trigger para guardar la baja de afiliado y cancelar los turnos que tenga
 GO
-ALTER TRIGGER mustached_spice.modificarAfiliado ON mustached_spice.afiliado AFTER UPDATE AS
+CREATE TRIGGER mustached_spice.modificarAfiliado ON mustached_spice.afiliado AFTER UPDATE AS
 BEGIN
 	INSERT INTO mustached_spice.afiliadoAudit(afA_fecha, afA_afiliado) (SELECT GETDATE(), afi_id FROM inserted WHERE afi_habilitado=0)
 	INSERT INTO mustached_spice.cancelacion(tuA_razon, tuA_tipo, tuA_turno) (SELECT 'Baja de Afiliado', 'Sistema', tur_id FROM mustached_spice.turno WHERE tur_afiliado IN (SELECT afi_id FROM inserted WHERE afi_habilitado=0))
@@ -351,7 +285,6 @@ BEGIN
 	UPDATE mustached_spice.afiliado
 		SET afi_planMedico=(select TOP 1 afi_planMedico from inserted)
 	WHERE afi_grupoFamiliar2 IN (SELECT afi_id FROM inserted)
-	
 	
 	--"Recordar que los bonos solo pueden ser utilizados para el plan que tenía asignado el 
 	--afiliado en el momento que realizó la compra, es decir, que si luego cambia de plan, sea 
@@ -411,21 +344,32 @@ CREATE TABLE mustached_spice.turno (
   tur_profesional INT NOT NULL FOREIGN KEY REFERENCES  mustached_spice.profesional(pro_id),
   tur_especialidad INT FOREIGN KEY REFERENCES mustached_spice.especialidad(esp_id),
   tur_fechaYHoraTurno DATETIME NOT NULL,
-  tur_fechaYHoraLlegada DATETIME NULL,
-  tur_fechaYHoraAtencion DATETIME NULL,
-  tur_sintomas TEXT NULL,
-  tur_diagnostico TEXT NULL,
-  tur_bonoConsulta INT NULL FOREIGN KEY REFERENCES mustached_spice.bonoConsulta(bco_id),
+  tur_agenda INT NULL FOREIGN KEY REFERENCES mustached_spice.agenda(age_id),
   tur_habilitado TINYINT NOT NULL DEFAULT 1,-- Sería cuando se cancela un turno
   PRIMARY KEY (tur_id)
 );
+
+-- -----------------------------------------------------
+-- creacion tabla atencion
+-- -----------------------------------------------------
+CREATE TABLE mustached_spice.atencion (
+  ate_turno INT NOT NULL Identity FOREIGN KEY REFERENCES mustached_spice.turno(tur_id),
+  ate_fechaYHoraLlegada DATETIME NULL,
+  ate_fechaYHoraAtencion DATETIME NULL,
+  ate_sintomas TEXT NULL,
+  ate_diagnostico TEXT NULL,
+  ate_bonoConsulta INT NULL FOREIGN KEY REFERENCES mustached_spice.bonoConsulta(bco_id),
+  PRIMARY KEY(ate_turno)
+);
+
+
 --Si se cancela el turno, se tiene que re-habilitar el bonoConsulta. El bonoFarmacia todavia no fue ni consumido (porque se tiene que cancelar ocn un dia de antelacion)
 GO
 CREATE TRIGGER mustached_spice.retribuirBono ON mustached_spice.turno AFTER UPDATE AS
 BEGIN
 	UPDATE mustached_spice.bonoConsulta
 		SET bco_habilitado=1
-		WHERE bco_id IN (SELECT tur_bonoConsulta FROM inserted WHERE tur_habilitado=0)
+		WHERE bco_id IN (SELECT ate_bonoConsulta FROM inserted JOIN mustached_spice.atencion ON ate_turno = tur_id WHERE tur_habilitado=0)
 END
 Go
 
@@ -437,7 +381,7 @@ CREATE TABLE mustached_spice.bonoFarmacia (
   bfa_fechaImpresion DATE NOT NULL,
   bfa_fechaVencimiento DATE NOT NULL,
   bfa_afiliado INT NULL FOREIGN KEY REFERENCES  mustached_spice.afiliado(afi_id),
-  bfa_turno INT NULL FOREIGN KEY REFERENCES  mustached_spice.turno(tur_id),
+  bfa_atencion INT NULL FOREIGN KEY REFERENCES  mustached_spice.atencion(ate_turno),
   bfa_compra INT NOT NULL FOREIGN KEY REFERENCES  mustached_spice.compra(cmp_id),
   bfa_habilitado TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (bfa_id)
@@ -459,11 +403,23 @@ CREATE TABLE mustached_spice.cancelacion(
 GO
 CREATE TRIGGER mustached_spice.cancelarTurnos ON mustached_spice.semanal FOR DELETE AS
 BEGIN
-	UPDATE mustached_spice.turno
-		SET tur_habilitado=0
-		WHERE DATEPART(dw, tur_fechaYHoraTurno) IN (SELECT sem_dia FROM deleted)
-		AND CAST(tur_fechaYHoraTurno AS TIME) IN (SELECT sem_hora FROM deleted)
-		AND tur_profesional IN (SELECT age_profesional FROM deleted LEFT JOIN mustached_spice.agenda ON sem_agenda = age_id)
+	DECLARE @DESDE TIME, @HASTA TIME, @AGENDA INT, @DIA INT;
+	DECLARE c CURSOR FOR (SELECT d.sem_desde, d.sem_hasta, d.sem_agenda, d.sem_dia FROM deleted d)
+	OPEN c
+	
+	FETCH NEXT FROM c INTO @DESDE, @HASTA, @AGENDA, @DIA
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		UPDATE mustached_spice.turno
+			SET tur_habilitado=0
+			WHERE DATEPART(dw, tur_fechaYHoraTurno) = @DIA
+			AND CAST(tur_fechaYHoraTurno AS TIME) >= @DESDE
+			AND CAST(tur_fechaYHoraTurno AS TIME) <= @HASTA
+			AND tur_agenda = @AGENDA
+			FETCH NEXT FROM c INTO @DESDE, @HASTA, @AGENDA, @DIA
+	END
+	CLOSE c
+	DEALLOCATE c
 END
 GO
 
@@ -520,7 +476,7 @@ CREATE VIEW mustached_spice.vAfiliado AS
 GO
 
 CREATE VIEW mustached_spice.vAgenda AS
-	SELECT age_id, age_desde, age_hasta, age_profesional, (usu_apellido + ', ' + usu_nombre) 'profesional', sem_dia, sem_hora
+	SELECT age_id, age_desde, age_hasta, age_profesional, (usu_apellido + ', ' + usu_nombre) 'profesional', sem_dia, sem_desde, sem_hasta, age_habilitado
 	FROM mustached_spice.agenda
 		JOIN mustached_spice.semanal ON sem_agenda = age_id
 		JOIN mustached_spice.vProfesional ON age_profesional = pro_id
@@ -701,14 +657,12 @@ PRINT 'migracion tabla turno'
 --Aca hacemos algo medio feo con GROUP BY, el problema es que la misma fila aparece repetida con aveces NULL y aveces el sintoma, para "compactar" los nulls
 --pero no perder cuales tiene sintomas, abusamos de la implementacion de MS SQL 2008 y su manejo de NULLs
 SET IDENTITY_INSERT mustached_spice.turno ON
-INSERT INTO mustached_spice.turno(tur_id, tur_bonoConsulta, tur_afiliado, tur_profesional, tur_fechaYHoraTurno, tur_fechaYHoraAtencion, tur_fechaYHoraLlegada, tur_sintomas, tur_diagnostico, tur_habilitado)
-	(SELECT DISTINCT Turno_Numero, MAX(Bono_Consulta_Numero),
-		afi_id, pro_id, Turno_Fecha, 
-		(CASE WHEN MAX(Consulta_Sintomas) IS NOT NULL THEN Turno_Fecha ELSE NULL END),
-		(CASE WHEN MAX(Consulta_Sintomas) IS NOT NULL THEN Turno_Fecha ELSE NULL END),
-		MAX(Consulta_Sintomas), MAX(Consulta_Enfermedades),
+INSERT INTO mustached_spice.turno(tur_id, tur_afiliado, tur_profesional, tur_fechaYHoraTurno, tur_habilitado, tur_agenda)
+	(SELECT DISTINCT Turno_Numero, afi_id, pro_id, Turno_Fecha,
 		(CASE WHEN (CAST(Turno_Fecha AS DATE) > (SELECT TOP 1 age_desde FROM mustached_spice.agenda WHERE age_profesional = pro_id)
-				AND CAST(Turno_Fecha AS DATE)  < (SELECT TOP 1 age_hasta FROM mustached_spice.agenda WHERE age_profesional = pro_id)) THEN 1 ELSE 0 END)
+				AND CAST(Turno_Fecha AS DATE)  < (SELECT TOP 1 age_hasta FROM mustached_spice.agenda WHERE age_profesional = pro_id)) THEN 1 ELSE 0 END),
+		(SELECT TOP 1 age_id FROM mustached_spice.agenda WHERE age_profesional = pro_id AND (CAST(Turno_Fecha AS DATE) > age_desde) AND
+																							(CAST(Turno_Fecha AS DATE) < age_hasta))
 	FROM gd_esquema.Maestra
 		LEFT JOIN mustached_spice.vAfiliado A ON A.usu_numeroDocumento = Paciente_Dni
 		LEFT JOIN mustached_spice.vProfesional P ON P.usu_numeroDocumento = Medico_Dni
@@ -717,11 +671,29 @@ INSERT INTO mustached_spice.turno(tur_id, tur_bonoConsulta, tur_afiliado, tur_pr
 SET IDENTITY_INSERT mustached_spice.turno OFF
 
 -- -----------------------------------------------------
+-- migracion tabla atencion
+-- -----------------------------------------------------
+PRINT 'migracion tabla atencion'
+--Mismo groupby feo :)
+SET IDENTITY_INSERT mustached_spice.atencion ON
+INSERT INTO mustached_spice.atencion(ate_bonoConsulta, ate_fechaYHoraAtencion, ate_fechaYHoraLlegada, ate_sintomas, ate_diagnostico, ate_turno)
+	(SELECT DISTINCT MAX(Bono_Consulta_Numero),
+		(CASE WHEN MAX(Consulta_Sintomas) IS NOT NULL THEN Turno_Fecha ELSE NULL END),
+		(CASE WHEN MAX(Consulta_Sintomas) IS NOT NULL THEN Turno_Fecha ELSE NULL END),
+		MAX(Consulta_Sintomas), MAX(Consulta_Enfermedades),
+		Turno_Numero
+	FROM gd_esquema.Maestra
+	WHERE Turno_Numero IS NOT NULL AND Consulta_Sintomas IS NOT NULL AND Consulta_Enfermedades IS NOT NULL
+	GROUP BY Turno_Numero, Turno_Fecha);
+SET IDENTITY_INSERT mustached_spice.atencion OFF
+
+
+-- -----------------------------------------------------
 -- migracion tabla bonoFarmacia
 -- -----------------------------------------------------
 PRINT 'migracion tabla bonoFarmacia'
 SET IDENTITY_INSERT mustached_spice.bonoFarmacia ON
-INSERT INTO mustached_spice.bonoFarmacia(bfa_id, bfa_fechaImpresion, bfa_turno, bfa_fechaVencimiento, bfa_afiliado, bfa_habilitado, bfa_compra)
+INSERT INTO mustached_spice.bonoFarmacia(bfa_id, bfa_fechaImpresion, bfa_atencion, bfa_fechaVencimiento, bfa_afiliado, bfa_habilitado, bfa_compra)
 	(SELECT DISTINCT Bono_Farmacia_Numero, Bono_Farmacia_Fecha_Impresion, Turno_Numero,
 					 Bono_Farmacia_Fecha_Vencimiento, afi_id, mustached_spice.bonoFarmaciaHabilitado(Bono_Farmacia_Fecha_Impresion, Bono_Farmacia_Fecha_Vencimiento),
 					 (SELECT TOP 1 cmp_id FROM mustached_spice.compra WHERE cmp_fechaCompra = Compra_Bono_Fecha AND cmp_afiliado = afi_id)
@@ -739,13 +711,13 @@ ALTER TABLE mustached_spice.bonoFarmacia ADD CONSTRAINT CK_bfa_valido CHECK (bfa
 -- -----------------------------------------------------
 PRINT 'migracion tabla semanal'
 -- Como con Agenda, lo inferimos mas que nada para poder testear, pero es una inferencia nuestra.
-INSERT INTO mustached_spice.semanal(sem_agenda, sem_dia, sem_hora, sem_habilitado)
-	(SELECT DISTINCT age_id, DATEPART(dw, tur_fechaYHoraTurno), CAST(tur_fechaYHoraTurno AS TIME),
+INSERT INTO mustached_spice.semanal(sem_agenda, sem_dia, sem_desde, sem_hasta, sem_habilitado)
+	(SELECT DISTINCT age_id, DATEPART(dw, tur_fechaYHoraTurno), CAST(tur_fechaYHoraTurno AS TIME), DATEADD(MINUTE, 30, CAST(tur_fechaYHoraTurno AS TIME)),
 	mustached_spice.semanalHabilitado(DATEPART(dw, tur_fechaYHoraTurno), CAST(tur_fechaYHoraTurno AS TIME))
 	FROM mustached_spice.turno
 		JOIN mustached_spice.agenda ON tur_profesional = age_profesional);
 UPDATE mustached_spice.semanal SET sem_habilitado=0 WHERE mustached_spice.cargaHoraria(sem_agenda ) > 48;
-ALTER TABLE mustached_spice.semanal ADD CONSTRAINT CK_sem_horarioValido CHECK(sem_habilitado=1 OR (mustached_spice.semanalHabilitado(sem_dia, sem_hora)=0 OR mustached_spice.cargaHoraria(sem_agenda ) > 48 ))
+ALTER TABLE mustached_spice.semanal ADD CONSTRAINT CK_sem_horarioValido CHECK(sem_habilitado=1 OR (mustached_spice.semanalHabilitado(sem_dia, sem_desde)=0 OR mustached_spice.cargaHoraria(sem_agenda ) > 48 ))
 
 -- -----------------------------------------------------
 -- migracion tabla medicamento
@@ -773,4 +745,75 @@ BEGIN
 																					(mxb_unidades <= 3 AND
 																					mustached_spice.cantidadMedicamentos(mxb_bonoFarmacia) <= 5))
 END
+GO
+
+
+
+-- Estadisticas
+CREATE FUNCTION mustached_spice.estEspecialidades (@anio INT, @mesInicial INT)
+RETURNS TABLE
+AS
+RETURN
+    SELECT TOP 5 ISNULL(esp_descripcion, 'Sin Especialidad') esp_descripcion, esp_id
+	FROM mustached_spice.cancelacion
+		JOIN mustached_spice.turno ON tur_id = tuA_turno
+		LEFT JOIN mustached_spice.especialidad ON tur_especialidad = esp_id
+	WHERE DATEPART(MONTH, tur_fechaYHoraTurno)>=3 AND
+		  DATEPART(MONTH, tur_fechaYHoraTurno)<=8 AND
+		  DATEPART(YEAR, tur_fechaYHoraTurno)=2013
+	GROUP BY esp_descripcion, esp_id
+	ORDER BY COUNT(esp_descripcion) DESC
+GO
+
+CREATE FUNCTION mustached_spice.estVencidos(@anio INT, @mesInicial INT, @hoy DATE)
+RETURNS TABLE
+AS
+RETURN
+	SELECT TOP 5 afi_id, usu_apellido + ', ' + usu_nombre 'Afiliado'
+	FROM mustached_spice.bonoFarmacia
+		JOIN mustached_spice.compra ON bfa_compra=cmp_id
+		JOIN mustached_spice.vAfiliado ON cmp_afiliado=afi_id
+	WHERE bfa_habilitado=1 AND bfa_fechaVencimiento<@hoy AND
+		  cmp_afiliado=afi_id AND
+		  DATEPART(MONTH, bfa_fechaImpresion)>=@mesInicial AND
+		  DATEPART(MONTH, bfa_fechaImpresion)<=(@mesInicial+5) AND
+		  DATEPART(YEAR, bfa_fechaImpresion)=@anio
+	GROUP BY afi_id, usu_apellido + ', ' + usu_nombre
+	ORDER BY COUNT(1) DESC
+GO
+
+CREATE FUNCTION mustached_spice.estRecetados(@anio INT, @mesInicial INT)
+RETURNS TABLE
+AS
+RETURN
+	SELECT TOP 5 esp_id, ISNULL(esp_descripcion, 'Sin Especialidad') esp_descripcion
+	FROM mustached_spice.bonoFarmacia
+		JOIN mustached_spice.atencion ON bfa_atencion = ate_turno
+		JOIN mustached_spice.turno ON tur_id = ate_turno
+		LEFT JOIN mustached_spice.especialidad ON esp_id=tur_especialidad
+	WHERE DATEPART(MONTH, tur_fechaYHoraTurno)>=@mesInicial AND
+		  DATEPART(MONTH, tur_fechaYHoraTurno)<=(@mesInicial+5) AND
+		  DATEPART(YEAR, tur_fechaYHoraTurno)=@anio
+	GROUP BY esp_descripcion, esp_id
+	ORDER BY COUNT(1) DESC
+GO
+
+CREATE FUNCTION mustached_spice.estNoEsTuyo(@anio INT, @mesInicial INT)
+RETURNS TABLE
+AS
+RETURN
+	SELECT TOP 10 afi_id, usu_apellido + ', ' + usu_nombre 'Afiliado'
+			  FROM mustached_spice.vAfiliado
+					LEFT JOIN mustached_spice.bonoConsulta ON bco_afiliado=afi_id AND
+															  bco_afiliado!=(SELECT cmp_afiliado FROM mustached_spice.compra WHERE cmp_id=bco_compra) AND
+															  DATEPART(MONTH, bco_fechaCompra)>=1 AND
+															  DATEPART(MONTH, bco_fechaCompra)<=6 AND
+															  DATEPART(YEAR, bco_fechaCompra)=2013
+					LEFT JOIN mustached_spice.bonoFarmacia ON bfa_afiliado=afi_id AND
+															  bfa_afiliado!=(SELECT cmp_afiliado FROM mustached_spice.compra WHERE cmp_id=bfa_compra) AND
+															  DATEPART(MONTH, bfa_fechaImpresion)>=1 AND
+															  DATEPART(MONTH, bfa_fechaImpresion)<=6 AND
+															  DATEPART(YEAR, bfa_fechaImpresion)=2013
+					GROUP BY afi_id, usu_apellido + ', ' + usu_nombre
+					ORDER BY COUNT(bfa_id)+COUNT(bco_id) DESC
 GO

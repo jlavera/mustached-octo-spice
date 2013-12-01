@@ -12,7 +12,6 @@ namespace Clinica_Frba.Registrar_Agenda {
     public partial class EditAgenda : Form {
         public bool nueva = false;
         private Agenda vieja;
-        Semanales semanales = new Semanales();
 
         Profesionales pros = new Profesionales();
 
@@ -40,13 +39,37 @@ namespace Clinica_Frba.Registrar_Agenda {
                 dtpDesde.Value = vieja.desde;
                 dtpHasta.Value = vieja.hasta;
 
-                semanales.FillForAgenda(vieja);
-                lbSemanal.Items.AddRange(semanales.ToList());
-                bAgregar.Enabled = false;
+
+                foreach (Control lb in this.Controls)
+                {
+                    if (lb is ListBox)
+                    {
+                        lb.Enabled = false;
+                        /////////////////Cargar los semanales
+                        DataTable dt = DB.ExecuteReader("SELECT * FROM " + DB.schema + "semanal WHERE sem_habilitado=1 AND sem_agenda=" + vieja.id);
+
+                        foreach (DataRow dr in dt.Rows) {
+                            ListBox tmp = ((ListBox)this.Controls["lbDia" + (dr["sem_dia"]).ToString()]);
+                            //Busca para seleccionarlo
+                            for(int i=0; i<tmp.Items.Count; i++)
+                            {
+                                if (tmp.Items[i].ToString() == dr["sem_hora"].ToString().Substring(0, 5))
+                                {
+                                    tmp.SetSelected(i, true);
+                                    break; //Cuando lo encuentra pasa al proximo registro
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 
         private void bGuardar_Click(object sender, EventArgs e) {
+            if ((lbDia2.SelectedItems.Count + lbDia3.SelectedItems.Count + lbDia4.SelectedItems.Count + lbDia5.SelectedItems.Count + lbDia6.SelectedItems.Count + lbDia7.SelectedItems.Count) >= 48) {
+                MessageBox.Show("No puede trabajar tantas horas");
+                return;
+            }
             if (cbProfesional.SelectedIndex == -1)
                 MessageBox.Show("No se selecciono un profesional");
             else if (dtpHasta.Value.Ticks < dtpDesde.Value.Ticks)
@@ -61,14 +84,24 @@ namespace Clinica_Frba.Registrar_Agenda {
                 {
                     query += "INSERT INTO " + DB.schema + "agenda(age_desde, age_hasta, age_profesional) VALUES('" + dtpDesde.Value.ToString("yyyy-MM-dd") + "', '" + dtpHasta.Value.ToString("yyyy-MM-dd") + "', " + ((Profesional)cbProfesional.SelectedItem).id + "); ";
 
-
-                    //Sacar la ultima coma
-                    if (lbSemanal.Items.Count>0)
+                    string subQuery = "";
+                    bool alguno = false;
+                    foreach (Control lb in this.Controls)
                     {
-                        query += "INSERT INTO " + DB.schema + "semanal(sem_agenda, sem_dia, sem_desde, sem_hasta) VALUES ";
-                        foreach (Semanal s in lbSemanal.Items)
-                            query += "(IDENT_CURRENT('" + DB.schema + "agenda') , " + s.dia + ", '" + s.desde.ToString("HH:mm") + "', '" + s.hasta.ToString("HH:mm") + "' ),";
-                        query = query.Substring(0, query.Length - 1);
+                        if (lb is ListBox)
+                        {
+                            foreach (Object hora in ((ListBox)lb).SelectedItems)
+                            {
+                                alguno = true;
+                                subQuery += "(IDENT_CURRENT('" + DB.schema + "agenda') , " + lb.Name.ToString().Substring(5) + ", '" + hora.ToString() + "' ),";
+                            }
+                        }
+                    }
+                    //Sacar la ultima coma
+                    if (alguno)
+                    {
+                        subQuery = subQuery.Substring(0, subQuery.Length - 1);
+                        query += "INSERT INTO " + DB.schema + "semanal(sem_agenda, sem_dia, sem_hora) VALUES " + subQuery;
                     }
                     if (DB.ExecuteNonQuery(query) == -1)
                         MessageBox.Show("Error en la creacion de agenda");
@@ -84,13 +117,6 @@ namespace Clinica_Frba.Registrar_Agenda {
                 this.Close();
                 DialogResult = DialogResult.OK;
             }
-        }
-
-        private void bAgregar_Click_1(object sender, EventArgs e) {
-            EditSemanal form = new EditSemanal();
-            form.ShowDialog();
-            if (form.DialogResult == DialogResult.OK)
-                lbSemanal.Items.Add(form.semanal);
         }
     }
 }

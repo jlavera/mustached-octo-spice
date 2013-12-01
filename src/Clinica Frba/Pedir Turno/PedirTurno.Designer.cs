@@ -52,13 +52,13 @@
             this.bSiguienteDia = new System.Windows.Forms.Button();
             this.dtpDia = new System.Windows.Forms.DateTimePicker();
             this.gbHorario = new System.Windows.Forms.GroupBox();
-            this.cmbHorario = new System.Windows.Forms.ComboBox();
             this.bFinalizar = new System.Windows.Forms.Button();
             this.bVolverHorario = new System.Windows.Forms.Button();
             this.gbEspecialidad = new System.Windows.Forms.GroupBox();
             this.cmbEspecialidades = new System.Windows.Forms.ComboBox();
             this.bVolverEsp = new System.Windows.Forms.Button();
             this.bSiguienteEsp = new System.Windows.Forms.Button();
+            this.dtpHora = new System.Windows.Forms.DateTimePicker();
             this.gbProf.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProfesionales)).BeginInit();
@@ -310,7 +310,7 @@
             // 
             // gbHorario
             // 
-            this.gbHorario.Controls.Add(this.cmbHorario);
+            this.gbHorario.Controls.Add(this.dtpHora);
             this.gbHorario.Controls.Add(this.bFinalizar);
             this.gbHorario.Controls.Add(this.bVolverHorario);
             this.gbHorario.Enabled = false;
@@ -320,15 +320,6 @@
             this.gbHorario.TabIndex = 2;
             this.gbHorario.TabStop = false;
             this.gbHorario.Text = "Seleccionar horario";
-            // 
-            // cmbHorario
-            // 
-            this.cmbHorario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbHorario.FormattingEnabled = true;
-            this.cmbHorario.Location = new System.Drawing.Point(19, 28);
-            this.cmbHorario.Name = "cmbHorario";
-            this.cmbHorario.Size = new System.Drawing.Size(231, 21);
-            this.cmbHorario.TabIndex = 4;
             // 
             // bFinalizar
             // 
@@ -392,6 +383,15 @@
             this.bSiguienteEsp.UseVisualStyleBackColor = true;
             this.bSiguienteEsp.Click += new System.EventHandler(this.bSiguienteEsp_Click);
             // 
+            // dtpHora
+            // 
+            this.dtpHora.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpHora.Location = new System.Drawing.Point(35, 33);
+            this.dtpHora.Name = "dtpHora";
+            this.dtpHora.ShowUpDown = true;
+            this.dtpHora.Size = new System.Drawing.Size(200, 20);
+            this.dtpHora.TabIndex = 4;
+            // 
             // PedirTurno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -450,7 +450,7 @@
         private System.Windows.Forms.ComboBox cmbEspecialidades;
         private System.Windows.Forms.Button bFinalizar;
         private System.Windows.Forms.Button bVolverHorario;
-        private System.Windows.Forms.ComboBox cmbHorario;
+        private System.Windows.Forms.DateTimePicker dtpHora;
 
 
     }

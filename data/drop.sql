@@ -23,6 +23,8 @@ IF OBJECT_ID('mustached_spice.cancelacion', 'U') IS NOT NULL
 	DROP TABLE mustached_spice.cancelacion
 IF OBJECT_ID('mustached_spice.bonoFarmacia', 'U') IS NOT NULL
 	DROP TABLE mustached_spice.bonoFarmacia
+IF OBJECT_ID('mustached_spice.atencion', 'U') IS NOT NULL
+	DROP TABLE mustached_spice.atencion
 IF OBJECT_ID('mustached_spice.turno', 'U') IS NOT NULL
 	DROP TABLE mustached_spice.turno
 IF OBJECT_ID('mustached_spice.bonoConsulta', 'U') IS NOT NULL

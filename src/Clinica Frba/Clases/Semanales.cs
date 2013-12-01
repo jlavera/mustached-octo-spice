@@ -51,17 +51,22 @@ namespace Clinica_Frba.Clases {
                                      " ORDER BY sem_hora DESC"));
         }
 
+        public void FillForAgenda(Agenda _agenda) {
+            int agenda = _agenda.id;
+            Fill(DB.ExecuteReader("SELECT * FROM " + DB.schema + "semanal WHERE sem_habilitado = 1 AND sem_agenda=" + agenda));
+        }
+
         public void Add(Semanal item) {
             items.Add(item);
         }
 
         public Object[] GetByDay(int p_prof, DateTime p_day) {
             //Como el 1 es domingo en la DB, tengo que hacer lo del %7
-            int datOfWeek = (int)(p_day.DayOfWeek+1)%7;
+            int dayOfWeek = (int)(p_day.DayOfWeek+1)%7;
 
             Semanales temp = new Semanales();
             foreach (Semanal sem in items) {
-                if ((sem.dia == datOfWeek) && (DB.ExecuteCardinal("SELECT COUNT(*) FROM " + DB.schema + "turno WHERE tur_profesional = " + p_prof + " AND CAST(tur_fechaYHoraTurno AS DATE)= CAST('" + p_day.Date + " ' AS DATE) AND CAST(tur_fechaYHoraTurno AS TIME) = CAST('" + sem.hora + "' AS TIME)") == 0))
+                if ((sem.dia == dayOfWeek) && (DB.ExecuteCardinal("SELECT COUNT(*) FROM " + DB.schema + "turno WHERE tur_profesional = " + p_prof + " AND CAST(tur_fechaYHoraTurno AS DATE)= CAST('" + p_day.Date + " ' AS DATE) AND CAST(tur_fechaYHoraTurno AS TIME) > CAST('" + sem.desde + "' AS TIME) AND AND CAST(tur_fechaYHoraTurno AS TIME) < CAST('" + sem.hasta + "' AS TIME)") == 0))
                     temp.Add(sem);
             }
             return temp.ToList();

@@ -179,6 +179,12 @@
     <Compile Include="Registrar Agenda\EditAgenda.Designer.cs">
       <DependentUpon>EditAgenda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Registrar Agenda\EditSemanal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registrar Agenda\EditSemanal.Designer.cs">
+      <DependentUpon>EditSemanal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Registro de LLegada\RegistrarLlegada.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,6 +293,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Registrar Agenda\EditAgenda.resx">
       <DependentUpon>EditAgenda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registrar Agenda\EditSemanal.resx">
+      <DependentUpon>EditSemanal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Registrar Agenda\RegistrarAgenda.resx">
       <DependentUpon>RegistrarAgenda.cs</DependentUpon>

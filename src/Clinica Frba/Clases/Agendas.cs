@@ -56,7 +56,7 @@ namespace Clinica_Frba.Clases {
             //--Eliminar de la DB
             if (p_objects.Count > 0)
             {
-                string queryAge = "DELETE " + DB.schema + tabla + " WHERE";
+                string queryAge = "UPDATE " + DB.schema + tabla + " SET age_habilitado=0 WHERE";
                 string querySem = "DELETE " + DB.schema + "semanal WHERE";
 
                 foreach (DataGridViewRow agenda in p_objects)
@@ -87,7 +87,7 @@ namespace Clinica_Frba.Clases {
 
         public void FillWithFilter(Profesional _profesional, DateTime _desde, DateTime _hasta, int _dia, string _dia_desde, string _dia_hasta)
         {
-            string query = "SELECT DISTINCT age_id, age_desde, age_hasta, age_profesional, profesional FROM " + DB.schema + "vAgenda WHERE";
+            string query = "SELECT DISTINCT age_id, age_desde, age_hasta, age_profesional, profesional FROM " + DB.schema + "vAgenda WHERE age_habilitado=1 AND";
             if (_profesional != null)
                 query += " age_profesional = " + _profesional.id + " AND ";
             if (_desde != _hasta)
@@ -109,7 +109,7 @@ namespace Clinica_Frba.Clases {
         }
 
         override public DataTable SelectAll(){
-            return DB.ExecuteReader("SELECT DISTINCT age_id, age_desde, age_hasta, age_profesional, profesional FROM " + DB.schema + "vAgenda");
+            return DB.ExecuteReader("SELECT DISTINCT age_id, age_desde, age_hasta, age_profesional, profesional FROM " + DB.schema + "vAgenda WHERE age_habilitado=1");
         }
     }
 }
