@@ -205,7 +205,7 @@ namespace Clinica_Frba.AbmAfiliados {
                     MessageBox.Show("Error en la insercion, probablemente algun campo unico este repetido");
                     DialogResult = DialogResult.Cancel;
                 }
-                //--Si está todo piola
+                //--Si está t0do piola
                 DialogResult = DialogResult.OK;
             }
 

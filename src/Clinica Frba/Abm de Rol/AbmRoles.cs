@@ -74,11 +74,11 @@ namespace Clinica_Frba.AbmRoles {
         }
 
         /// <summary>
-        /// Llena el dgv y la lista entidad con TODOS los roles
+        /// Llena el dgv y la lista entidad con T0DOS los roles
         /// </summary>
         private void FillDgv() {
 
-            //--Traer todos los roles
+            //--Traer t0dos los roles
             roles = new Roles();
             roles.FillWithFilter(tbRol.Text, lbFuncionalidades.SelectedItems, cbHabilitado.Checked);
 

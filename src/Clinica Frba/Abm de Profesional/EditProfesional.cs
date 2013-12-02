@@ -126,7 +126,7 @@ namespace Clinica_Frba.AbmProfesionales{
                         return;
                     }
 
-                    /********(no) FALTAN MODIFICAR TODOS ESTOS QUERYS**********/
+                    /********(no) FALTAN MODIFICAR T0DOS ESTOS QUERYS**********/
                     //--Insertar Profesional
                     if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "profesional " +
                         " (pro_matricula, pro_usuario) " +
@@ -151,7 +151,7 @@ namespace Clinica_Frba.AbmProfesionales{
                             "WHERE usu_id=" + usuarioID + "; ") < 0)
                         MessageBox.Show("Error en modificacion del profesional");
 
-                    //Es mas facil borrar todos los profesional_x_especialidad que revisar cuales cambiaron
+                    //Es mas facil borrar tod0s los profesional_x_especialidad que revisar cuales cambiaron
                     if (DB.ExecuteNonQuery("DELETE " + DB.schema + "profesional_x_especialidad WHERE pxe_profesional=" + profId + "; ") < 0)
                         MessageBox.Show("Error en modificacion de rol_x_funcionalidad");
                 }

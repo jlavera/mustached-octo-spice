@@ -90,7 +90,7 @@ namespace Clinica_Frba.Abm_de_Rol {
                  if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "rol(rol_nombre, rol_habilitado) VALUES ('" + tbNombre.Text + "', " + Convert.ToInt32(cbHabilitado.Checked) + ");") < 0)
                     MessageBox.Show("Error en inserscion de rol");
             } else {
-                //Es mas facil borrar todos los rol_x_funcionalidad que revisar cuales cambiaron
+                //Es mas facil borrar t0dos los rol_x_funcionalidad que revisar cuales cambiaron
                 if (DB.ExecuteNonQuery("DELETE " + DB.schema + "rol_x_usuario WHERE rxu_rol=" + tbId.Text + ";" +
                                        "DELETE " + DB.schema + "rol_x_funcionalidad WHERE rxf_rol=" + tbId.Text + "; " +
                                        "UPDATE " + DB.schema + "rol SET rol_nombre='" + tbNombre.Text + "', rol_habilitado=" + Convert.ToInt32(cbHabilitado.Checked) + " WHERE rol_id=" + tbId.Text) < 0)

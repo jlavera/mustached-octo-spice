@@ -43,7 +43,7 @@ namespace Clinica_Frba.Clases {
         }
 
         /// <summary>
-        /// Llena la lista con todos los roles que tienen una funcionalidad
+        /// Llena la lista con t0dos los roles que tienen una funcionalidad
         /// </summary>
         /// <param name="p_rolId"></param>
         public void FillByRol(int p_rolId) {

@@ -108,7 +108,7 @@ CREATE TABLE mustached_spice.rol (
   PRIMARY KEY (rol_id)
 );
 
--- "Se le debe quitar el rol inhabilitado a todos aquellos usuarios que lo posean."
+-- "Se le debe quitar el rol inhabilitado a t0dos aquellos usuarios que lo posean."
 -- "Esto no implica recuperar las asignaciones que existían en un pasado"
 GO
 CREATE TRIGGER mustached_spice.inhabilitarRol ON mustached_spice.rol AFTER UPDATE AS
@@ -190,7 +190,7 @@ CREATE TABLE mustached_spice.profesional (
   -- UNIQUE(matricula)
 );
 
---Trigger para que si se baja un profesional, borrar la agenda, y esto trigerea a borrar todos los turnos que tenga
+--Trigger para que si se baja un profesional, borrar la agenda, y esto trigerea a borrar t0dos los turnos que tenga
 GO
 CREATE TRIGGER mustached_spice.bajarProfesional ON mustached_spice.profesional AFTER UPDATE AS
 BEGIN
@@ -271,7 +271,7 @@ CREATE TABLE mustached_spice.afiliadoAudit (
   afA_fecha DATETIME NOT NULL,
 );
 
---Trigger para cambiar los planes medicos de todos los afiliados que esten en el mismo grupo, y deshabilitar todos los turnos que este tenga
+--Trigger para cambiar los planes medicos de t0dos los afiliados que esten en el mismo grupo, y deshabilitar t0dos los turnos que este tenga
 -- y
 --Trigger para guardar la baja de afiliado y cancelar los turnos que tenga
 GO
@@ -397,7 +397,7 @@ CREATE TABLE mustached_spice.cancelacion(
 	tua_cancelante TINYINT --0: Afiliado, 1: Profesional
 );
  
- -- Si el profesional cancela un semanal, se deshabilitan todos los turnos.
+ -- Si el profesional cancela un semanal, se deshabilitan t0dos los turnos.
  -- Alguien tiene que mirar los inhabilitado y avisar al afiliado
 GO
 CREATE TRIGGER mustached_spice.cancelarTurnos ON mustached_spice.semanal FOR DELETE AS
@@ -424,7 +424,7 @@ GO
 
 -- -----------------------------------------------------
 -- creacion tabla medicamento
--- Todos los posibles medicamentos
+-- t0dos los posibles medicamentos
 -- -----------------------------------------------------
 CREATE TABLE mustached_spice.medicamento (
   med_id INT NOT NULL Identity,
@@ -563,7 +563,7 @@ INSERT INTO mustached_spice.usuario(usu_numeroDocumento, usu_nombre, usu_apellid
 -- migracion tabla planMedico
 -- -----------------------------------------------------
 PRINT 'migracion tabla planMedico'
---Levantar todos los planes medicos posibles, manteniendo el codigo legacy
+--Levantar t0dos los planes medicos posibles, manteniendo el codigo legacy
 INSERT INTO mustached_spice.planMedico(pla_codigo, pla_nombre, pla_precioBonoConsulta, pla_precioBonoFarmacia)
 		(SELECT DISTINCT Plan_Med_Codigo, Plan_Med_Descripcion, Plan_Med_Precio_Bono_Consulta, Plan_Med_Precio_Bono_Farmacia
 		FROM gd_esquema.Maestra WHERE Plan_Med_Codigo IS NOT NULL);
@@ -591,7 +591,7 @@ INSERT INTO mustached_spice.profesional(pro_usuario)
 -- migracion tabla tipoEspecialidad
 -- -----------------------------------------------------
 PRINT 'migracion tabla tipoEspecialidad'
---Levantar todos los tipos de especialidad posibles, manteniendo el codigo legacy
+--Levantar t0dos los tipos de especialidad posibles, manteniendo el codigo legacy
 INSERT INTO mustached_spice.tipoEspecialidad(tip_id, tip_nombre)
 	(SELECT DISTINCT Tipo_Especialidad_Codigo, Tipo_Especialidad_Descripcion FROM gd_esquema.Maestra WHERE Especialidad_Codigo IS NOT NULL);
 
@@ -599,7 +599,7 @@ INSERT INTO mustached_spice.tipoEspecialidad(tip_id, tip_nombre)
 -- migracion tabla especialidad
 -- -----------------------------------------------------
 PRINT 'migracion tabla especialidad'
---Levantar todos las especialidades posibles, manteniendo el codigo legacy
+--Levantar t0dos las especialidades posibles, manteniendo el codigo legacy
 INSERT INTO mustached_spice.especialidad(esp_id, esp_descripcion, esp_tipo)
 	(SELECT DISTINCT Especialidad_Codigo, Especialidad_Descripcion, Tipo_Especialidad_Codigo FROM gd_esquema.Maestra WHERE Especialidad_Codigo IS NOT NULL);
 
@@ -642,7 +642,7 @@ SET IDENTITY_INSERT mustached_spice.bonoConsulta OFF
 -- migracion tabla agenda
 -- -----------------------------------------------------
 PRINT 'migracion tabla agenda'
---Creamos agendas para todos mas que naada a modo de debug, bien podriamos asumir no migrarlas y que la primera vez que un profesional ingrese al sistema, la cargue desde 0
+--Creamos agendas para t0dos mas que naada a modo de debug, bien podriamos asumir no migrarlas y que la primera vez que un profesional ingrese al sistema, la cargue desde 0
 INSERT INTO mustached_spice.agenda(age_profesional, age_hasta, age_desde)
 	(SELECT pro_id, MAX(Turno_Fecha), DATEADD(DAY, -120, MAX(Turno_Fecha)) FROM gd_esquema.Maestra
 		LEFT JOIN mustached_spice.vProfesional ON usu_numeroDocumento = Medico_Dni 

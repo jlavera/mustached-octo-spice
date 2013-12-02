@@ -50,7 +50,7 @@ namespace Clinica_Frba.Clases {
         }
 
         /// <summary>
-        /// Trae todos los afiliados desde la vista (junto con las entidades de sus FK)
+        /// Trae t0dos los afiliados desde la vista (junto con las entidades de sus FK)
         /// </summary>
         /// <returns></returns>
         public override DataTable SelectAll() {

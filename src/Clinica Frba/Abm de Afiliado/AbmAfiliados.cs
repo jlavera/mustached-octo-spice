@@ -21,7 +21,7 @@ namespace Clinica_Frba.AbmAfiliados {
 
         private void AbmAfiliados_Load(object sender, EventArgs e) {
 
-            //--Llenar dgv con todos los afiliados
+            //--Llenar dgv con t0dos los afiliados
             FillDgv();
 
             //--Traer y llenar los listBox
@@ -68,7 +68,7 @@ namespace Clinica_Frba.AbmAfiliados {
             }
         }
 
-        //--Llenar dgv con todos los afiliados
+        //--Llenar dgv con t0dos los afiliados
         private void FillDgv() {
 
             //--Limpia lista entidad y la trae aplicando los filtros

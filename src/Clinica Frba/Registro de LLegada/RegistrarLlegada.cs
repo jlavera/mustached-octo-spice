@@ -68,7 +68,6 @@ namespace Clinica_Frba.RegistrarLlegada {
                 gbTurno.Enabled = true;
                 gbProf.Enabled = false;
 
-                //--TODO llenar LB con los turnos del día del profesional
                 turnos.FillForProf(prof, false);
                 lbTurnos.Items.AddRange(turnos.ToList());
             }
@@ -140,7 +139,7 @@ namespace Clinica_Frba.RegistrarLlegada {
                     return;
                 }
 
-                //Si llego aca coincide todo, y va todo bien.
+                //Si llego aca coincide t0do, y va t0do bien.
                 DB.ExecuteNonQuery("SET IDENTITY_INSERT " + DB.schema + "atencion ON; " +
                                     "INSERT INTO " + DB.schema + "atencion(ate_bonoConsulta, ate_fechaYHoraLlegada, ate_turno) VALUES (" + bono.id + ", '" + FuncionesBoludas.GetDateTime() + "', " + ((Turno)lbTurnos.SelectedItem).id  + "); " +
                                     "SET IDENTITY_INSERT " + DB.schema + "atencion OFF; " +

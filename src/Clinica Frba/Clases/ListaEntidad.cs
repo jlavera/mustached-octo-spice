@@ -32,7 +32,7 @@ namespace Clinica_Frba {
         }
 
         /// <summary>
-        /// Elimina todos los elementos de la lista
+        /// Elimina t0dos los elementos de la lista
         /// </summary>
         public void ClearList() {
             items.Clear();

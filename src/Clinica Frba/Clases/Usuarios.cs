@@ -37,7 +37,7 @@ namespace Clinica_Frba.Clases {
         #endregion
         //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
 
-        //Subrecarga del new para pasarle un rol y seleccione todos los que tengan ese rol
+        //Subrecarga del new para pasarle un rol y seleccione t0dos los que tengan ese rol
        public Usuarios(int _id)
             : base("usuario") {
             //Como esta el triger que borra si se deshabilitan, ni me gasto en hacer un  where

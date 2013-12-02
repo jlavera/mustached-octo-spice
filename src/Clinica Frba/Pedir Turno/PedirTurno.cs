@@ -163,7 +163,6 @@ namespace Clinica_Frba.PedirTurno {
             };
 
             if (MessageBox.Show("Turno con el dr. " + prof.usuario.apellido + ", " + prof.usuario.nombre + " para el día " + dtpDia.Value.DayOfWeek + " " + dtpDia.Value.Day + " del " + dtpDia.Value.Month + " a las " + dtpHora.Value.ToString("HH:mm:ss"), "Confirmar", MessageBoxButtons.OKCancel) == DialogResult.OK)
-                //--TODO QUERY INSERT
                 if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "turno (tur_afiliado, tur_profesional, tur_especialidad, tur_fechaYHoraTurno, tur_agenda) VALUES " +
                     "(" + afiliado.id + ", " + prof.id + ", " + ((Especialidad)cmbEspecialidades.SelectedItem).id + ", '" +
                     dtpDia.Value.ToString("yyy-MM-dd") + " " + dtpHora.Value.ToString("HH:mm:ss") + "', " + agenda + ")") < 0)
