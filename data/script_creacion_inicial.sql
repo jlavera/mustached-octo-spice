@@ -348,6 +348,31 @@ CREATE TABLE mustached_spice.turno (
   PRIMARY KEY (tur_id)
 );
 
+-- Trigger para controlar el alta de los turnos
+GO
+CREATE TRIGGER mustached_spice.altaTurno ON mustached_spice.turno INSTEAD OF INSERT AS
+BEGIN
+	
+	INSERT INTO mustached_spice.turno (tur_afiliado, tur_profesional, tur_especialidad, tur_fechaYHoraTurno, tur_agenda, tur_habilitado)
+		(SELECT tur_afiliado, tur_profesional, tur_especialidad, tur_fechaYHoraTurno, tur_agenda, tur_habilitado
+			FROM inserted 
+			WHERE 	(SELECT COUNT(*)
+						FROM mustached_spice.semanal
+						WHERE
+							sem_agenda = inserted.tur_agenda AND
+							DATEPART(weekday, inserted.tur_fechaYHoraTurno) = sem_dia AND
+							sem_desde < CAST(inserted.tur_fechaYHoraTurno AS TIME) AND
+							sem_hasta > CAST(inserted.tur_fechaYHoraTurno AS TIME)) != 0 AND
+					(SELECT COUNT(*)
+						FROM mustached_spice.turno
+						WHERE
+							tur_agenda = inserted.tur_agenda AND
+							CAST(inserted.tur_fechaYHoraTurno AS DATE) = CAST(tur_fechaYHoraTurno AS DATE) AND
+							ABS(DATEDIFF(minute, CAST(tur_fechaYHoraTurno AS TIME), inserted.tur_fechaYHoraTurno)) < 30) = 0);
+
+END
+GO
+
 -- -----------------------------------------------------
 -- creacion tabla atencion
 -- -----------------------------------------------------

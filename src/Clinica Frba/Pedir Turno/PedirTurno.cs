@@ -150,14 +150,17 @@ namespace Clinica_Frba.PedirTurno {
                                         "sem_desde<='" + dtpHora.Value.ToString("HH:mm:ss") + "' AND " +
                                         "sem_hasta>='" + dtpHora.Value.ToString("HH:mm:ss") + "'");
             if (agenda == -1) {
-                MessageBox.Show("No atiende a esta hora");
+                MessageBox.Show("No atiende a esta hora.");
                 return;
             };
-            if (DB.ExecuteCardinal("SELECT COUNT(1) FROM " + DB.schema + "turno " +
-                           "WHERE tur_fechaYHoraTurno= '" + dtpDia.Value.ToString("yyy-MM-dd") + " " + dtpHora.Value.ToString("HH:mm:ss") + "'") > 0){
-                MessageBox.Show("Esa hora esta ocupada");
+            if (DB.ExecuteCardinal("SELECT COUNT(*) FROM " + DB.schema + "turno WHERE " +
+                            "tur_agenda = "+ agenda +" AND " +
+                            "'" + dtpDia.Value.ToString("yyy-MM-dd") + "'= CAST(tur_fechaYHoraTurno AS DATE) AND " +
+                            "DATEDIFF(minute, tur_fechaYHoraTurno, '" + dtpHora.Value.ToString("HH:mm") + "') < 30") > 0) {
+                MessageBox.Show("Esa media hora esta ocupada.");
                 return;
             };
+
             if (MessageBox.Show("Turno con el dr. " + prof.usuario.apellido + ", " + prof.usuario.nombre + " para el día " + dtpDia.Value.DayOfWeek + " " + dtpDia.Value.Day + " del " + dtpDia.Value.Month + " a las " + dtpHora.Value.ToString("HH:mm:ss"), "Confirmar", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 //--TODO QUERY INSERT
                 if (DB.ExecuteNonQuery("INSERT INTO " + DB.schema + "turno (tur_afiliado, tur_profesional, tur_especialidad, tur_fechaYHoraTurno, tur_agenda) VALUES " +
