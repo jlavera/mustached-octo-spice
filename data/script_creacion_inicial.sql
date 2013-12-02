@@ -826,20 +826,19 @@ CREATE FUNCTION mustached_spice.estNoEsTuyo(@anio INT, @mesInicial INT)
 RETURNS TABLE
 AS
 RETURN
-	SELECT TOP 10 afi_id, usu_apellido + ', ' + usu_nombre 'Afiliado'
-			  FROM mustached_spice.vAfiliado
-					JOIN mustached_spice.bonoConsulta ON bco_afiliado=afi_id
-						JOIN mustached_spice.compra cbc ON cbc.cmp_id = bco_compra
-					JOIN mustached_spice.bonoFarmacia ON bfa_afiliado=afi_id
-						JOIN mustached_spice.compra cfa ON cfa.cmp_id = bfa_compra 
-					WHERE bco_afiliado!=cbc.cmp_afiliado OR
-							bfa_afiliado != cfa.cmp_afiliado AND
-						  (DATEPART(MONTH, cbc.cmp_fechaCompra)>=@mesInicial OR
-							DATEPART(MONTH, cfa.cmp_fechaCompra)>=@mesInicial) AND
-						  (DATEPART(MONTH, cbc.cmp_fechaCompra)<=(@mesInicial+5) OR
-							DATEPART(MONTH, cfa.cmp_fechaCompra)<=(@mesInicial+5)) AND
-						  (DATEPART(YEAR, cbc.cmp_fechaCompra)=@anio OR
-							DATEPART(YEAR, cfa.cmp_fechaCompra)=@anio)
-					GROUP BY afi_id, usu_apellido + ', ' + usu_nombre
-					ORDER BY COUNT(bfa_id)+COUNT(bco_id) DESC
+	SELECT TOP 10 afi_id, usu_apellido + ', ' + usu_nombre 'Afiliado', COUNT(*) 'Cantidad de bonos'
+		FROM mustached_spice.compra
+			LEFT JOIN mustached_spice.bonoConsulta ON bco_compra = cmp_id
+			LEFT JOIN mustached_spice.bonoFarmacia ON bfa_compra = cmp_id
+			LEFT JOIN mustached_spice.vAfiliado ON 
+												bco_afiliado = afi_id OR 
+												bfa_afiliado = afi_id
+		WHERE 
+			DATEPART(MONTH, cmp_fechaCompra) >= 7 AND
+			DATEPART(MONTH, cmp_fechaCompra) <= 12 AND
+			DATEPART(YEAR, cmp_fechaCompra) = 2013 AND
+			(bco_afiliado IS NOT NULL AND bco_afiliado != cmp_afiliado OR 
+			 bfa_afiliado IS NOT NULL AND bfa_afiliado != cmp_afiliado)
+		GROUP BY afi_id, usu_apellido + ', ' + usu_nombre
+		ORDER BY [Cantidad de bonos] DESC
 GO
