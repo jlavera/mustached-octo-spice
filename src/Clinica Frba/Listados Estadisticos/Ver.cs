@@ -106,17 +106,19 @@ namespace Clinica_Frba.Listados_Estadisticos {
                     //FIXME
                     query = "SELECT DATENAME(month,  DateAdd( month , T.Mes , 0 ) - 1) 'Mes', " +
                                     "X.Afiliado 'Afiliado', " +
-		                                "(SELECT COUNT(bfa_id)+COUNT(bco_id) " +
-                                        "FROM " + DB.schema + "afiliado " +
-                                            "JOIN " + DB.schema + "bonoConsulta ON bco_afiliado=afi_id AND " +
-                                                                                 "bco_afiliado!=(SELECT cmp_afiliado FROM " + DB.schema + "compra WHERE cmp_id=bco_compra) AND " +
-											                                     "DATEPART(MONTH, bco_fechaCompa)=T.Mes AND " +
-                                                                                 "DATEPART(YEAR, bco_fechaCompa)=" + agno + " " +
-                                            "LEFT JOIN " + DB.schema + "bonoFarmacia ON bfa_afiliado=afi_id AND " +
-                                                                                      "bfa_afiliado!=(SELECT cmp_afiliado FROM " + DB.schema + "compra WHERE cmp_id=bfa_compra) AND " +
-													                                  "DATEPART(MONTH, bfa_fechaImpresion)=T.mes AND " +
-                                                                                      "DATEPART(YEAR, bfa_fechaImpresion)=" + agno + " " +
-			                                "WHERE afi_id=X.afi_id) 'Cantidad de bonos no cobrados por el' " +
+		                                "(SELECT COUNT(*) " +
+                                            "FROM " + DB.schema + "compra " +
+                                                "LEFT JOIN " + DB.schema + "bonoConsulta ON bco_compra = cmp_id " +
+                                                "LEFT JOIN " + DB.schema + "bonoFarmacia ON bfa_compra = cmp_id " +
+                                                "LEFT JOIN " + DB.schema + "vAfiliado ON " +
+												                                    "bco_afiliado = afi_id OR " +
+												                                    "bfa_afiliado = afi_id " +
+		                                    "WHERE " +
+			                                    "DATEPART(MONTH, cmp_fechaCompra) = T.Mes AND " +
+			                                    "DATEPART(YEAR, cmp_fechaCompra) = " + agno + " AND " +
+                                                "afi_id = X.afi_id AND " +
+			                                    "(bco_afiliado IS NOT NULL AND bco_afiliado != cmp_afiliado OR  " +
+			                                     "bfa_afiliado IS NOT NULL AND bfa_afiliado != cmp_afiliado)) 'Cantidad de bonos no cobrados por el' " +
                                     "FROM " + DB.schema + "estNoEsTuyo(" + agno + ", " + meses[0] + ") X, " +
                                     "(SELECT " + meses[0] + " 'Mes' UNION SELECT " + meses[1] + " UNION SELECT " + meses[2] + " UNION SELECT " + meses[3] + " UNION SELECT " + meses[4] + " UNION SELECT " + meses[5] + ") T";
                     res = DB.ExecuteReader(query);

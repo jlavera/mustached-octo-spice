@@ -90,7 +90,8 @@ namespace Clinica_Frba.PedirTurno {
                 agendas.FillWithFilter(prof, aux, aux, -1, "", "");
 
                 dtpDia.MinDate = FuncionesBoludas.GetDateTime();
-                dtpDia.MaxDate = agendas[0].hasta;
+                if (agendas.items.Count > 0)
+                    dtpDia.MaxDate = agendas[0].hasta;
 
             }
         }

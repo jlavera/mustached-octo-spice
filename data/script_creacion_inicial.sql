@@ -41,7 +41,7 @@ GO
 -- Funcion para obtener la carga horaria que se usa como check de que un profesional no este disponible mas de 48 horas semanales
 CREATE FUNCTION mustached_spice.cargaHoraria(@agenda int) RETURNS int AS
 BEGIN
-  RETURN (SELECT SUM(DATEDIFF(MINUTE, sem_hasta, sem_desde)) 
+  RETURN (SELECT SUM(DATEDIFF(MINUTE, sem_desde, sem_hasta)) 
 			FROM mustached_spice.semanal
 			WHERE sem_agenda = @agenda AND sem_habilitado=1)
 END
@@ -347,31 +347,6 @@ CREATE TABLE mustached_spice.turno (
   tur_habilitado TINYINT NOT NULL DEFAULT 1,-- Sería cuando se cancela un turno
   PRIMARY KEY (tur_id)
 );
-
--- Trigger para controlar el alta de los turnos
-GO
-CREATE TRIGGER mustached_spice.altaTurno ON mustached_spice.turno INSTEAD OF INSERT AS
-BEGIN
-	
-	INSERT INTO mustached_spice.turno (tur_afiliado, tur_profesional, tur_especialidad, tur_fechaYHoraTurno, tur_agenda, tur_habilitado)
-		(SELECT tur_afiliado, tur_profesional, tur_especialidad, tur_fechaYHoraTurno, tur_agenda, tur_habilitado
-			FROM inserted 
-			WHERE 	(SELECT COUNT(*)
-						FROM mustached_spice.semanal
-						WHERE
-							sem_agenda = inserted.tur_agenda AND
-							DATEPART(weekday, inserted.tur_fechaYHoraTurno) = sem_dia AND
-							sem_desde < CAST(inserted.tur_fechaYHoraTurno AS TIME) AND
-							sem_hasta > CAST(inserted.tur_fechaYHoraTurno AS TIME)) != 0 AND
-					(SELECT COUNT(*)
-						FROM mustached_spice.turno
-						WHERE
-							tur_agenda = inserted.tur_agenda AND
-							CAST(inserted.tur_fechaYHoraTurno AS DATE) = CAST(tur_fechaYHoraTurno AS DATE) AND
-							ABS(DATEDIFF(minute, tur_fechaYHoraTurno, inserted.tur_fechaYHoraTurno)) < 30) = 0);
-
-END
-GO
 
 -- -----------------------------------------------------
 -- creacion tabla atencion
@@ -694,6 +669,31 @@ INSERT INTO mustached_spice.turno(tur_id, tur_afiliado, tur_profesional, tur_fec
 	GROUP BY Turno_Numero, afi_id, pro_id, Turno_Fecha);
 SET IDENTITY_INSERT mustached_spice.turno OFF
 
+-- Trigger para controlar el alta de los turnos
+GO
+CREATE TRIGGER mustached_spice.altaTurno ON mustached_spice.turno INSTEAD OF INSERT AS
+BEGIN
+	
+	INSERT INTO mustached_spice.turno (tur_afiliado, tur_profesional, tur_especialidad, tur_fechaYHoraTurno, tur_agenda, tur_habilitado)
+		(SELECT tur_afiliado, tur_profesional, tur_especialidad, tur_fechaYHoraTurno, tur_agenda, tur_habilitado
+			FROM inserted 
+			WHERE 	(SELECT COUNT(*)
+						FROM mustached_spice.semanal
+						WHERE
+							sem_agenda = inserted.tur_agenda AND
+							DATEPART(weekday, inserted.tur_fechaYHoraTurno) = sem_dia AND
+							sem_desde < CAST(inserted.tur_fechaYHoraTurno AS TIME) AND
+							sem_hasta > CAST(inserted.tur_fechaYHoraTurno AS TIME)) != 0 AND
+					(SELECT COUNT(*)
+						FROM mustached_spice.turno
+						WHERE
+							tur_agenda = inserted.tur_agenda AND
+							CAST(inserted.tur_fechaYHoraTurno AS DATE) = CAST(tur_fechaYHoraTurno AS DATE) AND
+							ABS(DATEDIFF(minute, tur_fechaYHoraTurno, inserted.tur_fechaYHoraTurno)) < 30) = 0);
+
+END
+GO
+
 -- -----------------------------------------------------
 -- migracion tabla atencion
 -- -----------------------------------------------------
@@ -740,8 +740,12 @@ INSERT INTO mustached_spice.semanal(sem_agenda, sem_dia, sem_desde, sem_hasta, s
 	mustached_spice.semanalHabilitado(DATEPART(dw, tur_fechaYHoraTurno), CAST(tur_fechaYHoraTurno AS TIME))
 	FROM mustached_spice.turno
 		JOIN mustached_spice.agenda ON tur_profesional = age_profesional);
-UPDATE mustached_spice.semanal SET sem_habilitado=0 WHERE mustached_spice.cargaHoraria(sem_agenda ) > 48;
-ALTER TABLE mustached_spice.semanal ADD CONSTRAINT CK_sem_horarioValido CHECK(sem_habilitado=1 OR (mustached_spice.semanalHabilitado(sem_dia, sem_desde)=0 OR mustached_spice.cargaHoraria(sem_agenda ) > 48 ))
+UPDATE mustached_spice.semanal SET sem_habilitado=0 WHERE mustached_spice.cargaHoraria(sem_agenda ) > 2880;
+ALTER TABLE mustached_spice.semanal ADD CONSTRAINT CK_sem_horarioValido CHECK(NOT(
+	 sem_habilitado=1 AND
+	(mustached_spice.semanalHabilitado(sem_dia, sem_desde)=0 AND
+	mustached_spice.cargaHoraria(sem_agenda ) < 2880 )))
+
 
 -- -----------------------------------------------------
 -- migracion tabla medicamento
@@ -826,7 +830,7 @@ CREATE FUNCTION mustached_spice.estNoEsTuyo(@anio INT, @mesInicial INT)
 RETURNS TABLE
 AS
 RETURN
-	SELECT TOP 10 afi_id, usu_apellido + ', ' + usu_nombre 'Afiliado', COUNT(*) 'Cantidad de bonos'
+	SELECT TOP 10 afi_id, usu_apellido + ', ' + usu_nombre 'Afiliado'
 		FROM mustached_spice.compra
 			LEFT JOIN mustached_spice.bonoConsulta ON bco_compra = cmp_id
 			LEFT JOIN mustached_spice.bonoFarmacia ON bfa_compra = cmp_id
@@ -834,11 +838,11 @@ RETURN
 												bco_afiliado = afi_id OR 
 												bfa_afiliado = afi_id
 		WHERE 
-			DATEPART(MONTH, cmp_fechaCompra) >= 7 AND
-			DATEPART(MONTH, cmp_fechaCompra) <= 12 AND
-			DATEPART(YEAR, cmp_fechaCompra) = 2013 AND
+			DATEPART(MONTH, cmp_fechaCompra) >= @mesInicial AND
+			DATEPART(MONTH, cmp_fechaCompra) <= (@mesInicial+5) AND
+			DATEPART(YEAR, cmp_fechaCompra) = @anio AND
 			(bco_afiliado IS NOT NULL AND bco_afiliado != cmp_afiliado OR 
 			 bfa_afiliado IS NOT NULL AND bfa_afiliado != cmp_afiliado)
 		GROUP BY afi_id, usu_apellido + ', ' + usu_nombre
-		ORDER BY [Cantidad de bonos] DESC
+		ORDER BY COUNT(*) DESC
 GO

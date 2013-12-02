@@ -9,14 +9,14 @@ namespace Clinica_Frba.Clases {
 
         public int id;
         public Afiliado afiliado;
-        public int turno;
+        public int atencion;
         public DateTime fechaImpresion;
         public DateTime fechaVencimiento;
         public Compra compra;
 
         public BonoFarmacia (DataRow dr) {
             id = (int)dr["bfa_id"];
-            turno = (dr["bfa_turno"] == DBNull.Value) ? -1 : (int)dr["bfa_turno"];
+            atencion = (dr["bfa_atencion"] == DBNull.Value) ? -1 : (int)dr["bfa_atencion"];
             afiliado = (dr["bfa_afiliado"] == DBNull.Value) ? null : new Afiliado((int)dr["bfa_afiliado"]);
             fechaImpresion = (DateTime)dr["[bfa_fechaImpresion]"];
             fechaVencimiento = (DateTime)dr["bfa_fechaVencimiento"];
@@ -40,7 +40,7 @@ namespace Clinica_Frba.Clases {
             DataRow dr = dt.Rows[0];
 
             id = (int)dr["bfa_id"];
-            turno = (dr["bfa_turno"] == DBNull.Value) ? -1 : (int)dr["bfa_turno"];
+            atencion = (dr["bfa_atencion"] == DBNull.Value) ? -1 : (int)dr["bfa_atencion"];
             afiliado = (dr["bfa_afiliado"] == DBNull.Value) ? null : new Afiliado((int)dr["bfa_afiliado"]);
             fechaImpresion = (DateTime)dr["bfa_fechaImpresion"];
             fechaVencimiento = (DateTime)dr["bfa_fechaVencimiento"];
