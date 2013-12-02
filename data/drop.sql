@@ -14,6 +14,8 @@ IF OBJECT_ID('mustached_spice.bajarProfesional', 'TR') IS NOT NULL
 	DROP TRIGGER mustached_spice.bajarProfesional
 IF OBJECT_ID('mustached_spice.checkearMedicamentos', 'TR') IS NOT NULL
 	DROP TRIGGER mustached_spice.checkearMedicamentos
+IF OBJECT_ID('mustached_spice.agregarTurno', 'TR') IS NOT NULL
+	DROP TRIGGER mustached_spice.agregarTurno
 
 IF OBJECT_ID('mustached_spice.medicamento_x_bonoFarmacia', 'U') IS NOT NULL
 	DROP TABLE mustached_spice.medicamento_x_bonoFarmacia
