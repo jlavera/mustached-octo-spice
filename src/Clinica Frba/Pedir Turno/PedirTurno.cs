@@ -156,7 +156,7 @@ namespace Clinica_Frba.PedirTurno {
             if (DB.ExecuteCardinal("SELECT COUNT(*) FROM " + DB.schema + "turno WHERE " +
                             "tur_agenda = "+ agenda +" AND " +
                             "'" + dtpDia.Value.ToString("yyy-MM-dd") + "'= CAST(tur_fechaYHoraTurno AS DATE) AND " +
-                            "DATEDIFF(minute, tur_fechaYHoraTurno, '" + dtpHora.Value.ToString("HH:mm") + "') < 30") > 0) {
+                            "DATEDIFF(minute, tur_fechaYHoraTurno, '" + dtpHora.Value.ToString() + "') < 30") > 0) {
                 MessageBox.Show("Esa media hora esta ocupada.");
                 return;
             };
