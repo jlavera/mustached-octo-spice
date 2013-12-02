@@ -368,7 +368,7 @@ BEGIN
 						WHERE
 							tur_agenda = inserted.tur_agenda AND
 							CAST(inserted.tur_fechaYHoraTurno AS DATE) = CAST(tur_fechaYHoraTurno AS DATE) AND
-							ABS(DATEDIFF(minute, CAST(tur_fechaYHoraTurno AS TIME), inserted.tur_fechaYHoraTurno)) < 30) = 0);
+							ABS(DATEDIFF(minute, tur_fechaYHoraTurno, inserted.tur_fechaYHoraTurno)) < 30) = 0);
 
 END
 GO
