@@ -57,8 +57,14 @@ namespace Clinica_Frba.AbmRoles {
 
         //--Click en el botón eliminar
         private void bEliminar_Click(object sender, EventArgs e) {
+            if (dgvRoles.SelectedRows.Count == 0) {
+                MessageBox.Show("No seleccionó ninguna fila.");
+                return;
+            }
             //--Elimina los roles seleccionados
-            roles.DeleteSelected(dgvRoles);
+            if (MessageBox.Show("Está seguro de que desea eliminar los " + dgvRoles.SelectedRows.Count + " elementos seleccionados?", "Confirmación",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                roles.DeleteSelected(dgvRoles);
         }
 
         //--Click en el botón agregar rol

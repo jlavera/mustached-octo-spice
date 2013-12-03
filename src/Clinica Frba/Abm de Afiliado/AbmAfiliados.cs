@@ -105,7 +105,10 @@ namespace Clinica_Frba.AbmAfiliados {
         }
 
         private void bEliminar_Click(object sender, EventArgs e) {
-
+            if (dgvAfiliados.SelectedRows.Count == 0) {
+                MessageBox.Show("No seleccionó ninguna fila.");
+                return;
+            }
             if (MessageBox.Show("Está seguro de que desea eliminar los " + dgvAfiliados.SelectedRows.Count + " elementos seleccionados?", "Confirmación",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 //--Elimina los roles seleccionados

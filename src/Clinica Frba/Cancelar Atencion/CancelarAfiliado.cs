@@ -63,5 +63,12 @@ namespace Clinica_Frba.Cancelar_Atencion {
             gbMotivo.Enabled = false;
             gbSeleccion.Enabled = true;
         }
+
+        private void lbTurnos_KeyPress(object sender, KeyPressEventArgs e) {
+            e.Handled = true;
+            
+            if (e.KeyChar == (char)13)
+                bSeleccionar.PerformClick();
+        }
     }
 }

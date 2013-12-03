@@ -70,8 +70,11 @@ namespace Clinica_Frba.Cancelar_Atencion {
             }
         }
 
-        private void CancelarProfesional_Load(object sender, EventArgs e) {
+        private void monthCalendar_KeyPress(object sender, KeyPressEventArgs e) {
+            e.Handled = true;
 
+            if (e.KeyChar == (char)13)
+                bSeleccionar.PerformClick();
         }
     }
 }

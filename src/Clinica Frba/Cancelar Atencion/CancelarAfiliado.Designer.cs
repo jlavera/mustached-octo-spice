@@ -44,6 +44,7 @@
             this.lbTurnos.Name = "lbTurnos";
             this.lbTurnos.Size = new System.Drawing.Size(373, 186);
             this.lbTurnos.TabIndex = 0;
+            this.lbTurnos.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lbTurnos_KeyPress);
             // 
             // gbSeleccion
             // 

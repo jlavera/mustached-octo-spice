@@ -25,5 +25,18 @@ namespace Clinica_Frba.Cancelar_Atencion {
             rol = "Profesional";
             DialogResult = DialogResult.OK;
         }
+
+        //--Hotkeys para las funcionalidades
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
+            switch (keyData) {
+                case (Keys.A):
+                    bAfiliado.PerformClick();
+                    break;
+                case (Keys.P):
+                    bProfesional.PerformClick();
+                    break;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
     }
 }

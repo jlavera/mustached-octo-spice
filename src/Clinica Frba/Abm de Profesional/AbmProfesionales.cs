@@ -93,7 +93,10 @@ namespace Clinica_Frba.AbmProfesionales {
         }
 
         private void bEliminar_Click(object sender, EventArgs e) {
-
+            if (dgvProfesionales.SelectedRows.Count == 0) {
+                MessageBox.Show("No seleccionó ninguna fila.");
+                return;
+            }
             //--Elimina los profesionales seleccionados
             if (MessageBox.Show("Está seguro de que desea eliminar los " + dgvProfesionales.SelectedRows.Count + " elementos seleccionados?", "Confirmación",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

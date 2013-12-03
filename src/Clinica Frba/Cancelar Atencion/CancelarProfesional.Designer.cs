@@ -128,6 +128,7 @@
             this.monthCalendar.Location = new System.Drawing.Point(22, 25);
             this.monthCalendar.Name = "monthCalendar";
             this.monthCalendar.TabIndex = 4;
+            this.monthCalendar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.monthCalendar_KeyPress);
             // 
             // bSeleccionar
             // 
