@@ -52,6 +52,8 @@
             this.bSiguienteDia = new System.Windows.Forms.Button();
             this.dtpDia = new System.Windows.Forms.DateTimePicker();
             this.gbHorario = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lbTurnos = new System.Windows.Forms.ListBox();
             this.dtpHora = new System.Windows.Forms.DateTimePicker();
             this.bFinalizar = new System.Windows.Forms.Button();
             this.bVolverHorario = new System.Windows.Forms.Button();
@@ -59,8 +61,6 @@
             this.cmbEspecialidades = new System.Windows.Forms.ComboBox();
             this.bVolverEsp = new System.Windows.Forms.Button();
             this.bSiguienteEsp = new System.Windows.Forms.Button();
-            this.lbTurnos = new System.Windows.Forms.ListBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.gbProf.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProfesionales)).BeginInit();
@@ -310,6 +310,7 @@
             this.dtpDia.Name = "dtpDia";
             this.dtpDia.Size = new System.Drawing.Size(231, 20);
             this.dtpDia.TabIndex = 0;
+            this.dtpDia.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dtpDia_KeyPress);
             // 
             // gbHorario
             // 
@@ -325,6 +326,24 @@
             this.gbHorario.TabIndex = 2;
             this.gbHorario.TabStop = false;
             this.gbHorario.Text = "Seleccionar horario";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(176, 20);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(93, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Turnos ocupados:";
+            // 
+            // lbTurnos
+            // 
+            this.lbTurnos.FormattingEnabled = true;
+            this.lbTurnos.Location = new System.Drawing.Point(176, 53);
+            this.lbTurnos.Name = "lbTurnos";
+            this.lbTurnos.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.lbTurnos.Size = new System.Drawing.Size(147, 160);
+            this.lbTurnos.TabIndex = 5;
             // 
             // dtpHora
             // 
@@ -376,6 +395,7 @@
             this.cmbEspecialidades.Name = "cmbEspecialidades";
             this.cmbEspecialidades.Size = new System.Drawing.Size(231, 21);
             this.cmbEspecialidades.TabIndex = 3;
+            this.cmbEspecialidades.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbEspecialidades_KeyPress);
             // 
             // bVolverEsp
             // 
@@ -396,24 +416,6 @@
             this.bSiguienteEsp.Text = "Siguiente";
             this.bSiguienteEsp.UseVisualStyleBackColor = true;
             this.bSiguienteEsp.Click += new System.EventHandler(this.bSiguienteEsp_Click);
-            // 
-            // lbTurnos
-            // 
-            this.lbTurnos.FormattingEnabled = true;
-            this.lbTurnos.Location = new System.Drawing.Point(176, 53);
-            this.lbTurnos.Name = "lbTurnos";
-            this.lbTurnos.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.lbTurnos.Size = new System.Drawing.Size(147, 160);
-            this.lbTurnos.TabIndex = 5;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(176, 20);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Turnos ocupados:";
             // 
             // PedirTurno
             // 

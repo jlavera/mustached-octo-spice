@@ -185,5 +185,21 @@ namespace Clinica_Frba.PedirTurno {
                     new DataGridViewCellEventArgs(dgvProfesionales.Columns["seleccionar"].Index, dgvProfesionales.CurrentCell.RowIndex));
             }
         }
+
+        private void cmbEspecialidades_KeyPress(object sender, KeyPressEventArgs e) {
+
+            e.Handled = true;
+
+            if (e.KeyChar == (char)13)
+                bSiguienteEsp.PerformClick();
+        }
+
+        private void dtpDia_KeyPress(object sender, KeyPressEventArgs e) {
+
+            e.Handled = true;
+
+            if (e.KeyChar == (char)13)
+                bSiguienteDia.PerformClick();
+        }
     }
 }

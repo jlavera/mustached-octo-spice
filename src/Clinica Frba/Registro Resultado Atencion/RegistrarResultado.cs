@@ -86,5 +86,12 @@ namespace Clinica_Frba.RegistroResultado {
             gbFecha.Enabled = false;
             gbTurno.Enabled = true;
         }
+
+        private void lbTurnos_KeyPress(object sender, KeyPressEventArgs e) {
+            e.Handled = true;
+
+            if (e.KeyChar == (char)13)
+                bSiguiente.PerformClick();
+        }
     }
 }

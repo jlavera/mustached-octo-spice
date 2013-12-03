@@ -293,6 +293,7 @@
             this.tbAfiliado.Name = "tbAfiliado";
             this.tbAfiliado.Size = new System.Drawing.Size(89, 20);
             this.tbAfiliado.TabIndex = 57;
+            this.tbAfiliado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbAfiliado_KeyPress);
             // 
             // bVolvereAfi
             // 
@@ -373,6 +374,7 @@
             this.lbTurnos.Name = "lbTurnos";
             this.lbTurnos.Size = new System.Drawing.Size(427, 277);
             this.lbTurnos.TabIndex = 0;
+            this.lbTurnos.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lbTurnos_KeyPress);
             // 
             // gbBono
             // 
@@ -412,6 +414,7 @@
             this.tbBono.Name = "tbBono";
             this.tbBono.Size = new System.Drawing.Size(89, 20);
             this.tbBono.TabIndex = 1;
+            this.tbBono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbBono_KeyPress);
             // 
             // bSiguienteBono
             // 

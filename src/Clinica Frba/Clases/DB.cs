@@ -60,7 +60,7 @@ namespace Clinica_Frba.Clases {
                 //--Es convert porque hay veces que trae Decimal y el getInt no entiende nada :)
                 temp = Convert.ToInt32(reader[0]);
 
-            } catch (Exception ex) {
+            } catch (Exception) {
                 //TODO FuncionesBoludas.errorParser(ex.Message);
                 //Aca varios tiran errores porque no encuentran nada, asi que lo dejamos pasar y devolvemos -1
                 return temp;

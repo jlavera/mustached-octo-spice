@@ -152,7 +152,6 @@
             this.Name = "CancelarProfesional";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cancelar atención";
-            this.Load += new System.EventHandler(this.CancelarProfesional_Load);
             this.gbMotivo.ResumeLayout(false);
             this.gbMotivo.PerformLayout();
             this.gbSeleccion.ResumeLayout(false);

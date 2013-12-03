@@ -41,6 +41,12 @@ namespace Clinica_Frba.RegistrarAgendas {
         }
 
         private void bEliminar_Click(object sender, EventArgs e) {
+
+            if (dgvAgenda.SelectedRows.Count == 0) {
+                MessageBox.Show("No seleccionó ninguna fila.");
+                return;
+            }
+
             agendas.DeleteSelected(dgvAgenda, dgvAgenda.SelectedRows);
             FillDgv();
         }

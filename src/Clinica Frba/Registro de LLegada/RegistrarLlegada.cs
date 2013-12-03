@@ -150,10 +150,34 @@ namespace Clinica_Frba.RegistrarLlegada {
                                   "UPDATE "+DB.schema + "bonoConsulta SET bco_habilitado=0, bco_afiliado=" + tbAfiliado.Text + " WHERE bco_id=" + bono.id); //Caundo se consume, poner por quien
                 DialogResult = DialogResult.OK;
 
-            } catch (NoTrajoNadaExcep ex) {
+            } catch (NoTrajoNadaExcep) {
                 MessageBox.Show("No existe ese bono");
             }
             //--validar existencia de bono, deshabilitarlo y ponerle la fecha y hora de llegada al turno
+        }
+
+        private void lbTurnos_KeyPress(object sender, KeyPressEventArgs e) {
+
+            e.Handled = true;
+
+            if (e.KeyChar == (char)13)
+                bSiguienteTurno.PerformClick();
+        }
+
+        private void tbAfiliado_KeyPress(object sender, KeyPressEventArgs e) {
+
+            e.Handled = true;
+
+            if (e.KeyChar == (char)13)
+                bSiguienteAfi.PerformClick();
+        }
+
+        private void tbBono_KeyPress(object sender, KeyPressEventArgs e) {
+
+            e.Handled = true;
+
+            if (e.KeyChar == (char)13)
+                bSiguienteBono.PerformClick();
         }
     }
 }
