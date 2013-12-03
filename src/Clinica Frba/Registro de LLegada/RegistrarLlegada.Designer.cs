@@ -45,9 +45,10 @@
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.matricula = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.profesional = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.especialidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.especialidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbAfiliado = new System.Windows.Forms.GroupBox();
+            this.tbAfiliado = new System.Windows.Forms.MaskedTextBox();
             this.bVolvereAfi = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.bSiguienteAfi = new System.Windows.Forms.Button();
@@ -61,7 +62,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tbBono = new System.Windows.Forms.TextBox();
             this.bSiguienteBono = new System.Windows.Forms.Button();
-            this.tbAfiliado = new System.Windows.Forms.MaskedTextBox();
             this.gbProf.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProfesionales)).BeginInit();
@@ -87,7 +87,7 @@
             this.gbProf.Controls.Add(this.dgvProfesionales);
             this.gbProf.Location = new System.Drawing.Point(12, 12);
             this.gbProf.Name = "gbProf";
-            this.gbProf.Size = new System.Drawing.Size(552, 344);
+            this.gbProf.Size = new System.Drawing.Size(750, 344);
             this.gbProf.TabIndex = 1;
             this.gbProf.TabStop = false;
             this.gbProf.Text = "Seleccionar profesional";
@@ -96,7 +96,7 @@
             // 
             this.bLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.bLimpiar.Location = new System.Drawing.Point(404, 117);
+            this.bLimpiar.Location = new System.Drawing.Point(602, 117);
             this.bLimpiar.Name = "bLimpiar";
             this.bLimpiar.Size = new System.Drawing.Size(118, 29);
             this.bLimpiar.TabIndex = 15;
@@ -116,7 +116,7 @@
             // bBuscar
             // 
             this.bBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bBuscar.Location = new System.Drawing.Point(402, 79);
+            this.bBuscar.Location = new System.Drawing.Point(600, 79);
             this.bBuscar.Name = "bBuscar";
             this.bBuscar.Size = new System.Drawing.Size(120, 29);
             this.bBuscar.TabIndex = 14;
@@ -226,13 +226,13 @@
             this.id,
             this.matricula,
             this.profesional,
-            this.especialidades,
-            this.Seleccionar});
+            this.Seleccionar,
+            this.especialidades});
             this.dgvProfesionales.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvProfesionales.Location = new System.Drawing.Point(3, 159);
             this.dgvProfesionales.MultiSelect = false;
             this.dgvProfesionales.Name = "dgvProfesionales";
-            this.dgvProfesionales.Size = new System.Drawing.Size(546, 182);
+            this.dgvProfesionales.Size = new System.Drawing.Size(744, 182);
             this.dgvProfesionales.TabIndex = 0;
             this.dgvProfesionales.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvProfesionales_KeyDown);
             this.dgvProfesionales.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProfesionales_CellContentClick);
@@ -242,6 +242,7 @@
             this.id.HeaderText = "Id";
             this.id.Name = "id";
             this.id.ReadOnly = true;
+            this.id.Visible = false;
             this.id.Width = 41;
             // 
             // matricula
@@ -258,18 +259,18 @@
             this.profesional.ReadOnly = true;
             this.profesional.Width = 84;
             // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "Elegir";
+            this.Seleccionar.Name = "Seleccionar";
+            this.Seleccionar.Width = 39;
+            // 
             // especialidades
             // 
             this.especialidades.HeaderText = "Especialidades";
             this.especialidades.Name = "especialidades";
             this.especialidades.ReadOnly = true;
             this.especialidades.Width = 103;
-            // 
-            // Seleccionar
-            // 
-            this.Seleccionar.HeaderText = "Elegir";
-            this.Seleccionar.Name = "Seleccionar";
-            this.Seleccionar.Width = 39;
             // 
             // gbAfiliado
             // 
@@ -278,16 +279,24 @@
             this.gbAfiliado.Controls.Add(this.label2);
             this.gbAfiliado.Controls.Add(this.bSiguienteAfi);
             this.gbAfiliado.Enabled = false;
-            this.gbAfiliado.Location = new System.Drawing.Point(611, 211);
+            this.gbAfiliado.Location = new System.Drawing.Point(500, 362);
             this.gbAfiliado.Name = "gbAfiliado";
-            this.gbAfiliado.Size = new System.Drawing.Size(262, 142);
+            this.gbAfiliado.Size = new System.Drawing.Size(262, 163);
             this.gbAfiliado.TabIndex = 2;
             this.gbAfiliado.TabStop = false;
             this.gbAfiliado.Text = "Afiliado";
             // 
+            // tbAfiliado
+            // 
+            this.tbAfiliado.Location = new System.Drawing.Point(151, 47);
+            this.tbAfiliado.Mask = "000000";
+            this.tbAfiliado.Name = "tbAfiliado";
+            this.tbAfiliado.Size = new System.Drawing.Size(89, 20);
+            this.tbAfiliado.TabIndex = 57;
+            // 
             // bVolvereAfi
             // 
-            this.bVolvereAfi.Location = new System.Drawing.Point(30, 92);
+            this.bVolvereAfi.Location = new System.Drawing.Point(20, 96);
             this.bVolvereAfi.Name = "bVolvereAfi";
             this.bVolvereAfi.Size = new System.Drawing.Size(87, 23);
             this.bVolvereAfi.TabIndex = 55;
@@ -298,7 +307,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 28);
+            this.label2.Location = new System.Drawing.Point(27, 50);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(98, 13);
             this.label2.TabIndex = 2;
@@ -306,7 +315,7 @@
             // 
             // bSiguienteAfi
             // 
-            this.bSiguienteAfi.Location = new System.Drawing.Point(153, 92);
+            this.bSiguienteAfi.Location = new System.Drawing.Point(151, 96);
             this.bSiguienteAfi.Name = "bSiguienteAfi";
             this.bSiguienteAfi.Size = new System.Drawing.Size(87, 23);
             this.bSiguienteAfi.TabIndex = 0;
@@ -323,7 +332,7 @@
             this.gbTurno.Enabled = false;
             this.gbTurno.Location = new System.Drawing.Point(15, 362);
             this.gbTurno.Name = "gbTurno";
-            this.gbTurno.Size = new System.Drawing.Size(549, 344);
+            this.gbTurno.Size = new System.Drawing.Size(479, 344);
             this.gbTurno.TabIndex = 3;
             this.gbTurno.TabStop = false;
             this.gbTurno.Text = "Seleccionar turno";
@@ -349,7 +358,7 @@
             // 
             // bSiguienteTurno
             // 
-            this.bSiguienteTurno.Location = new System.Drawing.Point(432, 315);
+            this.bSiguienteTurno.Location = new System.Drawing.Point(370, 315);
             this.bSiguienteTurno.Name = "bSiguienteTurno";
             this.bSiguienteTurno.Size = new System.Drawing.Size(87, 23);
             this.bSiguienteTurno.TabIndex = 3;
@@ -362,7 +371,7 @@
             this.lbTurnos.FormattingEnabled = true;
             this.lbTurnos.Location = new System.Drawing.Point(30, 34);
             this.lbTurnos.Name = "lbTurnos";
-            this.lbTurnos.Size = new System.Drawing.Size(489, 277);
+            this.lbTurnos.Size = new System.Drawing.Size(427, 277);
             this.lbTurnos.TabIndex = 0;
             // 
             // gbBono
@@ -372,16 +381,16 @@
             this.gbBono.Controls.Add(this.tbBono);
             this.gbBono.Controls.Add(this.bSiguienteBono);
             this.gbBono.Enabled = false;
-            this.gbBono.Location = new System.Drawing.Point(611, 362);
+            this.gbBono.Location = new System.Drawing.Point(500, 531);
             this.gbBono.Name = "gbBono";
-            this.gbBono.Size = new System.Drawing.Size(262, 145);
+            this.gbBono.Size = new System.Drawing.Size(262, 175);
             this.gbBono.TabIndex = 56;
             this.gbBono.TabStop = false;
             this.gbBono.Text = "Bono consulta";
             // 
             // bVolverBono
             // 
-            this.bVolverBono.Location = new System.Drawing.Point(30, 116);
+            this.bVolverBono.Location = new System.Drawing.Point(20, 116);
             this.bVolverBono.Name = "bVolverBono";
             this.bVolverBono.Size = new System.Drawing.Size(87, 23);
             this.bVolverBono.TabIndex = 55;
@@ -391,7 +400,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(17, 36);
+            this.label6.Location = new System.Drawing.Point(28, 50);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(89, 13);
             this.label6.TabIndex = 2;
@@ -399,9 +408,9 @@
             // 
             // tbBono
             // 
-            this.tbBono.Location = new System.Drawing.Point(46, 70);
+            this.tbBono.Location = new System.Drawing.Point(152, 47);
             this.tbBono.Name = "tbBono";
-            this.tbBono.Size = new System.Drawing.Size(124, 20);
+            this.tbBono.Size = new System.Drawing.Size(89, 20);
             this.tbBono.TabIndex = 1;
             // 
             // bSiguienteBono
@@ -414,19 +423,11 @@
             this.bSiguienteBono.UseVisualStyleBackColor = true;
             this.bSiguienteBono.Click += new System.EventHandler(this.bSiguienteBono_Click);
             // 
-            // tbAfiliado
-            // 
-            this.tbAfiliado.Location = new System.Drawing.Point(22, 57);
-            this.tbAfiliado.Mask = "000000";
-            this.tbAfiliado.Name = "tbAfiliado";
-            this.tbAfiliado.Size = new System.Drawing.Size(218, 20);
-            this.tbAfiliado.TabIndex = 57;
-            // 
             // RegistrarLlegada
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(897, 741);
+            this.ClientSize = new System.Drawing.Size(778, 715);
             this.Controls.Add(this.gbBono);
             this.Controls.Add(this.gbTurno);
             this.Controls.Add(this.gbAfiliado);
@@ -467,11 +468,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbNombre;
         private System.Windows.Forms.DataGridView dgvProfesionales;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn matricula;
-        private System.Windows.Forms.DataGridViewTextBoxColumn profesional;
-        private System.Windows.Forms.DataGridViewTextBoxColumn especialidades;
-        private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
         private System.Windows.Forms.GroupBox gbAfiliado;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button bSiguienteAfi;
@@ -487,5 +483,10 @@
         private System.Windows.Forms.TextBox tbBono;
         private System.Windows.Forms.Button bSiguienteBono;
         private System.Windows.Forms.MaskedTextBox tbAfiliado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn matricula;
+        private System.Windows.Forms.DataGridViewTextBoxColumn profesional;
+        private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn especialidades;
     }
 }

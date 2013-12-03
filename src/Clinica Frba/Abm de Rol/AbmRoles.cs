@@ -85,7 +85,7 @@ namespace Clinica_Frba.AbmRoles {
             //--Limpiar dgv y volverlo a llenar
             dgvRoles.Rows.Clear();
             foreach (Rol rol in roles.items)
-                dgvRoles.Rows.Add(rol.id, rol.nombre, rol.concatFuncs(), rol.habilitado);
+                dgvRoles.Rows.Add(rol.id, rol.nombre, rol.concatFuncs(), rol.habilitado, "Editar");
 
         }
 

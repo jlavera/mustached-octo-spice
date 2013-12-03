@@ -12,6 +12,7 @@ namespace Clinica_Frba.RegistroResultado {
     public partial class RegistrarResultado : Form {
 
         Turnos turnos = new Turnos();
+        Turno turno;
         Profesional profesional;
         public bool cerrar = false;
 
@@ -37,7 +38,21 @@ namespace Clinica_Frba.RegistroResultado {
         }
 
         private void bSiguiente_Click(object sender, EventArgs e) {
-            //--Cachear el turno seleccionado
+
+            if (lbTurnos.SelectedItems.Count != 1) {
+                MessageBox.Show("Seleccione un turno.", "Error");
+                return;
+            }
+
+            //--Preparar ingreso
+            turno = (Turno) lbTurnos.SelectedItem;
+
+            dtpDia.Value = turno.turno;
+            dtpHora.Value = turno.turno;
+            rbNo.Checked = true;
+            tbDiagnostico.Text = "";
+            tbSintomas.Text = "";
+
             gbTurno.Enabled = false;
             gbFecha.Enabled = true;
 
@@ -55,12 +70,21 @@ namespace Clinica_Frba.RegistroResultado {
 
         private void bFinalizar_Click(object sender, EventArgs e) {
             if (rbSi.Checked) {
-                DB.ExecuteNonQuery("UPDATE " + DB.schema + "atencion SET ate_fechaYHoraAtencion='" + FuncionesBoludas.GetDateTime().ToString() + "', "+
+                if (tbDiagnostico.Text == "" && tbSintomas.Text == "" &&
+                    MessageBox.Show("Está seguro de que desea registrar la atención sin completar toda la información?", "Confirmar", MessageBoxButtons.YesNo) == DialogResult.No)
+                    return;
+
+                DB.ExecuteNonQuery("UPDATE " + DB.schema + "atencion SET ate_fechaYHoraAtencion='" + FuncionesBoludas.GetDateTime().ToString() + "', " +
                                                                      "ate_sintomas='" + tbSintomas.Text + "', " +
-                                                                     "ate_diagnostico='" + tbDiagnostico.Text + "' " + 
+                                                                     "ate_diagnostico='" + tbDiagnostico.Text + "' " +
                                                                      "WHERE ate_turno=" + ((Turno)lbTurnos.SelectedItem).id);
             }
             DialogResult = DialogResult.OK;
+        }
+
+        private void bVolver_Click(object sender, EventArgs e) {
+            gbFecha.Enabled = false;
+            gbTurno.Enabled = true;
         }
     }
 }

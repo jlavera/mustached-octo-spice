@@ -35,7 +35,6 @@ namespace Clinica_Frba.Clases {
                 throw new NoTrajoNadaExcep();
             DataRow dr = dt.Rows[0];
 
-            //FIXME como en Afiliado, haca tendria que estar la llamada a Profesional() de arriba
             id = Convert.ToInt32(dr["pro_id"]);
             matricula = (dr["pro_matricula"] == DBNull.Value) ? -1 : Convert.ToInt32(dr["pro_matricula"]);
             usuarioId = Convert.ToInt32(dr["pro_usuario"]);

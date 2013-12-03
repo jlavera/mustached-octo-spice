@@ -17,14 +17,6 @@ namespace Clinica_Frba.Listados_Estadisticos {
         private int[] meses = new int[6];
         private int mesInicial;
 
-
-        //schema done
-        //2013 done
-        //getdate done
-        //meses 
-
-
-
         public Ver(int _mesIni,int _agno, string _tipo) {
             InitializeComponent();
 
@@ -52,7 +44,7 @@ namespace Clinica_Frba.Listados_Estadisticos {
                     */
                     query = "SELECT DATENAME(month,  DateAdd( month , T.Mes , 0 ) - 1) 'Mes', "+
                                 "X.esp_descripcion 'Especialidad', " +
-                                "(SELECT COUNT(1) FROM " + DB.schema + "cancelacion JOIN " + DB.schema + "turno ON tur_id = tuA_turno WHERE tur_especialidad=x.esp_id AND DATEPART(MONTH, tur_fechaYHoraTurno) = t.Mes AND DATEPART(YEAR, tur_fechaYHoraTurno)=" + agno + ") 'Cantidad de Cancelaciones' " +
+                                "(SELECT COUNT(1) FROM " + DB.schema + "cancelacion JOIN " + DB.schema + "turno ON tur_id = tuA_turno WHERE ((x.esp_id is not null AND tur_especialidad=x.esp_id) OR (x.esp_id is null AND tur_especialidad is null)) AND DATEPART(MONTH, tur_fechaYHoraTurno) = t.Mes AND DATEPART(YEAR, tur_fechaYHoraTurno)=" + agno + ") 'Cantidad de Cancelaciones' " +
                             "FROM " + DB.schema + "estEspecialidades(" + agno + ", " + meses[0] + ") X, " +
                             "(SELECT " + meses[0] + " 'Mes' UNION SELECT " + meses[1] + " UNION SELECT " + meses[2] + " UNION SELECT " + meses[3] + " UNION SELECT " + meses[4] + " UNION SELECT " + meses[5] + ") T";
                     
@@ -103,7 +95,6 @@ namespace Clinica_Frba.Listados_Estadisticos {
                      * Top 10 de los afiliados que utilizaron bonos que ellos mismo no compraron.
                      * Me repito
                     */
-                    //FIXME
                     query = "SELECT DATENAME(month,  DateAdd( month , T.Mes , 0 ) - 1) 'Mes', " +
                                     "X.Afiliado 'Afiliado', " +
 		                                "(SELECT COUNT(*) " +

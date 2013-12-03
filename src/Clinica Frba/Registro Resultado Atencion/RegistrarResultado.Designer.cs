@@ -40,6 +40,7 @@
             this.dtpHora = new System.Windows.Forms.DateTimePicker();
             this.rbSi = new System.Windows.Forms.RadioButton();
             this.rbNo = new System.Windows.Forms.RadioButton();
+            this.bVolver = new System.Windows.Forms.Button();
             this.gbTurno.SuspendLayout();
             this.gbFecha.SuspendLayout();
             this.gbDatos.SuspendLayout();
@@ -86,10 +87,12 @@
             // 
             // gbFecha
             // 
+            this.gbFecha.Controls.Add(this.bVolver);
             this.gbFecha.Controls.Add(this.bFinalizar);
             this.gbFecha.Controls.Add(this.gbDatos);
             this.gbFecha.Controls.Add(this.rbSi);
             this.gbFecha.Controls.Add(this.rbNo);
+            this.gbFecha.Enabled = false;
             this.gbFecha.Location = new System.Drawing.Point(454, 13);
             this.gbFecha.Name = "gbFecha";
             this.gbFecha.Size = new System.Drawing.Size(559, 480);
@@ -99,7 +102,7 @@
             // 
             // bFinalizar
             // 
-            this.bFinalizar.Location = new System.Drawing.Point(58, 451);
+            this.bFinalizar.Location = new System.Drawing.Point(361, 448);
             this.bFinalizar.Name = "bFinalizar";
             this.bFinalizar.Size = new System.Drawing.Size(186, 23);
             this.bFinalizar.TabIndex = 3;
@@ -178,7 +181,7 @@
             // 
             // dtpDia
             // 
-            this.dtpDia.Location = new System.Drawing.Point(29, 32);
+            this.dtpDia.Location = new System.Drawing.Point(29, 37);
             this.dtpDia.Name = "dtpDia";
             this.dtpDia.Size = new System.Drawing.Size(200, 20);
             this.dtpDia.TabIndex = 4;
@@ -215,6 +218,16 @@
             this.rbNo.TabStop = true;
             this.rbNo.Text = "No se concretó";
             this.rbNo.UseVisualStyleBackColor = true;
+            // 
+            // bVolver
+            // 
+            this.bVolver.Location = new System.Drawing.Point(49, 451);
+            this.bVolver.Name = "bVolver";
+            this.bVolver.Size = new System.Drawing.Size(186, 23);
+            this.bVolver.TabIndex = 8;
+            this.bVolver.Text = "Volver";
+            this.bVolver.UseVisualStyleBackColor = true;
+            this.bVolver.Click += new System.EventHandler(this.bVolver_Click);
             // 
             // RegistrarResultado
             // 
@@ -258,5 +271,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tbSintomas;
         private System.Windows.Forms.Button bFinalizar;
+        private System.Windows.Forms.Button bVolver;
     }
 }

@@ -65,7 +65,6 @@
             this.cDia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cDia.FormattingEnabled = true;
             this.cDia.Items.AddRange(new object[] {
-            "Domingo",
             "Lunes",
             "Martes",
             "Miercoles",

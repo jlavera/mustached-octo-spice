@@ -55,7 +55,7 @@ namespace Clinica_Frba.RegistrarLlegada {
             //--Llena dgv
             foreach (Profesional prof in profs.items) {
                 dgvProfesionales.Rows.Add(prof.id, (prof.matricula == -1) ? "Falta cargar" : prof.matricula.ToString(),
-                    prof.usuario.apellido + ", " + prof.usuario.nombre, prof.concatEsps());
+                    prof.usuario.apellido + ", " + prof.usuario.nombre,">>", prof.concatEsps());
             }
         }
 
@@ -121,8 +121,8 @@ namespace Clinica_Frba.RegistrarLlegada {
 
         private void bSiguienteAfi_Click(object sender, EventArgs e) {
             //--Validar que el turno pertenezca al afiliado ingresado
-            if (tbAfiliado.Text != "" && (turno.afiliado.id != Convert.ToInt32(tbAfiliado.Text))) {
-                MessageBox.Show("El turno no le pertenece al afilado ingresado");
+            if (tbAfiliado.Text == "" || (turno.afiliado.id != Convert.ToInt32(tbAfiliado.Text))) {
+                MessageBox.Show("El turno no le pertenece al afilado ingresado o es inválido.");
                 return;
             }
 
@@ -132,6 +132,10 @@ namespace Clinica_Frba.RegistrarLlegada {
 
         private void bSiguienteBono_Click(object sender, EventArgs e) {
             try {
+                if (tbBono.Text == "") {
+                    MessageBox.Show("El número de bono es inválido.");
+                    return;
+                }
                 BonoConsulta bono = new BonoConsulta(Convert.ToInt32(tbBono.Text));
                 Afiliado afiliado = new Afiliado(Convert.ToInt32(tbAfiliado.Text));
                 if (afiliado.grupoFamiliar.grupo != bono.comprador.grupoFamiliar.grupo) { //Que pertenezca al grupo del que lo comrpo

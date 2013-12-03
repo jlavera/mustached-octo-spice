@@ -802,7 +802,6 @@ RETURN
 		JOIN mustached_spice.compra ON bfa_compra=cmp_id
 		JOIN mustached_spice.vAfiliado ON cmp_afiliado=afi_id
 	WHERE bfa_habilitado=1 AND bfa_fechaVencimiento<@hoy AND
-		  cmp_afiliado=afi_id AND
 		  DATEPART(MONTH, bfa_fechaImpresion)>=@mesInicial AND
 		  DATEPART(MONTH, bfa_fechaImpresion)<=(@mesInicial+5) AND
 		  DATEPART(YEAR, bfa_fechaImpresion)=@anio

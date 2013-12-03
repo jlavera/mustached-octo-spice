@@ -38,14 +38,15 @@ namespace Clinica_Frba.Clases {
         //--------------FIN HOMOGENEO A TODAS LAS ENTIDADES------
 
         public void FillForAfi(Afiliado _afi) {
-            DataTable dt = DB.ExecuteReader("SELECT * FROM " + DB.schema + "turno " +
-                    "JOIN " + DB.schema + "vProfesional ON pro_id = tur_profesional " +
-                    "JOIN " +DB.schema + "vAfiliado ON afi_id = tur_afiliado " +
-                "WHERE tur_afiliado=" + _afi.id + " AND DATEDIFF(DAY, tur_fechaYHoraTurno, '" + FuncionesBoludas.GetDateTime().ToString("yyyy-MM-dd") + "')<-1 AND tur_fechaYHoraLlegada IS NULL AND tur_fechaYHoraAtencion IS NULL AND tur_habilitado=1");
-            //Tengo que hacerlo a mano porqu quiero los turnos chiquitos, no los grandes
-            foreach (DataRow dr in dt.Rows) {
-                items.Add(new Turno(dr));
-            }
+            Fill(DB.ExecuteReader("SELECT * FROM " + DB.schema + "turno" +
+               " JOIN " + DB.schema + "vProfesional ON tur_profesional = pro_id" +
+               " JOIN " + DB.schema + "vAfiliado ON tur_afiliado = afi_id" +
+               " WHERE tur_afiliado = " + _afi.id + " " + //Que sea del afiliado que pidio el turno
+                   "AND (SELECT COUNT(1) FROM " + DB.schema + "atencion WHERE ate_turno = tur_id) = 0" +
+               "AND CAST(tur_fechaYHoraTurno as DATE) = '" + FuncionesBoludas.GetDateTime().ToString("yyyy-MM-dd") + "' " + //Que sea de ese dia
+               "AND CAST(tur_fechaYHoraTurno as TIME) > '" + FuncionesBoludas.GetDateTime().ToString("HH:mm") + "' " + //Pero que sea mas tarde
+               "AND tur_habilitado=1 " +
+               "ORDER BY tur_fechaYHoraTurno ASC")); //Ordenados
         }
 
         public void FillForProf(Profesional _prof, Boolean llego) {
@@ -60,7 +61,7 @@ namespace Clinica_Frba.Clases {
                 "AND CAST(tur_fechaYHoraTurno as DATE) = '" + FuncionesBoludas.GetDateTime().ToString("yyyy-MM-dd") +"' " + //Que sea de ese dia
                 "AND CAST(tur_fechaYHoraTurno as TIME) > '" + FuncionesBoludas.GetDateTime().ToString("HH:mm") + "' " + //Pero que sea mas tarde
                 "AND tur_habilitado=1 " +
-                "ORDER BY tur_fechaYHoraTurno DESC")); //Ordenados
+                "ORDER BY tur_fechaYHoraTurno ASC")); //Ordenados
         }
 
 
@@ -77,7 +78,19 @@ namespace Clinica_Frba.Clases {
                 "AND CAST(tur_fechaYHoraTurno as DATE) = '" + FuncionesBoludas.GetDateTime().ToString("yyyy-MM-dd") + "' " + //Que sea de ese dia
                 "AND CAST(tur_fechaYHoraTurno as TIME) > '" + FuncionesBoludas.GetDateTime().ToString("HH:mm") + "' " + //Pero que sea mas tarde
                 "AND tur_habilitado=1 " +
-                "ORDER BY tur_fechaYHoraTurno DESC")); //Ordenados
+                "ORDER BY tur_fechaYHoraTurno ASC")); //Ordenados
+        }
+
+        public void FillForDay(Profesional _prof, DateTime _dia) {
+            //--Trae los turnos de un profesional en un día específico
+
+            Fill(DB.ExecuteReader("SELECT * FROM " + DB.schema + "turno" +
+                " JOIN " + DB.schema + "vProfesional ON tur_profesional = pro_id" +
+                " JOIN " + DB.schema + "vAfiliado ON tur_afiliado = afi_id" +
+                " WHERE tur_profesional = " + _prof.id + " " + //Que sea del profesional que atendiste
+                "AND CAST(tur_fechaYHoraTurno as DATE) = '" + _dia.ToString("yyyy-MM-dd") + "' " + //Que sea de ese dia
+                "AND tur_habilitado = 1 " +
+                "ORDER BY tur_fechaYHoraTurno ASC")); //Ordenados
         }
     }
 }

@@ -14,6 +14,7 @@ namespace Clinica_Frba.PedirTurno {
         Profesionales profs = new Profesionales();
         Profesional prof;
         Afiliado afiliado;
+        Turnos turnos = new Turnos();
 
         Agendas agendas = new Agendas();
 
@@ -68,7 +69,7 @@ namespace Clinica_Frba.PedirTurno {
             //--Llena dgv
             foreach (Profesional prof in profs.items) {
                 dgvProfesionales.Rows.Add(prof.id, (prof.matricula == -1) ? "Falta cargar" : prof.matricula.ToString(),
-                    prof.usuario.apellido + ", " + prof.usuario.nombre, prof.concatEsps());
+                    prof.usuario.apellido + ", " + prof.usuario.nombre, ">>", prof.concatEsps());
             }
         }
 
@@ -130,6 +131,9 @@ namespace Clinica_Frba.PedirTurno {
             gbDia.Enabled = false;
             gbHorario.Enabled = true;
 
+            turnos.FillForDay(prof, dtpDia.Value);
+            lbTurnos.Items.AddRange(turnos.ToList());
+
         }
         private void bVolverDia_Click(object sender, EventArgs e) {
             gbDia.Enabled = false;
@@ -138,6 +142,8 @@ namespace Clinica_Frba.PedirTurno {
 
         //--------------HORARIO---------
         private void bVolverHorario_Click(object sender, EventArgs e) {
+            lbTurnos.Items.Clear();
+            turnos.ClearList();
             gbDia.Enabled = true;
             gbHorario.Enabled = false;
         }

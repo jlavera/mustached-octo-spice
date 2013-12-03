@@ -43,16 +43,16 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(77, 30);
+            this.label1.Location = new System.Drawing.Point(21, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(172, 13);
+            this.label1.Size = new System.Drawing.Size(171, 13);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Bonoc comprados en esta session:";
+            this.label1.Text = "Bonos comprados en esta session:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(74, 53);
+            this.label2.Location = new System.Drawing.Point(18, 32);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 13);
             this.label2.TabIndex = 4;
@@ -60,9 +60,9 @@
             // 
             // bComprar
             // 
-            this.bComprar.Location = new System.Drawing.Point(37, 142);
+            this.bComprar.Location = new System.Drawing.Point(21, 116);
             this.bComprar.Name = "bComprar";
-            this.bComprar.Size = new System.Drawing.Size(254, 39);
+            this.bComprar.Size = new System.Drawing.Size(172, 39);
             this.bComprar.TabIndex = 5;
             this.bComprar.Text = "Comprar";
             this.bComprar.UseVisualStyleBackColor = true;
@@ -71,7 +71,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(173, 53);
+            this.label3.Location = new System.Drawing.Point(117, 32);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(76, 13);
             this.label3.TabIndex = 7;
@@ -80,16 +80,17 @@
             // tbPrecio
             // 
             this.tbPrecio.Enabled = false;
-            this.tbPrecio.Location = new System.Drawing.Point(176, 111);
+            this.tbPrecio.Location = new System.Drawing.Point(101, 90);
             this.tbPrecio.Name = "tbPrecio";
-            this.tbPrecio.Size = new System.Drawing.Size(100, 20);
+            this.tbPrecio.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tbPrecio.Size = new System.Drawing.Size(67, 20);
             this.tbPrecio.TabIndex = 8;
             this.tbPrecio.Text = "0";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(124, 114);
+            this.label4.Location = new System.Drawing.Point(31, 93);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 13);
             this.label4.TabIndex = 11;
@@ -97,16 +98,18 @@
             // 
             // nFarmacia
             // 
-            this.nFarmacia.Location = new System.Drawing.Point(77, 69);
+            this.nFarmacia.Location = new System.Drawing.Point(21, 48);
             this.nFarmacia.Name = "nFarmacia";
+            this.nFarmacia.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.nFarmacia.Size = new System.Drawing.Size(75, 20);
             this.nFarmacia.TabIndex = 12;
             this.nFarmacia.ValueChanged += new System.EventHandler(this.actualizarPrecio);
             // 
             // nConsulta
             // 
-            this.nConsulta.Location = new System.Drawing.Point(176, 69);
+            this.nConsulta.Location = new System.Drawing.Point(120, 48);
             this.nConsulta.Name = "nConsulta";
+            this.nConsulta.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.nConsulta.Size = new System.Drawing.Size(73, 20);
             this.nConsulta.TabIndex = 13;
             this.nConsulta.ValueChanged += new System.EventHandler(this.actualizarPrecio);
@@ -115,7 +118,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(340, 202);
+            this.ClientSize = new System.Drawing.Size(213, 162);
             this.Controls.Add(this.nConsulta);
             this.Controls.Add(this.nFarmacia);
             this.Controls.Add(this.label4);
@@ -124,7 +127,10 @@
             this.Controls.Add(this.bComprar);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "ComprarBono";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Combrar Bonos";
             this.Load += new System.EventHandler(this.ComprarBono_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nFarmacia)).EndInit();

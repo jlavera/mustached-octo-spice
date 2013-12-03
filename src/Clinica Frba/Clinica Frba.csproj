@@ -84,6 +84,12 @@
     <Compile Include="Abm de Rol\EditRol.Designer.cs">
       <DependentUpon>EditRol.cs</DependentUpon>
     </Compile>
+    <Compile Include="Cancelar Atencion\Botonera.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cancelar Atencion\Botonera.Designer.cs">
+      <DependentUpon>Botonera.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cancelar Atencion\CancelarAfiliado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -252,6 +258,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm de Rol\EditRol.resx">
       <DependentUpon>EditRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cancelar Atencion\Botonera.resx">
+      <DependentUpon>Botonera.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Cancelar Atencion\CancelarAfiliado.resx">
       <DependentUpon>CancelarAfiliado.cs</DependentUpon>

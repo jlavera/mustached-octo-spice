@@ -55,7 +55,7 @@ namespace Clinica_Frba.Cancelar_Atencion {
                 queryAudit = "INSERT INTO " + DB.schema + "cancelacion(tuA_razon, tuA_tipo, tuA_turno, tua_cancelante) (SELECT '" + tbDetalle.Text + "', '" + cbTipo.Text + "', tur_id, 1 FROM " + DB.schema + "turno WHERE tur_habilitado=1 AND (";
 
                 for (DateTime dateTime = monthCalendar.SelectionStart;
-                     dateTime < monthCalendar.SelectionEnd;
+                     dateTime <= monthCalendar.SelectionEnd;
                      dateTime += TimeSpan.FromDays(1)) {
                     queryAux += "CAST(tur_fechaYHoraTurno AS DATE)='" + dateTime.ToString("yyyy-MM-dd") + "' OR ";
                 }

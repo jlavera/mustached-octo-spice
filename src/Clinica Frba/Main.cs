@@ -157,16 +157,25 @@ namespace Clinica_Frba {
         }
 
         private void Cancelar_atencion_Click(object sender, EventArgs e) {
-            if (rol.nombre == "Afiliado") {
+            string rolAdmin = "";
+
+            if (rol.nombre == "Administrativo") {
+                Cancelar_Atencion.Botonera bot = new Cancelar_Atencion.Botonera();
+                bot.ShowDialog();
+                rolAdmin = bot.rol;
+            }
+
+            if (rol.nombre == "Afiliado" || rolAdmin == "Afiliado") {
                 Cancelar_Atencion.CancelarAfiliado form = new Cancelar_Atencion.CancelarAfiliado(user);
-                if (!form.cerrar) 
+                if (!form.cerrar)
                     form.ShowDialog();
-            } else {
+            } else if (rol.nombre == "Profesional" || rolAdmin == "Profesional") {
                 Cancelar_Atencion.CancelarProfesional form = new Cancelar_Atencion.CancelarProfesional(user);
                 if (!form.cerrar)
                     form.ShowDialog();
             }
         }
+
 
         private void Receta_Click(object sender, EventArgs e) {
             Generar_Receta.GenerarReceta form = new Generar_Receta.GenerarReceta(user);

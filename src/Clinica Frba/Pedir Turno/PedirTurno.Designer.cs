@@ -45,20 +45,22 @@
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.matricula = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.profesional = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.especialidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.especialidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbDia = new System.Windows.Forms.GroupBox();
             this.bVolverDia = new System.Windows.Forms.Button();
             this.bSiguienteDia = new System.Windows.Forms.Button();
             this.dtpDia = new System.Windows.Forms.DateTimePicker();
             this.gbHorario = new System.Windows.Forms.GroupBox();
+            this.dtpHora = new System.Windows.Forms.DateTimePicker();
             this.bFinalizar = new System.Windows.Forms.Button();
             this.bVolverHorario = new System.Windows.Forms.Button();
             this.gbEspecialidad = new System.Windows.Forms.GroupBox();
             this.cmbEspecialidades = new System.Windows.Forms.ComboBox();
             this.bVolverEsp = new System.Windows.Forms.Button();
             this.bSiguienteEsp = new System.Windows.Forms.Button();
-            this.dtpHora = new System.Windows.Forms.DateTimePicker();
+            this.lbTurnos = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.gbProf.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProfesionales)).BeginInit();
@@ -84,7 +86,7 @@
             this.gbProf.Controls.Add(this.dgvProfesionales);
             this.gbProf.Location = new System.Drawing.Point(12, 12);
             this.gbProf.Name = "gbProf";
-            this.gbProf.Size = new System.Drawing.Size(552, 344);
+            this.gbProf.Size = new System.Drawing.Size(612, 344);
             this.gbProf.TabIndex = 0;
             this.gbProf.TabStop = false;
             this.gbProf.Text = "Seleccionar profesional";
@@ -93,7 +95,7 @@
             // 
             this.bLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.bLimpiar.Location = new System.Drawing.Point(404, 117);
+            this.bLimpiar.Location = new System.Drawing.Point(464, 117);
             this.bLimpiar.Name = "bLimpiar";
             this.bLimpiar.Size = new System.Drawing.Size(118, 29);
             this.bLimpiar.TabIndex = 15;
@@ -104,7 +106,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(401, 16);
+            this.label15.Location = new System.Drawing.Point(499, 16);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(98, 13);
             this.label15.TabIndex = 52;
@@ -113,7 +115,7 @@
             // bBuscar
             // 
             this.bBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bBuscar.Location = new System.Drawing.Point(402, 79);
+            this.bBuscar.Location = new System.Drawing.Point(462, 79);
             this.bBuscar.Name = "bBuscar";
             this.bBuscar.Size = new System.Drawing.Size(120, 29);
             this.bBuscar.TabIndex = 14;
@@ -128,7 +130,7 @@
             0,
             0,
             0});
-            this.nLimit.Location = new System.Drawing.Point(425, 35);
+            this.nLimit.Location = new System.Drawing.Point(523, 35);
             this.nLimit.Minimum = new decimal(new int[] {
             1,
             0,
@@ -147,7 +149,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(217, 16);
+            this.label1.Location = new System.Drawing.Point(221, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(81, 13);
             this.label1.TabIndex = 49;
@@ -157,7 +159,7 @@
             // 
             this.lbEspecialidades.DisplayMember = "id";
             this.lbEspecialidades.FormattingEnabled = true;
-            this.lbEspecialidades.Location = new System.Drawing.Point(240, 34);
+            this.lbEspecialidades.Location = new System.Drawing.Point(274, 34);
             this.lbEspecialidades.Name = "lbEspecialidades";
             this.lbEspecialidades.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbEspecialidades.Size = new System.Drawing.Size(140, 108);
@@ -223,13 +225,13 @@
             this.id,
             this.matricula,
             this.profesional,
-            this.especialidades,
-            this.Seleccionar});
+            this.Seleccionar,
+            this.especialidades});
             this.dgvProfesionales.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvProfesionales.Location = new System.Drawing.Point(3, 159);
             this.dgvProfesionales.MultiSelect = false;
             this.dgvProfesionales.Name = "dgvProfesionales";
-            this.dgvProfesionales.Size = new System.Drawing.Size(546, 182);
+            this.dgvProfesionales.Size = new System.Drawing.Size(606, 182);
             this.dgvProfesionales.TabIndex = 0;
             this.dgvProfesionales.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvProfesionales_KeyDown);
             this.dgvProfesionales.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProfesionales_CellContentClick);
@@ -239,6 +241,7 @@
             this.id.HeaderText = "Id";
             this.id.Name = "id";
             this.id.ReadOnly = true;
+            this.id.Visible = false;
             this.id.Width = 41;
             // 
             // matricula
@@ -255,6 +258,12 @@
             this.profesional.ReadOnly = true;
             this.profesional.Width = 84;
             // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "Elegir";
+            this.Seleccionar.Name = "Seleccionar";
+            this.Seleccionar.Width = 39;
+            // 
             // especialidades
             // 
             this.especialidades.HeaderText = "Especialidades";
@@ -262,19 +271,13 @@
             this.especialidades.ReadOnly = true;
             this.especialidades.Width = 103;
             // 
-            // Seleccionar
-            // 
-            this.Seleccionar.HeaderText = "Elegir";
-            this.Seleccionar.Name = "Seleccionar";
-            this.Seleccionar.Width = 39;
-            // 
             // gbDia
             // 
             this.gbDia.Controls.Add(this.bVolverDia);
             this.gbDia.Controls.Add(this.bSiguienteDia);
             this.gbDia.Controls.Add(this.dtpDia);
             this.gbDia.Enabled = false;
-            this.gbDia.Location = new System.Drawing.Point(570, 128);
+            this.gbDia.Location = new System.Drawing.Point(12, 490);
             this.gbDia.Name = "gbDia";
             this.gbDia.Size = new System.Drawing.Size(265, 108);
             this.gbDia.TabIndex = 1;
@@ -310,22 +313,33 @@
             // 
             // gbHorario
             // 
+            this.gbHorario.Controls.Add(this.label2);
+            this.gbHorario.Controls.Add(this.lbTurnos);
             this.gbHorario.Controls.Add(this.dtpHora);
             this.gbHorario.Controls.Add(this.bFinalizar);
             this.gbHorario.Controls.Add(this.bVolverHorario);
             this.gbHorario.Enabled = false;
-            this.gbHorario.Location = new System.Drawing.Point(570, 242);
+            this.gbHorario.Location = new System.Drawing.Point(286, 374);
             this.gbHorario.Name = "gbHorario";
-            this.gbHorario.Size = new System.Drawing.Size(265, 114);
+            this.gbHorario.Size = new System.Drawing.Size(338, 224);
             this.gbHorario.TabIndex = 2;
             this.gbHorario.TabStop = false;
             this.gbHorario.Text = "Seleccionar horario";
             // 
+            // dtpHora
+            // 
+            this.dtpHora.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpHora.Location = new System.Drawing.Point(35, 33);
+            this.dtpHora.Name = "dtpHora";
+            this.dtpHora.ShowUpDown = true;
+            this.dtpHora.Size = new System.Drawing.Size(114, 20);
+            this.dtpHora.TabIndex = 4;
+            // 
             // bFinalizar
             // 
-            this.bFinalizar.Location = new System.Drawing.Point(159, 73);
+            this.bFinalizar.Location = new System.Drawing.Point(35, 170);
             this.bFinalizar.Name = "bFinalizar";
-            this.bFinalizar.Size = new System.Drawing.Size(91, 23);
+            this.bFinalizar.Size = new System.Drawing.Size(114, 39);
             this.bFinalizar.TabIndex = 3;
             this.bFinalizar.Text = "Finalizar";
             this.bFinalizar.UseVisualStyleBackColor = true;
@@ -333,9 +347,9 @@
             // 
             // bVolverHorario
             // 
-            this.bVolverHorario.Location = new System.Drawing.Point(19, 73);
+            this.bVolverHorario.Location = new System.Drawing.Point(35, 116);
             this.bVolverHorario.Name = "bVolverHorario";
-            this.bVolverHorario.Size = new System.Drawing.Size(91, 23);
+            this.bVolverHorario.Size = new System.Drawing.Size(114, 23);
             this.bVolverHorario.TabIndex = 3;
             this.bVolverHorario.Text = "Volver";
             this.bVolverHorario.UseVisualStyleBackColor = true;
@@ -347,7 +361,7 @@
             this.gbEspecialidad.Controls.Add(this.bVolverEsp);
             this.gbEspecialidad.Controls.Add(this.bSiguienteEsp);
             this.gbEspecialidad.Enabled = false;
-            this.gbEspecialidad.Location = new System.Drawing.Point(570, 12);
+            this.gbEspecialidad.Location = new System.Drawing.Point(15, 374);
             this.gbEspecialidad.Name = "gbEspecialidad";
             this.gbEspecialidad.Size = new System.Drawing.Size(265, 110);
             this.gbEspecialidad.TabIndex = 3;
@@ -383,20 +397,29 @@
             this.bSiguienteEsp.UseVisualStyleBackColor = true;
             this.bSiguienteEsp.Click += new System.EventHandler(this.bSiguienteEsp_Click);
             // 
-            // dtpHora
+            // lbTurnos
             // 
-            this.dtpHora.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpHora.Location = new System.Drawing.Point(35, 33);
-            this.dtpHora.Name = "dtpHora";
-            this.dtpHora.ShowUpDown = true;
-            this.dtpHora.Size = new System.Drawing.Size(200, 20);
-            this.dtpHora.TabIndex = 4;
+            this.lbTurnos.FormattingEnabled = true;
+            this.lbTurnos.Location = new System.Drawing.Point(176, 53);
+            this.lbTurnos.Name = "lbTurnos";
+            this.lbTurnos.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.lbTurnos.Size = new System.Drawing.Size(147, 160);
+            this.lbTurnos.TabIndex = 5;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(176, 20);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(93, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Turnos ocupados:";
             // 
             // PedirTurno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(845, 362);
+            this.ClientSize = new System.Drawing.Size(639, 611);
             this.Controls.Add(this.gbEspecialidad);
             this.Controls.Add(this.gbHorario);
             this.Controls.Add(this.gbDia);
@@ -413,6 +436,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvProfesionales)).EndInit();
             this.gbDia.ResumeLayout(false);
             this.gbHorario.ResumeLayout(false);
+            this.gbHorario.PerformLayout();
             this.gbEspecialidad.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -437,11 +461,6 @@
         private System.Windows.Forms.Button bLimpiar;
         private System.Windows.Forms.Button bBuscar;
         private System.Windows.Forms.DateTimePicker dtpDia;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn matricula;
-        private System.Windows.Forms.DataGridViewTextBoxColumn profesional;
-        private System.Windows.Forms.DataGridViewTextBoxColumn especialidades;
-        private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
         private System.Windows.Forms.Button bVolverDia;
         private System.Windows.Forms.Button bSiguienteDia;
         private System.Windows.Forms.GroupBox gbEspecialidad;
@@ -451,6 +470,13 @@
         private System.Windows.Forms.Button bFinalizar;
         private System.Windows.Forms.Button bVolverHorario;
         private System.Windows.Forms.DateTimePicker dtpHora;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn matricula;
+        private System.Windows.Forms.DataGridViewTextBoxColumn profesional;
+        private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn especialidades;
+        private System.Windows.Forms.ListBox lbTurnos;
+        private System.Windows.Forms.Label label2;
 
 
     }
